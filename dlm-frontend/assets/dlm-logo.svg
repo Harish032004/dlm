@@ -1,0 +1,12 @@
+<svg width="160" height="160" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="80" cy="80" r="80" fill="#EF2D83"/>
+  <text x="80" y="82" text-anchor="middle" fill="white" font-family="Georgia, 'Times New Roman', serif" font-size="50" font-weight="400">DLM</text>
+  <path d="M35 103C59 102 85 98 124 90" stroke="white" stroke-width="3" stroke-linecap="round"/>
+  <path d="M45 103C51 94 60 90 70 90C65 100 57 106 45 103Z" stroke="white" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M59 101C66 91 77 87 88 88C82 99 72 105 59 101Z" stroke="white" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M75 98C83 89 94 84 106 85C100 97 89 102 75 98Z" stroke="white" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M91 95C100 87 112 82 126 83C119 94 106 99 91 95Z" stroke="white" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M45 103C51 113 60 118 72 118C67 107 57 102 45 103Z" stroke="white" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M62 101C69 113 79 120 92 120C87 107 76 100 62 101Z" stroke="white" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M81 97C89 108 100 113 114 112C108 101 96 96 81 97Z" stroke="white" stroke-width="3" stroke-linejoin="round"/>
+</svg>

@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DLM Packages</title>
+    <style>
+        :root { --pink: #ef2d83; --ink: #241723; --muted: #7a6572; --line: rgba(36, 23, 35, 0.1); --soft: #fff0f7; }
+        * { box-sizing: border-box; }
+        body { margin: 0; font-family: Inter, "Segoe UI", sans-serif; color: var(--ink); background: #fff7fb; }
+        .shell { min-height: 100vh; display: grid; grid-template-columns: 250px 1fr; }
+        aside { padding: 24px; background: #fff; border-right: 1px solid var(--line); }
+        main { padding: 30px; }
+        .brand { display: flex; align-items: center; gap: 12px; font-weight: 900; font-size: 20px; }
+        .brand img { width: 52px; height: 52px; border-radius: 50%; }
+        nav { display: grid; gap: 8px; margin-top: 28px; }
+        nav a, .logout { padding: 12px 14px; border: 0; border-radius: 8px; color: var(--ink); background: transparent; text-align: left; text-decoration: none; font-weight: 800; cursor: pointer; }
+        nav a.active, nav a:hover, .logout:hover { color: #fff; background: var(--pink); }
+        h1 { margin: 0 0 8px; font-size: 34px; }
+        h2 { margin: 0 0 18px; }
+        .muted { margin: 0 0 26px; color: var(--muted); }
+        .grid { display: grid; grid-template-columns: 360px 1fr; gap: 22px; align-items: start; }
+        .panel { padding: 22px; border: 1px solid var(--line); border-radius: 10px; background: #fff; box-shadow: 0 16px 34px rgba(143, 28, 82, 0.08); }
+        .form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+        .span-2 { grid-column: 1 / -1; }
+        label { display: block; margin-bottom: 7px; font-size: 13px; font-weight: 900; }
+        input, textarea, select { width: 100%; padding: 12px; border: 1px solid var(--line); border-radius: 8px; background: #fff; font: inherit; }
+        textarea { min-height: 82px; resize: vertical; }
+        .checks { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+        .checks label { margin: 0; padding: 11px; display: flex; align-items: center; gap: 8px; border: 1px solid var(--line); border-radius: 8px; font-size: 12px; }
+        .checks input { width: auto; }
+        .actions { margin-top: 18px; display: flex; gap: 10px; flex-wrap: wrap; }
+        button { min-height: 42px; padding: 0 16px; border: 0; border-radius: 999px; font-weight: 900; cursor: pointer; }
+        .primary { color: #fff; background: var(--pink); }
+        .ghost { color: var(--pink); background: var(--soft); }
+        .danger { color: #fff; background: #241723; }
+        .message { min-height: 22px; margin-top: 12px; color: var(--pink); font-weight: 800; }
+        .service-list { display: grid; gap: 10px; margin-top: 16px; }
+        .service-item { padding: 12px; border-radius: 8px; background: var(--soft); }
+        .service-item strong { display: block; }
+        .service-item span { color: var(--muted); font-size: 13px; }
+        .package-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+        .package-card { padding: 18px; border: 1px solid var(--line); border-radius: 10px; background: #fff; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+        .package-card:hover { transform: translateY(-3px); box-shadow: 0 18px 38px rgba(143, 28, 82, 0.13); }
+        .package-top { display: flex; align-items: start; justify-content: space-between; gap: 12px; }
+        .badge { padding: 5px 10px; border-radius: 999px; color: #fff; background: var(--pink); font-size: 11px; font-weight: 900; white-space: nowrap; }
+        .badge.off { color: var(--muted); background: #f0ecef; }
+        .package-card h3 { margin: 0; font-size: 20px; }
+        .package-card p { color: var(--muted); line-height: 1.55; }
+        .price { margin-top: 10px; color: var(--pink); font-size: 18px; font-weight: 900; }
+        .meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+        .meta span { padding: 6px 9px; border-radius: 999px; background: var(--soft); color: #604252; font-size: 12px; font-weight: 800; }
+        @media (max-width: 1050px) { .grid, .package-list { grid-template-columns: 1fr; } }
+        @media (max-width: 900px) { .shell { grid-template-columns: 1fr; } aside { border-right: 0; border-bottom: 1px solid var(--line); } main { padding: 20px; } .form-grid, .checks { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <div class="shell">
+        <aside>
+            <div class="brand"><img src="../assets/image.png" alt="DLM logo">DLM Admin</div>
+            <nav>
+                <a href="dashboard.html">Dashboard</a>
+                <a href="dashboard.html#customers">Customers</a>
+                <a class="active" href="packages.html">Packages</a>
+                <a href="availability.html">Availability</a>
+                <a href="#bookings">Bookings</a>
+                <a href="#galleries">Galleries</a>
+                <a href="#payments">Payments</a>
+                <a href="#content">Website Content</a>
+                <button class="logout" id="logoutButton" type="button">Logout</button>
+            </nav>
+        </aside>
+        <main>
+            <h1>Packages & Services</h1>
+            <p class="muted">Create services, manage package pricing, and control what appears on the public website.</p>
+
+            <div class="grid">
+                <div class="panel">
+                    <h2>Add Service</h2>
+                    <form id="serviceForm">
+                        <label>Service Title</label>
+                        <input name="title" placeholder="Wedding Photography" required>
+                        <label>Description</label>
+                        <textarea name="description" placeholder="Short admin description"></textarea>
+                        <label>Booking Type</label>
+                        <select name="bookingType">
+                            <option value="FULL_DAY">Full day</option>
+                            <option value="HALF_DAY">Half day</option>
+                            <option value="TIME_SLOT">Time slot</option>
+                        </select>
+                        <div class="actions">
+                            <button class="primary" type="submit">Save Service</button>
+                        </div>
+                    </form>
+                    <div class="message" id="serviceMessage"></div>
+                    <div class="service-list" id="serviceList"></div>
+                </div>
+
+                <div class="panel">
+                    <h2 id="packageFormTitle">Add Package</h2>
+                    <form id="packageForm" class="form-grid">
+                        <input type="hidden" name="id">
+                        <div>
+                            <label>Service</label>
+                            <select name="serviceId" id="serviceSelect">
+                                <option value="">No linked service</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label>Package Title</label>
+                            <input name="title" placeholder="Wedding Premium Film" required>
+                        </div>
+                        <div>
+                            <label>Regular Price</label>
+                            <input name="regularPrice" type="number" min="0" step="0.01" required>
+                        </div>
+                        <div>
+                            <label>Offer Price</label>
+                            <input name="offerPrice" type="number" min="0" step="0.01">
+                        </div>
+                        <div>
+                            <label>Valid From</label>
+                            <input name="validFrom" type="date">
+                        </div>
+                        <div>
+                            <label>Valid Until</label>
+                            <input name="validUntil" type="date">
+                        </div>
+                        <div>
+                            <label>Shoot Duration</label>
+                            <input name="shootDuration" placeholder="Full day coverage">
+                        </div>
+                        <div>
+                            <label>Photographers</label>
+                            <input name="photographersCount" type="number" min="0" step="1">
+                        </div>
+                        <div>
+                            <label>Booking Type</label>
+                            <select name="bookingType">
+                                <option value="FULL_DAY">Full day</option>
+                                <option value="HALF_DAY">Half day</option>
+                                <option value="TIME_SLOT">Time slot</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label>Image URL / Path</label>
+                            <input name="imageLocation" placeholder="assets/slide-1.svg">
+                        </div>
+                        <div class="span-2">
+                            <label>Description</label>
+                            <textarea name="description" placeholder="Package summary shown on website"></textarea>
+                        </div>
+                        <div class="span-2">
+                            <label>Inclusions</label>
+                            <textarea name="inclusions" placeholder="Candid photography&#10;Cinematic videography&#10;Photo album"></textarea>
+                        </div>
+                        <div class="span-2">
+                            <label>Deliverables</label>
+                            <textarea name="deliverables" placeholder="Edited photos, highlight film, album design"></textarea>
+                        </div>
+                        <div class="span-2 checks">
+                            <label><input name="bookingEnabled" type="checkbox" checked> Booking enabled</label>
+                            <label><input name="featured" type="checkbox"> Featured</label>
+                            <label><input name="active" type="checkbox" checked> Visible</label>
+                        </div>
+                        <div class="span-2 actions">
+                            <button class="primary" type="submit">Save Package</button>
+                            <button class="ghost" id="resetPackageForm" type="button">Clear</button>
+                        </div>
+                    </form>
+                    <div class="message" id="packageMessage"></div>
+                </div>
+            </div>
+
+            <section class="panel">
+                <h2>Current Packages</h2>
+                <div class="package-list" id="packageList"></div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        const API_BASE = localStorage.getItem("dlmApiBase") || "http://localhost:8080";
+        const token = localStorage.getItem("dlmAdminToken");
+        if (!token) location.href = "login.html";
+
+        const authHeaders = { "Content-Type": "application/json", "Authorization": `Bearer ${token}` };
+        const serviceList = document.getElementById("serviceList");
+        const serviceSelect = document.getElementById("serviceSelect");
+        const packageList = document.getElementById("packageList");
+        const packageForm = document.getElementById("packageForm");
+        const serviceMessage = document.getElementById("serviceMessage");
+        const packageMessage = document.getElementById("packageMessage");
+        let services = [];
+        let packages = [];
+
+        document.getElementById("logoutButton").addEventListener("click", () => {
+            localStorage.removeItem("dlmAdminToken");
+            location.href = "login.html";
+        });
+
+        async function request(path, options = {}) {
+            const response = await fetch(`${API_BASE}${path}`, { ...options, headers: { ...authHeaders, ...(options.headers || {}) } });
+            if (response.status === 401 || response.status === 403) {
+                localStorage.removeItem("dlmAdminToken");
+                location.href = "login.html";
+            }
+            if (!response.ok) throw new Error(await response.text());
+            return response.json();
+        }
+
+        function money(value) {
+            if (value === null || value === undefined || value === "") return "";
+            return `Rs. ${Number(value).toLocaleString("en-IN")}`;
+        }
+
+        function lines(value) {
+            return (value || "")
+                .split(/\r?\n|,/)
+                .map(item => item.trim())
+                .filter(Boolean);
+        }
+
+        function formPayload(form) {
+            const formData = new FormData(form);
+            return {
+                serviceId: formData.get("serviceId") ? Number(formData.get("serviceId")) : null,
+                title: formData.get("title"),
+                description: formData.get("description"),
+                regularPrice: Number(formData.get("regularPrice")),
+                offerPrice: formData.get("offerPrice") ? Number(formData.get("offerPrice")) : null,
+                validFrom: formData.get("validFrom") || null,
+                validUntil: formData.get("validUntil") || null,
+                inclusions: formData.get("inclusions"),
+                shootDuration: formData.get("shootDuration"),
+                photographersCount: formData.get("photographersCount") ? Number(formData.get("photographersCount")) : null,
+                deliverables: formData.get("deliverables"),
+                imageLocation: formData.get("imageLocation"),
+                bookingType: formData.get("bookingType"),
+                bookingEnabled: form.bookingEnabled.checked,
+                featured: form.featured.checked,
+                active: form.active.checked
+            };
+        }
+
+        function renderServices() {
+            serviceSelect.innerHTML = `<option value="">No linked service</option>` + services.map(service => (
+                `<option value="${service.id}">${service.title}</option>`
+            )).join("");
+            serviceList.innerHTML = services.length ? services.map(service => `
+                <div class="service-item">
+                    <strong>${service.title}</strong>
+                    <span>${service.bookingType.replace("_", " ")} | ${service.active ? "Active" : "Disabled"}</span>
+                </div>
+            `).join("") : `<p class="muted">No services yet.</p>`;
+        }
+
+        function renderPackages() {
+            packageList.innerHTML = packages.length ? packages.map(item => `
+                <article class="package-card">
+                    <div class="package-top">
+                        <div>
+                            <h3>${item.title}</h3>
+                            <p>${item.description || "No description added."}</p>
+                        </div>
+                        <span class="badge ${item.active ? "" : "off"}">${item.active ? "Visible" : "Hidden"}</span>
+                    </div>
+                    <div class="price">${money(item.offerPrice || item.regularPrice)} ${item.offerPrice ? `<small style="color:var(--muted);text-decoration:line-through;">${money(item.regularPrice)}</small>` : ""}</div>
+                    <div class="meta">
+                        <span>${item.serviceTitle || "No service"}</span>
+                        <span>${item.bookingType.replace("_", " ")}</span>
+                        <span>${item.featured ? "Featured" : "Standard"}</span>
+                        <span>${item.bookingEnabled ? "Booking on" : "Booking off"}</span>
+                    </div>
+                    <p>${lines(item.inclusions).slice(0, 3).join(" | ") || "No inclusions added."}</p>
+                    <div class="actions">
+                        <button class="ghost" type="button" data-edit="${item.id}">Edit</button>
+                        <button class="danger" type="button" data-archive="${item.id}">Archive</button>
+                    </div>
+                </article>
+            `).join("") : `<p class="muted">No packages yet. Add your first package above.</p>`;
+        }
+
+        async function loadAll() {
+            services = await request("/api/admin/services");
+            packages = await request("/api/admin/packages");
+            renderServices();
+            renderPackages();
+        }
+
+        document.getElementById("serviceForm").addEventListener("submit", async event => {
+            event.preventDefault();
+            const payload = Object.fromEntries(new FormData(event.target).entries());
+            payload.active = true;
+            await request("/api/admin/services", { method: "POST", body: JSON.stringify(payload) });
+            serviceMessage.textContent = "Service saved.";
+            event.target.reset();
+            await loadAll();
+        });
+
+        packageForm.addEventListener("submit", async event => {
+            event.preventDefault();
+            const id = packageForm.elements.id.value;
+            const payload = formPayload(packageForm);
+            await request(id ? `/api/admin/packages/${id}` : "/api/admin/packages", {
+                method: id ? "PUT" : "POST",
+                body: JSON.stringify(payload)
+            });
+            packageMessage.textContent = id ? "Package updated." : "Package created.";
+            resetPackageForm();
+            await loadAll();
+        });
+
+        function resetPackageForm() {
+            packageForm.reset();
+            packageForm.elements.id.value = "";
+            packageForm.bookingEnabled.checked = true;
+            packageForm.active.checked = true;
+            document.getElementById("packageFormTitle").textContent = "Add Package";
+        }
+
+        document.getElementById("resetPackageForm").addEventListener("click", resetPackageForm);
+
+        packageList.addEventListener("click", async event => {
+            const editId = event.target.dataset.edit;
+            const archiveId = event.target.dataset.archive;
+            if (editId) {
+                const item = packages.find(entry => entry.id === Number(editId));
+                if (!item) return;
+                document.getElementById("packageFormTitle").textContent = `Edit ${item.title}`;
+                packageForm.elements.id.value = item.id;
+                packageForm.serviceId.value = item.serviceId || "";
+                packageForm.title.value = item.title || "";
+                packageForm.description.value = item.description || "";
+                packageForm.regularPrice.value = item.regularPrice || "";
+                packageForm.offerPrice.value = item.offerPrice || "";
+                packageForm.validFrom.value = item.validFrom || "";
+                packageForm.validUntil.value = item.validUntil || "";
+                packageForm.inclusions.value = item.inclusions || "";
+                packageForm.shootDuration.value = item.shootDuration || "";
+                packageForm.photographersCount.value = item.photographersCount || "";
+                packageForm.deliverables.value = item.deliverables || "";
+                packageForm.imageLocation.value = item.imageLocation || "";
+                packageForm.bookingType.value = item.bookingType || "FULL_DAY";
+                packageForm.bookingEnabled.checked = item.bookingEnabled;
+                packageForm.featured.checked = item.featured;
+                packageForm.active.checked = item.active;
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            }
+            if (archiveId) {
+                await request(`/api/admin/packages/${archiveId}/archive`, { method: "PATCH" });
+                packageMessage.textContent = "Package archived.";
+                await loadAll();
+            }
+        });
+
+        loadAll().catch(error => {
+            packageMessage.textContent = "Could not load packages. Check backend server.";
+            console.error(error);
+        });
+    </script>
+</body>
+</html>

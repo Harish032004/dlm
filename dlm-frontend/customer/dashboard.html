@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DLM Customer Dashboard</title>
+    <style>
+        :root { --pink: #ef2d83; --ink: #241723; --muted: #7a6572; --line: rgba(36, 23, 35, 0.1); }
+        * { box-sizing: border-box; }
+        body { margin: 0; font-family: Inter, "Segoe UI", sans-serif; color: var(--ink); background: #fff7fb; }
+        header { min-height: 74px; padding: 0 28px; display: flex; align-items: center; justify-content: space-between; background: #fff; border-bottom: 1px solid var(--line); }
+        .brand { display: flex; align-items: center; gap: 12px; font-weight: 900; }
+        .brand img { width: 48px; height: 48px; border-radius: 50%; }
+        button { min-height: 42px; padding: 0 18px; border: 0; border-radius: 999px; color: #fff; background: var(--pink); font-weight: 900; cursor: pointer; }
+        main { width: min(100%, 1040px); margin: 0 auto; padding: 34px 20px; }
+        .panel { padding: 26px; border: 1px solid var(--line); border-radius: 12px; background: #fff; box-shadow: 0 18px 42px rgba(143, 28, 82, 0.08); }
+        h1 { margin: 0 0 8px; font-size: 34px; }
+        p { color: var(--muted); line-height: 1.6; }
+        .empty { margin-top: 22px; padding: 24px; border-radius: 10px; background: #fff0f7; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="brand"><img src="../assets/image.png" alt="DLM logo">DLM Customer</div>
+        <button id="logoutButton" type="button">Logout</button>
+    </header>
+    <main>
+        <section class="panel">
+            <h1 id="welcomeTitle">Welcome</h1>
+            <p id="accountDetails">Loading your private account...</p>
+            <div class="empty">
+                <strong>Private galleries will appear here.</strong>
+                <p>Once the admin uploads and assigns an album, this dashboard will show previews, expiry details, and download options.</p>
+            </div>
+        </section>
+    </main>
+    <script>
+        const API_BASE = localStorage.getItem("dlmApiBase") || "http://localhost:8080";
+        const token = localStorage.getItem("dlmCustomerToken");
+        if (!token) location.href = "login.html";
+        document.getElementById("logoutButton").addEventListener("click", () => {
+            localStorage.removeItem("dlmCustomerToken");
+            location.href = "login.html";
+        });
+        async function loadMe() {
+            const response = await fetch(`${API_BASE}/api/customer/me`, {
+                headers: { "Authorization": `Bearer ${token}` }
+            });
+            if (!response.ok) {
+                localStorage.removeItem("dlmCustomerToken");
+                location.href = "login.html";
+                return;
+            }
+            const data = await response.json();
+            if (data.mustChangePassword) {
+                location.href = "change-password.html";
+                return;
+            }
+            document.getElementById("welcomeTitle").textContent = `Welcome, ${data.fullName}`;
+            document.getElementById("accountDetails").textContent = `Customer ID: ${data.customerCode} | Email: ${data.email}`;
+        }
+        loadMe();
+    </script>
+</body>
+</html>

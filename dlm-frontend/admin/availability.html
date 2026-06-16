@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DLM Availability</title>
+    <style>
+        :root { --pink: #ef2d83; --ink: #241723; --muted: #7a6572; --line: rgba(36, 23, 35, 0.1); --soft: #fff0f7; }
+        * { box-sizing: border-box; }
+        body { margin: 0; font-family: Inter, "Segoe UI", sans-serif; color: var(--ink); background: #fff7fb; }
+        .shell { min-height: 100vh; display: grid; grid-template-columns: 250px 1fr; }
+        aside { padding: 24px; background: #fff; border-right: 1px solid var(--line); }
+        main { padding: 30px; }
+        .brand { display: flex; align-items: center; gap: 12px; font-weight: 900; font-size: 20px; }
+        .brand img { width: 52px; height: 52px; border-radius: 50%; }
+        nav { display: grid; gap: 8px; margin-top: 28px; }
+        nav a, .logout { padding: 12px 14px; border: 0; border-radius: 8px; color: var(--ink); background: transparent; text-align: left; text-decoration: none; font-weight: 800; cursor: pointer; }
+        nav a.active, nav a:hover, .logout:hover { color: #fff; background: var(--pink); }
+        h1 { margin: 0 0 8px; font-size: 34px; }
+        h2 { margin: 0 0 18px; }
+        .muted { margin: 0 0 26px; color: var(--muted); }
+        .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; align-items: start; }
+        .panel { padding: 22px; border: 1px solid var(--line); border-radius: 10px; background: #fff; box-shadow: 0 16px 34px rgba(143, 28, 82, 0.08); }
+        .form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+        .span-2 { grid-column: 1 / -1; }
+        label { display: block; margin-bottom: 7px; font-size: 13px; font-weight: 900; }
+        input, select { width: 100%; padding: 12px; border: 1px solid var(--line); border-radius: 8px; background: #fff; font: inherit; }
+        .checks label { margin: 0; padding: 11px; display: flex; align-items: center; gap: 8px; border: 1px solid var(--line); border-radius: 8px; font-size: 12px; }
+        .checks input { width: auto; }
+        button { min-height: 42px; padding: 0 16px; border: 0; border-radius: 999px; font-weight: 900; cursor: pointer; }
+        .primary { color: #fff; background: var(--pink); }
+        .ghost { color: var(--pink); background: var(--soft); }
+        .danger { color: #fff; background: #241723; }
+        .message { min-height: 22px; margin-top: 12px; color: var(--pink); font-weight: 800; }
+        .list { display: grid; gap: 12px; margin-top: 16px; }
+        .item { padding: 15px; border: 1px solid var(--line); border-radius: 10px; background: #fff; }
+        .item-top { display: flex; align-items: start; justify-content: space-between; gap: 12px; }
+        .item strong { display: block; }
+        .item span, .item p { color: var(--muted); font-size: 13px; line-height: 1.5; }
+        .badge { padding: 5px 10px; border-radius: 999px; color: #fff; background: var(--pink); font-size: 11px; font-weight: 900; white-space: nowrap; }
+        .badge.off { color: var(--muted); background: #f0ecef; }
+        .slot-preview { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+        .date-card { padding: 14px; border-radius: 10px; background: var(--soft); }
+        .date-card strong { display: block; margin-bottom: 8px; }
+        .date-card small { display: block; color: var(--muted); line-height: 1.45; }
+        @media (max-width: 1050px) { .grid, .slot-preview { grid-template-columns: 1fr; } }
+        @media (max-width: 900px) { .shell { grid-template-columns: 1fr; } aside { border-right: 0; border-bottom: 1px solid var(--line); } main { padding: 20px; } .form-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <div class="shell">
+        <aside>
+            <div class="brand"><img src="../assets/image.png" alt="DLM logo">DLM Admin</div>
+            <nav>
+                <a href="dashboard.html">Dashboard</a>
+                <a href="dashboard.html#customers">Customers</a>
+                <a href="packages.html">Packages</a>
+                <a class="active" href="availability.html">Availability</a>
+                <a href="#bookings">Bookings</a>
+                <a href="#galleries">Galleries</a>
+                <a href="#payments">Payments</a>
+                <a href="#content">Website Content</a>
+                <button class="logout" id="logoutButton" type="button">Logout</button>
+            </nav>
+        </aside>
+        <main>
+            <h1>Availability Calendar</h1>
+            <p class="muted">Create weekly slot rules and block dates. Public booking screens will only show slots generated here.</p>
+
+            <div class="grid">
+                <section class="panel">
+                    <h2>Add Availability Rule</h2>
+                    <form id="ruleForm" class="form-grid">
+                        <div>
+                            <label>Package</label>
+                            <select name="packageId" id="packageSelect">
+                                <option value="">All packages / service only</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label>Service</label>
+                            <select name="serviceId" id="serviceSelect">
+                                <option value="">Any service</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label>Day of Week</label>
+                            <select name="dayOfWeek">
+                                <option value="">Every day</option>
+                                <option>MONDAY</option>
+                                <option>TUESDAY</option>
+                                <option>WEDNESDAY</option>
+                                <option>THURSDAY</option>
+                                <option>FRIDAY</option>
+                                <option>SATURDAY</option>
+                                <option>SUNDAY</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label>Booking Type</label>
+                            <select name="bookingType" required>
+                                <option value="FULL_DAY">Full day</option>
+                                <option value="HALF_DAY">Half day</option>
+                                <option value="TIME_SLOT">Time slot</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label>Start Time</label>
+                            <input name="startTime" type="time">
+                        </div>
+                        <div>
+                            <label>End Time</label>
+                            <input name="endTime" type="time">
+                        </div>
+                        <div>
+                            <label>Max Bookings Per Day</label>
+                            <input name="maxBookingsPerDay" type="number" min="1" value="1" required>
+                        </div>
+                        <div>
+                            <label>Buffer Minutes</label>
+                            <input name="bufferMinutes" type="number" min="0" value="0">
+                        </div>
+                        <div class="span-2 checks">
+                            <label><input name="active" type="checkbox" checked> Active</label>
+                        </div>
+                        <div class="span-2">
+                            <button class="primary" type="submit">Save Rule</button>
+                        </div>
+                    </form>
+                    <div class="message" id="ruleMessage"></div>
+                </section>
+
+                <section class="panel">
+                    <h2>Block Date / Holiday</h2>
+                    <form id="blockedForm" class="form-grid">
+                        <div>
+                            <label>Date</label>
+                            <input name="blockedDate" type="date" required>
+                        </div>
+                        <div>
+                            <label>Package</label>
+                            <select name="packageId" id="blockedPackageSelect">
+                                <option value="">All packages / service only</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label>Service</label>
+                            <select name="serviceId" id="blockedServiceSelect">
+                                <option value="">Any service</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label>Reason</label>
+                            <input name="reason" placeholder="Holiday, already booked, travel day">
+                        </div>
+                        <div class="span-2 checks">
+                            <label><input name="holiday" type="checkbox"> Mark as holiday</label>
+                        </div>
+                        <div class="span-2">
+                            <button class="primary" type="submit">Block Date</button>
+                        </div>
+                    </form>
+                    <div class="message" id="blockedMessage"></div>
+                </section>
+            </div>
+
+            <div class="grid">
+                <section class="panel">
+                    <h2>Rules</h2>
+                    <div class="list" id="ruleList"></div>
+                </section>
+
+                <section class="panel">
+                    <h2>Blocked Dates</h2>
+                    <div class="list" id="blockedList"></div>
+                </section>
+            </div>
+
+            <section class="panel">
+                <h2>Public Slot Preview</h2>
+                <form id="previewForm" class="form-grid">
+                    <div>
+                        <label>Package</label>
+                        <select name="packageId" id="previewPackageSelect" required></select>
+                    </div>
+                    <div>
+                        <label>Start Date</label>
+                        <input name="startDate" type="date" required>
+                    </div>
+                    <div>
+                        <label>End Date</label>
+                        <input name="endDate" type="date" required>
+                    </div>
+                    <div style="align-self:end;">
+                        <button class="primary" type="submit">Preview Slots</button>
+                    </div>
+                </form>
+                <div class="slot-preview" id="slotPreview"></div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        const API_BASE = localStorage.getItem("dlmApiBase") || "http://localhost:8080";
+        const token = localStorage.getItem("dlmAdminToken");
+        if (!token) location.href = "login.html";
+        const authHeaders = { "Content-Type": "application/json", "Authorization": `Bearer ${token}` };
+
+        const packageSelects = ["packageSelect", "blockedPackageSelect", "previewPackageSelect"].map(id => document.getElementById(id));
+        const serviceSelects = ["serviceSelect", "blockedServiceSelect"].map(id => document.getElementById(id));
+        let packages = [];
+        let services = [];
+
+        document.getElementById("logoutButton").addEventListener("click", () => {
+            localStorage.removeItem("dlmAdminToken");
+            location.href = "login.html";
+        });
+
+        async function request(path, options = {}) {
+            const response = await fetch(`${API_BASE}${path}`, { ...options, headers: { ...authHeaders, ...(options.headers || {}) } });
+            if (response.status === 401 || response.status === 403) {
+                localStorage.removeItem("dlmAdminToken");
+                location.href = "login.html";
+            }
+            if (!response.ok) throw new Error(await response.text());
+            return response.json();
+        }
+
+        function payloadFrom(form) {
+            const data = Object.fromEntries(new FormData(form).entries());
+            return {
+                ...data,
+                packageId: data.packageId ? Number(data.packageId) : null,
+                serviceId: data.serviceId ? Number(data.serviceId) : null,
+                dayOfWeek: data.dayOfWeek || null,
+                startTime: data.startTime || null,
+                endTime: data.endTime || null,
+                maxBookingsPerDay: data.maxBookingsPerDay ? Number(data.maxBookingsPerDay) : 1,
+                bufferMinutes: data.bufferMinutes ? Number(data.bufferMinutes) : 0,
+                active: form.active ? form.active.checked : true,
+                holiday: form.holiday ? form.holiday.checked : false
+            };
+        }
+
+        function renderSelectors() {
+            const packageOptions = packages.map(item => `<option value="${item.id}">${item.title}</option>`).join("");
+            packageSelects.forEach((select, index) => {
+                const prefix = index === 2 ? `<option value="">Select package</option>` : `<option value="">All packages / service only</option>`;
+                select.innerHTML = prefix + packageOptions;
+            });
+            const serviceOptions = services.map(item => `<option value="${item.id}">${item.title}</option>`).join("");
+            serviceSelects.forEach(select => {
+                select.innerHTML = `<option value="">Any service</option>` + serviceOptions;
+            });
+        }
+
+        function renderRules(rules) {
+            document.getElementById("ruleList").innerHTML = rules.length ? rules.map(rule => `
+                <article class="item">
+                    <div class="item-top">
+                        <div>
+                            <strong>${rule.packageTitle || rule.serviceTitle || "Global availability"}</strong>
+                            <span>${rule.dayOfWeek || "Every day"} | ${rule.bookingType.replace("_", " ")} | ${rule.startTime || "Full day"}${rule.endTime ? " - " + rule.endTime : ""}</span>
+                            <p>Capacity ${rule.maxBookingsPerDay}, buffer ${rule.bufferMinutes} min</p>
+                        </div>
+                        <span class="badge ${rule.active ? "" : "off"}">${rule.active ? "Active" : "Disabled"}</span>
+                    </div>
+                    ${rule.active ? `<button class="ghost" type="button" data-disable-rule="${rule.id}">Disable</button>` : ""}
+                </article>
+            `).join("") : `<p class="muted">No availability rules yet.</p>`;
+        }
+
+        function renderBlocked(blockedDates) {
+            document.getElementById("blockedList").innerHTML = blockedDates.length ? blockedDates.map(item => `
+                <article class="item">
+                    <div class="item-top">
+                        <div>
+                            <strong>${item.blockedDate}</strong>
+                            <span>${item.packageTitle || item.serviceTitle || "Global block"} | ${item.holiday ? "Holiday" : "Blocked"}</span>
+                            <p>${item.reason || "No reason added."}</p>
+                        </div>
+                        <button class="danger" type="button" data-delete-block="${item.id}">Remove</button>
+                    </div>
+                </article>
+            `).join("") : `<p class="muted">No blocked dates yet.</p>`;
+        }
+
+        async function loadAll() {
+            [services, packages] = await Promise.all([
+                request("/api/admin/services"),
+                request("/api/admin/packages")
+            ]);
+            renderSelectors();
+            const [rules, blockedDates] = await Promise.all([
+                request("/api/admin/availability/rules"),
+                request("/api/admin/availability/blocked-dates")
+            ]);
+            renderRules(rules);
+            renderBlocked(blockedDates);
+        }
+
+        document.getElementById("ruleForm").addEventListener("submit", async event => {
+            event.preventDefault();
+            await request("/api/admin/availability/rules", { method: "POST", body: JSON.stringify(payloadFrom(event.target)) });
+            document.getElementById("ruleMessage").textContent = "Availability rule saved.";
+            event.target.reset();
+            event.target.active.checked = true;
+            await loadAll();
+        });
+
+        document.getElementById("blockedForm").addEventListener("submit", async event => {
+            event.preventDefault();
+            await request("/api/admin/availability/blocked-dates", { method: "POST", body: JSON.stringify(payloadFrom(event.target)) });
+            document.getElementById("blockedMessage").textContent = "Date blocked.";
+            event.target.reset();
+            await loadAll();
+        });
+
+        document.getElementById("ruleList").addEventListener("click", async event => {
+            const id = event.target.dataset.disableRule;
+            if (!id) return;
+            await request(`/api/admin/availability/rules/${id}/disable`, { method: "PATCH" });
+            await loadAll();
+        });
+
+        document.getElementById("blockedList").addEventListener("click", async event => {
+            const id = event.target.dataset.deleteBlock;
+            if (!id) return;
+            await request(`/api/admin/availability/blocked-dates/${id}`, { method: "DELETE" });
+            await loadAll();
+        });
+
+        document.getElementById("previewForm").addEventListener("submit", async event => {
+            event.preventDefault();
+            const data = Object.fromEntries(new FormData(event.target).entries());
+            const result = await request(`/api/public/availability?packageId=${data.packageId}&startDate=${data.startDate}&endDate=${data.endDate}`);
+            document.getElementById("slotPreview").innerHTML = result.dates.map(date => `
+                <article class="date-card">
+                    <strong>${date.date}</strong>
+                    ${date.available ? date.slots.map(slot => `<small>${slot.bookingType.replace("_", " ")} ${slot.startTime || "Full day"}${slot.endTime ? " - " + slot.endTime : ""} | ${slot.remainingCapacity} left</small>`).join("") : `<small>${date.reason}</small>`}
+                </article>
+            `).join("");
+        });
+
+        const today = new Date();
+        const nextWeek = new Date();
+        nextWeek.setDate(today.getDate() + 7);
+        document.querySelector("[name='startDate']").valueAsDate = today;
+        document.querySelector("[name='endDate']").valueAsDate = nextWeek;
+
+        loadAll().catch(error => {
+            document.getElementById("ruleMessage").textContent = "Could not load availability. Check backend server.";
+            console.error(error);
+        });
+    </script>
+</body>
+</html>

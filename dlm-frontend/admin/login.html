@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DLM Admin Login</title>
+    <style>
+        :root { --pink: #ef2d83; --ink: #241723; --muted: #7a6572; }
+        * { box-sizing: border-box; }
+        body {
+            min-height: 100vh;
+            margin: 0;
+            display: grid;
+            place-items: center;
+            font-family: Inter, "Segoe UI", sans-serif;
+            color: var(--ink);
+            background: linear-gradient(135deg, #fff2f8, #ffe1ee);
+        }
+        .login-card {
+            width: min(92vw, 420px);
+            padding: 34px;
+            border: 1px solid rgba(239, 45, 131, 0.14);
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.88);
+            box-shadow: 0 28px 70px rgba(143, 28, 82, 0.16);
+        }
+        img { width: 74px; height: 74px; display: block; margin: 0 auto 18px; border-radius: 50%; }
+        h1 { margin: 0; text-align: center; font-size: 30px; }
+        p { margin: 10px 0 24px; text-align: center; color: var(--muted); line-height: 1.5; }
+        label { display: block; margin: 14px 0 7px; font-weight: 800; font-size: 13px; }
+        input {
+            width: 100%;
+            height: 46px;
+            padding: 0 14px;
+            border: 1px solid rgba(36, 23, 35, 0.12);
+            border-radius: 8px;
+            font: inherit;
+        }
+        button {
+            width: 100%;
+            height: 48px;
+            margin-top: 22px;
+            border: 0;
+            border-radius: 999px;
+            color: #fff;
+            background: var(--pink);
+            font-weight: 900;
+            cursor: pointer;
+        }
+        .message { min-height: 22px; margin-top: 14px; color: #b00020; font-size: 13px; text-align: center; }
+    </style>
+</head>
+<body>
+    <form class="login-card" id="adminLoginForm">
+        <img src="../assets/image.png" alt="DLM logo">
+        <h1>Admin Login</h1>
+        <p>Manage customers, packages, bookings, galleries and payments.</p>
+        <label for="identifier">Email or Username</label>
+        <input id="identifier" name="identifier" autocomplete="username" required value="admin@dlmstudio.com">
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" autocomplete="current-password" required value="Admin@12345">
+        <button type="submit">Login</button>
+        <div class="message" id="message"></div>
+    </form>
+    <script>
+        const API_BASE = localStorage.getItem("dlmApiBase") || "http://localhost:8080";
+        document.getElementById("adminLoginForm").addEventListener("submit", async event => {
+            event.preventDefault();
+            const message = document.getElementById("message");
+            message.textContent = "Signing in...";
+            const response = await fetch(`${API_BASE}/api/auth/admin/login`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    identifier: event.target.identifier.value,
+                    password: event.target.password.value
+                })
+            });
+            if (!response.ok) {
+                message.textContent = "Invalid admin credentials or backend is not running.";
+                return;
+            }
+            const data = await response.json();
+            localStorage.setItem("dlmAdminToken", data.token);
+            location.href = "dashboard.html";
+        });
+    </script>
+</body>
+</html>

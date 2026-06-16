@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DLM Admin Dashboard</title>
+    <style>
+        :root { --pink: #ef2d83; --ink: #241723; --muted: #7a6572; --line: rgba(36, 23, 35, 0.1); }
+        * { box-sizing: border-box; }
+        body { margin: 0; font-family: Inter, "Segoe UI", sans-serif; color: var(--ink); background: #fff7fb; }
+        .shell { min-height: 100vh; display: grid; grid-template-columns: 250px 1fr; }
+        aside { padding: 24px; background: #fff; border-right: 1px solid var(--line); }
+        main { padding: 30px; }
+        .brand { display: flex; align-items: center; gap: 12px; font-weight: 900; font-size: 20px; }
+        .brand img { width: 52px; height: 52px; border-radius: 50%; }
+        nav { display: grid; gap: 8px; margin-top: 28px; }
+        nav a, .logout { padding: 12px 14px; border: 0; border-radius: 8px; color: var(--ink); background: transparent; text-align: left; text-decoration: none; font-weight: 800; cursor: pointer; }
+        nav a.active, nav a:hover, .logout:hover { color: #fff; background: var(--pink); }
+        h1 { margin: 0 0 8px; font-size: 34px; }
+        .muted { margin: 0 0 26px; color: var(--muted); }
+        .cards { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
+        .card { padding: 20px; border: 1px solid var(--line); border-radius: 10px; background: #fff; box-shadow: 0 16px 34px rgba(143, 28, 82, 0.08); }
+        .card span { color: var(--muted); font-size: 13px; font-weight: 800; }
+        .card strong { display: block; margin-top: 10px; font-size: 32px; }
+        .panel { margin-top: 26px; padding: 22px; border: 1px solid var(--line); border-radius: 10px; background: #fff; }
+        .form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+        label { display: block; margin-bottom: 7px; font-size: 13px; font-weight: 900; }
+        input, textarea { width: 100%; padding: 12px; border: 1px solid var(--line); border-radius: 8px; font: inherit; }
+        textarea { min-height: 82px; resize: vertical; }
+        button.primary { min-height: 44px; padding: 0 18px; border: 0; border-radius: 999px; color: #fff; background: var(--pink); font-weight: 900; cursor: pointer; }
+        table { width: 100%; margin-top: 16px; border-collapse: collapse; }
+        th, td { padding: 12px; border-bottom: 1px solid var(--line); text-align: left; font-size: 14px; }
+        th { color: var(--muted); font-size: 12px; text-transform: uppercase; }
+        .message { margin-top: 12px; color: var(--pink); font-weight: 800; }
+        @media (max-width: 900px) { .shell { grid-template-columns: 1fr; } aside { border-right: 0; border-bottom: 1px solid var(--line); } .cards, .form-grid { grid-template-columns: 1fr; } main { padding: 20px; } }
+    </style>
+</head>
+<body>
+    <div class="shell">
+        <aside>
+            <div class="brand"><img src="../assets/image.png" alt="DLM logo">DLM Admin</div>
+            <nav>
+                <a class="active" href="#dashboard">Dashboard</a>
+                <a href="#customers">Customers</a>
+                <a href="packages.html">Packages</a>
+                <a href="availability.html">Availability</a>
+                <a href="#bookings">Bookings</a>
+                <a href="#galleries">Galleries</a>
+                <a href="#payments">Payments</a>
+                <a href="#content">Website Content</a>
+                <button class="logout" id="logoutButton" type="button">Logout</button>
+            </nav>
+        </aside>
+        <main>
+            <h1>Dashboard</h1>
+            <p class="muted">Auth foundation is connected. Package, booking, gallery and payment modules are ready for the next milestones.</p>
+            <section class="cards" id="metricCards"></section>
+            <section class="panel" id="customers">
+                <h2>Create Customer Account</h2>
+                <form id="customerForm" class="form-grid">
+                    <div><label>Full Name</label><input name="fullName" required></div>
+                    <div><label>Email</label><input name="email" type="email" required></div>
+                    <div><label>Mobile</label><input name="mobile"></div>
+                    <div><label>Address</label><input name="address"></div>
+                    <div style="grid-column: 1 / -1;"><label>Notes</label><textarea name="notes"></textarea></div>
+                    <div><button class="primary" type="submit">Create Customer</button></div>
+                </form>
+                <div class="message" id="customerMessage"></div>
+                <table>
+                    <thead><tr><th>Code</th><th>Name</th><th>Email</th><th>Status</th><th>Temp Password</th></tr></thead>
+                    <tbody id="customerRows"></tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+    <script>
+        const API_BASE = localStorage.getItem("dlmApiBase") || "http://localhost:8080";
+        const token = localStorage.getItem("dlmAdminToken");
+        if (!token) location.href = "login.html";
+        const authHeaders = { "Content-Type": "application/json", "Authorization": `Bearer ${token}` };
+        const metricCards = document.getElementById("metricCards");
+        const customerRows = document.getElementById("customerRows");
+        const customerMessage = document.getElementById("customerMessage");
+
+        document.getElementById("logoutButton").addEventListener("click", () => {
+            localStorage.removeItem("dlmAdminToken");
+            location.href = "login.html";
+        });
+
+        async function request(path, options = {}) {
+            const response = await fetch(`${API_BASE}${path}`, { ...options, headers: { ...authHeaders, ...(options.headers || {}) } });
+            if (response.status === 401 || response.status === 403) {
+                localStorage.removeItem("dlmAdminToken");
+                location.href = "login.html";
+            }
+            if (!response.ok) throw new Error(await response.text());
+            return response.json();
+        }
+
+        async function loadDashboard() {
+            const data = await request("/api/admin/dashboard");
+            const metrics = [
+                ["Total Customers", data.totalCustomers],
+                ["Audit Logs", data.auditLogEntries],
+                ["Total Bookings", data.totalBookings],
+                ["Confirmed", data.confirmedBookings],
+                ["Upcoming Shoots", data.upcomingShoots],
+                ["Awaiting Upload", data.galleriesAwaitingUpload],
+                ["Expiring Galleries", data.galleriesNearingExpiry]
+            ];
+            metricCards.innerHTML = metrics.map(([label, value]) => `<article class="card"><span>${label}</span><strong>${value}</strong></article>`).join("");
+        }
+
+        async function loadCustomers() {
+            const customers = await request("/api/admin/customers");
+            customerRows.innerHTML = customers.map(customer => `
+                <tr>
+                    <td>${customer.customerCode}</td>
+                    <td>${customer.fullName}</td>
+                    <td>${customer.email}</td>
+                    <td>${customer.status}</td>
+                    <td>${customer.mustChangePassword ? "Required" : "Changed"}</td>
+                </tr>
+            `).join("");
+        }
+
+        document.getElementById("customerForm").addEventListener("submit", async event => {
+            event.preventDefault();
+            const form = new FormData(event.target);
+            const payload = Object.fromEntries(form.entries());
+            const created = await request("/api/admin/customers", { method: "POST", body: JSON.stringify(payload) });
+            customerMessage.textContent = `Customer ${created.customer.customerCode} created. Temporary password: ${created.temporaryPassword}`;
+            event.target.reset();
+            loadCustomers();
+        });
+
+        loadDashboard();
+        loadCustomers();
+    </script>
+</body>
+</html>
