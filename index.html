@@ -1,0 +1,4795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DLM Site</title>
+    <style>
+        :root {
+            --pink: #ef2d83;
+            --pink-dark: #c91567;
+            --soft: #fff0f7;
+            --ink: #241723;
+            --muted: #7a6572;
+            --border: rgba(36, 23, 35, 0.1);
+            --white: #ffffff;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Inter", "Segoe UI", sans-serif;
+            color: var(--ink);
+            background: #fff8fb;
+        }
+
+        body.menu-open {
+            overflow: hidden;
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+        button,
+        a {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .navbar-wrap {
+            position: absolute;
+            top: 18px;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 0 28px;
+        }
+
+        .navbar-wrap.is-sticky {
+            position: fixed;
+            top: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            width: min(100%, 1180px);
+            min-height: 76px;
+            margin: auto;
+            padding: 0 30px;
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            gap: 24px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.94);
+            box-shadow: 0 18px 50px rgba(108, 20, 64, 0.14);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            transition: border-radius 0.25s ease, min-height 0.25s ease;
+        }
+
+        .navbar-wrap.is-sticky .navbar {
+            width: 100%;
+            min-height: 70px;
+            border-radius: 0;
+        }
+
+        .brand {
+            justify-self: start;
+            display: flex;
+            align-items: center;
+        }
+
+        .brand-logo {
+            width: 56px;
+            height: 56px;
+            object-fit: contain;
+            border-radius: 50%;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 28px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-links a,
+        .wedding-button {
+            min-height: 70px;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            border: 0;
+            color: var(--ink);
+            background: none;
+            font: 700 14px "Inter", "Segoe UI", sans-serif;
+            text-decoration: none;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .nav-links a:hover,
+        .wedding-button:hover {
+            color: var(--pink);
+        }
+
+        .arrow {
+            width: 8px;
+            height: 8px;
+            border-right: 2px solid currentColor;
+            border-bottom: 2px solid currentColor;
+            transform: rotate(45deg);
+            transition: transform 0.25s ease;
+        }
+
+        .wedding-item:hover .arrow,
+        .wedding-item:focus-within .arrow {
+            transform: rotate(225deg);
+        }
+
+        .wedding-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            width: 560px;
+            padding: 26px;
+            display: grid;
+            grid-template-columns: 160px 1fr 1fr;
+            gap: 24px;
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            background: #fff;
+            box-shadow: 0 24px 60px rgba(40, 20, 32, 0.16);
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transform: translate(-50%, -10px);
+            transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
+        }
+
+        .wedding-item:hover .wedding-dropdown,
+        .wedding-item:focus-within .wedding-dropdown {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transform: translate(-50%, 0);
+        }
+
+        .wedding-dropdown img {
+            width: 100%;
+            height: 180px;
+            object-fit: contain;
+            border-radius: 14px;
+            background: #fff4f9;
+        }
+
+        .wedding-column {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .wedding-column a {
+            min-height: 44px;
+            font-size: 15px;
+        }
+
+        .nav-actions {
+            justify-self: end;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .login-button {
+            min-width: 96px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 999px;
+            color: #fff;
+            background: var(--pink);
+            font-weight: 800;
+            text-decoration: none;
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+
+        .login-button:hover {
+            background: var(--pink-dark);
+            transform: translateY(-1px);
+        }
+
+        .menu-toggle {
+            flex: 0 0 auto;
+            width: 44px;
+            height: 44px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            border: 0;
+            border-radius: 50%;
+            color: var(--pink);
+            background: var(--soft);
+            cursor: pointer;
+        }
+
+        .menu-lines,
+        .menu-lines::before,
+        .menu-lines::after {
+            width: 20px;
+            height: 2px;
+            display: block;
+            border-radius: 10px;
+            background: currentColor;
+        }
+
+        .menu-lines {
+            position: relative;
+        }
+
+        .menu-lines::before,
+        .menu-lines::after {
+            content: "";
+            position: absolute;
+            left: 0;
+        }
+
+        .menu-lines::before {
+            top: -6px;
+        }
+
+        .menu-lines::after {
+            top: 6px;
+        }
+
+        .menu-backdrop {
+            position: fixed;
+            inset: 0;
+            z-index: 1100;
+            visibility: hidden;
+            opacity: 0;
+            background: rgba(36, 23, 35, 0.5);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .menu-backdrop.open {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1200;
+            width: min(88vw, 370px);
+            height: 100vh;
+            height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            background: #fff;
+            box-shadow: -25px 0 60px rgba(30, 15, 24, 0.2);
+            visibility: hidden;
+            transform: translateX(105%);
+            transition: transform 0.35s ease, visibility 0.35s ease;
+        }
+
+        .mobile-menu.open {
+            visibility: visible;
+            transform: translateX(0);
+        }
+
+        .mobile-menu-header {
+            flex: 0 0 auto;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .mobile-logo {
+            width: 52px;
+            height: 52px;
+            object-fit: contain;
+            border-radius: 50%;
+        }
+
+        .menu-close {
+            width: 42px;
+            height: 42px;
+            border: 0;
+            border-radius: 50%;
+            color: var(--pink);
+            background: var(--soft);
+            font-size: 27px;
+            line-height: 1;
+            cursor: pointer;
+        }
+
+        .mobile-links {
+            flex: 1 1 auto;
+            margin: 0;
+            padding: 16px 20px;
+            list-style: none;
+            overflow-y: auto;
+            overscroll-behavior: contain;
+        }
+
+        .mobile-links > li {
+            border-bottom: 1px solid var(--border);
+        }
+
+        .mobile-links a,
+        .mobile-wedding-button {
+            width: 100%;
+            min-height: 56px;
+            padding: 0 8px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border: 0;
+            color: var(--ink);
+            background: none;
+            font: 700 16px "Inter", "Segoe UI", sans-serif;
+            text-decoration: none;
+            text-align: left;
+            cursor: pointer;
+        }
+
+        .mobile-wedding-panel {
+            max-height: 0;
+            overflow: hidden;
+            background: #fff8fb;
+            transition: max-height 0.3s ease;
+        }
+
+        .mobile-wedding-panel.open {
+            max-height: 520px;
+        }
+
+        .mobile-wedding-panel a {
+            min-height: 43px;
+            padding-left: 22px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .mobile-login {
+            flex: 0 0 auto;
+            margin: 20px;
+            min-height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 999px;
+            color: #fff;
+            background: var(--pink);
+            font-weight: 800;
+            text-decoration: none;
+        }
+
+        .hero-slider {
+            position: relative;
+            min-height: 100vh;
+            min-height: 100svh;
+            overflow: hidden;
+            background: #1c1218;
+            isolation: isolate;
+            touch-action: pan-y;
+        }
+
+        .slider-track {
+            height: 100%;
+            min-height: inherit;
+            display: flex;
+            transform: translateX(0);
+            transition: transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+            will-change: transform;
+        }
+
+        .hero-slide {
+            position: relative;
+            flex: 0 0 100%;
+            min-height: inherit;
+            overflow: hidden;
+        }
+
+        .hero-slide::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            background:
+                linear-gradient(90deg, rgba(22, 10, 16, 0.72) 0%, rgba(22, 10, 16, 0.28) 43%, rgba(22, 10, 16, 0.12) 100%),
+                linear-gradient(0deg, rgba(22, 10, 16, 0.34) 0%, transparent 38%);
+            pointer-events: none;
+        }
+
+        .hero-slide img {
+            width: 100%;
+            height: 100%;
+            min-height: inherit;
+            display: block;
+            object-fit: cover;
+            object-position: center;
+            transform: scale(1.055);
+            transition: transform 4.5s ease;
+            user-select: none;
+            pointer-events: none;
+            -webkit-user-drag: none;
+        }
+
+        .hero-slide.is-active img {
+            transform: scale(1);
+        }
+
+        .slider-content {
+            position: absolute;
+            left: max(28px, calc((100vw - 1180px) / 2));
+            bottom: 12vh;
+            z-index: 4;
+            width: min(560px, calc(100% - 56px));
+            color: #fff;
+        }
+
+        .slider-kicker {
+            margin: 0 0 14px;
+            color: #ffd7e8;
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+        }
+
+        .slider-title {
+            margin: 0;
+            font-size: clamp(42px, 6vw, 86px);
+            line-height: 0.95;
+            letter-spacing: 0;
+        }
+
+        .slider-copy {
+            max-width: 480px;
+            margin: 22px 0 0;
+            color: rgba(255, 255, 255, 0.84);
+            font-size: 18px;
+            line-height: 1.7;
+        }
+
+        .slider-controls {
+            position: absolute;
+            right: max(28px, calc((100vw - 1180px) / 2));
+            bottom: 12vh;
+            z-index: 5;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .slider-arrow {
+            width: 48px;
+            height: 48px;
+            display: grid;
+            place-items: center;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            color: #fff;
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            cursor: pointer;
+            transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+        }
+
+        .slider-arrow:hover {
+            border-color: var(--pink);
+            background: var(--pink);
+            transform: translateY(-1px);
+        }
+
+        .slider-arrow span {
+            width: 11px;
+            height: 11px;
+            display: block;
+            border-top: 2px solid currentColor;
+            border-right: 2px solid currentColor;
+        }
+
+        .slider-prev span {
+            margin-left: 4px;
+            transform: rotate(-135deg);
+        }
+
+        .slider-next span {
+            margin-right: 4px;
+            transform: rotate(45deg);
+        }
+
+        .slider-dots {
+            position: absolute;
+            left: 50%;
+            bottom: 34px;
+            z-index: 5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            transform: translateX(-50%);
+        }
+
+        .slider-dot {
+            width: 9px;
+            height: 9px;
+            padding: 0;
+            border: 1px solid rgba(255, 255, 255, 0.82);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.45);
+            cursor: pointer;
+            transition: width 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+        }
+
+        .slider-dot.is-active {
+            width: 30px;
+            border-color: var(--pink);
+            background: var(--pink);
+        }
+
+        .slider-progress {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            z-index: 6;
+            width: 100%;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.24);
+            overflow: hidden;
+        }
+
+        .slider-progress-bar {
+            width: 0;
+            height: 100%;
+            background: var(--pink);
+        }
+
+        .slider-progress-bar.is-running {
+            animation: sliderProgress 4s linear forwards;
+        }
+
+        @keyframes sliderProgress {
+            from {
+                width: 0;
+            }
+
+            to {
+                width: 100%;
+            }
+        }
+
+        .content-section {
+            padding: 96px 28px;
+            background: #fff;
+        }
+
+        .content-section:nth-of-type(odd) {
+            background: #fff4f9;
+        }
+
+        .section-inner {
+            width: min(100%, 1080px);
+            margin: 0 auto;
+        }
+
+        .section-inner h2 {
+            margin: 0 0 16px;
+            font-size: clamp(30px, 4vw, 48px);
+        }
+
+        .section-inner p {
+            max-width: 720px;
+            margin: 0;
+            color: var(--muted);
+            font-size: 18px;
+            line-height: 1.75;
+        }
+
+        .services-section {
+            position: relative;
+            padding: 86px 28px 96px;
+            overflow: hidden;
+            background:
+                radial-gradient(circle at 100% 62%, rgba(255, 255, 255, 0.42) 0 130px, transparent 132px),
+                linear-gradient(180deg, #ffe1ee 0%, #fff3f8 100%);
+        }
+
+        .services-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: min(92%, 760px);
+            height: 10px;
+            border-radius: 0 0 999px 999px;
+            background: var(--pink);
+            transform: translateX(-50%);
+        }
+
+        .services-inner {
+            position: relative;
+            z-index: 1;
+            width: min(100%, 1180px);
+            margin: 0 auto;
+        }
+
+        .services-intro {
+            max-width: 720px;
+            margin: 0 auto 42px;
+            text-align: center;
+        }
+
+        .services-kicker {
+            width: fit-content;
+            margin: 0 auto 14px;
+            padding: 9px 20px;
+            border-radius: 999px;
+            color: #fff;
+            background: var(--pink);
+            font-size: 12px;
+            font-weight: 850;
+            text-transform: uppercase;
+        }
+
+        .services-intro h2 {
+            margin: 0;
+            color: #172236;
+            font-size: clamp(32px, 4vw, 50px);
+            line-height: 1.1;
+            letter-spacing: 0;
+        }
+
+        .services-intro p {
+            max-width: 620px;
+            margin: 14px auto 0;
+            color: var(--muted);
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 28px;
+            padding-top: 82px;
+        }
+
+        .service-card {
+            position: relative;
+            min-height: 238px;
+            padding: 94px 24px 24px;
+            overflow: visible;
+            border-radius: 12px;
+            background:
+                linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0 38%, transparent 39%),
+                linear-gradient(180deg, #ff4b8f 0%, #d71973 100%);
+            box-shadow: 0 22px 42px rgba(143, 28, 82, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .service-card::after {
+            content: "";
+            position: absolute;
+            right: -62px;
+            bottom: -62px;
+            width: 188px;
+            height: 188px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.22);
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .service-card::before {
+            content: "";
+            position: absolute;
+            left: 18px;
+            right: 18px;
+            bottom: 18px;
+            height: 108px;
+            z-index: 0;
+            border-radius: 14px;
+            background: linear-gradient(180deg, rgba(87, 11, 48, 0.34), rgba(87, 11, 48, 0.12));
+            opacity: 0.85;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            pointer-events: none;
+        }
+
+        .service-image {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            z-index: 2;
+            width: min(86%, 245px);
+            height: 172px;
+            transform: translate(-50%, -52%);
+            filter: drop-shadow(0 22px 20px rgba(54, 17, 31, 0.24));
+            object-fit: contain;
+            transition: transform 0.35s ease, filter 0.35s ease;
+        }
+
+        .service-card h3 {
+            position: relative;
+            z-index: 2;
+            max-width: 250px;
+            margin: 0 0 18px;
+            color: #fff;
+            font-size: clamp(24px, 2.7vw, 32px);
+            line-height: 1.08;
+            letter-spacing: 0;
+            text-shadow: 0 2px 12px rgba(43, 6, 25, 0.36);
+        }
+
+        .service-button {
+            position: relative;
+            z-index: 2;
+            width: fit-content;
+            min-height: 34px;
+            padding: 0 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border-radius: 7px;
+            color: var(--pink);
+            background: #fff;
+            font-size: 13px;
+            font-weight: 850;
+            text-decoration: none;
+            box-shadow: 0 8px 18px rgba(36, 23, 35, 0.12);
+            transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease;
+        }
+
+        .service-button span {
+            font-size: 18px;
+            line-height: 1;
+            transition: transform 0.25s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(143, 28, 82, 0.28);
+        }
+
+        .service-card:hover::after {
+            opacity: 0.32;
+            transform: scale(1.15);
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
+            transform: translateY(-4px);
+        }
+
+        .service-card:hover .service-image {
+            transform: translate(-50%, -58%) scale(1.06);
+            filter: drop-shadow(0 26px 22px rgba(54, 17, 31, 0.32));
+        }
+
+        .service-card:hover .service-button {
+            color: #fff;
+            background: #241723;
+            transform: translateY(-2px);
+        }
+
+        .service-card:hover .service-button span {
+            transform: translateX(4px);
+        }
+
+        .studio-about {
+            padding: 78px 28px 70px;
+            background: #fff;
+        }
+
+        .studio-about-inner {
+            width: min(100%, 1180px);
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: minmax(280px, 340px) 1fr;
+            align-items: center;
+            gap: clamp(34px, 5vw, 64px);
+        }
+
+        .about-gallery {
+            display: grid;
+            justify-items: center;
+            gap: 20px;
+        }
+
+        .about-photo-frame {
+            position: relative;
+            width: min(100%, 320px);
+            aspect-ratio: 0.82;
+            border-radius: 10px 10px 22px 22px;
+            overflow: hidden;
+            background: #14070d;
+            box-shadow: 0 20px 46px rgba(36, 23, 35, 0.18);
+            transform: perspective(900px) rotateY(-7deg) rotateZ(-1.5deg);
+            transform-origin: center;
+        }
+
+        .about-carousel-track {
+            height: 100%;
+            display: flex;
+            transform: translateX(0);
+            animation: aboutCarouselLoop 12s linear infinite;
+            will-change: transform;
+        }
+
+        .about-photo-frame:hover .about-carousel-track {
+            animation-play-state: paused;
+        }
+
+        @keyframes aboutCarouselLoop {
+            from {
+                transform: translateX(0);
+            }
+
+            to {
+                transform: translateX(-300%);
+            }
+        }
+
+        .about-carousel-slide {
+            flex: 0 0 100%;
+            height: 100%;
+            margin: 0;
+        }
+
+        .about-carousel-slide img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+        }
+
+        .about-photo-frame > img {
+            display: none;
+        }
+
+        .about-photo-frame::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 52%, rgba(20, 7, 13, 0.48));
+            pointer-events: none;
+        }
+
+        .about-side-arrow {
+            display: none;
+        }
+
+        .about-gallery-button {
+            min-width: 144px;
+            min-height: 44px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 999px;
+            color: #fff;
+            background: var(--pink);
+            font-weight: 800;
+            text-decoration: underline;
+            box-shadow: 0 14px 26px rgba(239, 45, 131, 0.24);
+        }
+
+        .studio-about-copy {
+            min-width: 0;
+        }
+
+        .about-eyebrow {
+            width: fit-content;
+            margin: 0 0 16px;
+            padding: 9px 20px;
+            border-radius: 999px;
+            color: #fff;
+            background: var(--pink);
+            font: 800 12px "Inter", "Segoe UI", sans-serif;
+            text-transform: uppercase;
+            box-shadow: 0 12px 24px rgba(239, 45, 131, 0.22);
+        }
+
+        .studio-about-copy h2 {
+            max-width: 820px;
+            margin: 0;
+            color: #172236;
+            font-family: "Inter", "Segoe UI", sans-serif;
+            font-size: clamp(32px, 3.4vw, 48px);
+            line-height: 1.14;
+            font-weight: 850;
+            letter-spacing: 0;
+        }
+
+        .about-description {
+            max-width: 860px;
+            margin: 16px 0 0;
+            color: #5e5a5d;
+            font: 16px/1.72 "Inter", "Segoe UI", sans-serif;
+        }
+
+        .about-description strong {
+            color: #2b2530;
+        }
+
+        .about-highlights {
+            margin-top: 22px;
+            padding: 22px 26px;
+            display: grid;
+            grid-template-columns: 76px 1fr;
+            align-items: center;
+            gap: 22px;
+            border-radius: 22px;
+            background: #f8f5f6;
+        }
+
+        .about-avatar {
+            width: 68px;
+            height: 68px;
+            border-radius: 50%;
+            object-fit: cover;
+            background: #fff;
+            box-shadow: 0 10px 24px rgba(36, 23, 35, 0.12);
+        }
+
+        .about-checks {
+            margin: 0;
+            padding: 0;
+            display: grid;
+            gap: 11px;
+            list-style: none;
+            color: #251f29;
+            font: 600 15px "Inter", "Segoe UI", sans-serif;
+        }
+
+        .about-checks li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .about-checks li::before {
+            content: "";
+            width: 8px;
+            height: 14px;
+            display: inline-block;
+            border-right: 2px solid var(--pink);
+            border-bottom: 2px solid var(--pink);
+            transform: rotate(45deg);
+            color: var(--pink);
+        }
+
+        .about-actions {
+            margin-top: 24px;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 13px;
+        }
+
+        .availability-text {
+            margin-right: 8px;
+            color: #2d2830;
+            font: 800 15px "Inter", "Segoe UI", sans-serif;
+        }
+
+        .about-action {
+            min-height: 50px;
+            padding: 0 24px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid transparent;
+            border-radius: 999px;
+            font: 800 14px "Inter", "Segoe UI", sans-serif;
+            text-decoration: underline;
+            white-space: nowrap;
+        }
+
+        .about-action.call {
+            color: #fff;
+            background: var(--pink);
+        }
+
+        .about-action.whatsapp {
+            color: #fff;
+            background: #25d366;
+            text-decoration-color: rgba(255, 255, 255, 0.8);
+        }
+
+        .about-action.maps {
+            color: #4776d0;
+            background: #fff;
+            border-color: #e6e1e5;
+            font-style: italic;
+            text-decoration: none;
+        }
+
+        @media (max-width: 900px) {
+            .navbar-wrap {
+                padding: 0 16px;
+            }
+
+            .navbar-wrap.is-sticky {
+                padding: 0;
+            }
+
+            .navbar {
+                grid-template-columns: 1fr auto;
+                min-height: 70px;
+                padding: 9px 16px;
+                gap: 14px;
+            }
+
+            .nav-links,
+            .login-button {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .brand-logo {
+                width: 48px;
+                height: 48px;
+            }
+
+            .nav-actions {
+                min-width: 0;
+            }
+
+            .hero-slider {
+                min-height: 720px;
+            }
+
+            .slider-content {
+                bottom: 110px;
+            }
+
+            .slider-controls {
+                right: 24px;
+                bottom: 34px;
+            }
+
+            .slider-dots {
+                left: 28px;
+                bottom: 48px;
+                transform: none;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .navbar-wrap {
+                top: 12px;
+                padding: 0 14px;
+            }
+
+            .navbar-wrap.is-sticky {
+                top: 0;
+                padding: 0;
+            }
+
+            .navbar {
+                min-height: 66px;
+                padding: 8px 12px;
+                border-radius: 34px;
+            }
+
+            .navbar-wrap.is-sticky .navbar {
+                border-radius: 0;
+            }
+
+            .mobile-menu {
+                width: min(92vw, 350px);
+            }
+
+            .mobile-menu-header {
+                padding: 14px 16px;
+            }
+
+            .mobile-links {
+                padding: 12px 16px;
+            }
+
+            .mobile-links a,
+            .mobile-wedding-button {
+                min-height: 52px;
+                font-size: 15px;
+            }
+
+            .mobile-login {
+                margin: 16px;
+            }
+
+            .hero-slider {
+                min-height: min(680px, 100svh);
+            }
+
+            .hero-slide::after {
+                background:
+                    linear-gradient(0deg, rgba(22, 10, 16, 0.76) 0%, rgba(22, 10, 16, 0.2) 72%),
+                    linear-gradient(90deg, rgba(22, 10, 16, 0.42), transparent);
+            }
+
+            .hero-slide img {
+                object-position: center;
+            }
+
+            .slider-content {
+                left: 20px;
+                right: 20px;
+                bottom: 118px;
+                width: auto;
+            }
+
+            .slider-kicker {
+                font-size: 12px;
+            }
+
+            .slider-title {
+                font-size: clamp(38px, 14vw, 58px);
+            }
+
+            .slider-copy {
+                margin-top: 16px;
+                font-size: 16px;
+                line-height: 1.6;
+            }
+
+            .slider-controls {
+                right: 18px;
+                bottom: 30px;
+            }
+
+            .slider-arrow {
+                width: 42px;
+                height: 42px;
+            }
+
+            .slider-dots {
+                left: 20px;
+                bottom: 45px;
+            }
+
+            .content-section {
+                padding: 72px 20px;
+            }
+
+            .services-section {
+                padding: 74px 20px 80px;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+                gap: 86px;
+                padding-top: 74px;
+            }
+
+            .service-card {
+                width: min(100%, 380px);
+                margin: 0 auto;
+            }
+
+            .studio-about {
+                padding: 86px 20px 78px;
+            }
+
+            .studio-about-inner {
+                grid-template-columns: 1fr;
+                gap: 26px;
+            }
+
+            .about-gallery {
+                order: 2;
+                width: 100%;
+                justify-self: center;
+            }
+
+            .studio-about-copy {
+                order: 1;
+                display: contents;
+            }
+
+            .about-eyebrow,
+            .studio-about-copy h2,
+            .about-description {
+                order: 1;
+            }
+
+            .about-photo-frame {
+                width: min(84vw, 340px);
+                transform: perspective(900px) rotateY(-7deg) rotateZ(-1.5deg);
+            }
+
+            .about-highlights {
+                order: 3;
+                grid-template-columns: 72px 1fr;
+                padding: 24px;
+                gap: 18px;
+            }
+
+            .about-avatar {
+                width: 66px;
+                height: 66px;
+            }
+
+            .about-actions {
+                order: 4;
+                align-items: stretch;
+            }
+
+            .availability-text {
+                width: 100%;
+                margin: 0 0 2px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .navbar-wrap {
+                padding: 0 10px;
+            }
+
+            .navbar {
+                min-height: 60px;
+                padding: 7px 10px;
+            }
+
+            .brand-logo {
+                width: 42px;
+                height: 42px;
+            }
+
+            .menu-toggle {
+                width: 40px;
+                height: 40px;
+            }
+
+            .mobile-menu {
+                width: 100vw;
+            }
+
+            .mobile-logo {
+                width: 46px;
+                height: 46px;
+            }
+
+            .hero-slider {
+                min-height: min(640px, 100svh);
+            }
+
+            .slider-title {
+                font-size: 36px;
+            }
+
+            .slider-copy {
+                font-size: 15px;
+            }
+
+            .studio-about {
+                padding: 72px 16px 64px;
+            }
+
+            .studio-about-copy h2 {
+                font-size: 34px;
+            }
+
+            .about-description {
+                font-size: 15.5px;
+            }
+
+            .about-highlights {
+                grid-template-columns: 1fr;
+                justify-items: start;
+                border-radius: 22px;
+            }
+
+            .about-actions {
+                gap: 12px;
+            }
+
+            .about-action,
+            .about-gallery-button {
+                width: 100%;
+            }
+
+            .services-section {
+                padding: 66px 16px 72px;
+            }
+
+            .services-intro {
+                margin-bottom: 58px;
+            }
+
+            .service-card {
+                min-height: 226px;
+                padding: 88px 20px 22px;
+            }
+
+            .service-image {
+                height: 150px;
+            }
+
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            .slider-track,
+            .hero-slide img,
+            .about-carousel-track,
+            .mobile-menu,
+            .menu-backdrop,
+            .mobile-wedding-panel {
+                transition: none;
+            }
+
+            .slider-progress-bar.is-running {
+                animation: none;
+            }
+
+            .about-carousel-track {
+                animation: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="navbar-wrap" id="siteNavbar">
+        <nav class="navbar" aria-label="Main navigation">
+            <a class="brand" href="#home">
+                <img class="brand-logo" src="assets/image.png" alt="DLM logo">
+            </a>
+
+            <ul class="nav-links">
+                <li class="nav-item"><a href="#home">Home</a></li>
+
+                <li class="nav-item wedding-item">
+                    <button class="wedding-button" type="button">
+                        Weddings
+                        <span class="arrow"></span>
+                    </button>
+
+                    <div class="wedding-dropdown">
+                        <img src="https://i.pinimg.com/736x/c3/08/2a/c3082adc6d4155cb01949f67dbfb0788.jpg" alt="Wedding photography preview">
+
+                        <div class="wedding-column">
+                            <a href="#hindu">Hindu Wedding</a>
+                            <a href="#brahmin">Brahmin Wedding</a>
+                            <a href="#christian">Christian Wedding</a>
+                            <a href="#bride">Bride Portrait</a>
+                            <a href="#groom">Groom Portrait</a>
+                        </div>
+
+                        <div class="wedding-column">
+                            <a href="#baby-shower">Baby Shower</a>
+                            <a href="#beauty">Beauty Shoot</a>
+                            <a href="#couple">Couple Shoot</a>
+                            <a href="#birthday">Birthday Shoot</a>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="nav-item"><a href="#about">About</a></li>
+                <li class="nav-item"><a href="#services">Services</a></li>
+                <li class="nav-item"><a href="#portfolio">Portfolio</a></li>
+                <li class="nav-item"><a href="#packages">Packages</a></li>
+                <li class="nav-item"><a href="#contact">Contact</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <a class="login-button" href="customer/login.html">Login</a>
+
+                <button class="menu-toggle" id="menuOpen" type="button" aria-label="Open menu" aria-controls="mobileMenu">
+                    <span class="menu-lines"></span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <div class="menu-backdrop" id="menuBackdrop"></div>
+
+    <aside class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation">
+        <div class="mobile-menu-header">
+            <img class="mobile-logo" src="assets/image.png" alt="DLM logo">
+
+            <button class="menu-close" id="menuClose" type="button" aria-label="Close menu">
+                &times;
+            </button>
+        </div>
+
+        <ul class="mobile-links">
+            <li><a href="#home">Home</a></li>
+
+            <li>
+                <button class="mobile-wedding-button" id="mobileWeddingButton" type="button">
+                    Weddings
+                    <span class="arrow"></span>
+                </button>
+
+                <div class="mobile-wedding-panel" id="mobileWeddingPanel">
+                    <a href="#hindu">Hindu Wedding</a>
+                    <a href="#brahmin">Brahmin Wedding</a>
+                    <a href="#christian">Christian Wedding</a>
+                    <a href="#bride">Bride Portrait</a>
+                    <a href="#groom">Groom Portrait</a>
+                    <a href="#baby-shower">Baby Shower</a>
+                    <a href="#beauty">Beauty Shoot</a>
+                    <a href="#couple">Couple Shoot</a>
+                    <a href="#birthday">Birthday Shoot</a>
+                </div>
+            </li>
+
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="#packages">Packages</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+
+        <a class="mobile-login" href="customer/login.html">Customer Login</a>
+    </aside>
+
+    <main>
+        <section class="hero-slider" id="home" aria-label="DLM featured photography">
+            <div class="slider-track" id="sliderTrack">
+                <article class="hero-slide is-active">
+                    <img src="assets/slide-1.svg" alt="Elegant wedding couple portrait" loading="eager" draggable="false">
+                </article>
+
+                <article class="hero-slide">
+                    <img src="assets/slide-2.svg" alt="Outdoor celebration photography" loading="lazy" draggable="false">
+                </article>
+
+                <article class="hero-slide">
+                    <img src="assets/slide-3.svg" alt="Luxury event photography details" loading="lazy" draggable="false">
+                </article>
+            </div>
+
+            <div class="slider-content">
+                <p class="slider-kicker">DLM Photography</p>
+                <h1 class="slider-title">Timeless Frames For Your Best Day</h1>
+                <p class="slider-copy">A polished, responsive image slider built for weddings, portraits, events, and celebration stories.</p>
+            </div>
+
+            <div class="slider-controls" aria-label="Slider controls">
+                <button class="slider-arrow slider-prev" id="sliderPrev" type="button" aria-label="Previous image">
+                    <span></span>
+                </button>
+                <button class="slider-arrow slider-next" id="sliderNext" type="button" aria-label="Next image">
+                    <span></span>
+                </button>
+            </div>
+
+            <div class="slider-dots" id="sliderDots" aria-label="Select image"></div>
+
+            <div class="slider-progress" aria-hidden="true">
+                <div class="slider-progress-bar" id="sliderProgress"></div>
+            </div>
+        </section>
+
+        <section class="studio-about" id="about">
+            <div class="studio-about-inner">
+                <div class="about-gallery">
+                    <div class="about-photo-frame" id="aboutCarousel">
+                        <div class="about-carousel-track" id="aboutCarouselTrack">
+                            <figure class="about-carousel-slide">
+                                <img src="assets/slide-1.svg" alt="DLM bridal portrait showcase">
+                            </figure>
+                            <figure class="about-carousel-slide">
+                                <img src="assets/slide-2.svg" alt="DLM outdoor wedding showcase">
+                            </figure>
+                            <figure class="about-carousel-slide">
+                                <img src="assets/slide-3.svg" alt="DLM event photography showcase">
+                            </figure>
+                            <figure class="about-carousel-slide" aria-hidden="true">
+                                <img src="assets/slide-1.svg" alt="">
+                            </figure>
+                            <figure class="about-carousel-slide" aria-hidden="true">
+                                <img src="assets/slide-2.svg" alt="">
+                            </figure>
+                            <figure class="about-carousel-slide" aria-hidden="true">
+                                <img src="assets/slide-3.svg" alt="">
+                            </figure>
+                        </div>
+                        <img src="assets/slide-1.svg" alt="DLM wedding photography showcase">
+                        <button class="about-side-arrow left" type="button" aria-label="Previous gallery image">‹</button>
+                        <button class="about-side-arrow right" type="button" aria-label="Next gallery image">›</button>
+                    </div>
+
+                    <a class="about-gallery-button" href="#portfolio">Gallery</a>
+                </div>
+
+                <div class="studio-about-copy">
+                    <p class="about-eyebrow">About DLM Studio</p>
+                    <h2>Meet Your Professional Wedding Photography & Videography Studio</h2>
+
+                    <p class="about-description">
+                        <strong>DLM Studio</strong>, DLM Studio - Best Wedding Photographer for timeless celebrations and elegant memories.
+                        With years of creative experience, <strong>DLM Studio</strong> specializes in professional wedding photography,
+                        candid shots, cinematic wedding films, pre-wedding shoots, and traditional photography. We are known for creative
+                        concepts, high-quality editing, and beautifully crafted wedding albums that preserve your most special moments forever.
+                        Serving clients with care and detail, we are committed to delivering premium-quality photos and videos for your big day.
+                    </p>
+
+                    <div class="about-highlights">
+                        <img class="about-avatar" src="assets/image.png" alt="DLM photographer profile">
+
+                        <ul class="about-checks">
+                            <li>Professional Wedding Photographer</li>
+                            <li>500+ Happy Clients</li>
+                            <li>Cinematic Wedding Films</li>
+                            <li>On-Location Services Available</li>
+                        </ul>
+                    </div>
+
+                    <div class="about-actions">
+                        <span class="availability-text">Book Your Date / Check Availability</span>
+                        <a class="about-action call" href="tel:+919999999999">Call</a>
+                        <a class="about-action whatsapp" href="https://wa.me/919999999999">WhatsApp</a>
+                        <a class="about-action maps" href="https://maps.google.com" target="_blank" rel="noreferrer">Google Maps</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="services-section" id="services">
+            <div class="services-inner">
+                <div class="services-intro">
+                    <p class="services-kicker">Our Services</p>
+                    <h2>Wedding Stories, Portraits & Event Films</h2>
+                    <p>Choose a premium DLM service crafted for elegant celebrations, cinematic memories, and beautifully preserved moments.</p>
+                </div>
+
+                <div class="services-grid">
+                    <article class="service-card">
+                        <img class="service-image" src="assets/slide-1.svg" alt="Wedding photography service">
+                        <h3>Wedding Photography</h3>
+                        <a class="service-button" href="#contact">Explore more <span>&raquo;</span></a>
+                    </article>
+
+                    <article class="service-card">
+                        <img class="service-image" src="assets/slide-2.svg" alt="Cinematic wedding film service">
+                        <h3>Cinematic Wedding Films</h3>
+                        <a class="service-button" href="#contact">Explore more <span>&raquo;</span></a>
+                    </article>
+
+                    <article class="service-card">
+                        <img class="service-image" src="assets/slide-3.svg" alt="Portrait and event shoot service">
+                        <h3>Portrait & Event Shoots</h3>
+                        <a class="service-button" href="#contact">Explore more <span>&raquo;</span></a>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <style>
+            .wedding-stories {
+                padding: 82px 28px 88px;
+                background: #fff;
+            }
+
+            .wedding-stories-inner {
+                width: min(100%, 1180px);
+                margin: 0 auto;
+            }
+
+            .stories-header {
+                margin-bottom: 34px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 20px;
+            }
+
+            .stories-title-wrap {
+                max-width: 620px;
+            }
+
+            .stories-title-wrap h2 {
+                margin: 0;
+                color: #172236;
+                font-size: clamp(30px, 3.5vw, 44px);
+                line-height: 1.12;
+                letter-spacing: 0;
+            }
+
+            .stories-title-wrap p {
+                max-width: 560px;
+                margin: 10px 0 0;
+                color: var(--muted);
+                font-size: 15.5px;
+                line-height: 1.7;
+            }
+
+            .stories-portfolio {
+                min-height: 44px;
+                padding: 0 26px;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 999px;
+                color: #fff;
+                background: linear-gradient(90deg, #9557e9, var(--pink));
+                font-size: 13px;
+                font-weight: 850;
+                text-decoration: none;
+                white-space: nowrap;
+                box-shadow: 0 14px 28px rgba(149, 87, 233, 0.22);
+                transition: transform 0.25s ease, box-shadow 0.25s ease;
+            }
+
+            .stories-portfolio:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 18px 36px rgba(239, 45, 131, 0.26);
+            }
+
+            .stories-carousel-wrap {
+                position: relative;
+                overflow: hidden;
+            }
+
+            .stories-track {
+                display: flex;
+                gap: 24px;
+                overflow: visible;
+                padding: 0 2px 10px;
+                transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+                will-change: transform;
+            }
+
+            .stories-track::-webkit-scrollbar {
+                display: none;
+            }
+
+            .story-card {
+                position: relative;
+                min-height: 390px;
+                overflow: hidden;
+                border-radius: 12px;
+                background: #160a10;
+                flex: 0 0 calc((100% - 72px) / 4);
+                box-shadow: 0 18px 36px rgba(36, 23, 35, 0.16);
+                transform: translateZ(0);
+            }
+
+            .story-card video {
+                width: 100%;
+                height: 100%;
+                display: block;
+                object-fit: cover;
+                transition: transform 0.45s ease, filter 0.45s ease;
+            }
+
+            .story-card::after {
+                content: "";
+                position: absolute;
+                inset: 0;
+                background: linear-gradient(180deg, transparent 52%, rgba(20, 7, 13, 0.7));
+                opacity: 0.86;
+                pointer-events: none;
+            }
+
+            .story-play {
+                position: absolute;
+                top: 14px;
+                right: 14px;
+                z-index: 2;
+                width: 58px;
+                height: 38px;
+                display: grid;
+                place-items: center;
+                border: 2px solid rgba(255, 255, 255, 0.86);
+                border-radius: 999px;
+                background: linear-gradient(135deg, #9058f2, var(--pink));
+                box-shadow: 0 10px 22px rgba(36, 23, 35, 0.22);
+                pointer-events: none;
+            }
+
+            .story-play::before {
+                content: "";
+                width: 0;
+                height: 0;
+                margin-left: 3px;
+                border-top: 8px solid transparent;
+                border-bottom: 8px solid transparent;
+                border-left: 12px solid #fff;
+            }
+
+            .story-caption {
+                position: absolute;
+                left: 18px;
+                right: 18px;
+                bottom: 58px;
+                z-index: 2;
+                color: #fff;
+                pointer-events: none;
+            }
+
+            .story-caption h3 {
+                margin: 0;
+                font-size: 20px;
+                line-height: 1.15;
+                text-shadow: 0 2px 12px rgba(20, 7, 13, 0.5);
+            }
+
+            .story-caption p {
+                margin: 7px 0 0;
+                color: rgba(255, 255, 255, 0.78);
+                font-size: 13px;
+                line-height: 1.5;
+            }
+
+            .story-card:hover video {
+                transform: scale(1.06);
+                filter: saturate(1.08);
+            }
+
+            .stories-arrow {
+                position: absolute;
+                top: 50%;
+                z-index: 5;
+                width: 52px;
+                height: 52px;
+                display: grid;
+                place-items: center;
+                border: 0;
+                border-radius: 50%;
+                color: #fff;
+                background: linear-gradient(135deg, #9557e9, var(--pink));
+                box-shadow: 0 16px 28px rgba(143, 28, 82, 0.24);
+                cursor: pointer;
+                transform: translateY(-50%);
+                transition: transform 0.25s ease, box-shadow 0.25s ease;
+            }
+
+            .stories-arrow:hover {
+                transform: translateY(-50%) scale(1.06);
+                box-shadow: 0 20px 38px rgba(143, 28, 82, 0.3);
+            }
+
+            .stories-arrow.prev {
+                left: -26px;
+            }
+
+            .stories-arrow.next {
+                right: -26px;
+            }
+
+            .stories-arrow span {
+                width: 10px;
+                height: 10px;
+                display: block;
+                border-top: 2px solid currentColor;
+                border-right: 2px solid currentColor;
+            }
+
+            .stories-arrow.prev span {
+                margin-left: 4px;
+                transform: rotate(-135deg);
+            }
+
+            .stories-arrow.next span {
+                margin-right: 4px;
+                transform: rotate(45deg);
+            }
+
+            @media (max-width: 900px) {
+                .wedding-stories {
+                    padding: 72px 20px 78px;
+                }
+
+                .stories-header {
+                    align-items: flex-start;
+                    flex-direction: column;
+                }
+
+                .stories-track {
+                    gap: 20px;
+                }
+
+                .story-card {
+                    flex-basis: calc((100% - 20px) / 2);
+                    min-height: 360px;
+                }
+
+                .stories-arrow.prev {
+                    left: -8px;
+                }
+
+                .stories-arrow.next {
+                    right: -8px;
+                }
+            }
+
+            @media (max-width: 560px) {
+                .wedding-stories {
+                    padding: 64px 16px 70px;
+                }
+
+                .stories-header {
+                    margin-bottom: 26px;
+                }
+
+                .stories-portfolio {
+                    width: 100%;
+                }
+
+                .stories-track {
+                    gap: 16px;
+                    padding-bottom: 4px;
+                }
+
+                .story-card {
+                    flex-basis: 100%;
+                    min-height: 338px;
+                    border-radius: 14px;
+                }
+
+                .stories-arrow {
+                    width: 44px;
+                    height: 44px;
+                }
+
+                .stories-arrow.prev {
+                    left: -4px;
+                }
+
+                .stories-arrow.next {
+                    right: -4px;
+                }
+            }
+        </style>
+
+        <section class="wedding-stories" id="wedding-stories">
+            <div class="wedding-stories-inner">
+                <div class="stories-header">
+                    <div class="stories-title-wrap">
+                        <h2>Wedding Stories</h2>
+                        <p>Watch cinematic wedding moments, bridal portraits, and celebration highlights crafted by DLM Studio.</p>
+                    </div>
+
+                    <a class="stories-portfolio" href="#portfolio">View Wedding Portfolio</a>
+                </div>
+
+                <div class="stories-carousel-wrap">
+                    <button class="stories-arrow prev" id="storiesPrev" type="button" aria-label="Previous wedding story">
+                        <span></span>
+                    </button>
+
+                    <div class="stories-track" id="storiesTrack" aria-label="Wedding video carousel">
+                        <article class="story-card">
+                            <video controls preload="metadata" poster="assets/slide-1.svg">
+                                <source src="assets/WhatsApp%20Video%202026-06-16%20at%2012.41.19%20PM.mp4" type="video/mp4">
+                            </video>
+                            <span class="story-play" aria-hidden="true"></span>
+                            <div class="story-caption">
+                                <h3>Bridal Moments</h3>
+                                <p>Elegant highlights from the wedding morning.</p>
+                            </div>
+                        </article>
+
+                        <article class="story-card">
+                            <video controls preload="metadata" poster="assets/slide-2.svg">
+                                <source src="assets/WhatsApp%20Video%202026-06-16%20at%2012.41.19%20PM.mp4" type="video/mp4">
+                            </video>
+                            <span class="story-play" aria-hidden="true"></span>
+                            <div class="story-caption">
+                                <h3>Cinematic Couple Film</h3>
+                                <p>Soft, emotional frames with a premium finish.</p>
+                            </div>
+                        </article>
+                        
+
+                        <article class="story-card">
+                            <video controls preload="metadata" poster="assets/slide-3.svg">
+                                <source src="assets/WhatsApp%20Video%202026-06-16%20at%2012.41.19%20PM.mp4" type="video/mp4">
+                            </video>
+                            <span class="story-play" aria-hidden="true"></span>
+                            <div class="story-caption">
+                                <h3>Celebration Story</h3>
+                                <p>Reception energy, rituals, and family moments.</p>
+                            </div>
+                        </article>
+                         <article class="story-card">
+                            <video controls preload="metadata" poster="assets/slide-3.svg">
+                                <source src="assets/WhatsApp%20Video%202026-06-16%20at%2012.41.19%20PM.mp4" type="video/mp4">
+                            </video>
+                            <span class="story-play" aria-hidden="true"></span>
+                            <div class="story-caption">
+                                <h3>Celebration Story</h3>
+                                <p>Reception energy, rituals, and family moments.</p>
+                            </div>
+                        </article>
+
+                        <article class="story-card">
+                            <video controls preload="metadata" poster="assets/slide-1.svg">
+                                <source src="assets/WhatsApp%20Video%202026-06-16%20at%2012.41.19%20PM.mp4" type="video/mp4">
+                            </video>
+                            <span class="story-play" aria-hidden="true"></span>
+                            <div class="story-caption">
+                                <h3>Traditional Wedding</h3>
+                                <p>Classic wedding coverage with cinematic edits.</p>
+                            </div>
+                        </article>
+                    </div>
+
+                    <button class="stories-arrow next" id="storiesNext" type="button" aria-label="Next wedding story">
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <script>
+            (() => {
+                const storiesTrack = document.getElementById("storiesTrack");
+                const previousButton = document.getElementById("storiesPrev");
+                const nextButton = document.getElementById("storiesNext");
+                const videos = Array.from(document.querySelectorAll(".story-card video"));
+
+                if (!storiesTrack || !previousButton || !nextButton) {
+                    return;
+                }
+
+                const getScrollAmount = () => {
+                    const firstCard = storiesTrack.querySelector(".story-card");
+                    if (!firstCard) {
+                        return storiesTrack.clientWidth;
+                    }
+
+                    const styles = window.getComputedStyle(storiesTrack);
+                    const gap = Number.parseFloat(styles.columnGap || styles.gap) || 0;
+                    return firstCard.getBoundingClientRect().width + gap;
+                };
+
+                const pauseStoriesVideos = () => {
+                    videos.forEach(video => video.pause());
+                };
+
+                let isMoving = false;
+                let moveDirection = "next";
+                let fallbackTimer = null;
+
+                const enableTransition = () => {
+                    storiesTrack.style.transition = "";
+                };
+
+                const disableTransition = () => {
+                    storiesTrack.style.transition = "none";
+                };
+
+                const resetTrack = () => {
+                    disableTransition();
+                    storiesTrack.style.transform = "translateX(0)";
+                    requestAnimationFrame(enableTransition);
+                };
+
+                const finishMove = () => {
+                    window.clearTimeout(fallbackTimer);
+                    fallbackTimer = null;
+
+                    if (!isMoving) {
+                        return;
+                    }
+
+                    if (moveDirection === "next") {
+                        storiesTrack.appendChild(storiesTrack.firstElementChild);
+                    }
+
+                    resetTrack();
+                    isMoving = false;
+                };
+
+                const moveNext = () => {
+                    if (isMoving) {
+                        return;
+                    }
+
+                    pauseStoriesVideos();
+                    isMoving = true;
+                    moveDirection = "next";
+                    enableTransition();
+                    storiesTrack.style.transform = `translateX(-${getScrollAmount()}px)`;
+                    fallbackTimer = window.setTimeout(finishMove, 700);
+                };
+
+                const movePrevious = () => {
+                    if (isMoving) {
+                        return;
+                    }
+
+                    pauseStoriesVideos();
+                    isMoving = true;
+                    moveDirection = "previous";
+                    disableTransition();
+                    storiesTrack.insertBefore(storiesTrack.lastElementChild, storiesTrack.firstElementChild);
+                    storiesTrack.style.transform = `translateX(-${getScrollAmount()}px)`;
+
+                    requestAnimationFrame(() => {
+                        enableTransition();
+                        storiesTrack.style.transform = "translateX(0)";
+                        fallbackTimer = window.setTimeout(finishMove, 700);
+                    });
+                };
+
+                previousButton.addEventListener("click", () => {
+                    movePrevious();
+                });
+
+                nextButton.addEventListener("click", () => {
+                    moveNext();
+                });
+
+                storiesTrack.addEventListener("transitionend", event => {
+                    if (event.target !== storiesTrack || event.propertyName !== "transform") {
+                        return;
+                    }
+
+                    finishMove();
+                });
+
+                videos.forEach(video => {
+                    video.addEventListener("play", () => {
+                        videos.forEach(otherVideo => {
+                            if (otherVideo !== video) {
+                                otherVideo.pause();
+                            }
+                        });
+                    });
+                });
+
+                resetTrack();
+            })();
+        </script>
+
+   
+
+
+
+
+<style>
+    /* ==========================================
+       EXACT GALLERY + TESTIMONIAL SECTION
+    ========================================== */
+
+    .photo-gallery-testimonial {
+        width: 100%;
+        padding: 28px;
+        overflow: hidden;
+        background: #edf1f5;
+    }
+
+    .photo-gallery-panel {
+        width: min(100%, 1220px);
+        margin: 0 auto;
+        padding: 58px 70px 72px;
+        background: #ffffff;
+    }
+
+    /* Section title */
+
+    .photo-gallery-heading {
+        max-width: 640px;
+        margin: 0 auto 42px;
+        text-align: center;
+    }
+
+    .photo-gallery-heading h2 {
+        margin: 0;
+        color: #15171c;
+        font-size: clamp(34px, 4vw, 48px);
+        font-weight: 750;
+        line-height: 1.05;
+        letter-spacing: -1.4px;
+    }
+
+    .photo-gallery-heading p {
+        max-width: 540px;
+        margin: 12px auto 0;
+        color: #818690;
+        font-size: 14px;
+        line-height: 1.7;
+    }
+
+    /* ==========================================
+       DESKTOP IMAGE ALIGNMENT
+    ========================================== */
+
+    .photo-gallery-mosaic {
+        width: min(100%, 1000px);
+        min-height: 438px;
+        margin: 0 auto;
+
+        display: grid;
+        grid-template-columns: repeat(8, minmax(0, 1fr));
+        grid-template-rows: repeat(6, 62px);
+        gap: 12px;
+
+        align-items: stretch;
+    }
+
+    .photo-gallery-card {
+        position: relative;
+        min-width: 0;
+        padding: 0;
+        overflow: hidden;
+
+        border: 0;
+        border-radius: 17px;
+
+        background: #f1f1f1;
+        box-shadow: 0 8px 22px rgba(21, 25, 33, 0.08);
+
+        cursor: zoom-in;
+        isolation: isolate;
+
+        transition:
+            transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+            box-shadow 0.35s ease;
+    }
+
+    .photo-gallery-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 2;
+
+        pointer-events: none;
+        opacity: 0;
+
+        background:
+            linear-gradient(
+                145deg,
+                rgba(255, 255, 255, 0.22),
+                transparent 45%,
+                rgba(239, 45, 131, 0.16)
+            );
+
+        transition: opacity 0.35s ease;
+    }
+
+    .photo-gallery-card::after {
+        content: "View";
+
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        z-index: 3;
+
+        min-width: 58px;
+        height: 30px;
+        padding: 0 13px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        border: 1px solid rgba(255, 255, 255, 0.6);
+        border-radius: 999px;
+
+        color: #ffffff;
+        background: rgba(20, 16, 19, 0.52);
+
+        font-size: 11px;
+        font-weight: 750;
+        letter-spacing: 0.3px;
+
+        opacity: 0;
+        transform: translate(-50%, -40%);
+
+        backdrop-filter: blur(7px);
+        -webkit-backdrop-filter: blur(7px);
+
+        transition:
+            opacity 0.3s ease,
+            transform 0.3s ease;
+    }
+
+    .photo-gallery-card img {
+        width: 100%;
+        height: 100%;
+        display: block;
+
+        object-fit: contain;
+        object-position: center;
+
+        background: #f3f3f3;
+
+        transition:
+            transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+            filter 0.35s ease;
+    }
+
+    .photo-gallery-card:hover,
+    .photo-gallery-card:focus-visible {
+        z-index: 10;
+
+        outline: none;
+
+        transform: translateY(-7px);
+
+        box-shadow:
+            0 22px 42px rgba(20, 25, 34, 0.16),
+            0 8px 22px rgba(239, 45, 131, 0.08);
+    }
+
+    .photo-gallery-card:hover::before,
+    .photo-gallery-card:focus-visible::before {
+        opacity: 1;
+    }
+
+    .photo-gallery-card:hover::after,
+    .photo-gallery-card:focus-visible::after {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+
+    .photo-gallery-card:hover img,
+    .photo-gallery-card:focus-visible img {
+        filter:
+            brightness(0.9)
+            saturate(1.08);
+
+        transform: scale(1.025);
+    }
+
+    /* Left-side arrangement */
+
+    .photo-card-1 {
+        grid-column: 1;
+        grid-row: 2 / span 2;
+    }
+
+    .photo-card-2 {
+        grid-column: 1;
+        grid-row: 4 / span 2;
+    }
+
+    .photo-card-3 {
+        grid-column: 2;
+        grid-row: 1 / span 2;
+    }
+
+    .photo-card-4 {
+        grid-column: 2;
+        grid-row: 3 / span 2;
+    }
+
+    .photo-card-5 {
+        grid-column: 2;
+        grid-row: 5 / span 2;
+    }
+
+    .photo-card-6 {
+        grid-column: 3;
+        grid-row: 2 / span 3;
+    }
+
+    .photo-card-7 {
+        grid-column: 4;
+        grid-row: 1 / span 4;
+    }
+
+    /* Right-side arrangement */
+
+    .photo-card-8 {
+        grid-column: 5;
+        grid-row: 1 / span 4;
+    }
+
+    .photo-card-9 {
+        grid-column: 6;
+        grid-row: 2 / span 3;
+    }
+
+    .photo-card-10 {
+        grid-column: 7;
+        grid-row: 1 / span 2;
+    }
+
+    .photo-card-11 {
+        grid-column: 7;
+        grid-row: 3 / span 2;
+    }
+
+    .photo-card-12 {
+        grid-column: 7;
+        grid-row: 5 / span 2;
+    }
+
+    .photo-card-13 {
+        grid-column: 8;
+        grid-row: 2 / span 2;
+    }
+
+    .photo-card-14 {
+        grid-column: 8;
+        grid-row: 4 / span 2;
+    }
+
+    /* Centre testimonial heading */
+
+    .photo-testimonial-heading {
+        grid-column: 3 / span 4;
+        grid-row: 5 / span 2;
+
+        z-index: 4;
+
+        align-self: center;
+        justify-self: center;
+
+        width: 100%;
+        padding: 10px 10px 2px;
+
+        text-align: center;
+        background: #ffffff;
+    }
+
+    .photo-testimonial-pill {
+        width: fit-content;
+        margin: 0 auto 13px;
+        padding: 7px 17px;
+
+        border: 1px solid #d0d4da;
+        border-radius: 999px;
+
+        color: #262a31;
+        background: #ffffff;
+
+        font-size: 11px;
+        font-weight: 650;
+        line-height: 1;
+    }
+
+    .photo-testimonial-heading h3 {
+        margin: 0;
+
+        color: #15181f;
+
+        font-size: clamp(25px, 2.6vw, 36px);
+        font-weight: 760;
+        line-height: 1.08;
+        letter-spacing: -1.1px;
+    }
+
+    .photo-testimonial-heading h3 span {
+        display: block;
+        margin-top: 3px;
+
+        color: #a0a5ae;
+        font-weight: 620;
+    }
+
+    /* ==========================================
+       TESTIMONIAL REVIEWS
+    ========================================== */
+
+    .photo-testimonial-reviews {
+        width: min(100%, 1000px);
+        margin: 45px auto 0;
+
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 58px;
+    }
+
+    .photo-review {
+        min-width: 0;
+    }
+
+    .photo-review-stars {
+        margin-bottom: 15px;
+
+        color: #efb713;
+
+        font-size: 15px;
+        line-height: 1;
+        letter-spacing: 2px;
+    }
+
+    .photo-review blockquote {
+        margin: 0;
+
+        color: #5e626a;
+
+        font-size: 12px;
+        line-height: 1.65;
+    }
+
+    .photo-review-author {
+        margin-top: 18px;
+
+        display: flex;
+        align-items: center;
+        gap: 11px;
+    }
+
+    .photo-review-author img {
+        width: 40px;
+        height: 40px;
+        flex: 0 0 40px;
+
+        display: block;
+
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    .photo-review-author strong {
+        display: block;
+        margin-bottom: 2px;
+
+        color: #171a20;
+
+        font-size: 12px;
+        font-weight: 760;
+    }
+
+    .photo-review-author span {
+        display: block;
+
+        color: #888d96;
+
+        font-size: 10px;
+    }
+
+    /* ==========================================
+       FULL-SCREEN IMAGE VIEWER
+    ========================================== */
+
+    body.photo-lightbox-open {
+        overflow: hidden;
+    }
+
+    .photo-lightbox {
+        position: fixed;
+        inset: 0;
+        z-index: 99999;
+
+        padding: 70px 40px 40px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        visibility: hidden;
+        opacity: 0;
+
+        background: rgba(12, 10, 11, 0.94);
+
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+
+        transition:
+            opacity 0.3s ease,
+            visibility 0.3s ease;
+    }
+
+    .photo-lightbox.is-open {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    .photo-lightbox-image {
+        max-width: min(94vw, 1500px);
+        max-height: calc(100vh - 110px);
+
+        display: block;
+
+        object-fit: contain;
+        object-position: center;
+
+        border-radius: 12px;
+
+        opacity: 0;
+        transform: scale(0.96);
+
+        box-shadow: 0 30px 90px rgba(0, 0, 0, 0.48);
+
+        transition:
+            opacity 0.35s ease,
+            transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .photo-lightbox.is-open .photo-lightbox-image {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    .photo-lightbox-close {
+        position: fixed;
+        top: 20px;
+        right: 24px;
+        z-index: 100001;
+
+        width: 48px;
+        height: 48px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+
+        color: #ffffff;
+        background: rgba(255, 255, 255, 0.11);
+
+        cursor: pointer;
+
+        backdrop-filter: blur(9px);
+        -webkit-backdrop-filter: blur(9px);
+
+        transition:
+            background 0.25s ease,
+            transform 0.25s ease;
+    }
+
+    .photo-lightbox-close:hover {
+        background: #ef2d83;
+        transform: rotate(5deg);
+    }
+
+    .photo-lightbox-close-icon {
+        position: relative;
+        width: 20px;
+        height: 20px;
+    }
+
+    .photo-lightbox-close-icon::before,
+    .photo-lightbox-close-icon::after {
+        content: "";
+
+        position: absolute;
+        left: 0;
+        top: 9px;
+
+        width: 20px;
+        height: 2px;
+
+        border-radius: 999px;
+        background: currentColor;
+    }
+
+    .photo-lightbox-close-icon::before {
+        transform: rotate(45deg);
+    }
+
+    .photo-lightbox-close-icon::after {
+        transform: rotate(-45deg);
+    }
+
+    /* ==========================================
+       TABLET
+    ========================================== */
+
+    @media (max-width: 950px) {
+        .photo-gallery-testimonial {
+            padding: 22px;
+        }
+
+        .photo-gallery-panel {
+            padding: 52px 28px 58px;
+        }
+
+        .photo-gallery-mosaic {
+            min-height: auto;
+
+            grid-template-columns: repeat(6, minmax(0, 1fr));
+            grid-template-rows: auto;
+            grid-auto-rows: 82px;
+
+            gap: 11px;
+        }
+
+        .photo-gallery-card {
+            grid-column: auto !important;
+            grid-row: span 2 !important;
+        }
+
+        .photo-gallery-card:nth-child(3n + 2) {
+            grid-row: span 3 !important;
+        }
+
+        .photo-testimonial-heading {
+            grid-column: 1 / -1;
+            grid-row: auto;
+
+            padding: 28px 8px 18px;
+        }
+
+        .photo-testimonial-reviews {
+            gap: 30px;
+        }
+    }
+
+    /* ==========================================
+       MOBILE
+    ========================================== */
+
+    @media (max-width: 650px) {
+        .photo-gallery-testimonial {
+            padding: 13px;
+        }
+
+        .photo-gallery-panel {
+            padding: 40px 13px 44px;
+        }
+
+        .photo-gallery-heading {
+            margin-bottom: 30px;
+        }
+
+        .photo-gallery-heading h2 {
+            font-size: 34px;
+        }
+
+        .photo-gallery-heading p {
+            max-width: 320px;
+            font-size: 13px;
+        }
+
+        .photo-gallery-mosaic {
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            grid-auto-rows: 82px;
+            gap: 9px;
+        }
+
+        .photo-gallery-card {
+            grid-column: auto !important;
+            grid-row: span 2 !important;
+
+            border-radius: 13px;
+        }
+
+        .photo-gallery-card:nth-child(2),
+        .photo-gallery-card:nth-child(5),
+        .photo-gallery-card:nth-child(8),
+        .photo-gallery-card:nth-child(11) {
+            grid-row: span 3 !important;
+        }
+
+        .photo-testimonial-heading {
+            grid-column: 1 / -1;
+            grid-row: auto;
+
+            padding: 25px 2px 16px;
+        }
+
+        .photo-testimonial-heading h3 {
+            font-size: clamp(25px, 8vw, 33px);
+        }
+
+        .photo-testimonial-reviews {
+            margin-top: 30px;
+
+            grid-template-columns: 1fr;
+            gap: 0;
+        }
+
+        .photo-review {
+            padding-bottom: 27px;
+            margin-bottom: 27px;
+
+            border-bottom: 1px solid #e7e8eb;
+        }
+
+        .photo-review:last-child {
+            padding-bottom: 0;
+            margin-bottom: 0;
+            border-bottom: 0;
+        }
+
+        .photo-review blockquote {
+            font-size: 14px;
+        }
+
+        .photo-lightbox {
+            padding: 70px 12px 24px;
+        }
+
+        .photo-lightbox-image {
+            max-width: 100%;
+            max-height: calc(100svh - 100px);
+            border-radius: 8px;
+        }
+
+        .photo-lightbox-close {
+            top: 14px;
+            right: 14px;
+
+            width: 44px;
+            height: 44px;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .photo-gallery-card,
+        .photo-gallery-card img,
+        .photo-gallery-card::before,
+        .photo-gallery-card::after,
+        .photo-lightbox,
+        .photo-lightbox-image {
+            transition: none;
+        }
+    }
+       @media (max-width: 650px) {
+.photo-gallery-testimonial {
+padding: 10px;
+background: #edf1f5;
+}
+.photo-gallery-panel {
+    width: 100%;
+    padding: 38px 12px 42px;
+    border-radius: 0;
+}
+
+/* Gallery heading */
+
+.photo-gallery-heading {
+    max-width: 330px;
+    margin: 0 auto 30px;
+    padding: 0 8px;
+}
+
+.photo-gallery-heading h2 {
+    font-size: 34px;
+    line-height: 1.05;
+    letter-spacing: -1px;
+}
+
+.photo-gallery-heading p {
+    max-width: 310px;
+    margin-top: 11px;
+    font-size: 13px;
+    line-height: 1.65;
+}
+
+/* Mobile mosaic */
+
+.photo-gallery-mosaic {
+    width: 100%;
+    min-height: auto;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-rows: 112px;
+    gap: 10px;
+}
+
+.photo-gallery-card {
+    width: 100%;
+    min-width: 0;
+    grid-column: auto !important;
+    grid-row: span 2 !important;
+    border-radius: 15px;
+    background: #f4f4f4;
+    box-shadow: 0 8px 20px rgba(20, 25, 34, 0.09);
+}
+
+.photo-gallery-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    background: #f4f4f4;
+}
+
+/* Create a professional staggered layout */
+
+.photo-card-1 {
+    grid-column: 1 !important;
+    grid-row: span 2 !important;
+}
+
+.photo-card-2 {
+    grid-column: 2 !important;
+    grid-row: span 3 !important;
+}
+
+.photo-card-3 {
+    grid-column: 1 !important;
+    grid-row: span 3 !important;
+}
+
+.photo-card-4 {
+    grid-column: 2 !important;
+    grid-row: span 2 !important;
+}
+
+.photo-card-5 {
+    grid-column: 1 !important;
+    grid-row: span 2 !important;
+}
+
+.photo-card-6 {
+    grid-column: 2 !important;
+    grid-row: span 3 !important;
+}
+
+.photo-card-7 {
+    grid-column: 1 !important;
+    grid-row: span 3 !important;
+}
+
+.photo-card-8 {
+    grid-column: 2 !important;
+    grid-row: span 2 !important;
+}
+
+.photo-card-9 {
+    grid-column: 1 !important;
+    grid-row: span 2 !important;
+}
+
+.photo-card-10 {
+    grid-column: 2 !important;
+    grid-row: span 3 !important;
+}
+
+/* Hide extra images on small screens for a cleaner layout */
+
+.photo-card-11,
+.photo-card-12,
+.photo-card-13,
+.photo-card-14 {
+    display: none;
+}
+
+/* Mobile hover/touch appearance */
+
+.photo-gallery-card::after {
+    min-width: 52px;
+    height: 27px;
+    padding: 0 11px;
+    font-size: 10px;
+}
+
+.photo-gallery-card:hover,
+.photo-gallery-card:focus-visible {
+    transform: translateY(-4px);
+    box-shadow:
+        0 16px 30px rgba(20, 25, 34, 0.14),
+        0 6px 15px rgba(239, 45, 131, 0.08);
+}
+
+.photo-gallery-card:hover img,
+.photo-gallery-card:focus-visible img {
+    transform: scale(1.01);
+}
+
+/* Testimonial heading */
+
+.photo-testimonial-heading {
+    grid-column: 1 / -1 !important;
+    grid-row: auto !important;
+    width: 100%;
+    margin-top: 14px;
+    padding: 28px 5px 18px;
+    text-align: center;
+    background: #ffffff;
+}
+
+.photo-testimonial-pill {
+    margin-bottom: 12px;
+    padding: 7px 16px;
+    font-size: 10px;
+}
+
+.photo-testimonial-heading h3 {
+    max-width: 340px;
+    margin: 0 auto;
+    font-size: clamp(25px, 8vw, 32px);
+    line-height: 1.1;
+    letter-spacing: -0.8px;
+}
+
+.photo-testimonial-heading h3 span {
+    margin-top: 4px;
+}
+
+/* Reviews */
+
+.photo-testimonial-reviews {
+    width: 100%;
+    margin-top: 26px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+}
+
+.photo-review {
+    margin: 0;
+    padding: 25px 4px;
+    border-bottom: 1px solid #e7e8eb;
+}
+
+.photo-review:first-child {
+    padding-top: 8px;
+}
+
+.photo-review:last-child {
+    padding-bottom: 0;
+    border-bottom: 0;
+}
+
+.photo-review-stars {
+    margin-bottom: 13px;
+    font-size: 15px;
+}
+
+.photo-review blockquote {
+    max-width: 100%;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.photo-review-author {
+    margin-top: 17px;
+}
+
+.photo-review-author img {
+    width: 42px;
+    height: 42px;
+    flex-basis: 42px;
+}
+
+.photo-review-author strong {
+    font-size: 13px;
+}
+
+.photo-review-author span {
+    font-size: 11px;
+}
+
+/* Full-screen image */
+
+.photo-lightbox {
+    padding: 66px 10px 18px;
+}
+
+.photo-lightbox-image {
+    width: auto;
+    max-width: 100%;
+    max-height: calc(100svh - 90px);
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+.photo-lightbox-close {
+    top: 12px;
+    right: 12px;
+    width: 44px;
+    height: 44px;
+}
+
+}
+
+@media (max-width: 380px) {
+.photo-gallery-panel {
+padding-right: 9px;
+padding-left: 9px;
+}
+
+.photo-gallery-mosaic {
+    grid-auto-rows: 102px;
+    gap: 8px;
+}
+
+.photo-gallery-card {
+    border-radius: 12px;
+}
+
+.photo-testimonial-heading h3 {
+    font-size: 25px;
+}
+
+
+}
+</style>
+
+<!-- ==========================================
+     GALLERY + TESTIMONIAL START
+========================================== -->
+
+<section
+    class="photo-gallery-testimonial"
+    id="gallery-legacy"
+>
+    <div class="photo-gallery-panel">
+
+    <div class="photo-gallery-heading">
+        <h2>Gallery</h2>
+
+        <p>
+            A curated collection of timeless wedding moments,
+            elegant portraits and meaningful celebrations
+            captured with creativity and care.
+        </p>
+    </div>
+
+    <div
+        class="photo-gallery-mosaic"
+        aria-label="Photography gallery and testimonials"
+    >
+
+        <button class="photo-gallery-card photo-card-1" type="button">
+            <img
+                src="https://picsum.photos/seed/gallery-one/400/500"
+                alt="Wedding photography gallery image"
+                loading="lazy"
+            >
+        </button>
+
+        <button class="photo-gallery-card photo-card-2" type="button">
+            <img
+                src="https://picsum.photos/seed/gallery-two/400/500"
+                alt="Creative photography gallery image"
+                loading="lazy"
+            >
+        </button>
+
+        <button class="photo-gallery-card photo-card-3" type="button">
+            <img
+                src="https://picsum.photos/seed/gallery-three/400/500"
+                alt="Outdoor photography gallery image"
+                loading="lazy"
+            >
+        </button>
+
+        <button class="photo-gallery-card photo-card-4" type="button">
+            <img
+                src="https://picsum.photos/seed/gallery-four/400/500"
+                alt="Couple photography gallery image"
+                loading="lazy"
+            >
+        </button>
+
+        <button class="photo-gallery-card photo-card-5" type="button">
+            <img
+                src="https://picsum.photos/seed/gallery-five/400/500"
+                alt="Celebration photography gallery image"
+                loading="lazy"
+            >
+        </button>
+
+        <button class="photo-gallery-card photo-card-6" type="button">
+            <img
+                src="https://picsum.photos/seed/gallery-six/450/750"
+                alt="Portrait photography gallery image"
+                loading="lazy"
+            >
+        </button>
+
+        <button class="photo-gallery-card photo-card-7" type="button">
+            <img
+                src="https://picsum.photos/seed/gallery-seven/450/850"
+                alt="Traditional photography gallery image"
+                loading="lazy"
+            >
+        </button>
+
+        <button class="photo-gallery-card photo-card-8" type="button">
+            <img
+                src="https://picsum.photos/seed/gallery-eight/450/850"
+                alt="Studio photography gallery image"
+                loading="lazy"
+            >
+        </button>
+
+        <button class="photo-gallery-card photo-card-9" type="button">
+            <img
+                src="https://picsum.photos/seed/gallery-nine/450/750"
+                alt="Cinematic photography gallery image"
+                loading="lazy"
+            >
+        </button>
+
+        <button class="photo-gallery-card photo-card-10" type="button">
+            <img
+                src="https://picsum.photos/seed/gallery-ten/400/500"
+                alt="Event photography gallery image"
+                loading="lazy"
+            >
+        </button>
+
+        <button class="photo-gallery-card photo-card-11" type="button">
+            <img
+                src="https://picsum.photos/seed/gallery-eleven/400/500"
+                alt="Reception photography gallery image"
+                loading="lazy"
+            >
+        </button>
+
+        <button class="photo-gallery-card photo-card-12" type="button">
+            <img
+                src="https://picsum.photos/seed/gallery-twelve/400/500"
+                alt="Family photography gallery image"
+                loading="lazy"
+            >
+        </button>
+
+        <button class="photo-gallery-card photo-card-13" type="button">
+            <img
+                src="https://picsum.photos/seed/gallery-thirteen/400/500"
+                alt="Premium photography gallery image"
+                loading="lazy"
+            >
+        </button>
+
+        <button class="photo-gallery-card photo-card-14" type="button">
+            <img
+                src="https://picsum.photos/seed/gallery-fourteen/400/500"
+                alt="Wedding portrait gallery image"
+                loading="lazy"
+            >
+        </button>
+
+        <div class="photo-testimonial-heading">
+            <div class="photo-testimonial-pill">
+                Testimonials
+            </div>
+
+            <h3>
+                Trusted by couples and families
+                <span>across every celebration</span>
+            </h3>
+        </div>
+
+    </div>
+
+    <div class="photo-testimonial-reviews">
+
+        <article class="photo-review">
+            <div
+                class="photo-review-stars"
+                aria-label="Five-star review"
+            >
+                ★★★★★
+            </div>
+
+            <blockquote>
+                “The team captured every emotion naturally.
+                Our wedding photographs were elegant,
+                meaningful and beautifully delivered.”
+            </blockquote>
+
+            <div class="photo-review-author">
+                <img
+                    src="https://i.pravatar.cc/100?img=47"
+                    alt="Customer portrait"
+                    loading="lazy"
+                >
+
+                <div>
+                    <strong>Ananya & Arjun</strong>
+                    <span>Wedding Couple</span>
+                </div>
+            </div>
+        </article>
+
+        <article class="photo-review">
+            <div
+                class="photo-review-stars"
+                aria-label="Five-star review"
+            >
+                ★★★★★
+            </div>
+
+            <blockquote>
+                “The photography and cinematic video were
+                handled professionally. The final result
+                exceeded all our expectations.”
+            </blockquote>
+
+            <div class="photo-review-author">
+                <img
+                    src="https://i.pravatar.cc/100?img=12"
+                    alt="Customer portrait"
+                    loading="lazy"
+                >
+
+                <div>
+                    <strong>Rahul K.</strong>
+                    <span>Outdoor Shoot</span>
+                </div>
+            </div>
+        </article>
+
+        <article class="photo-review">
+            <div
+                class="photo-review-stars"
+                aria-label="Five-star review"
+            >
+                ★★★★★
+            </div>
+
+            <blockquote>
+                “The photographers made our family comfortable
+                throughout the event. The album quality and
+                editing were truly outstanding.”
+            </blockquote>
+
+            <div class="photo-review-author">
+                <img
+                    src="https://i.pravatar.cc/100?img=32"
+                    alt="Customer portrait"
+                    loading="lazy"
+                >
+
+                <div>
+                    <strong>Priya S.</strong>
+                    <span>Family Celebration</span>
+                </div>
+            </div>
+        </article>
+
+    </div>
+
+</div>
+
+
+</section>
+
+<!-- ==========================================
+     FULL-SCREEN IMAGE VIEWER
+========================================== -->
+
+<div
+    class="photo-lightbox"
+    id="photoLightbox"
+    role="dialog"
+    aria-modal="true"
+    aria-hidden="true"
+    aria-label="Full-screen gallery image"
+>
+    <button
+        class="photo-lightbox-close"
+        id="photoLightboxClose"
+        type="button"
+        aria-label="Close full-screen image"
+    >
+        <span class="photo-lightbox-close-icon"></span>
+    </button>
+
+```
+<img
+    class="photo-lightbox-image"
+    id="photoLightboxImage"
+    src=""
+    alt=""
+>
+```
+
+</div>
+
+<!-- ==========================================
+     GALLERY + TESTIMONIAL END
+========================================== -->
+
+<script>
+    (() => {
+        const galleryCards = document.querySelectorAll(
+            ".photo-gallery-card"
+        );
+
+        const lightbox = document.getElementById(
+            "photoLightbox"
+        );
+
+        const lightboxImage = document.getElementById(
+            "photoLightboxImage"
+        );
+
+        const closeButton = document.getElementById(
+            "photoLightboxClose"
+        );
+
+        if (
+            galleryCards.length === 0 ||
+            !lightbox ||
+            !lightboxImage ||
+            !closeButton
+        ) {
+            return;
+        }
+
+        let lastOpenedCard = null;
+
+        const openLightbox = card => {
+            const image = card.querySelector("img");
+
+            if (!image) {
+                return;
+            }
+
+            lastOpenedCard = card;
+
+            lightboxImage.src =
+                image.currentSrc || image.src;
+
+            lightboxImage.alt =
+                image.alt || "Gallery image";
+
+            lightbox.classList.add("is-open");
+
+            lightbox.setAttribute(
+                "aria-hidden",
+                "false"
+            );
+
+            document.body.classList.add(
+                "photo-lightbox-open"
+            );
+
+            window.setTimeout(() => {
+                closeButton.focus();
+            }, 100);
+        };
+
+        const closeLightbox = () => {
+            lightbox.classList.remove("is-open");
+
+            lightbox.setAttribute(
+                "aria-hidden",
+                "true"
+            );
+
+            document.body.classList.remove(
+                "photo-lightbox-open"
+            );
+
+            window.setTimeout(() => {
+                lightboxImage.src = "";
+                lightboxImage.alt = "";
+
+                if (lastOpenedCard) {
+                    lastOpenedCard.focus();
+                }
+            }, 300);
+        };
+
+        galleryCards.forEach(card => {
+            card.addEventListener("click", () => {
+                openLightbox(card);
+            });
+        });
+
+        closeButton.addEventListener(
+            "click",
+            closeLightbox
+        );
+
+        lightbox.addEventListener("click", event => {
+            if (event.target === lightbox) {
+                closeLightbox();
+            }
+        });
+
+        document.addEventListener(
+            "keydown",
+            event => {
+                if (
+                    event.key === "Escape" &&
+                    lightbox.classList.contains(
+                        "is-open"
+                    )
+                ) {
+                    closeLightbox();
+                }
+            }
+        );
+    })();
+</script>
+
+
+<style>
+    /* ==========================================
+       PACKAGE EXPLANATION SECTION
+    ========================================== */
+
+    .package-section {
+        position: relative;
+        padding: 86px 0 92px;
+        overflow: hidden;
+        color: var(--ink);
+        background:
+            radial-gradient(circle at 14% 20%, rgba(239, 45, 131, 0.14), transparent 30%),
+            radial-gradient(circle at 88% 76%, rgba(255, 255, 255, 0.9), transparent 28%),
+            linear-gradient(180deg, #fff3f8 0%, #ffe4ef 100%);
+    }
+
+    .package-section::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background:
+            linear-gradient(90deg, rgba(255, 255, 255, 0.68), transparent 18%, transparent 82%, rgba(255, 255, 255, 0.58)),
+            radial-gradient(circle at 12% 84%, rgba(239, 45, 131, 0.1), transparent 28%);
+    }
+
+    .package-inner {
+        position: relative;
+        z-index: 1;
+        width: min(100%, 1220px);
+        margin: 0 auto;
+        padding: 0 28px;
+    }
+
+    .package-heading {
+        max-width: 720px;
+        margin: 0 auto 34px;
+        text-align: center;
+    }
+
+    .package-kicker {
+        margin: 0 0 10px;
+        color: var(--pink);
+        font-size: 12px;
+        font-weight: 850;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+    }
+
+    .package-heading h2 {
+        margin: 0;
+        font-size: clamp(34px, 4vw, 56px);
+        line-height: 1.04;
+        letter-spacing: 0;
+    }
+
+    .package-heading p {
+        max-width: 610px;
+        margin: 15px auto 0;
+        color: var(--muted);
+        font-size: 16px;
+        line-height: 1.7;
+    }
+
+    .package-filter {
+        margin: 0 auto 34px;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .package-filter-button {
+        min-height: 38px;
+        padding: 0 18px;
+        border: 1px solid rgba(239, 45, 131, 0.12);
+        border-radius: 999px;
+        color: #604252;
+        background: rgba(255, 255, 255, 0.76);
+        font: 800 13px "Inter", "Segoe UI", sans-serif;
+        cursor: pointer;
+        transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
+    }
+
+    .package-filter-button:hover,
+    .package-filter-button.is-active {
+        color: #fff;
+        border-color: rgba(239, 45, 131, 0.48);
+        background: var(--pink);
+        transform: translateY(-1px);
+    }
+
+    .package-carousel-wrap {
+        position: relative;
+    }
+
+    .package-carousel-wrap::before,
+    .package-carousel-wrap::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 12px;
+        z-index: 2;
+        width: 76px;
+        pointer-events: none;
+    }
+
+    .package-carousel-wrap::before {
+        left: 0;
+        background: linear-gradient(90deg, #fff0f7, rgba(255, 240, 247, 0));
+    }
+
+    .package-carousel-wrap::after {
+        right: 0;
+        background: linear-gradient(270deg, #ffe5ef, rgba(255, 229, 239, 0));
+    }
+
+    .package-track {
+        display: grid;
+        grid-auto-flow: column;
+        grid-auto-columns: calc((100% - 72px) / 4);
+        gap: 24px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding: 0 2px 12px;
+        scroll-behavior: smooth;
+        scroll-snap-type: x mandatory;
+        scrollbar-width: none;
+    }
+
+    .package-track::-webkit-scrollbar {
+        display: none;
+    }
+
+    .package-card {
+        position: relative;
+        min-height: 330px;
+        padding: 18px;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        border: 1px solid rgba(239, 45, 131, 0.12);
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.82);
+        box-shadow:
+            0 18px 42px rgba(143, 28, 82, 0.13),
+            inset 0 1px 0 rgba(255, 255, 255, 0.9);
+        scroll-snap-align: start;
+        transform: translateY(0) scale(1);
+        transition:
+            transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+            border-color 0.3s ease,
+            background 0.3s ease,
+            box-shadow 0.3s ease;
+    }
+
+    .package-card::before {
+        content: "";
+        position: absolute;
+        inset: 1px;
+        z-index: 0;
+        border-radius: 11px;
+        opacity: 0;
+        pointer-events: none;
+        background:
+            linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0) 34%),
+            radial-gradient(circle at 18% 0%, rgba(239, 45, 131, 0.16), transparent 34%);
+        transition: opacity 0.3s ease;
+    }
+
+    .package-card::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        pointer-events: none;
+        background: linear-gradient(145deg, rgba(239, 45, 131, 0.13), transparent 48%);
+        transition: opacity 0.3s ease;
+    }
+
+    .package-card:hover {
+        transform: translateY(-10px) scale(1.015);
+        border-color: rgba(239, 45, 131, 0.46);
+        background: #ffffff;
+        box-shadow:
+            0 28px 58px rgba(143, 28, 82, 0.2),
+            inset 0 1px 0 rgba(255, 255, 255, 1);
+    }
+
+    .package-card:hover::before {
+        opacity: 1;
+    }
+
+    .package-card:hover::after {
+        opacity: 1;
+    }
+
+    .package-media {
+        height: 104px;
+        margin-bottom: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        z-index: 1;
+    }
+
+    .package-media::before {
+        content: "";
+        position: absolute;
+        width: 118px;
+        height: 118px;
+        border-radius: 50%;
+        opacity: 0;
+        background: rgba(239, 45, 131, 0.12);
+        transform: scale(0.78);
+        transition: opacity 0.35s ease, transform 0.35s ease;
+    }
+
+    .package-media img {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        filter: drop-shadow(0 18px 18px rgba(143, 28, 82, 0.18));
+        transform: translateY(0) scale(1);
+        transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), filter 0.35s ease;
+    }
+
+    .package-card:hover .package-media::before {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    .package-card:hover .package-media img {
+        transform: translateY(-6px) scale(1.08) rotate(-1deg);
+        filter: drop-shadow(0 24px 22px rgba(143, 28, 82, 0.25));
+    }
+
+    .package-card-top {
+        position: relative;
+        z-index: 1;
+        margin-bottom: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+    }
+
+    .package-tag,
+    .package-count {
+        min-height: 24px;
+        display: inline-flex;
+        align-items: center;
+        border-radius: 999px;
+        font-size: 11px;
+        font-weight: 850;
+        text-transform: uppercase;
+    }
+
+    .package-tag {
+        padding: 0 10px;
+        color: var(--pink-dark);
+        background: rgba(239, 45, 131, 0.12);
+        transition: color 0.25s ease, background 0.25s ease;
+    }
+
+    .package-count {
+        padding: 0 9px;
+        color: #fff;
+        background: var(--pink);
+        transition: transform 0.25s ease;
+    }
+
+    .package-card:hover .package-tag {
+        color: #fff;
+        background: var(--pink);
+    }
+
+    .package-card:hover .package-count {
+        transform: translateY(-1px);
+    }
+
+    .package-card h3 {
+        position: relative;
+        z-index: 1;
+        margin: 0;
+        color: #211821;
+        font-size: 20px;
+        line-height: 1.18;
+        letter-spacing: 0;
+    }
+
+    .package-price {
+        position: relative;
+        z-index: 1;
+        margin: 8px 0 0;
+        color: var(--pink-dark);
+        font-size: 14px;
+        font-weight: 850;
+    }
+
+    .package-list {
+        position: relative;
+        z-index: 1;
+        margin: 18px 0 22px;
+        padding: 0;
+        display: grid;
+        gap: 9px;
+        list-style: none;
+        color: #6f5a67;
+        font-size: 13px;
+        line-height: 1.45;
+    }
+
+    .package-list li {
+        display: flex;
+        gap: 9px;
+        transform: translateX(0);
+        transition: color 0.25s ease, transform 0.25s ease;
+    }
+
+    .package-card:hover .package-list li {
+        color: #4d3945;
+        transform: translateX(3px);
+    }
+
+    .package-list li::before {
+        content: "";
+        width: 7px;
+        height: 11px;
+        flex: 0 0 auto;
+        margin-top: 3px;
+        border-right: 2px solid var(--pink);
+        border-bottom: 2px solid var(--pink);
+        transform: rotate(45deg);
+    }
+
+    .package-book {
+        position: relative;
+        z-index: 1;
+        width: fit-content;
+        min-height: 38px;
+        margin-top: auto;
+        padding: 0 16px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 999px;
+        color: #fff;
+        background: var(--pink);
+        font-size: 13px;
+        font-weight: 850;
+        text-decoration: none;
+        box-shadow: 0 10px 20px rgba(239, 45, 131, 0.2);
+        transition: background 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+    }
+
+    .package-book:hover {
+        background: var(--pink-dark);
+        box-shadow: 0 14px 28px rgba(201, 21, 103, 0.26);
+        transform: translateY(-2px);
+    }
+
+    .package-arrow {
+        position: absolute;
+        top: 50%;
+        z-index: 3;
+        width: 48px;
+        height: 48px;
+        display: grid;
+        place-items: center;
+        border: 1px solid rgba(239, 45, 131, 0.18);
+        border-radius: 50%;
+        color: var(--pink);
+        background: rgba(255, 255, 255, 0.86);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        cursor: pointer;
+        transform: translateY(-50%);
+        transition: background 0.25s ease, transform 0.25s ease;
+    }
+
+    .package-arrow:hover {
+        color: #fff;
+        background: var(--pink);
+        box-shadow: 0 16px 30px rgba(239, 45, 131, 0.24);
+        transform: translateY(-50%) scale(1.05);
+    }
+
+    .package-arrow.prev {
+        left: -24px;
+    }
+
+    .package-arrow.next {
+        right: -24px;
+    }
+
+    .package-arrow span {
+        width: 10px;
+        height: 10px;
+        display: block;
+        border-top: 2px solid currentColor;
+        border-right: 2px solid currentColor;
+    }
+
+    .package-arrow.prev span {
+        margin-left: 4px;
+        transform: rotate(-135deg);
+    }
+
+    .package-arrow.next span {
+        margin-right: 4px;
+        transform: rotate(45deg);
+    }
+
+    .package-card.is-hidden {
+        display: none;
+    }
+
+    @media (max-width: 1000px) {
+        .package-track {
+            grid-auto-columns: calc((100% - 24px) / 2);
+        }
+    }
+
+    @media (max-width: 620px) {
+        .package-section {
+            padding: 68px 0 76px;
+        }
+
+        .package-inner {
+            padding: 0 16px;
+        }
+
+        .package-heading {
+            margin-bottom: 26px;
+        }
+
+        .package-heading p {
+            font-size: 14.5px;
+        }
+
+        .package-filter {
+            justify-content: flex-start;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            padding-bottom: 4px;
+            scrollbar-width: none;
+        }
+
+        .package-filter::-webkit-scrollbar {
+            display: none;
+        }
+
+        .package-filter-button {
+            flex: 0 0 auto;
+        }
+
+        .package-track {
+            grid-auto-columns: 100%;
+            gap: 16px;
+        }
+
+        .package-card {
+            min-height: 320px;
+        }
+
+        .package-carousel-wrap::before,
+        .package-carousel-wrap::after {
+            width: 32px;
+        }
+
+        .package-arrow {
+            width: 42px;
+            height: 42px;
+        }
+
+        .package-arrow.prev {
+            left: -8px;
+        }
+
+        .package-arrow.next {
+            right: -8px;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .package-track {
+            scroll-behavior: auto;
+        }
+
+        .package-card,
+        .package-card::before,
+        .package-card::after,
+        .package-media::before,
+        .package-media img,
+        .package-list li,
+        .package-book,
+        .package-filter-button,
+        .package-arrow {
+            transition: none;
+        }
+    }
+</style>
+
+<section class="package-section" id="packages">
+    <div class="package-inner">
+        <div class="package-heading">
+            <p class="package-kicker">DLM Packages</p>
+            <h2>Choose The Right Plan For Your Celebration</h2>
+            <p>Browse package categories just like a premium gear carousel, then compare plans by coverage, deliverables, and event type.</p>
+        </div>
+
+        <div class="package-filter" aria-label="Package categories">
+            <button class="package-filter-button is-active" type="button" data-package-filter="all">All Packages</button>
+            <button class="package-filter-button" type="button" data-package-filter="wedding">Wedding</button>
+            <button class="package-filter-button" type="button" data-package-filter="birthday">Birthday</button>
+            <button class="package-filter-button" type="button" data-package-filter="baby">Baby Shower</button>
+            <button class="package-filter-button" type="button" data-package-filter="couple">Couple Shoot</button>
+            <button class="package-filter-button" type="button" data-package-filter="event">Events</button>
+        </div>
+
+        <div class="package-carousel-wrap">
+            <button class="package-arrow prev" id="packagePrev" type="button" aria-label="Previous package">
+                <span></span>
+            </button>
+
+            <div class="package-track" id="packageTrack" aria-label="DLM package plans">
+                <article class="package-card" data-package-category="wedding">
+                    <div class="package-card-top">
+                        <span class="package-tag">Wedding</span>
+                        <span class="package-count">Popular</span>
+                    </div>
+                    <div class="package-media">
+                        <img src="assets/slide-1.svg" alt="Wedding package preview">
+                    </div>
+                    <h3>Wedding Classic</h3>
+                    <p class="package-price">From Rs. 45,000</p>
+                    <ul class="package-list">
+                        <li>1 day wedding coverage</li>
+                        <li>Candid and traditional photos</li>
+                        <li>Edited photos with online gallery</li>
+                    </ul>
+                    <a class="package-book" href="#contact">Check Availability</a>
+                </article>
+
+                <article class="package-card" data-package-category="wedding">
+                    <div class="package-card-top">
+                        <span class="package-tag">Wedding</span>
+                        <span class="package-count">Film</span>
+                    </div>
+                    <div class="package-media">
+                        <img src="assets/slide-2.svg" alt="Wedding film package preview">
+                    </div>
+                    <h3>Wedding Premium Film</h3>
+                    <p class="package-price">From Rs. 85,000</p>
+                    <ul class="package-list">
+                        <li>Photography and cinematic video</li>
+                        <li>Highlight film and full event video</li>
+                        <li>Premium album design included</li>
+                    </ul>
+                    <a class="package-book" href="#contact">Check Availability</a>
+                </article>
+
+                <article class="package-card" data-package-category="birthday">
+                    <div class="package-card-top">
+                        <span class="package-tag">Birthday</span>
+                        <span class="package-count">Kids</span>
+                    </div>
+                    <div class="package-media">
+                        <img src="assets/slide-3.svg" alt="Birthday package preview">
+                    </div>
+                    <h3>Birthday Moments</h3>
+                    <p class="package-price">From Rs. 12,000</p>
+                    <ul class="package-list">
+                        <li>3 hours event photography</li>
+                        <li>Cake, decor, family and candid shots</li>
+                        <li>Edited digital photos delivered online</li>
+                    </ul>
+                    <a class="package-book" href="#contact">Check Availability</a>
+                </article>
+
+                <article class="package-card" data-package-category="baby">
+                    <div class="package-card-top">
+                        <span class="package-tag">Baby Shower</span>
+                        <span class="package-count">Family</span>
+                    </div>
+                    <div class="package-media">
+                        <img src="assets/slide-1.svg" alt="Baby shower package preview">
+                    </div>
+                    <h3>Baby Shower Story</h3>
+                    <p class="package-price">From Rs. 18,000</p>
+                    <ul class="package-list">
+                        <li>Decor, rituals and guest coverage</li>
+                        <li>Family portraits with natural candids</li>
+                        <li>Short reel edit for social sharing</li>
+                    </ul>
+                    <a class="package-book" href="#contact">Check Availability</a>
+                </article>
+
+                <article class="package-card" data-package-category="couple">
+                    <div class="package-card-top">
+                        <span class="package-tag">Couple</span>
+                        <span class="package-count">Outdoor</span>
+                    </div>
+                    <div class="package-media">
+                        <img src="assets/slide-2.svg" alt="Couple shoot package preview">
+                    </div>
+                    <h3>Pre-Wedding Couple Shoot</h3>
+                    <p class="package-price">From Rs. 25,000</p>
+                    <ul class="package-list">
+                        <li>Outdoor or studio session</li>
+                        <li>Creative posing and location guidance</li>
+                        <li>Edited photos and short teaser video</li>
+                    </ul>
+                    <a class="package-book" href="#contact">Check Availability</a>
+                </article>
+
+                <article class="package-card" data-package-category="event">
+                    <div class="package-card-top">
+                        <span class="package-tag">Event</span>
+                        <span class="package-count">Pro</span>
+                    </div>
+                    <div class="package-media">
+                        <img src="assets/slide-3.svg" alt="Event package preview">
+                    </div>
+                    <h3>Corporate & Family Event</h3>
+                    <p class="package-price">From Rs. 20,000</p>
+                    <ul class="package-list">
+                        <li>Stage, guest and highlight coverage</li>
+                        <li>Professional edited photo selection</li>
+                        <li>Optional reels and video add-on</li>
+                    </ul>
+                    <a class="package-book" href="#contact">Check Availability</a>
+                </article>
+            </div>
+
+            <button class="package-arrow next" id="packageNext" type="button" aria-label="Next package">
+                <span></span>
+            </button>
+        </div>
+    </div>
+</section>
+
+<script>
+    (() => {
+        const packageTrack = document.getElementById("packageTrack");
+        const filterButtons = document.querySelectorAll("[data-package-filter]");
+        const packageCards = document.querySelectorAll("[data-package-category]");
+        const previousButton = document.getElementById("packagePrev");
+        const nextButton = document.getElementById("packageNext");
+
+        if (!packageTrack || !previousButton || !nextButton) {
+            return;
+        }
+
+        const getPackageStep = () => {
+            const visibleCard = Array.from(packageCards).find(card => !card.classList.contains("is-hidden"));
+
+            if (!visibleCard) {
+                return packageTrack.clientWidth;
+            }
+
+            const styles = window.getComputedStyle(packageTrack);
+            const gap = Number.parseFloat(styles.columnGap || styles.gap) || 0;
+            return visibleCard.getBoundingClientRect().width + gap;
+        };
+
+        const scrollPackages = direction => {
+            packageTrack.scrollBy({
+                left: getPackageStep() * direction,
+                behavior: "smooth"
+            });
+        };
+
+        filterButtons.forEach(button => {
+            button.addEventListener("click", () => {
+                const filter = button.dataset.packageFilter;
+
+                filterButtons.forEach(item => item.classList.remove("is-active"));
+                button.classList.add("is-active");
+
+                packageCards.forEach(card => {
+                    const shouldShow = filter === "all" || card.dataset.packageCategory === filter;
+                    card.classList.toggle("is-hidden", !shouldShow);
+                });
+
+                packageTrack.scrollTo({ left: 0, behavior: "smooth" });
+            });
+        });
+
+        previousButton.addEventListener("click", () => scrollPackages(-1));
+        nextButton.addEventListener("click", () => scrollPackages(1));
+    })();
+</script>
+
+
+<style>
+    /* ==========================================
+       CANDID WEDDING VIDEOS SECTION
+    ========================================== */
+
+    .candid-video-section {
+        position: relative;
+        padding: 78px 28px 66px;
+        overflow: hidden;
+        background:
+            radial-gradient(circle at 12% 16%, rgba(239, 45, 131, 0.08), transparent 28%),
+            radial-gradient(circle at 88% 8%, rgba(239, 45, 131, 0.06), transparent 24%),
+            linear-gradient(180deg, #ffffff 0%, #fff8fb 100%);
+        isolation: isolate;
+    }
+
+    .candid-video-section::before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: 28px;
+        width: 108px;
+        height: 6px;
+        border-radius: 999px;
+        background: linear-gradient(90deg, rgba(239, 45, 131, 0.24), rgba(239, 45, 131, 0.08));
+        transform: translateX(-50%);
+    }
+
+    .candid-video-inner {
+        position: relative;
+        z-index: 1;
+        width: min(100%, 1160px);
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .candid-video-heading h2 {
+        margin: 0;
+        color: #1c1a20;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: clamp(34px, 3.7vw, 48px);
+        font-weight: 600;
+        line-height: 1.12;
+        letter-spacing: 0.06em;
+    }
+
+    .candid-video-heading p {
+        margin: 10px 0 28px;
+        color: #67525e;
+        font-size: 13px;
+        line-height: 1.5;
+    }
+
+    .candid-video-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 28px;
+        align-items: stretch;
+    }
+
+    .candid-video-card {
+        position: relative;
+        min-height: 240px;
+        padding: 0;
+        display: block;
+        overflow: hidden;
+        border: 1px solid rgba(239, 45, 131, 0.1);
+        border-radius: 4px;
+        background: #160f12;
+        cursor: pointer;
+        box-shadow: 0 18px 42px rgba(36, 23, 35, 0.12);
+        transform: translateY(0) scale(1);
+        text-decoration: none;
+        isolation: isolate;
+        transition:
+            transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+            box-shadow 0.35s ease,
+            border-color 0.35s ease;
+    }
+
+    .candid-video-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 2;
+        opacity: 0;
+        pointer-events: none;
+        background:
+            linear-gradient(120deg, rgba(255, 255, 255, 0.22), transparent 34%),
+            radial-gradient(circle at 50% 52%, rgba(239, 45, 131, 0.18), transparent 26%);
+        transition: opacity 0.35s ease;
+    }
+
+    .candid-video-card::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        background:
+            linear-gradient(180deg, rgba(0, 0, 0, 0.02), rgba(0, 0, 0, 0.26)),
+            linear-gradient(90deg, rgba(20, 7, 13, 0.16), transparent 38%, rgba(20, 7, 13, 0.1));
+        opacity: 0.9;
+        pointer-events: none;
+    }
+
+    .candid-video-card img {
+        width: 100%;
+        height: 100%;
+        min-height: 240px;
+        display: block;
+        object-fit: cover;
+        transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), filter 0.35s ease;
+    }
+
+    .candid-video-card:hover {
+        border-color: rgba(239, 45, 131, 0.36);
+        transform: translateY(-9px) scale(1.012);
+        box-shadow: 0 30px 64px rgba(143, 28, 82, 0.2);
+    }
+
+    .candid-video-card:hover::before {
+        opacity: 1;
+    }
+
+    .candid-video-card:hover img {
+        transform: scale(1.07);
+        filter: saturate(1.1) contrast(1.04);
+    }
+
+    .candid-video-logo {
+        position: absolute;
+        top: 9px;
+        right: 11px;
+        z-index: 3;
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.9) url("assets/image.png") center / contain no-repeat;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+    }
+
+    .candid-play {
+        position: absolute;
+        left: 50%;
+        top: 53%;
+        z-index: 4;
+        width: 48px;
+        height: 34px;
+        display: grid;
+        place-items: center;
+        border-radius: 8px;
+        background: #ff0000;
+        box-shadow: 0 10px 22px rgba(0, 0, 0, 0.28);
+        transform: translate(-50%, -50%);
+        transition: transform 0.25s ease, background 0.25s ease;
+    }
+
+    .candid-play::before {
+        content: "";
+        width: 0;
+        height: 0;
+        margin-left: 3px;
+        border-top: 8px solid transparent;
+        border-bottom: 8px solid transparent;
+        border-left: 13px solid #fff;
+    }
+
+    .candid-video-card:hover .candid-play {
+        background: var(--pink);
+        transform: translate(-50%, -50%) scale(1.12);
+    }
+
+    .candid-video-more {
+        min-width: 168px;
+        min-height: 36px;
+        margin: 28px auto 0;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 999px;
+        color: #fff;
+        background: #0b0709;
+        font-size: 13px;
+        font-weight: 800;
+        text-decoration: none;
+        transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .candid-video-more:hover {
+        background: var(--pink);
+        box-shadow: 0 12px 24px rgba(239, 45, 131, 0.22);
+        transform: translateY(-2px);
+    }
+
+    .candid-video-modal {
+        position: fixed;
+        inset: 0;
+        z-index: 3000;
+        padding: 70px 20px 24px;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        background: rgba(20, 7, 13, 0.82);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+    }
+
+    .candid-video-modal.is-open {
+        display: flex;
+    }
+
+    .candid-video-frame {
+        width: min(100%, 960px);
+        aspect-ratio: 16 / 9;
+        max-height: calc(100svh - 120px);
+        border-radius: 10px;
+        border: 0;
+        background: #000;
+        box-shadow: 0 28px 80px rgba(0, 0, 0, 0.35);
+    }
+
+    .candid-video-close {
+        position: fixed;
+        top: 18px;
+        right: 22px;
+        width: 44px;
+        height: 44px;
+        border: 0;
+        border-radius: 50%;
+        color: #fff;
+        background: var(--pink);
+        font-size: 28px;
+        line-height: 1;
+        cursor: pointer;
+    }
+
+    @media (max-width: 900px) {
+        .candid-video-section {
+            padding: 68px 20px 58px;
+        }
+
+        .candid-video-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .candid-video-card,
+        .candid-video-card img {
+            min-height: 218px;
+        }
+    }
+
+    @media (max-width: 650px) {
+        .candid-video-section {
+            padding: 62px 16px 52px;
+        }
+
+        .candid-video-heading h2 {
+            font-size: 29px;
+            letter-spacing: 0.035em;
+        }
+
+        .candid-video-heading p {
+            max-width: 280px;
+            margin-right: auto;
+            margin-left: auto;
+            font-size: 12.5px;
+        }
+
+        .candid-video-grid {
+            grid-template-columns: 1fr;
+            gap: 18px;
+        }
+
+        .candid-video-card,
+        .candid-video-card img {
+            min-height: 225px;
+        }
+
+        .candid-video-more {
+            width: min(100%, 210px);
+            min-height: 40px;
+        }
+
+        .candid-video-modal {
+            padding: 78px 12px 22px;
+        }
+
+        .candid-video-close {
+            top: 16px;
+            right: 14px;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .candid-video-card,
+        .candid-video-card img,
+        .candid-video-card::before,
+        .candid-play,
+        .candid-video-more {
+            transition: none;
+        }
+    }
+</style>
+
+<section class="candid-video-section" id="candid-videos">
+    <div class="candid-video-inner">
+        <div class="candid-video-heading">
+            <h2>Candid Wedding Videos</h2>
+            <p>- A minute of video is worth 1.8 million words -</p>
+        </div>
+
+        <div class="candid-video-grid" aria-label="Candid wedding videos">
+            <a class="candid-video-card" href="https://www.youtube.com/watch?v=VIDEO_ID_1" data-youtube-embed="https://www.youtube.com/embed/VIDEO_ID_1?autoplay=1&rel=0" aria-label="Play candid wedding video one">
+                <img src="assets/slide-1.svg" alt="Candid wedding ceremony video">
+                <span class="candid-video-logo" aria-hidden="true"></span>
+                <span class="candid-play" aria-hidden="true"></span>
+            </a>
+
+            <a class="candid-video-card" href="https://www.youtube.com/watch?v=VIDEO_ID_2" data-youtube-embed="https://www.youtube.com/embed/VIDEO_ID_2?autoplay=1&rel=0" aria-label="Play candid wedding video two">
+                <img src="assets/slide-2.svg" alt="Candid couple wedding video">
+                <span class="candid-video-logo" aria-hidden="true"></span>
+                <span class="candid-play" aria-hidden="true"></span>
+            </a>
+
+            <a class="candid-video-card" href="https://www.youtube.com/watch?v=VIDEO_ID_3" data-youtube-embed="https://www.youtube.com/embed/VIDEO_ID_3?autoplay=1&rel=0" aria-label="Play candid wedding video three">
+                <img src="assets/slide-3.svg" alt="Candid wedding ritual video">
+                <span class="candid-video-logo" aria-hidden="true"></span>
+                <span class="candid-play" aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <a class="candid-video-more" href="#wedding-stories">View More</a>
+    </div>
+
+</section>
+
+<div class="candid-video-modal" id="candidVideoModal" aria-hidden="true">
+    <button class="candid-video-close" id="candidVideoClose" type="button" aria-label="Close video">&times;</button>
+    <iframe class="candid-video-frame" id="candidVideoFrame" title="Candid wedding video" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+</div>
+
+<script>
+    (() => {
+        const videoCards = document.querySelectorAll("[data-candid-video]");
+        const modal = document.getElementById("candidVideoModal");
+        const closeButton = document.getElementById("candidVideoClose");
+        const player = document.getElementById("candidVideoPlayer");
+
+        if (!modal || !closeButton || !player || videoCards.length === 0) {
+            return;
+        }
+
+        const closeVideo = () => {
+            player.pause();
+            player.removeAttribute("src");
+            player.load();
+            modal.classList.remove("is-open");
+            modal.setAttribute("aria-hidden", "true");
+            document.body.classList.remove("menu-open");
+        };
+
+        videoCards.forEach(card => {
+            card.addEventListener("click", () => {
+                player.src = card.dataset.candidVideo;
+                modal.classList.add("is-open");
+                modal.setAttribute("aria-hidden", "false");
+                document.body.classList.add("menu-open");
+                player.play();
+            });
+        });
+
+        closeButton.addEventListener("click", closeVideo);
+
+        modal.addEventListener("click", event => {
+            if (event.target === modal) {
+                closeVideo();
+            }
+        });
+
+        document.addEventListener("keydown", event => {
+            if (event.key === "Escape" && modal.classList.contains("is-open")) {
+                closeVideo();
+            }
+        });
+    })();
+</script>
+
+
+
+       
+    </main>
+
+    <script>
+        (() => {
+            const navbar = document.getElementById("siteNavbar");
+            const menu = document.getElementById("mobileMenu");
+            const backdrop = document.getElementById("menuBackdrop");
+            const openButton = document.getElementById("menuOpen");
+            const closeButton = document.getElementById("menuClose");
+            const weddingButton = document.getElementById("mobileWeddingButton");
+            const weddingPanel = document.getElementById("mobileWeddingPanel");
+
+            const openMenu = () => {
+                menu.classList.add("open");
+                backdrop.classList.add("open");
+                document.body.classList.add("menu-open");
+                openButton.setAttribute("aria-expanded", "true");
+            };
+
+            const closeMenu = () => {
+                menu.classList.remove("open");
+                backdrop.classList.remove("open");
+                document.body.classList.remove("menu-open");
+                openButton.setAttribute("aria-expanded", "false");
+            };
+
+            openButton.addEventListener("click", openMenu);
+            closeButton.addEventListener("click", closeMenu);
+            backdrop.addEventListener("click", closeMenu);
+
+            weddingButton.addEventListener("click", () => {
+                weddingPanel.classList.toggle("open");
+            });
+
+            menu.querySelectorAll("a").forEach(link => {
+                link.addEventListener("click", closeMenu);
+            });
+
+            window.addEventListener("scroll", () => {
+                navbar.classList.toggle("is-sticky", window.scrollY > 20);
+            });
+
+            document.addEventListener("keydown", event => {
+                if (event.key === "Escape") closeMenu();
+            });
+
+            window.addEventListener("resize", () => {
+                if (window.innerWidth > 900) closeMenu();
+            });
+        })();
+
+        (() => {
+            const slider = document.getElementById("home");
+            const track = document.getElementById("sliderTrack");
+            const previousButton = document.getElementById("sliderPrev");
+            const nextButton = document.getElementById("sliderNext");
+            const dotsContainer = document.getElementById("sliderDots");
+            const progressBar = document.getElementById("sliderProgress");
+
+            if (!slider || !track || !previousButton || !nextButton || !dotsContainer || !progressBar) {
+                return;
+            }
+
+            const originalSlides = Array.from(track.querySelectorAll(".hero-slide"));
+            const slideDuration = 4000;
+            const swipeThreshold = 45;
+
+            if (originalSlides.length === 0) {
+                return;
+            }
+
+            const firstClone = originalSlides[0].cloneNode(true);
+            const lastClone = originalSlides[originalSlides.length - 1].cloneNode(true);
+
+            firstClone.classList.remove("is-active");
+            lastClone.classList.remove("is-active");
+            firstClone.setAttribute("aria-hidden", "true");
+            lastClone.setAttribute("aria-hidden", "true");
+
+            track.appendChild(firstClone);
+            track.insertBefore(lastClone, originalSlides[0]);
+
+            const slides = Array.from(track.querySelectorAll(".hero-slide"));
+
+            let currentIndex = 1;
+            let autoPlayTimer = null;
+            let touchStartX = 0;
+            let touchEndX = 0;
+            let isSliding = false;
+            let slideFallbackTimer = null;
+
+            const getRealIndex = () => {
+                if (currentIndex === 0) {
+                    return originalSlides.length - 1;
+                }
+
+                if (currentIndex === originalSlides.length + 1) {
+                    return 0;
+                }
+
+                return currentIndex - 1;
+            };
+
+            const dots = originalSlides.map((_, index) => {
+                const dot = document.createElement("button");
+                dot.className = "slider-dot";
+                dot.type = "button";
+                dot.setAttribute("aria-label", `Show image ${index + 1}`);
+                dot.addEventListener("click", () => {
+                    showSlide(index);
+                    restartAutoPlay();
+                });
+                dotsContainer.appendChild(dot);
+                return dot;
+            });
+
+            const restartProgress = () => {
+                progressBar.classList.remove("is-running");
+                void progressBar.offsetWidth;
+                progressBar.classList.add("is-running");
+            };
+
+            const completeSlideTransition = () => {
+                window.clearTimeout(slideFallbackTimer);
+                slideFallbackTimer = null;
+                isSliding = false;
+
+                if (currentIndex === 0) {
+                    currentIndex = originalSlides.length;
+                    setTrackPosition(false);
+                    updateSliderState(false);
+                }
+
+                if (currentIndex === originalSlides.length + 1) {
+                    currentIndex = 1;
+                    setTrackPosition(false);
+                    updateSliderState(false);
+                }
+            };
+
+            const setTrackPosition = shouldAnimate => {
+                if (shouldAnimate) {
+                    isSliding = true;
+                    window.clearTimeout(slideFallbackTimer);
+                    slideFallbackTimer = window.setTimeout(completeSlideTransition, 950);
+                }
+
+                track.style.transition = shouldAnimate ? "" : "none";
+                track.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+                if (!shouldAnimate) {
+                    isSliding = false;
+
+                    requestAnimationFrame(() => {
+                        track.style.transition = "";
+                    });
+                }
+            };
+
+            const updateSliderState = shouldRestartProgress => {
+                const realIndex = getRealIndex();
+
+                slides.forEach((slide, slideIndex) => {
+                    slide.classList.toggle("is-active", slideIndex === currentIndex);
+                });
+
+                dots.forEach((dot, dotIndex) => {
+                    const isActive = dotIndex === realIndex;
+                    dot.classList.toggle("is-active", isActive);
+                    dot.setAttribute("aria-current", isActive ? "true" : "false");
+                });
+
+                if (shouldRestartProgress) {
+                    restartProgress();
+                }
+            };
+
+            const showSlide = index => {
+                if (isSliding) {
+                    return;
+                }
+
+                currentIndex = index + 1;
+                setTrackPosition(true);
+                updateSliderState(true);
+            };
+
+            const showNextSlide = () => {
+                if (isSliding) {
+                    return;
+                }
+
+                currentIndex += 1;
+                setTrackPosition(true);
+                updateSliderState(true);
+            };
+
+            const showPreviousSlide = () => {
+                if (isSliding) {
+                    return;
+                }
+
+                currentIndex -= 1;
+                setTrackPosition(true);
+                updateSliderState(true);
+            };
+
+            const stopAutoPlay = () => {
+                window.clearInterval(autoPlayTimer);
+                autoPlayTimer = null;
+                progressBar.classList.remove("is-running");
+            };
+
+            const startAutoPlay = () => {
+                stopAutoPlay();
+                autoPlayTimer = window.setInterval(showNextSlide, slideDuration);
+                restartProgress();
+            };
+
+            const restartAutoPlay = () => {
+                stopAutoPlay();
+                startAutoPlay();
+            };
+
+            nextButton.addEventListener("click", () => {
+                showNextSlide();
+                restartAutoPlay();
+            });
+
+            previousButton.addEventListener("click", () => {
+                showPreviousSlide();
+                restartAutoPlay();
+            });
+
+            track.addEventListener("transitionend", event => {
+                if (event.target !== track || event.propertyName !== "transform") {
+                    return;
+                }
+
+                completeSlideTransition();
+            });
+
+            slider.addEventListener("mouseenter", stopAutoPlay);
+            slider.addEventListener("mouseleave", startAutoPlay);
+            slider.addEventListener("focusin", stopAutoPlay);
+            slider.addEventListener("focusout", event => {
+                if (!slider.contains(event.relatedTarget)) startAutoPlay();
+            });
+
+            slider.addEventListener("touchstart", event => {
+                touchStartX = event.changedTouches[0].clientX;
+                stopAutoPlay();
+            }, { passive: true });
+
+            slider.addEventListener("touchend", event => {
+                touchEndX = event.changedTouches[0].clientX;
+                const swipeDistance = touchStartX - touchEndX;
+
+                if (Math.abs(swipeDistance) > swipeThreshold) {
+                    if (swipeDistance > 0) {
+                        showNextSlide();
+                    } else {
+                        showPreviousSlide();
+                    }
+                }
+
+                startAutoPlay();
+            }, { passive: true });
+
+            document.addEventListener("visibilitychange", () => {
+                if (document.hidden) {
+                    stopAutoPlay();
+                } else {
+                    startAutoPlay();
+                }
+            });
+
+            setTrackPosition(false);
+            updateSliderState(true);
+            startAutoPlay();
+        })();
+    </script>
+
+    
+</body>
+</html>
