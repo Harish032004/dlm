@@ -4505,7 +4505,555 @@ padding-left: 9px;
 </script>
 
 
+<style>
+    /* =========================================
+       INSTAGRAM FEED SECTION
+    ========================================= */
 
+    .studio-instagram-section {
+        --instagram-pink: #ef2d83;
+        --instagram-pink-dark: #c91867;
+        --instagram-gold: #c79b58;
+        --instagram-ink: #2a1d25;
+        --instagram-muted: #796670;
+        --instagram-white: #ffffff;
+
+        position: relative;
+        width: 100%;
+        padding: 92px 24px;
+        overflow: hidden;
+
+        background:
+            radial-gradient(
+                circle at 8% 15%,
+                rgba(239, 45, 131, 0.11),
+                transparent 30%
+            ),
+            radial-gradient(
+                circle at 92% 85%,
+                rgba(199, 155, 88, 0.12),
+                transparent 30%
+            ),
+            linear-gradient(
+                135deg,
+                #fff7fb 0%,
+                #ffffff 50%,
+                #fff2f7 100%
+            );
+    }
+
+    .studio-instagram-section::before,
+    .studio-instagram-section::after {
+        content: "";
+        position: absolute;
+        border-radius: 50%;
+        pointer-events: none;
+    }
+
+    .studio-instagram-section::before {
+        top: -120px;
+        right: -100px;
+        width: 320px;
+        height: 320px;
+        background: rgba(239, 45, 131, 0.06);
+    }
+
+    .studio-instagram-section::after {
+        left: -100px;
+        bottom: -150px;
+        width: 350px;
+        height: 350px;
+        background: rgba(199, 155, 88, 0.07);
+    }
+
+    .studio-instagram-inner {
+        position: relative;
+        z-index: 2;
+        width: min(100%, 1220px);
+        margin: 0 auto;
+    }
+
+    /* Heading */
+
+    .studio-instagram-heading {
+        max-width: 700px;
+        margin: 0 auto 42px;
+        text-align: center;
+    }
+
+    .studio-instagram-kicker {
+        width: fit-content;
+        margin: 0 auto 14px;
+        padding: 8px 17px;
+
+        border: 1px solid rgba(239, 45, 131, 0.17);
+        border-radius: 999px;
+
+        color: var(--instagram-pink);
+        background: rgba(255, 255, 255, 0.82);
+
+        font-size: 11px;
+        font-weight: 850;
+        line-height: 1;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+
+        box-shadow: 0 9px 24px rgba(239, 45, 131, 0.08);
+    }
+
+    .studio-instagram-heading h2 {
+        margin: 0;
+
+        color: var(--instagram-ink);
+
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: clamp(38px, 4.5vw, 60px);
+        font-weight: 500;
+        line-height: 1.04;
+        letter-spacing: -1.7px;
+    }
+
+    .studio-instagram-heading p:not(.studio-instagram-kicker) {
+        max-width: 600px;
+        margin: 16px auto 0;
+
+        color: var(--instagram-muted);
+
+        font-size: 15px;
+        line-height: 1.75;
+    }
+
+    /* Feed container */
+
+    .studio-instagram-feed-box {
+        position: relative;
+        width: 100%;
+        min-height: 430px;
+        padding: 24px;
+        overflow: hidden;
+
+        border: 1px solid rgba(42, 29, 37, 0.08);
+        border-radius: 28px;
+
+        background: rgba(255, 255, 255, 0.9);
+
+        box-shadow:
+            0 26px 65px rgba(74, 45, 59, 0.1),
+            inset 0 1px 0 rgba(255, 255, 255, 0.95);
+
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+    }
+
+    .studio-instagram-feed-box::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 50%;
+        z-index: 3;
+
+        width: 130px;
+        height: 3px;
+
+        border-radius: 999px;
+
+        background: linear-gradient(
+            90deg,
+            var(--instagram-pink),
+            var(--instagram-gold)
+        );
+
+        transform: translateX(-50%);
+    }
+
+    /* Loading placeholder */
+
+    .studio-instagram-loader {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 14px;
+
+        color: var(--instagram-muted);
+        background: rgba(255, 255, 255, 0.92);
+
+        font-size: 13px;
+
+        transition:
+            opacity 0.35s ease,
+            visibility 0.35s ease;
+    }
+
+    .studio-instagram-loader.is-hidden {
+        visibility: hidden;
+        opacity: 0;
+    }
+
+    .studio-instagram-loader-icon {
+        width: 34px;
+        height: 34px;
+
+        border: 3px solid rgba(239, 45, 131, 0.15);
+        border-top-color: var(--instagram-pink);
+        border-radius: 50%;
+
+        animation: studioInstagramSpin 0.8s linear infinite;
+    }
+
+    @keyframes studioInstagramSpin {
+        to {
+            transform: rotate(360deg);
+        }
+    }
+
+    .studio-instagram-widget {
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        min-height: 380px;
+    }
+
+    /* Follow button */
+
+    .studio-instagram-action {
+        margin-top: 34px;
+        text-align: center;
+    }
+
+    .studio-instagram-follow {
+        min-height: 48px;
+        padding: 0 24px;
+
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+
+        border-radius: 999px;
+
+        color: var(--instagram-white);
+
+        background: linear-gradient(
+            135deg,
+            var(--instagram-pink),
+            var(--instagram-pink-dark)
+        );
+
+        font-size: 13px;
+        font-weight: 850;
+        text-decoration: none;
+
+        box-shadow: 0 15px 32px rgba(239, 45, 131, 0.23);
+
+        transition:
+            transform 0.25s ease,
+            box-shadow 0.25s ease;
+    }
+
+    .studio-instagram-follow::before {
+        content: "";
+        width: 17px;
+        height: 17px;
+        display: block;
+
+        border: 2px solid currentColor;
+        border-radius: 5px;
+    }
+
+    .studio-instagram-follow::after {
+        content: "→";
+        font-size: 16px;
+        transition: transform 0.25s ease;
+    }
+
+    .studio-instagram-follow:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 20px 38px rgba(239, 45, 131, 0.3);
+    }
+
+    .studio-instagram-follow:hover::after {
+        transform: translateX(4px);
+    }
+
+    /* Tablet */
+
+    @media (max-width: 900px) {
+        .studio-instagram-section {
+            padding: 74px 18px;
+        }
+
+        .studio-instagram-heading {
+            margin-bottom: 34px;
+        }
+
+        .studio-instagram-feed-box {
+            min-height: 360px;
+            padding: 18px;
+            border-radius: 23px;
+        }
+
+        .studio-instagram-widget {
+            min-height: 320px;
+        }
+    }
+
+    /* Mobile */
+
+    @media (max-width: 560px) {
+        .studio-instagram-section {
+            padding: 60px 12px;
+        }
+
+        .studio-instagram-heading {
+            margin-bottom: 30px;
+            padding: 0 7px;
+        }
+
+        .studio-instagram-kicker {
+            margin-bottom: 12px;
+            font-size: 10px;
+        }
+
+        .studio-instagram-heading h2 {
+            font-size: clamp(36px, 11vw, 48px);
+            letter-spacing: -1.1px;
+        }
+
+        .studio-instagram-heading p:not(.studio-instagram-kicker) {
+            max-width: 340px;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .studio-instagram-feed-box {
+            min-height: 330px;
+            padding: 10px;
+            border-radius: 18px;
+        }
+
+        .studio-instagram-widget {
+            min-height: 300px;
+        }
+
+        .studio-instagram-action {
+            margin-top: 27px;
+        }
+
+        .studio-instagram-follow {
+            width: 100%;
+            min-height: 48px;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .studio-instagram-loader-icon {
+            animation: none;
+        }
+
+        .studio-instagram-follow,
+        .studio-instagram-follow::after,
+        .studio-instagram-loader {
+            transition: none;
+        }
+    }
+    /* =========================================
+FINAL INSTAGRAM TEXT SIZE OVERRIDE
+Keep this at the bottom of the style block
+========================================= */
+
+.studio-instagram-heading {
+max-width: 600px !important;
+margin: 0 auto 28px !important;
+}
+
+.studio-instagram-kicker {
+margin: 0 auto 10px !important;
+padding: 6px 13px !important;
+font-size: 9px !important;
+line-height: 1 !important;
+letter-spacing: 0.12em !important;
+}
+
+.studio-instagram-heading h2 {
+margin: 0 !important;
+font-size: clamp(28px, 3vw, 40px) !important;
+line-height: 1.1 !important;
+letter-spacing: -0.8px !important;
+}
+
+.studio-instagram-heading p:not(.studio-instagram-kicker) {
+max-width: 500px !important;
+margin: 10px auto 0 !important;
+font-size: 12.5px !important;
+line-height: 1.6 !important;
+}
+
+@media (max-width: 560px) {
+.studio-instagram-heading {
+max-width: 330px !important;
+margin-bottom: 23px !important;
+padding: 0 6px !important;
+}
+
+
+.studio-instagram-kicker {
+    margin-bottom: 9px !important;
+    padding: 5px 12px !important;
+    font-size: 8px !important;
+}
+
+.studio-instagram-heading h2 {
+    font-size: 29px !important;
+    line-height: 1.08 !important;
+    letter-spacing: -0.6px !important;
+}
+
+.studio-instagram-heading p:not(.studio-instagram-kicker) {
+    max-width: 300px !important;
+    margin-top: 9px !important;
+    font-size: 12px !important;
+    line-height: 1.55 !important;
+}
+
+}
+/* Hide Elfsight dynamic branding/logo links */
+div[class*="elfsight-app"] + a,
+div[class*="elfsight-app"] a[href*="elfsight.com"],
+[class*="eapps-link"], 
+[class*="widget-container"] + a {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    width: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    pointer-events: none !important;
+}
+</style>
+
+
+
+<section
+    class="studio-instagram-section"
+    id="instagram"
+>
+    <div class="studio-instagram-inner">
+    <div class="studio-instagram-heading">
+
+        <p class="studio-instagram-kicker">
+            Follow Our Stories
+        </p>
+
+        <h2>
+            Moments From Instagram
+        </h2>
+
+        <p>
+            Discover our latest wedding stories, portraits,
+            celebrations and behind-the-scenes moments from
+            every memorable event.
+        </p>
+
+    </div>
+
+    <div class="studio-instagram-feed-box">
+
+        <div
+            class="studio-instagram-loader"
+            id="studioInstagramLoader"
+            aria-hidden="true"
+        >
+            <span class="studio-instagram-loader-icon"></span>
+            <span>Loading Instagram moments...</span>
+        </div>
+
+        <div class="studio-instagram-widget">
+
+            <!-- Elfsight Instagram Feed -->
+            <div
+                class="elfsight-app-edae6b28-27df-46b9-9fe3-51f01524aa15"
+                data-elfsight-app-lazy
+            ></div>
+
+        </div>
+
+    </div>
+
+    <div class="studio-instagram-action">
+
+        <a
+            class="studio-instagram-follow"
+            href="https://www.instagram.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Follow the studio on Instagram"
+        >
+            Follow Us on Instagram
+        </a>
+
+    </div>
+
+</div>
+
+
+</section>
+
+
+
+<script
+    src="https://elfsightcdn.com/platform.js"
+    async
+></script>
+
+<script>
+  (() => {
+    const loader = document.getElementById("studioInstagramLoader");
+    const widget = document.querySelector(".elfsight-app-edae6b28-27df-46b9-9fe3-51f01524aa15");
+
+    if (!loader || !widget) {
+        return;
+    }
+
+    const hideLoader = () => {
+        loader.classList.add("is-hidden");
+    };
+
+    const removeBranding = () => {
+        // Looks for links pointing to elfsight or containing eapps-link class and removes them
+        const links = document.querySelectorAll('a[href*="elfsight.com"], [class*="eapps-link"]');
+        links.forEach(link => link.remove());
+    };
+
+    const observer = new MutationObserver(() => {
+        if (widget.children.length > 0 || widget.querySelector("iframe")) {
+            hideLoader();
+            removeBranding(); // Run branding removal when widget loads
+            
+            // Re-run briefly after a slight delay to catch late-injected elements
+            setTimeout(removeBranding, 500);
+            setTimeout(removeBranding, 1500);
+            
+            observer.disconnect();
+        }
+    });
+
+    observer.observe(widget.parentElement, { // Observed parent to catch adjacent sibling links
+        childList: true,
+        subtree: true
+    });
+
+    window.setTimeout(() => {
+        hideLoader();
+        removeBranding();
+    }, 7000);
+})();
+</script>
        
     </main>
 
