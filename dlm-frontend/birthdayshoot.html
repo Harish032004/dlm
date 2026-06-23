@@ -1,0 +1,3497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beauty Shoot |DLM </title>
+</head>
+<body>
+      <style>
+          :root {
+            --pink: #ef2d83;
+            --pink-dark: #c91567;
+            --soft: #fff0f7;
+            --ink: #241723;
+            --muted: #7a6572;
+            --border: rgba(36, 23, 35, 0.1);
+            --white: #ffffff;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Inter", "Segoe UI", sans-serif;
+            color: var(--ink);
+            background: #fff8fb;
+        }
+
+        body.menu-open {
+            overflow: hidden;
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+        button,
+        a {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .navbar-wrap {
+            position: absolute;
+            top: 18px;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 0 28px;
+        }
+
+        .navbar-wrap.is-sticky {
+            position: fixed;
+            top: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            width: min(100%, 1180px);
+            min-height: 76px;
+            margin: auto;
+            padding: 0 30px;
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            gap: 24px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.94);
+            box-shadow: 0 18px 50px rgba(108, 20, 64, 0.14);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            transition: border-radius 0.25s ease, min-height 0.25s ease;
+        }
+
+        .navbar-wrap.is-sticky .navbar {
+            width: 100%;
+            min-height: 70px;
+            border-radius: 0;
+        }
+
+        .brand {
+            justify-self: start;
+            display: flex;
+            align-items: center;
+        }
+
+        .brand-logo {
+            width: 56px;
+            height: 56px;
+            object-fit: contain;
+            border-radius: 50%;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 28px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-links a,
+        .wedding-button {
+            min-height: 70px;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            border: 0;
+            color: var(--ink);
+            background: none;
+            font: 700 14px "Inter", "Segoe UI", sans-serif;
+            text-decoration: none;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .nav-links a:hover,
+        .wedding-button:hover {
+            color: var(--pink);
+        }
+
+        .arrow {
+            width: 8px;
+            height: 8px;
+            border-right: 2px solid currentColor;
+            border-bottom: 2px solid currentColor;
+            transform: rotate(45deg);
+            transition: transform 0.25s ease;
+        }
+
+        .wedding-item:hover .arrow,
+        .wedding-item:focus-within .arrow {
+            transform: rotate(225deg);
+        }
+
+        .wedding-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            width: 560px;
+            padding: 26px;
+            display: grid;
+            grid-template-columns: 160px 1fr 1fr;
+            gap: 24px;
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            background: #fff;
+            box-shadow: 0 24px 60px rgba(40, 20, 32, 0.16);
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transform: translate(-50%, -10px);
+            transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
+        }
+
+        .wedding-item:hover .wedding-dropdown,
+        .wedding-item:focus-within .wedding-dropdown {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transform: translate(-50%, 0);
+        }
+
+        .wedding-dropdown img {
+            width: 100%;
+            height: 180px;
+            object-fit: contain;
+            border-radius: 14px;
+            background: #fff4f9;
+        }
+
+        .wedding-column {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .wedding-column a {
+            min-height: 44px;
+            font-size: 15px;
+        }
+
+        .nav-actions {
+            justify-self: end;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .login-button {
+            min-width: 96px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 999px;
+            color: #fff;
+            background: var(--pink);
+            font-weight: 800;
+            text-decoration: none;
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+
+        .login-button:hover {
+            background: var(--pink-dark);
+            transform: translateY(-1px);
+        }
+
+        .menu-toggle {
+            flex: 0 0 auto;
+            width: 44px;
+            height: 44px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            border: 0;
+            border-radius: 50%;
+            color: var(--pink);
+            background: var(--soft);
+            cursor: pointer;
+        }
+
+        .menu-lines,
+        .menu-lines::before,
+        .menu-lines::after {
+            width: 20px;
+            height: 2px;
+            display: block;
+            border-radius: 10px;
+            background: currentColor;
+        }
+
+        .menu-lines {
+            position: relative;
+        }
+
+        .menu-lines::before,
+        .menu-lines::after {
+            content: "";
+            position: absolute;
+            left: 0;
+        }
+
+        .menu-lines::before {
+            top: -6px;
+        }
+
+        .menu-lines::after {
+            top: 6px;
+        }
+
+        .menu-backdrop {
+            position: fixed;
+            inset: 0;
+            z-index: 1100;
+            visibility: hidden;
+            opacity: 0;
+            background: rgba(36, 23, 35, 0.5);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .menu-backdrop.open {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1200;
+            width: min(88vw, 370px);
+            height: 100vh;
+            height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            background: #fff;
+            box-shadow: -25px 0 60px rgba(30, 15, 24, 0.2);
+            visibility: hidden;
+            transform: translateX(105%);
+            transition: transform 0.35s ease, visibility 0.35s ease;
+        }
+
+        .mobile-menu.open {
+            visibility: visible;
+            transform: translateX(0);
+        }
+
+        .mobile-menu-header {
+            flex: 0 0 auto;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .mobile-logo {
+            width: 52px;
+            height: 52px;
+            object-fit: contain;
+            border-radius: 50%;
+        }
+
+        .menu-close {
+            width: 42px;
+            height: 42px;
+            border: 0;
+            border-radius: 50%;
+            color: var(--pink);
+            background: var(--soft);
+            font-size: 27px;
+            line-height: 1;
+            cursor: pointer;
+        }
+
+        .mobile-links {
+            flex: 1 1 auto;
+            margin: 0;
+            padding: 16px 20px;
+            list-style: none;
+            overflow-y: auto;
+            overscroll-behavior: contain;
+        }
+
+        .mobile-links > li {
+            border-bottom: 1px solid var(--border);
+        }
+
+        .mobile-links a,
+        .mobile-wedding-button {
+            width: 100%;
+            min-height: 56px;
+            padding: 0 8px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border: 0;
+            color: var(--ink);
+            background: none;
+            font: 700 16px "Inter", "Segoe UI", sans-serif;
+            text-decoration: none;
+            text-align: left;
+            cursor: pointer;
+        }
+
+        .mobile-wedding-panel {
+            max-height: 0;
+            overflow: hidden;
+            background: #fff8fb;
+            transition: max-height 0.3s ease;
+        }
+
+        .mobile-wedding-panel.open {
+            max-height: 520px;
+        }
+
+        .mobile-wedding-panel a {
+            min-height: 43px;
+            padding-left: 22px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .mobile-login {
+            flex: 0 0 auto;
+            margin: 20px;
+            min-height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 999px;
+            color: #fff;
+            background: var(--pink);
+            font-weight: 800;
+            text-decoration: none;
+        }
+          @media (max-width: 900px) {
+            .navbar-wrap {
+                padding: 0 16px;
+            }
+
+            .navbar-wrap.is-sticky {
+                padding: 0;
+            }
+
+            .navbar {
+                grid-template-columns: 1fr auto;
+                min-height: 70px;
+                padding: 9px 16px;
+                gap: 14px;
+            }
+
+            .nav-links,
+            .login-button {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .brand-logo {
+                width: 48px;
+                height: 48px;
+            }
+
+            .nav-actions {
+                min-width: 0;
+            }
+
+            .hero-slider {
+                min-height: 720px;
+            }
+
+            .slider-content {
+                bottom: 110px;
+            }
+
+            .slider-controls {
+                right: 24px;
+                bottom: 34px;
+            }
+
+            .slider-dots {
+                left: 28px;
+                bottom: 48px;
+                transform: none;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .navbar-wrap {
+                top: 12px;
+                padding: 0 14px;
+            }
+
+            .navbar-wrap.is-sticky {
+                top: 0;
+                padding: 0;
+            }
+
+            .navbar {
+                min-height: 66px;
+                padding: 8px 12px;
+                border-radius: 34px;
+            }
+
+            .navbar-wrap.is-sticky .navbar {
+                border-radius: 0;
+            }
+
+            .mobile-menu {
+                width: min(92vw, 350px);
+            }
+
+            .mobile-menu-header {
+                padding: 14px 16px;
+            }
+
+            .mobile-links {
+                padding: 12px 16px;
+            }
+
+            .mobile-links a,
+            .mobile-wedding-button {
+                min-height: 52px;
+                font-size: 15px;
+            }
+
+            .mobile-login {
+                margin: 16px;
+            }
+
+            .hero-slider {
+                min-height: min(680px, 100svh);
+            }
+
+            .hero-slide::after {
+                background:
+                    linear-gradient(0deg, rgba(22, 10, 16, 0.76) 0%, rgba(22, 10, 16, 0.2) 72%),
+                    linear-gradient(90deg, rgba(22, 10, 16, 0.42), transparent);
+            }
+
+            .hero-slide img {
+                object-position: center;
+            }
+
+            .slider-content {
+                left: 20px;
+                right: 20px;
+                bottom: 118px;
+                width: auto;
+            }
+
+            .slider-kicker {
+                font-size: 12px;
+            }
+
+            .slider-title {
+                font-size: clamp(38px, 14vw, 58px);
+            }
+
+            .slider-copy {
+                margin-top: 16px;
+                font-size: 16px;
+                line-height: 1.6;
+            }
+
+            .slider-controls {
+                right: 18px;
+                bottom: 30px;
+            }
+
+            .slider-arrow {
+                width: 42px;
+                height: 42px;
+            }
+
+            .slider-dots {
+                left: 20px;
+                bottom: 45px;
+            }
+
+            .content-section {
+                padding: 72px 20px;
+            }
+
+            .services-section {
+                padding: 74px 20px 80px;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+                gap: 86px;
+                padding-top: 74px;
+            }
+
+            .service-card {
+                width: min(100%, 380px);
+                margin: 0 auto;
+            }
+
+            .studio-about {
+                padding: 86px 20px 78px;
+            }
+
+            .studio-about-inner {
+                grid-template-columns: 1fr;
+                gap: 26px;
+            }
+
+            .about-gallery {
+                order: 2;
+                width: 100%;
+                justify-self: center;
+            }
+
+            .studio-about-copy {
+                order: 1;
+                display: contents;
+            }
+
+            .about-eyebrow,
+            .studio-about-copy h2,
+            .about-description {
+                order: 1;
+            }
+
+            .about-photo-frame {
+                width: min(84vw, 340px);
+                transform: perspective(900px) rotateY(-7deg) rotateZ(-1.5deg);
+            }
+
+            .about-highlights {
+                order: 3;
+                grid-template-columns: 72px 1fr;
+                padding: 24px;
+                gap: 18px;
+            }
+
+            .about-avatar {
+                width: 66px;
+                height: 66px;
+            }
+
+            .about-actions {
+                order: 4;
+                align-items: stretch;
+            }
+
+            .availability-text {
+                width: 100%;
+                margin: 0 0 2px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .navbar-wrap {
+                padding: 0 10px;
+            }
+
+            .navbar {
+                min-height: 60px;
+                padding: 7px 10px;
+            }
+
+            .brand-logo {
+                width: 42px;
+                height: 42px;
+            }
+
+            .menu-toggle {
+                width: 40px;
+                height: 40px;
+            }
+
+            .mobile-menu {
+                width: 100vw;
+            }
+
+            .mobile-logo {
+                width: 46px;
+                height: 46px;
+            }
+
+            .hero-slider {
+                min-height: min(640px, 100svh);
+            }
+
+            .slider-title {
+                font-size: 36px;
+            }
+
+            .slider-copy {
+                font-size: 15px;
+            }
+
+            .studio-about {
+                padding: 72px 16px 64px;
+            }
+
+            .studio-about-copy h2 {
+                font-size: 34px;
+            }
+
+            .about-description {
+                font-size: 15.5px;
+            }
+
+            .about-highlights {
+                grid-template-columns: 1fr;
+                justify-items: start;
+                border-radius: 22px;
+            }
+
+            .about-actions {
+                gap: 12px;
+            }
+
+            .about-action,
+            .about-gallery-button {
+                width: 100%;
+            }
+
+            .services-section {
+                padding: 66px 16px 72px;
+            }
+
+            .services-intro {
+                margin-bottom: 58px;
+            }
+
+            .service-card {
+                min-height: 226px;
+                padding: 88px 20px 22px;
+            }
+
+            .service-image {
+                height: 150px;
+            }
+
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            .slider-track,
+            .hero-slide img,
+            .about-carousel-track,
+            .mobile-menu,
+            .menu-backdrop,
+            .mobile-wedding-panel {
+                transition: none;
+            }
+
+            .slider-progress-bar.is-running {
+                animation: none;
+            }
+
+            .about-carousel-track {
+                animation: none;
+            }
+        }
+
+    </style>
+     <header class="navbar-wrap" id="siteNavbar">
+        <nav class="navbar" aria-label="Main navigation">
+            <a class="brand" href="#home">
+                <img class="brand-logo" src="assets/image.png" alt="DLM logo">
+            </a>
+
+            <ul class="nav-links">
+                <li class="nav-item"><a href="index.html">Home</a></li>
+
+                <li class="nav-item wedding-item">
+                    <button class="wedding-button" type="button">
+                        Weddings
+                        <span class="arrow"></span>
+                    </button>
+
+                    <div class="wedding-dropdown">
+                        <img src="https://i.pinimg.com/736x/c3/08/2a/c3082adc6d4155cb01949f67dbfb0788.jpg" alt="Wedding photography preview">
+
+                        <div class="wedding-column">
+                            <a href="hindumarriage.html">Hindu Wedding</a>
+                            <a href="brahminmarriage.html">Brahmin Wedding</a>
+                            <a href="christianmarriage.html">Christian Wedding</a>
+                            <a href="bridepotrait.html">Bride Portrait</a>
+                            <a href="groompotrait.html">Groom Portrait</a>
+                        </div>
+
+                        <div class="wedding-column">
+                            <a href="babyshower.html">Baby Shower</a>
+                            <a href="beautyshoot.html">Beauty Shoot</a>
+                            <a href="coupleshoot.html">Couple Shoot</a>
+                            <a href="birthdayshoot.html">Birthday Shoot</a>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="nav-item"><a href="index.html#about">About</a></li>
+                <li class="nav-item"><a href="index.html#services">Services</a></li>
+                <li class="nav-item"><a href="index.html#gallery-legacy">Portfolio</a></li>
+                <li class="nav-item"><a href="index.html#packages">Packages</a></li>
+                <li class="nav-item"><a href="blog.html">Stories</a></li>
+                <li class="nav-item"><a href="index.html#contact">Contact</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <a class="login-button" href="customer/login.html">Login</a>
+
+                <button class="menu-toggle" id="menuOpen" type="button" aria-label="Open menu" aria-controls="mobileMenu">
+                    <span class="menu-lines"></span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <div class="menu-backdrop" id="menuBackdrop"></div>
+
+    <aside class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation">
+        <div class="mobile-menu-header">
+            <img class="mobile-logo" src="assets/image.png" alt="DLM logo">
+
+            <button class="menu-close" id="menuClose" type="button" aria-label="Close menu">
+                &times;
+            </button>
+        </div>
+
+        <ul class="mobile-links">
+            <li><a href="index.html">Home</a></li>
+
+            <li>
+                <button class="mobile-wedding-button" id="mobileWeddingButton" type="button">
+                    Weddings
+                    <span class="arrow"></span>
+                </button>
+
+                <div class="mobile-wedding-panel" id="mobileWeddingPanel">
+                    <a href="hindumarriage.html">Hindu Wedding</a>
+                    <a href="brahminmarriage.html">Brahmin Wedding</a>
+                    <a href="christianmarriage.html">Christian Wedding</a>
+                    <a href="bridepotrait.html">Bride Portrait</a>
+                    <a href="groompotrait.html">Groom Portrait</a>
+                    <a href="babyshower.html">Baby Shower</a>
+                    <a href="beautyshoot.html">Beauty Shoot</a>
+                    <a href="coupleshoot.html">Couple Shoot</a>
+                    <a href="birthdayshoot.html">Birthday Shoot</a>
+                </div>
+            </li>
+
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#services">Services</a></li>
+            <li><a href="index.html#gallery-legacy">Portfolio</a></li>
+            <li><a href="index.html#packages">Packages</a></li>
+            <li><a href="blog.html">Stories</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+
+        <a class="mobile-login" href="customer/login.html">Customer Login</a>
+    </aside>
+     <script>
+        (() => {
+            const navbar = document.getElementById("siteNavbar");
+            const menu = document.getElementById("mobileMenu");
+            const backdrop = document.getElementById("menuBackdrop");
+            const openButton = document.getElementById("menuOpen");
+            const closeButton = document.getElementById("menuClose");
+            const weddingButton = document.getElementById("mobileWeddingButton");
+            const weddingPanel = document.getElementById("mobileWeddingPanel");
+
+            const openMenu = () => {
+                menu.classList.add("open");
+                backdrop.classList.add("open");
+                document.body.classList.add("menu-open");
+                openButton.setAttribute("aria-expanded", "true");
+            };
+
+            const closeMenu = () => {
+                menu.classList.remove("open");
+                backdrop.classList.remove("open");
+                document.body.classList.remove("menu-open");
+                openButton.setAttribute("aria-expanded", "false");
+            };
+
+            openButton.addEventListener("click", openMenu);
+            closeButton.addEventListener("click", closeMenu);
+            backdrop.addEventListener("click", closeMenu);
+
+            weddingButton.addEventListener("click", () => {
+                weddingPanel.classList.toggle("open");
+            });
+
+            menu.querySelectorAll("a").forEach(link => {
+                link.addEventListener("click", closeMenu);
+            });
+
+            window.addEventListener("scroll", () => {
+                navbar.classList.toggle("is-sticky", window.scrollY > 20);
+            });
+
+            document.addEventListener("keydown", event => {
+                if (event.key === "Escape") closeMenu();
+            });
+
+            window.addEventListener("resize", () => {
+                if (window.innerWidth > 900) closeMenu();
+            });
+        })();
+
+        (() => {
+            const slider = document.getElementById("home");
+            const track = document.getElementById("sliderTrack");
+            const previousButton = document.getElementById("sliderPrev");
+            const nextButton = document.getElementById("sliderNext");
+            const dotsContainer = document.getElementById("sliderDots");
+            const progressBar = document.getElementById("sliderProgress");
+
+            if (!slider || !track || !previousButton || !nextButton || !dotsContainer || !progressBar) {
+                return;
+            }
+
+            const originalSlides = Array.from(track.querySelectorAll(".hero-slide"));
+            const slideDuration = 4000;
+            const swipeThreshold = 45;
+
+            if (originalSlides.length === 0) {
+                return;
+            }
+
+            const firstClone = originalSlides[0].cloneNode(true);
+            const lastClone = originalSlides[originalSlides.length - 1].cloneNode(true);
+
+            firstClone.classList.remove("is-active");
+            lastClone.classList.remove("is-active");
+            firstClone.setAttribute("aria-hidden", "true");
+            lastClone.setAttribute("aria-hidden", "true");
+
+            track.appendChild(firstClone);
+            track.insertBefore(lastClone, originalSlides[0]);
+
+            const slides = Array.from(track.querySelectorAll(".hero-slide"));
+
+            let currentIndex = 1;
+            let autoPlayTimer = null;
+            let touchStartX = 0;
+            let touchEndX = 0;
+            let isSliding = false;
+            let slideFallbackTimer = null;
+
+            const getRealIndex = () => {
+                if (currentIndex === 0) {
+                    return originalSlides.length - 1;
+                }
+
+                if (currentIndex === originalSlides.length + 1) {
+                    return 0;
+                }
+
+                return currentIndex - 1;
+            };
+
+            const dots = originalSlides.map((_, index) => {
+                const dot = document.createElement("button");
+                dot.className = "slider-dot";
+                dot.type = "button";
+                dot.setAttribute("aria-label", `Show image ${index + 1}`);
+                dot.addEventListener("click", () => {
+                    showSlide(index);
+                    restartAutoPlay();
+                });
+                dotsContainer.appendChild(dot);
+                return dot;
+            });
+
+            const restartProgress = () => {
+                progressBar.classList.remove("is-running");
+                void progressBar.offsetWidth;
+                progressBar.classList.add("is-running");
+            };
+
+            const completeSlideTransition = () => {
+                window.clearTimeout(slideFallbackTimer);
+                slideFallbackTimer = null;
+                isSliding = false;
+
+                if (currentIndex === 0) {
+                    currentIndex = originalSlides.length;
+                    setTrackPosition(false);
+                    updateSliderState(false);
+                }
+
+                if (currentIndex === originalSlides.length + 1) {
+                    currentIndex = 1;
+                    setTrackPosition(false);
+                    updateSliderState(false);
+                }
+            };
+
+            const setTrackPosition = shouldAnimate => {
+                if (shouldAnimate) {
+                    isSliding = true;
+                    window.clearTimeout(slideFallbackTimer);
+                    slideFallbackTimer = window.setTimeout(completeSlideTransition, 950);
+                }
+
+                track.style.transition = shouldAnimate ? "" : "none";
+                track.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+                if (!shouldAnimate) {
+                    isSliding = false;
+
+                    requestAnimationFrame(() => {
+                        track.style.transition = "";
+                    });
+                }
+            };
+
+            const updateSliderState = shouldRestartProgress => {
+                const realIndex = getRealIndex();
+
+                slides.forEach((slide, slideIndex) => {
+                    slide.classList.toggle("is-active", slideIndex === currentIndex);
+                });
+
+                dots.forEach((dot, dotIndex) => {
+                    const isActive = dotIndex === realIndex;
+                    dot.classList.toggle("is-active", isActive);
+                    dot.setAttribute("aria-current", isActive ? "true" : "false");
+                });
+
+                if (shouldRestartProgress) {
+                    restartProgress();
+                }
+            };
+
+            const showSlide = index => {
+                if (isSliding) {
+                    return;
+                }
+
+                currentIndex = index + 1;
+                setTrackPosition(true);
+                updateSliderState(true);
+            };
+
+            const showNextSlide = () => {
+                if (isSliding) {
+                    return;
+                }
+
+                currentIndex += 1;
+                setTrackPosition(true);
+                updateSliderState(true);
+            };
+
+            const showPreviousSlide = () => {
+                if (isSliding) {
+                    return;
+                }
+
+                currentIndex -= 1;
+                setTrackPosition(true);
+                updateSliderState(true);
+            };
+
+            const stopAutoPlay = () => {
+                window.clearInterval(autoPlayTimer);
+                autoPlayTimer = null;
+                progressBar.classList.remove("is-running");
+            };
+
+            const startAutoPlay = () => {
+                stopAutoPlay();
+                autoPlayTimer = window.setInterval(showNextSlide, slideDuration);
+                restartProgress();
+            };
+
+            const restartAutoPlay = () => {
+                stopAutoPlay();
+                startAutoPlay();
+            };
+
+            nextButton.addEventListener("click", () => {
+                showNextSlide();
+                restartAutoPlay();
+            });
+
+            previousButton.addEventListener("click", () => {
+                showPreviousSlide();
+                restartAutoPlay();
+            });
+
+            track.addEventListener("transitionend", event => {
+                if (event.target !== track || event.propertyName !== "transform") {
+                    return;
+                }
+
+                completeSlideTransition();
+            });
+
+            slider.addEventListener("mouseenter", stopAutoPlay);
+            slider.addEventListener("mouseleave", startAutoPlay);
+            slider.addEventListener("focusin", stopAutoPlay);
+            slider.addEventListener("focusout", event => {
+                if (!slider.contains(event.relatedTarget)) startAutoPlay();
+            });
+
+            slider.addEventListener("touchstart", event => {
+                touchStartX = event.changedTouches[0].clientX;
+                stopAutoPlay();
+            }, { passive: true });
+
+            slider.addEventListener("touchend", event => {
+                touchEndX = event.changedTouches[0].clientX;
+                const swipeDistance = touchStartX - touchEndX;
+
+                if (Math.abs(swipeDistance) > swipeThreshold) {
+                    if (swipeDistance > 0) {
+                        showNextSlide();
+                    } else {
+                        showPreviousSlide();
+                    }
+                }
+
+                startAutoPlay();
+            }, { passive: true });
+
+            document.addEventListener("visibilitychange", () => {
+                if (document.hidden) {
+                    stopAutoPlay();
+                } else {
+                    startAutoPlay();
+                }
+            });
+
+            setTrackPosition(false);
+            updateSliderState(true);
+            startAutoPlay();
+        })();
+    </script>
+
+<!-- =========================================================
+     BIRTHDAY SHOOT — DLM PHOTOGRAPHY
+     ========================================================= -->
+
+<style>
+    /* =========================================================
+       BIRTHDAY SHOOT — ROOT VARIABLES
+       ========================================================= */
+    .bday-page {
+        --bday-pink: #ef2d83;
+        --bday-pink-dark: #c91567;
+        --bday-pink-soft: #fff0f7;
+        --bday-pink-light: #ffe6f1;
+        --bday-gold: #cfa766;
+        --bday-gold-soft: #f5ede0;
+        --bday-ink: #241723;
+        --bday-muted: #7a6572;
+        --bday-muted-light: #a08a96;
+        --bday-border: rgba(36, 23, 35, 0.08);
+        --bday-white: #ffffff;
+        --bday-cream: #fff8fb;
+        --bday-shadow-sm: 0 8px 24px rgba(83, 41, 62, 0.06);
+        --bday-shadow-md: 0 18px 44px rgba(83, 41, 62, 0.10);
+        --bday-shadow-lg: 0 28px 68px rgba(83, 41, 62, 0.14);
+        --bday-shadow-xl: 0 36px 80px rgba(83, 41, 62, 0.18);
+        --bday-radius-sm: 12px;
+        --bday-radius-md: 18px;
+        --bday-radius-lg: 24px;
+        --bday-radius-xl: 30px;
+        --bday-transition: 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .bday-page {
+        width: 100%;
+        overflow: hidden;
+        color: var(--bday-ink);
+        background: var(--bday-cream);
+        font-family: "Inter", "Segoe UI", sans-serif;
+    }
+
+    .bday-page *,
+    .bday-page *::before,
+    .bday-page *::after {
+        box-sizing: border-box;
+    }
+
+    .bday-container {
+        width: min(100%, 1180px);
+        margin: 0 auto;
+        padding: 0 24px;
+    }
+
+    /* =========================================================
+       SECTION HEADING
+       ========================================================= */
+
+    .bday-section-label {
+        display: inline-block;
+        padding: 6px 18px;
+        border: 1px solid rgba(239, 45, 131, 0.15);
+        border-radius: 999px;
+        color: var(--bday-pink-dark);
+        background: rgba(255, 255, 255, 0.9);
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        margin-bottom: 16px;
+        box-shadow: var(--bday-shadow-sm);
+    }
+
+    .bday-heading {
+        font-family: 'Playfair Display', Georgia, serif;
+        font-size: clamp(34px, 4.5vw, 52px);
+        font-weight: 600;
+        line-height: 1.08;
+        margin: 0 0 14px;
+        letter-spacing: -1px;
+        color: var(--bday-ink);
+    }
+
+    .bday-heading span {
+        color: var(--bday-pink);
+        font-style: italic;
+    }
+
+    .bday-subheading {
+        color: var(--bday-muted);
+        font-size: 15px;
+        line-height: 1.7;
+        max-width: 620px;
+        margin: 0 auto;
+    }
+
+    .bday-text-center {
+        text-align: center;
+    }
+
+    .bday-text-center .bday-subheading {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* =========================================================
+       BUTTONS
+       ========================================================= */
+
+    .bday-btn {
+        min-height: 48px;
+        padding: 0 28px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        border-radius: 999px;
+        font-family: "Inter", sans-serif;
+        font-size: 12px;
+        font-weight: 800;
+        text-decoration: none;
+        cursor: pointer;
+        transition: all var(--bday-transition);
+        border: none;
+    }
+
+    .bday-btn-primary {
+        color: #fff;
+        background: linear-gradient(135deg, var(--bday-pink), var(--bday-pink-dark));
+        box-shadow: 0 14px 30px rgba(239, 45, 131, 0.25);
+    }
+
+    .bday-btn-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 20px 40px rgba(239, 45, 131, 0.35);
+    }
+
+    .bday-btn-secondary {
+        color: var(--bday-ink);
+        background: var(--bday-white);
+        border: 1px solid var(--bday-border);
+    }
+
+    .bday-btn-secondary:hover {
+        border-color: var(--bday-pink);
+        color: var(--bday-pink);
+        transform: translateY(-3px);
+        box-shadow: var(--bday-shadow-sm);
+    }
+
+    /* =========================================================
+       SCROLL REVEAL
+       ========================================================= */
+
+    .bday-reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .bday-reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .bday-reveal-left {
+        transform: translateX(-30px);
+    }
+
+    .bday-reveal-right {
+        transform: translateX(30px);
+    }
+
+    .bday-reveal-left.visible,
+    .bday-reveal-right.visible {
+        transform: translateX(0);
+    }
+
+    /* =========================================================
+       HERO SECTION — BIRTHDAY THEME
+       ========================================================= */
+
+    .bday-hero {
+        position: relative;
+        padding: 120px 0 80px;
+        min-height: 80vh;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+        background:
+            radial-gradient(circle at 20% 30%, rgba(239, 45, 131, 0.08), transparent 40%),
+            radial-gradient(circle at 80% 70%, rgba(207, 167, 102, 0.10), transparent 40%),
+            linear-gradient(180deg, #ffffff 0%, var(--bday-cream) 100%);
+    }
+
+    .bday-hero-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 50px;
+        align-items: center;
+    }
+
+    .bday-hero-content {
+        padding-right: 20px;
+    }
+
+    .bday-hero-content .bday-section-label {
+        margin-bottom: 20px;
+    }
+
+    .bday-hero-content h1 {
+        font-family: 'Playfair Display', Georgia, serif;
+        font-size: clamp(40px, 5.5vw, 68px);
+        font-weight: 600;
+        line-height: 1.04;
+        letter-spacing: -1.5px;
+        margin: 0 0 16px;
+        color: var(--bday-ink);
+    }
+
+    .bday-hero-content h1 span {
+        color: var(--bday-pink);
+        font-style: italic;
+    }
+
+    .bday-hero-content p {
+        max-width: 480px;
+        color: var(--bday-muted);
+        font-size: 16px;
+        line-height: 1.75;
+        margin: 0 0 28px;
+    }
+
+    .bday-hero-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    /* Hero Image Grid — Birthday Theme */
+    .bday-hero-grid-images {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+    }
+
+    .bday-hero-grid-images .bday-img-wrapper {
+        position: relative;
+        overflow: hidden;
+        border-radius: var(--bday-radius-lg);
+        background: #f0e8e4;
+        box-shadow: var(--bday-shadow-md);
+        transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .bday-hero-grid-images .bday-img-wrapper:hover {
+        transform: translateY(-6px);
+        box-shadow: var(--bday-shadow-lg);
+    }
+
+    .bday-hero-grid-images .bday-img-wrapper img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+        transition: transform 0.6s ease;
+        image-rendering: auto;
+        image-rendering: -webkit-optimize-contrast;
+    }
+
+    .bday-hero-grid-images .bday-img-wrapper:hover img {
+        transform: scale(1.05);
+    }
+
+    .bday-hero-grid-images .bday-img-wrapper:first-child {
+        grid-column: 1 / -1;
+        aspect-ratio: 16 / 9;
+    }
+
+    .bday-hero-grid-images .bday-img-wrapper:not(:first-child) {
+        aspect-ratio: 1 / 1;
+    }
+
+    /* Decorative balloons */
+    .bday-hero .balloon {
+        position: absolute;
+        opacity: 0.06;
+        font-size: 60px;
+        pointer-events: none;
+        animation: floatBalloon 6s ease-in-out infinite;
+    }
+
+    .bday-hero .balloon-1 {
+        top: 10%;
+        right: 5%;
+        animation-delay: 0s;
+    }
+
+    .bday-hero .balloon-2 {
+        bottom: 15%;
+        left: 3%;
+        font-size: 80px;
+        animation-delay: 2s;
+    }
+
+    .bday-hero .balloon-3 {
+        top: 30%;
+        left: 40%;
+        font-size: 40px;
+        animation-delay: 4s;
+    }
+
+    @keyframes floatBalloon {
+        0%,
+        100% {
+            transform: translateY(0) rotate(0deg);
+        }
+        50% {
+            transform: translateY(-20px) rotate(5deg);
+        }
+    }
+
+    /* =========================================================
+       BIRTHDAY SERVICES SECTION
+       ========================================================= */
+
+    .bday-services {
+        padding: 80px 0 90px;
+        background: var(--bday-white);
+        position: relative;
+    }
+
+    .bday-services::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: min(80%, 400px);
+        height: 4px;
+        background: linear-gradient(90deg, transparent, var(--bday-pink), var(--bday-gold), var(--bday-pink), transparent);
+        border-radius: 0 0 999px 999px;
+    }
+
+    .bday-services-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+        margin-top: 40px;
+    }
+
+    .bday-service-card {
+        position: relative;
+        padding: 32px 24px 28px;
+        border-radius: var(--bday-radius-md);
+        background: var(--bday-white);
+        border: 1px solid var(--bday-border);
+        box-shadow: var(--bday-shadow-sm);
+        text-align: center;
+        transition: all var(--bday-transition);
+        overflow: hidden;
+        cursor: default;
+        isolation: isolate;
+    }
+
+    /* Animated gradient border */
+    .bday-service-card::before {
+        content: "";
+        position: absolute;
+        inset: -2px;
+        z-index: -1;
+        border-radius: var(--bday-radius-md);
+        background: linear-gradient(135deg, var(--bday-pink), var(--bday-gold), var(--bday-pink));
+        background-size: 300% 300%;
+        opacity: 0;
+        transition: opacity 0.5s ease;
+        animation: bdayBorderGlow 3s ease-in-out infinite;
+    }
+
+    .bday-service-card:hover::before {
+        opacity: 1;
+    }
+
+    @keyframes bdayBorderGlow {
+        0%,
+        100% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+    }
+
+    /* Inner card background */
+    .bday-service-card::after {
+        content: "";
+        position: absolute;
+        inset: 1px;
+        border-radius: calc(var(--bday-radius-md) - 1px);
+        background: var(--bday-white);
+        z-index: -1;
+    }
+
+    .bday-service-card:hover {
+        transform: translateY(-8px);
+        box-shadow: var(--bday-shadow-lg);
+        border-color: transparent;
+    }
+
+    .bday-service-icon {
+        width: 72px;
+        height: 72px;
+        margin: 0 auto 16px;
+        display: grid;
+        place-items: center;
+        border-radius: 50%;
+        background: var(--bday-pink-soft);
+        font-size: 30px;
+        transition: all var(--bday-transition);
+        position: relative;
+    }
+
+    .bday-service-card:hover .bday-service-icon {
+        transform: scale(1.1) rotate(-8deg);
+        background: linear-gradient(135deg, var(--bday-pink), var(--bday-pink-dark));
+        color: #fff;
+        box-shadow: 0 12px 32px rgba(239, 45, 131, 0.25);
+    }
+
+    .bday-service-card h3 {
+        font-family: 'Playfair Display', Georgia, serif;
+        font-size: 19px;
+        font-weight: 600;
+        margin: 0 0 10px;
+        color: var(--bday-ink);
+        transition: color var(--bday-transition);
+    }
+
+    .bday-service-card:hover h3 {
+        color: var(--bday-pink);
+    }
+
+    .bday-service-card p {
+        color: var(--bday-muted);
+        font-size: 13px;
+        line-height: 1.6;
+        margin: 0;
+    }
+
+    .bday-service-card .highlight-ring {
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(239, 45, 131, 0.06), transparent 60%);
+        opacity: 0;
+        transition: opacity var(--bday-transition);
+        pointer-events: none;
+        z-index: 0;
+    }
+
+    .bday-service-card:hover .highlight-ring {
+        opacity: 1;
+    }
+
+    /* =========================================================
+       GALLERY SECTION — BIRTHDAY THEME
+       ========================================================= */
+
+    .bday-gallery {
+        padding: 80px 0 90px;
+        background: var(--bday-cream);
+    }
+
+    .bday-gallery-mosaic {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-auto-rows: 140px;
+        gap: 14px;
+        grid-auto-flow: dense;
+        margin-top: 40px;
+    }
+
+    .bday-gallery-item {
+        position: relative;
+        overflow: hidden;
+        border-radius: var(--bday-radius-md);
+        background: #f0e8e4;
+        box-shadow: var(--bday-shadow-sm);
+        cursor: pointer;
+        transition: all var(--bday-transition);
+    }
+
+    .bday-gallery-item:hover {
+        transform: translateY(-6px);
+        box-shadow: var(--bday-shadow-lg);
+        z-index: 2;
+    }
+
+    .bday-gallery-item img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+        transition: transform 0.6s ease;
+        image-rendering: auto;
+        image-rendering: -webkit-optimize-contrast;
+    }
+
+    .bday-gallery-item:hover img {
+        transform: scale(1.06);
+    }
+
+    .bday-gallery-item::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to top, rgba(36, 23, 35, 0.4), transparent 55%);
+        opacity: 0;
+        transition: opacity var(--bday-transition);
+    }
+
+    .bday-gallery-item:hover::after {
+        opacity: 1;
+    }
+
+    .bday-gallery-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 20px 18px 16px;
+        color: #fff;
+        opacity: 0;
+        transform: translateY(10px);
+        transition: all var(--bday-transition);
+        z-index: 2;
+    }
+
+    .bday-gallery-item:hover .bday-gallery-overlay {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .bday-gallery-overlay span {
+        display: block;
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        opacity: 0.7;
+    }
+
+    .bday-gallery-overlay strong {
+        display: block;
+        font-family: 'Playfair Display', Georgia, serif;
+        font-size: 16px;
+        font-weight: 600;
+        margin-top: 2px;
+    }
+
+    /* Gallery Grid Spans — 13 items */
+    .bday-gallery-item:nth-child(1) {
+        grid-column: span 2;
+        grid-row: span 2;
+    }
+    .bday-gallery-item:nth-child(2) {
+        grid-column: span 1;
+        grid-row: span 2;
+    }
+    .bday-gallery-item:nth-child(3) {
+        grid-column: span 1;
+        grid-row: span 2;
+    }
+    .bday-gallery-item:nth-child(4) {
+        grid-column: span 1;
+        grid-row: span 1;
+    }
+    .bday-gallery-item:nth-child(5) {
+        grid-column: span 2;
+        grid-row: span 2;
+    }
+    .bday-gallery-item:nth-child(6) {
+        grid-column: span 1;
+        grid-row: span 2;
+    }
+    .bday-gallery-item:nth-child(7) {
+        grid-column: span 1;
+        grid-row: span 2;
+    }
+    .bday-gallery-item:nth-child(8) {
+        grid-column: span 2;
+        grid-row: span 2;
+    }
+    .bday-gallery-item:nth-child(9) {
+        grid-column: span 1;
+        grid-row: span 2;
+    }
+    .bday-gallery-item:nth-child(10) {
+        grid-column: span 1;
+        grid-row: span 1;
+    }
+    .bday-gallery-item:nth-child(11) {
+        grid-column: span 2;
+        grid-row: span 2;
+    }
+    .bday-gallery-item:nth-child(12) {
+        grid-column: span 1;
+        grid-row: span 2;
+    }
+    .bday-gallery-item:nth-child(13) {
+        grid-column: span 1;
+        grid-row: span 2;
+    }
+
+    /* =========================================================
+       PRICING SECTION — BIRTHDAY THEME
+       ========================================================= */
+
+    .bday-pricing {
+        padding: 80px 0 90px;
+        background: var(--bday-white);
+        position: relative;
+    }
+
+    .bday-pricing-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        margin-top: 40px;
+    }
+
+    .bday-pricing-card {
+        padding: 36px 28px 32px;
+        border-radius: var(--bday-radius-md);
+        background: var(--bday-white);
+        border: 1px solid var(--bday-border);
+        box-shadow: var(--bday-shadow-sm);
+        text-align: center;
+        transition: all var(--bday-transition);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .bday-pricing-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, var(--bday-pink), var(--bday-gold));
+        opacity: 0;
+        transition: opacity var(--bday-transition);
+    }
+
+    .bday-pricing-card:hover::before {
+        opacity: 1;
+    }
+
+    .bday-pricing-card:hover {
+        transform: translateY(-8px);
+        box-shadow: var(--bday-shadow-lg);
+        border-color: rgba(239, 45, 131, 0.15);
+    }
+
+    .bday-pricing-card.featured {
+        border-color: var(--bday-pink);
+        box-shadow: var(--bday-shadow-md);
+        transform: translateY(-4px);
+    }
+
+    .bday-pricing-card.featured::before {
+        opacity: 1;
+    }
+
+    .bday-pricing-card.featured .bday-pricing-badge {
+        display: inline-block;
+        padding: 4px 14px;
+        border-radius: 999px;
+        background: var(--bday-pink);
+        color: #fff;
+        font-size: 9px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin-bottom: 12px;
+    }
+
+    .bday-pricing-card h3 {
+        font-family: 'Playfair Display', Georgia, serif;
+        font-size: 22px;
+        font-weight: 600;
+        margin: 0 0 6px;
+        color: var(--bday-ink);
+    }
+
+    .bday-pricing-price {
+        font-family: 'Playfair Display', Georgia, serif;
+        font-size: 36px;
+        font-weight: 700;
+        color: var(--bday-pink);
+        margin: 8px 0;
+    }
+
+    .bday-pricing-price span {
+        font-size: 16px;
+        font-weight: 400;
+        color: var(--bday-muted);
+    }
+
+    .bday-pricing-card ul {
+        list-style: none;
+        padding: 0;
+        margin: 16px 0 24px;
+        text-align: left;
+    }
+
+    .bday-pricing-card ul li {
+        padding: 6px 0;
+        font-size: 13px;
+        color: var(--bday-muted);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .bday-pricing-card ul li::before {
+        content: "✓";
+        color: var(--bday-pink);
+        font-weight: 800;
+        font-size: 14px;
+    }
+
+    .bday-pricing-card .bday-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    /* =========================================================
+       TESTIMONIAL SECTION
+       ========================================================= */
+
+    .bday-testimonial {
+        padding: 80px 0 90px;
+        background: var(--bday-cream);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .bday-testimonial::before {
+        content: "🎈";
+        position: absolute;
+        top: 20px;
+        right: 40px;
+        font-size: 80px;
+        opacity: 0.06;
+        pointer-events: none;
+    }
+
+    .bday-testimonial::after {
+        content: "🎂";
+        position: absolute;
+        bottom: 20px;
+        left: 40px;
+        font-size: 70px;
+        opacity: 0.05;
+        pointer-events: none;
+    }
+
+    .bday-testimonial-wrapper {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        grid-template-columns: 1fr 1.2fr;
+        align-items: center;
+        gap: 50px;
+        max-width: 1020px;
+        margin: 0 auto;
+        padding: 48px 56px;
+        background: var(--bday-white);
+        border-radius: var(--bday-radius-xl);
+        border: 1px solid var(--bday-border);
+        box-shadow: var(--bday-shadow-md);
+        overflow: hidden;
+    }
+
+    .bday-testimonial-wrapper::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, var(--bday-pink), var(--bday-gold), var(--bday-pink));
+        background-size: 200% 100%;
+        animation: bdayShimmer 4s ease-in-out infinite;
+    }
+
+    @keyframes bdayShimmer {
+        0%,
+        100% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+    }
+
+    .bday-testimonial-image {
+        position: relative;
+        border-radius: var(--bday-radius-md);
+        overflow: hidden;
+        aspect-ratio: 4 / 3;
+        box-shadow: var(--bday-shadow-md);
+    }
+
+    .bday-testimonial-image img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+        transition: transform 0.6s ease;
+        image-rendering: auto;
+        image-rendering: -webkit-optimize-contrast;
+    }
+
+    .bday-testimonial-image:hover img {
+        transform: scale(1.03);
+    }
+
+    .bday-testimonial-image .quote-mark {
+        position: absolute;
+        top: -20px;
+        right: -10px;
+        font-family: 'Playfair Display', Georgia, serif;
+        font-size: 80px;
+        color: rgba(239, 45, 131, 0.12);
+        line-height: 1;
+        pointer-events: none;
+    }
+
+    .bday-testimonial-content {
+        padding: 10px 0;
+    }
+
+    .bday-testimonial-content .bday-section-label {
+        margin-bottom: 12px;
+    }
+
+    .bday-testimonial-stars {
+        color: #e9ad32;
+        font-size: 20px;
+        letter-spacing: 4px;
+        margin-bottom: 14px;
+    }
+
+    .bday-testimonial-content blockquote {
+        font-family: 'Playfair Display', Georgia, serif;
+        font-size: clamp(20px, 2.4vw, 30px);
+        font-weight: 500;
+        color: var(--bday-ink);
+        margin: 0 0 18px;
+        line-height: 1.35;
+        font-style: italic;
+    }
+
+    .bday-testimonial-content blockquote::before {
+        content: '"';
+        color: var(--bday-pink);
+        font-size: 1.2em;
+        opacity: 0.5;
+        margin-right: 2px;
+    }
+
+    .bday-testimonial-content blockquote::after {
+        content: '"';
+        color: var(--bday-pink);
+        font-size: 1.2em;
+        opacity: 0.5;
+        margin-left: 2px;
+    }
+
+    .bday-testimonial-author {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin-top: 4px;
+    }
+
+    .bday-testimonial-author .avatar {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        object-fit: cover;
+        background: var(--bday-pink-soft);
+        box-shadow: var(--bday-shadow-sm);
+    }
+
+    .bday-testimonial-author .info {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .bday-testimonial-author .info strong {
+        color: var(--bday-pink);
+        font-size: 14px;
+        font-weight: 800;
+    }
+
+    .bday-testimonial-author .info span {
+        color: var(--bday-muted);
+        font-size: 12px;
+        font-weight: 400;
+    }
+
+    /* =========================================================
+       CTA SECTION — COMPACT
+       ========================================================= */
+
+    .bday-cta {
+        padding: 60px 0;
+        background:
+            linear-gradient(135deg, rgba(239, 45, 131, 0.92), rgba(200, 24, 103, 0.92)),
+            url("https://images.unsplash.com/photo-1606800052052-a08af7148866?auto=format&fit=crop&w=1900&q=88") center/cover no-repeat;
+        color: #fff;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .bday-cta::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at 30% 40%, rgba(255, 255, 255, 0.08), transparent 50%);
+        pointer-events: none;
+    }
+
+    .bday-cta-inner {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 30px;
+        max-width: 1020px;
+        margin: 0 auto;
+        padding: 40px 50px;
+        background: rgba(255, 255, 255, 0.06);
+        border-radius: var(--bday-radius-lg);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+    }
+
+    .bday-cta-content {
+        flex: 1;
+    }
+
+    .bday-cta-content h2 {
+        font-family: 'Playfair Display', Georgia, serif;
+        font-size: clamp(28px, 3.2vw, 38px);
+        font-weight: 600;
+        margin: 0 0 8px;
+        line-height: 1.08;
+    }
+
+    .bday-cta-content p {
+        font-size: 14px;
+        opacity: 0.8;
+        line-height: 1.6;
+        margin: 0;
+        max-width: 500px;
+    }
+
+    .bday-cta .bday-btn {
+        flex-shrink: 0;
+        background: var(--bday-white);
+        color: var(--bday-pink);
+        min-height: 50px;
+        padding: 0 32px;
+        font-size: 13px;
+        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .bday-cta .bday-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 24px 50px rgba(0, 0, 0, 0.25);
+    }
+
+    /* =========================================================
+       RESPONSIVE
+       ========================================================= */
+
+    @media (max-width: 1024px) {
+        .bday-hero-grid {
+            gap: 35px;
+        }
+
+        .bday-hero-content h1 {
+            font-size: clamp(34px, 4.5vw, 50px);
+        }
+
+        .bday-services-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .bday-pricing-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .bday-testimonial-wrapper {
+            grid-template-columns: 1fr;
+            gap: 30px;
+            padding: 32px 28px;
+        }
+
+        .bday-testimonial-image {
+            max-height: 280px;
+        }
+
+        .bday-cta-inner {
+            flex-direction: column;
+            text-align: center;
+            padding: 32px 28px;
+        }
+
+        .bday-cta-content p {
+            max-width: 100%;
+        }
+    }
+
+    @media (max-width: 850px) {
+        .bday-hero {
+            padding: 100px 0 60px;
+        }
+
+        .bday-hero-grid {
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+
+        .bday-hero-content {
+            padding-right: 0;
+            text-align: center;
+        }
+
+        .bday-hero-content p {
+            max-width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .bday-hero-buttons {
+            justify-content: center;
+        }
+
+        .bday-hero-grid-images {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .bday-services-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .bday-pricing-grid {
+            grid-template-columns: 1fr;
+            max-width: 420px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .bday-pricing-card.featured {
+            transform: translateY(0);
+        }
+
+        .bday-gallery-mosaic {
+            grid-template-columns: repeat(2, 1fr);
+            grid-auto-rows: auto;
+            gap: 12px;
+        }
+
+        .bday-gallery-item {
+            grid-column: auto !important;
+            grid-row: auto !important;
+            aspect-ratio: 4 / 3;
+        }
+
+        .bday-gallery-item:nth-child(3n+1) {
+            aspect-ratio: 3 / 4;
+        }
+    }
+
+    @media (max-width: 620px) {
+        .bday-container {
+            padding: 0 16px;
+        }
+
+        .bday-hero {
+            padding: 80px 0 50px;
+        }
+
+        .bday-hero-content h1 {
+            font-size: 28px;
+        }
+
+        .bday-hero-content p {
+            font-size: 14px;
+        }
+
+        .bday-hero-buttons {
+            flex-direction: column;
+            align-items: stretch;
+        }
+
+        .bday-hero-buttons .bday-btn {
+            width: 100%;
+            justify-content: center;
+        }
+
+        .bday-hero-grid-images {
+            gap: 10px;
+        }
+
+        .bday-hero .balloon {
+            display: none;
+        }
+
+        .bday-services {
+            padding: 60px 0 70px;
+        }
+
+        .bday-services-grid {
+            grid-template-columns: 1fr;
+            gap: 14px;
+        }
+
+        .bday-gallery {
+            padding: 60px 0 70px;
+        }
+
+        .bday-gallery-mosaic {
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .bday-gallery-item {
+            aspect-ratio: 4 / 3;
+            min-height: 140px;
+        }
+
+        .bday-gallery-item:nth-child(3n+1) {
+            aspect-ratio: 3 / 4;
+            min-height: 180px;
+        }
+
+        .bday-gallery-overlay strong {
+            font-size: 13px;
+        }
+
+        .bday-pricing {
+            padding: 60px 0 70px;
+        }
+
+        .bday-pricing-card {
+            padding: 28px 20px 24px;
+        }
+
+        .bday-pricing-price {
+            font-size: 30px;
+        }
+
+        .bday-testimonial {
+            padding: 60px 0 70px;
+        }
+
+        .bday-testimonial-wrapper {
+            padding: 24px 18px;
+            gap: 20px;
+        }
+
+        .bday-testimonial-content blockquote {
+            font-size: 18px;
+        }
+
+        .bday-testimonial-image {
+            max-height: 220px;
+        }
+
+        .bday-testimonial-author .avatar {
+            width: 40px;
+            height: 40px;
+        }
+
+        .bday-cta {
+            padding: 40px 0;
+        }
+
+        .bday-cta-inner {
+            padding: 24px 18px;
+        }
+
+        .bday-cta-content h2 {
+            font-size: 24px;
+        }
+
+        .bday-cta-content p {
+            font-size: 13px;
+        }
+
+        .bday-cta .bday-btn {
+            width: 100%;
+            justify-content: center;
+        }
+    }
+
+    @media (max-width: 400px) {
+        .bday-hero-content h1 {
+            font-size: 24px;
+        }
+
+        .bday-gallery-mosaic {
+            grid-template-columns: 1fr;
+        }
+
+        .bday-gallery-item {
+            aspect-ratio: 4 / 3;
+            min-height: 120px;
+        }
+
+        .bday-gallery-item:nth-child(3n+1) {
+            aspect-ratio: 4 / 3;
+            min-height: 120px;
+        }
+
+        .bday-pricing-card {
+            padding: 24px 16px 20px;
+        }
+
+        .bday-pricing-price {
+            font-size: 26px;
+        }
+    }
+
+    /* Reduced Motion */
+    @media (prefers-reduced-motion: reduce) {
+        .bday-reveal {
+            opacity: 1;
+            transform: none;
+            transition: none;
+        }
+
+        .bday-hero-grid-images .bday-img-wrapper,
+        .bday-hero-grid-images .bday-img-wrapper img,
+        .bday-service-card,
+        .bday-gallery-item,
+        .bday-gallery-item img,
+        .bday-pricing-card {
+            transition: none !important;
+        }
+
+        .bday-hero-grid-images .bday-img-wrapper:hover {
+            transform: none !important;
+        }
+
+        .bday-hero-grid-images .bday-img-wrapper:hover img {
+            transform: none !important;
+        }
+
+        .bday-service-card:hover {
+            transform: none !important;
+        }
+
+        .bday-gallery-item:hover {
+            transform: none !important;
+        }
+
+        .bday-gallery-item:hover img {
+            transform: none !important;
+        }
+
+        .bday-pricing-card:hover {
+            transform: none !important;
+        }
+
+        .bday-testimonial-wrapper::before {
+            animation: none !important;
+        }
+
+        .bday-service-card::before {
+            animation: none !important;
+        }
+
+        .bday-hero .balloon {
+            animation: none !important;
+        }
+    }
+</style>
+
+<!-- =========================================================
+     BIRTHDAY SHOOT PAGE
+     ========================================================= -->
+
+<section class="bday-page">
+
+    <!-- ===== HERO SECTION ===== -->
+    <section class="bday-hero">
+        <span class="balloon balloon-1" aria-hidden="true">🎈</span>
+        <span class="balloon balloon-2" aria-hidden="true">🎈</span>
+        <span class="balloon balloon-3" aria-hidden="true">🎈</span>
+
+        <div class="bday-container">
+            <div class="bday-hero-grid">
+
+                <div class="bday-hero-content bday-reveal">
+                    <span class="bday-section-label">DLM Birthday Shoot</span>
+                    <h1>Celebrate Your <span>Special Day</span></h1>
+                    <p>From milestone birthdays to intimate celebrations, we capture the joy, laughter and beautiful moments that make your day unforgettable.</p>
+                    <div class="bday-hero-buttons">
+                        <a href="#bday-gallery" class="bday-btn bday-btn-primary">Explore Gallery</a>
+                        <a href="https://wa.me/919789029012?text=Hello%2C%20I%20would%20like%20to%20enquire%20about%20birthday%20shoot%20photography." target="_blank" rel="noopener noreferrer" class="bday-btn bday-btn-secondary">Book Your Session</a>
+                    </div>
+                </div>
+
+                <div class="bday-hero-grid-images bday-reveal bday-reveal-right">
+                    <div class="bday-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?auto=format&fit=crop&w=1200&q=88" alt="Birthday celebration" loading="eager">
+                    </div>
+                    <div class="bday-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?auto=format&fit=crop&w=800&q=88" alt="Birthday cake" loading="lazy">
+                    </div>
+                    <div class="bday-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=800&q=88" alt="Birthday balloons" loading="lazy">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SERVICES SECTION ===== -->
+    <section class="bday-services">
+        <div class="bday-container">
+            <div class="bday-text-center bday-reveal">
+                <span class="bday-section-label">Our Services</span>
+                <h2 class="bday-heading">Birthday Shoot <span>Collections</span></h2>
+                <p class="bday-subheading">Tailored birthday photography experiences designed to capture every joyful moment of your special day.</p>
+            </div>
+
+            <div class="bday-services-grid">
+                <div class="bday-service-card bday-reveal bday-reveal-left">
+                    <span class="highlight-ring"></span>
+                    <div class="bday-service-icon">🎂</div>
+                    <h3>Birthday Portraits</h3>
+                    <p>Elegant portraits celebrating the birthday person with style, warmth and personality.</p>
+                </div>
+
+                <div class="bday-service-card bday-reveal">
+                    <span class="highlight-ring"></span>
+                    <div class="bday-service-icon">🎈</div>
+                    <h3>Party Coverage</h3>
+                    <p>Complete event coverage capturing candid moments, decorations and celebrations.</p>
+                </div>
+
+                <div class="bday-service-card bday-reveal">
+                    <span class="highlight-ring"></span>
+                    <div class="bday-service-icon">🎁</div>
+                    <h3>Milestone Birthdays</h3>
+                    <p>Special coverage for 1st, 18th, 21st, 50th and other milestone celebrations.</p>
+                </div>
+
+                <div class="bday-service-card bday-reveal bday-reveal-right">
+                    <span class="highlight-ring"></span>
+                    <div class="bday-service-icon">📸</div>
+                    <h3>Studio &amp; Location</h3>
+                    <p>Flexible indoor studio or outdoor location shoots tailored to your vision.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== GALLERY SECTION ===== -->
+    <section class="bday-gallery" id="bday-gallery">
+        <div class="bday-container">
+            <div class="bday-text-center bday-reveal">
+                <span class="bday-section-label">Birthday Gallery</span>
+                <h2 class="bday-heading">Capturing <span>Joyful Moments</span></h2>
+                <p class="bday-subheading">A curated collection of birthday celebrations that capture the joy, laughter and love of your special day.</p>
+            </div>
+
+            <div class="bday-gallery-mosaic">
+                <div class="bday-gallery-item bday-reveal">
+                    <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?auto=format&fit=crop&w=900&q=88" alt="Birthday celebration" loading="lazy">
+                    <div class="bday-gallery-overlay">
+                        <span>Happy Birthday</span>
+                        <strong>Celebration Joy</strong>
+                    </div>
+                </div>
+
+                <div class="bday-gallery-item bday-reveal">
+                    <img src="https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?auto=format&fit=crop&w=800&q=88" alt="Birthday cake" loading="lazy">
+                    <div class="bday-gallery-overlay">
+                        <span>Cake Moment</span>
+                        <strong>Sweet Celebrations</strong>
+                    </div>
+                </div>
+
+                <div class="bday-gallery-item bday-reveal">
+                    <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=800&q=88" alt="Birthday balloons" loading="lazy">
+                    <div class="bday-gallery-overlay">
+                        <span>Decor Details</span>
+                        <strong>Balloons &amp; Joy</strong>
+                    </div>
+                </div>
+
+                <div class="bday-gallery-item bday-reveal">
+                    <img src="https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?auto=format&fit=crop&w=800&q=88" alt="Birthday girl portrait" loading="lazy">
+                    <div class="bday-gallery-overlay">
+                        <span>Birthday Girl</span>
+                        <strong>Radiant &amp; Happy</strong>
+                    </div>
+                </div>
+
+                <div class="bday-gallery-item bday-reveal">
+                    <img src="https://images.unsplash.com/photo-1530023367847-a683933f4172?auto=format&fit=crop&w=900&q=88" alt="Birthday party" loading="lazy">
+                    <div class="bday-gallery-overlay">
+                        <span>Party Moments</span>
+                        <strong>Fun &amp; Laughter</strong>
+                    </div>
+                </div>
+
+                <div class="bday-gallery-item bday-reveal">
+                    <img src="https://images.unsplash.com/photo-1464349153735-7db50ed83c5f?auto=format&fit=crop&w=800&q=88" alt="Birthday gifts" loading="lazy">
+                    <div class="bday-gallery-overlay">
+                        <span>Gift Time</span>
+                        <strong>Surprise &amp; Joy</strong>
+                    </div>
+                </div>
+
+                <div class="bday-gallery-item bday-reveal">
+                    <img src="https://images.unsplash.com/photo-1529634597503-139d3726fed5?auto=format&fit=crop&w=800&q=88" alt="Birthday candle" loading="lazy">
+                    <div class="bday-gallery-overlay">
+                        <span>Wish Time</span>
+                        <strong>Make a Wish</strong>
+                    </div>
+                </div>
+
+                <div class="bday-gallery-item bday-reveal">
+                    <img src="https://images.unsplash.com/photo-1506005098770-8f3fafdcc4e2?auto=format&fit=crop&w=900&q=88" alt="Birthday celebration with family" loading="lazy">
+                    <div class="bday-gallery-overlay">
+                        <span>Family Love</span>
+                        <strong>Togetherness</strong>
+                    </div>
+                </div>
+
+                <div class="bday-gallery-item bday-reveal">
+                    <img src="https://images.unsplash.com/photo-1531666797136-8a5d1c70cacd?auto=format&fit=crop&w=800&q=88" alt="Birthday smile" loading="lazy">
+                    <div class="bday-gallery-overlay">
+                        <span>Smile</span>
+                        <strong>Pure Happiness</strong>
+                    </div>
+                </div>
+
+                <div class="bday-gallery-item bday-reveal">
+                    <img src="https://images.unsplash.com/photo-1506342126300-1d3f2d8d7b63?auto=format&fit=crop&w=800&q=88" alt="Birthday decorations" loading="lazy">
+                    <div class="bday-gallery-overlay">
+                        <span>Decor Story</span>
+                        <strong>Beautiful Setup</strong>
+                    </div>
+                </div>
+
+                <div class="bday-gallery-item bday-reveal">
+                    <img src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?auto=format&fit=crop&w=900&q=88" alt="Birthday celebration with friends" loading="lazy">
+                    <div class="bday-gallery-overlay">
+                        <span>Friends</span>
+                        <strong>Celebrating Together</strong>
+                    </div>
+                </div>
+
+                <div class="bday-gallery-item bday-reveal">
+                    <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=88" alt="Birthday portrait" loading="lazy">
+                    <div class="bday-gallery-overlay">
+                        <span>Portrait</span>
+                        <strong>Elegant &amp; Graceful</strong>
+                    </div>
+                </div>
+
+                <!-- 13th IMAGE - fills the gap -->
+                <div class="bday-gallery-item bday-reveal">
+                    <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=900&q=88" alt="Birthday celebration joy" loading="lazy">
+                    <div class="bday-gallery-overlay">
+                        <span>Joyful Celebration</span>
+                        <strong>Pure Joy</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PRICING SECTION ===== -->
+    <section class="bday-pricing">
+        <div class="bday-container">
+            <div class="bday-text-center bday-reveal">
+                <span class="bday-section-label">Pricing</span>
+                <h2 class="bday-heading">Choose Your <span>Birthday Package</span></h2>
+                <p class="bday-subheading">Flexible packages designed to suit every celebration, from intimate gatherings to grand parties.</p>
+            </div>
+
+            <div class="bday-pricing-grid">
+                <div class="bday-pricing-card bday-reveal bday-reveal-left">
+                    <h3>Essential</h3>
+                    <div class="bday-pricing-price">₹8,999 <span>/ session</span></div>
+                    <ul>
+                        <li>1-hour photo session</li>
+                        <li>30+ edited photos</li>
+                        <li>Online gallery access</li>
+                        <li>Digital download</li>
+                    </ul>
+                    <a href="https://wa.me/919789029012?text=Hello%2C%20I%20would%20like%20to%20book%20the%20Essential%20birthday%20package." target="_blank" rel="noopener noreferrer" class="bday-btn bday-btn-secondary">Book Now</a>
+                </div>
+
+                <div class="bday-pricing-card featured bday-reveal">
+                    <span class="bday-pricing-badge">Popular</span>
+                    <h3>Premium</h3>
+                    <div class="bday-pricing-price">₹15,999 <span>/ session</span></div>
+                    <ul>
+                        <li>2-hour photo session</li>
+                        <li>60+ edited photos</li>
+                        <li>Online gallery access</li>
+                        <li>Digital download + Print rights</li>
+                        <li>Behind-the-scenes video</li>
+                    </ul>
+                    <a href="https://wa.me/919789029012?text=Hello%2C%20I%20would%20like%20to%20book%20the%20Premium%20birthday%20package." target="_blank" rel="noopener noreferrer" class="bday-btn bday-btn-primary">Book Now</a>
+                </div>
+
+                <div class="bday-pricing-card bday-reveal bday-reveal-right">
+                    <h3>Luxury</h3>
+                    <div class="bday-pricing-price">₹24,999 <span>/ session</span></div>
+                    <ul>
+                        <li>3-hour photo session</li>
+                        <li>100+ edited photos</li>
+                        <li>Online gallery access</li>
+                        <li>Digital download + Print rights</li>
+                        <li>Behind-the-scenes video</li>
+                        <li>Premium photo album</li>
+                    </ul>
+                    <a href="https://wa.me/919789029012?text=Hello%2C%20I%20would%20like%20to%20book%20the%20Luxury%20birthday%20package." target="_blank" rel="noopener noreferrer" class="bday-btn bday-btn-secondary">Book Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+<!-- =========================================================
+     BIRTHDAY SHOOT — MEMORY LANE SECTION
+     ========================================================= -->
+
+<style>
+    /* =========================================================
+       BIRTHDAY MEMORY LANE
+       ========================================================= */
+
+    .bday-memory {
+        --bday-memory-pink: #ef2d83;
+        --bday-memory-pink-dark: #c91567;
+        --bday-memory-pink-soft: #fff0f7;
+        --bday-memory-gold: #cfa766;
+        --bday-memory-ink: #241723;
+        --bday-memory-muted: #7a6572;
+        --bday-memory-border: rgba(36, 23, 35, 0.08);
+        --bday-memory-white: #ffffff;
+        --bday-memory-cream: #fff8fb;
+        --bday-memory-shadow: 0 18px 44px rgba(83, 41, 62, 0.10);
+        --bday-memory-radius: 20px;
+        --bday-memory-transition: 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .bday-memory {
+        position: relative;
+        width: 100%;
+        padding: 80px 0 90px;
+        overflow: hidden;
+        color: var(--bday-memory-ink);
+        background: var(--bday-memory-cream);
+    }
+
+    .bday-memory-container {
+        position: relative;
+        z-index: 2;
+        width: min(100%, 1180px);
+        margin: 0 auto;
+        padding: 0 24px;
+    }
+
+    /* =========================================================
+       HEADING
+       ========================================================= */
+
+    .bday-memory-heading {
+        text-align: center;
+        margin-bottom: 50px;
+    }
+
+    .bday-memory-heading .bday-section-label {
+        margin-bottom: 14px;
+    }
+
+    .bday-memory-heading h2 {
+        font-family: 'Playfair Display', Georgia, serif;
+        font-size: clamp(32px, 4vw, 48px);
+        font-weight: 600;
+        margin: 0 0 12px;
+        line-height: 1.08;
+        color: var(--bday-memory-ink);
+    }
+
+    .bday-memory-heading h2 span {
+        color: var(--bday-memory-pink);
+        font-style: italic;
+    }
+
+    .bday-memory-heading p {
+        max-width: 620px;
+        margin: 0 auto;
+        color: var(--bday-memory-muted);
+        font-size: 15px;
+        line-height: 1.7;
+    }
+
+    /* =========================================================
+       MEMORY TIMELINE
+       ========================================================= */
+
+    .bday-memory-timeline {
+        position: relative;
+        padding-left: 40px;
+    }
+
+    .bday-memory-timeline::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 15px;
+        width: 2px;
+        background: linear-gradient(to bottom, var(--bday-memory-pink), var(--bday-memory-gold), var(--bday-memory-pink));
+        opacity: 0.3;
+        border-radius: 999px;
+    }
+
+    .bday-memory-item {
+        position: relative;
+        padding: 0 0 40px 30px;
+        display: grid;
+        grid-template-columns: 1fr 1.2fr;
+        gap: 30px;
+        align-items: center;
+    }
+
+    .bday-memory-item:last-child {
+        padding-bottom: 0;
+    }
+
+    /* Timeline dot */
+    .bday-memory-item::before {
+        content: "";
+        position: absolute;
+        left: -33px;
+        top: 8px;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: var(--bday-memory-pink);
+        border: 3px solid var(--bday-memory-white);
+        box-shadow: 0 0 0 4px var(--bday-memory-pink-soft), var(--bday-memory-shadow);
+        z-index: 2;
+        transition: all var(--bday-memory-transition);
+    }
+
+    .bday-memory-item:hover::before {
+        transform: scale(1.15);
+        box-shadow: 0 0 0 6px var(--bday-memory-pink-soft), var(--bday-memory-shadow);
+    }
+
+    /* Year badge */
+    .bday-memory-year {
+        position: absolute;
+        left: -95px;
+        top: 0;
+        font-family: 'Playfair Display', Georgia, serif;
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--bday-memory-pink);
+        opacity: 0.6;
+        letter-spacing: 0.05em;
+        white-space: nowrap;
+    }
+
+    /* Memory image */
+    .bday-memory-image {
+        position: relative;
+        overflow: hidden;
+        border-radius: var(--bday-memory-radius);
+        background: #f0e8e4;
+        box-shadow: var(--bday-memory-shadow);
+        aspect-ratio: 4 / 3;
+        transition: all var(--bday-memory-transition);
+    }
+
+    .bday-memory-image:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 24px 52px rgba(83, 41, 62, 0.16);
+    }
+
+    .bday-memory-image img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+        transition: transform 0.7s ease;
+        image-rendering: auto;
+        image-rendering: -webkit-optimize-contrast;
+    }
+
+    .bday-memory-image:hover img {
+        transform: scale(1.05);
+    }
+
+    .bday-memory-image .memory-number {
+        position: absolute;
+        top: 14px;
+        right: 14px;
+        padding: 4px 12px;
+        border-radius: 999px;
+        background: rgba(239, 45, 131, 0.85);
+        color: #fff;
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: 0.05em;
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        z-index: 2;
+    }
+
+    /* Memory content */
+    .bday-memory-content {
+        padding: 10px 0;
+    }
+
+    .bday-memory-content .memory-icon {
+        font-size: 28px;
+        display: block;
+        margin-bottom: 8px;
+    }
+
+    .bday-memory-content h3 {
+        font-family: 'Playfair Display', Georgia, serif;
+        font-size: 24px;
+        font-weight: 600;
+        margin: 0 0 8px;
+        color: var(--bday-memory-ink);
+        line-height: 1.15;
+    }
+
+    .bday-memory-content h3 span {
+        color: var(--bday-memory-pink);
+    }
+
+    .bday-memory-content p {
+        color: var(--bday-memory-muted);
+        font-size: 14px;
+        line-height: 1.7;
+        margin: 0 0 12px;
+    }
+
+    .bday-memory-content .memory-tag {
+        display: inline-block;
+        padding: 3px 14px;
+        border-radius: 999px;
+        background: var(--bday-memory-pink-soft);
+        color: var(--bday-memory-pink);
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+    }
+
+    /* Alternate layout - image right */
+    .bday-memory-item:nth-child(even) .bday-memory-image {
+        order: 2;
+    }
+
+    .bday-memory-item:nth-child(even) .bday-memory-content {
+        order: 1;
+        text-align: right;
+    }
+
+    .bday-memory-item:nth-child(even) .bday-memory-year {
+        left: auto;
+        right: -95px;
+    }
+
+    .bday-memory-item:nth-child(even)::before {
+        left: -33px;
+    }
+
+    /* =========================================================
+       RESPONSIVE
+       ========================================================= */
+
+    @media (max-width: 1024px) {
+        .bday-memory-item {
+            grid-template-columns: 1fr;
+            gap: 20px;
+            padding-left: 20px;
+        }
+
+        .bday-memory-item:nth-child(even) .bday-memory-image {
+            order: 1;
+        }
+
+        .bday-memory-item:nth-child(even) .bday-memory-content {
+            order: 2;
+            text-align: left;
+        }
+
+        .bday-memory-item:nth-child(even) .bday-memory-year {
+            left: -95px;
+            right: auto;
+        }
+
+        .bday-memory-year {
+            font-size: 14px;
+            left: -90px;
+        }
+
+        .bday-memory-item:nth-child(even) .bday-memory-year {
+            left: -90px;
+            right: auto;
+        }
+
+        .bday-memory-timeline {
+            padding-left: 30px;
+        }
+
+        .bday-memory-timeline::before {
+            left: 10px;
+        }
+
+        .bday-memory-item::before {
+            left: -28px;
+        }
+    }
+
+    @media (max-width: 620px) {
+        .bday-memory {
+            padding: 60px 0 70px;
+        }
+
+        .bday-memory-container {
+            padding: 0 16px;
+        }
+
+        .bday-memory-timeline {
+            padding-left: 20px;
+        }
+
+        .bday-memory-timeline::before {
+            left: 5px;
+        }
+
+        .bday-memory-item {
+            padding: 0 0 30px 15px;
+            gap: 16px;
+        }
+
+        .bday-memory-item::before {
+            width: 14px;
+            height: 14px;
+            left: -22px;
+            top: 5px;
+        }
+
+        .bday-memory-year {
+            position: relative;
+            left: auto !important;
+            right: auto !important;
+            font-size: 12px;
+            margin-bottom: 4px;
+            display: block;
+            color: var(--bday-memory-pink);
+            opacity: 0.7;
+        }
+
+        .bday-memory-item:nth-child(even) .bday-memory-year {
+            left: auto !important;
+            right: auto !important;
+        }
+
+        .bday-memory-content h3 {
+            font-size: 20px;
+        }
+
+        .bday-memory-content p {
+            font-size: 13px;
+        }
+
+        .bday-memory-image .memory-number {
+            font-size: 8px;
+            padding: 3px 10px;
+            top: 10px;
+            right: 10px;
+        }
+    }
+
+    @media (max-width: 400px) {
+        .bday-memory-heading h2 {
+            font-size: 28px;
+        }
+
+        .bday-memory-content h3 {
+            font-size: 18px;
+        }
+
+        .bday-memory-content .memory-icon {
+            font-size: 22px;
+        }
+    }
+
+    /* Reduced Motion */
+    @media (prefers-reduced-motion: reduce) {
+        .bday-memory-item::before,
+        .bday-memory-image,
+        .bday-memory-image img {
+            transition: none !important;
+        }
+
+        .bday-memory-image:hover {
+            transform: none !important;
+        }
+
+        .bday-memory-image:hover img {
+            transform: none !important;
+        }
+
+        .bday-memory-item:hover::before {
+            transform: none !important;
+        }
+    }
+</style>
+
+<!-- =========================================================
+     BIRTHDAY SHOOT — MEMORY LANE SECTION
+     ========================================================= -->
+
+<section class="bday-memory">
+    <div class="bday-memory-container">
+
+        <header class="bday-memory-heading bday-reveal">
+            <span class="bday-section-label">Memory Lane</span>
+            <h2>Every Birthday Tells a <span>Beautiful Story</span></h2>
+            <p>From the first smile to the last laugh, each moment unfolds like a chapter in your celebration story.</p>
+        </header>
+
+        <div class="bday-memory-timeline">
+
+            <!-- Memory 1 -->
+            <div class="bday-memory-item bday-reveal">
+                <span class="bday-memory-year">Chapter 01</span>
+                <div class="bday-memory-image">
+                    <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?auto=format&fit=crop&w=900&q=88" alt="Birthday celebration begins" loading="lazy">
+                    <span class="memory-number">01</span>
+                </div>
+                <div class="bday-memory-content">
+                    <span class="memory-icon">🎈</span>
+                    <h3>The <span>Celebration</span> Begins</h3>
+                    <p>Decorations are set, balloons are floating, and the excitement fills the air as guests arrive to celebrate your special day.</p>
+                    <span class="memory-tag">Joyful Beginnings</span>
+                </div>
+            </div>
+
+            <!-- Memory 2 -->
+            <div class="bday-memory-item bday-reveal">
+                <span class="bday-memory-year">Chapter 02</span>
+                <div class="bday-memory-image">
+                    <img src="https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?auto=format&fit=crop&w=900&q=88" alt="Birthday cake moment" loading="lazy">
+                    <span class="memory-number">02</span>
+                </div>
+                <div class="bday-memory-content">
+                    <span class="memory-icon">🎂</span>
+                    <h3>The <span>Sweetest</span> Moment</h3>
+                    <p>The candles glow, everyone sings, and a wish is made. This is the heart of every birthday celebration — pure magic.</p>
+                    <span class="memory-tag">Making Wishes</span>
+                </div>
+            </div>
+
+            <!-- Memory 3 -->
+            <div class="bday-memory-item bday-reveal">
+                <span class="bday-memory-year">Chapter 03</span>
+                <div class="bday-memory-image">
+                    <img src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?auto=format&fit=crop&w=900&q=88" alt="Birthday celebration with family" loading="lazy">
+                    <span class="memory-number">03</span>
+                </div>
+                <div class="bday-memory-content">
+                    <span class="memory-icon">💕</span>
+                    <h3><span>Family</span> &amp; Friends</h3>
+                    <p>Laughter echoes, hugs are shared, and memories are created with the people who matter most — your loved ones.</p>
+                    <span class="memory-tag">Togetherness</span>
+                </div>
+            </div>
+
+            <!-- Memory 4 -->
+            <div class="bday-memory-item bday-reveal">
+                <span class="bday-memory-year">Chapter 04</span>
+                <div class="bday-memory-image">
+                    <img src="https://images.unsplash.com/photo-1529634597503-139d3726fed5?auto=format&fit=crop&w=900&q=88" alt="Birthday candle wish" loading="lazy">
+                    <span class="memory-number">04</span>
+                </div>
+                <div class="bday-memory-content">
+                    <span class="memory-icon">✨</span>
+                    <h3><span>Wishes</span> &amp; Dreams</h3>
+                    <p>With closed eyes and a hopeful heart, you make a wish that holds all your dreams. This is the moment that truly matters.</p>
+                    <span class="memory-tag">Dream Big</span>
+                </div>
+            </div>
+
+            <!-- Memory 5 -->
+            <div class="bday-memory-item bday-reveal">
+                <span class="bday-memory-year">Chapter 05</span>
+                <div class="bday-memory-image">
+                    <img src="https://images.unsplash.com/photo-1530023367847-a683933f4172?auto=format&fit=crop&w=900&q=88" alt="Birthday celebration joy" loading="lazy">
+                    <span class="memory-number">05</span>
+                </div>
+                <div class="bday-memory-content">
+                    <span class="memory-icon">🎉</span>
+                    <h3><span>Joy</span> Unleashed</h3>
+                    <p>Genuine laughter, happy tears, and unfiltered joy — these are the moments that make your birthday truly unforgettable.</p>
+                    <span class="memory-tag">Pure Happiness</span>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<script>
+    (() => {
+        // =========================================================
+        // SCROLL REVEAL FOR MEMORY LANE
+        // =========================================================
+
+        const memoryRevealElements = document.querySelectorAll('.bday-memory .bday-reveal');
+
+        if ('IntersectionObserver' in window) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.08,
+                rootMargin: '0px 0px -30px 0px'
+            });
+
+            memoryRevealElements.forEach((el) => {
+                observer.observe(el);
+            });
+        } else {
+            memoryRevealElements.forEach((el) => {
+                el.classList.add('visible');
+            });
+        }
+
+        // =========================================================
+        // LIGHTBOX FOR MEMORY IMAGES
+        // =========================================================
+
+        const memoryImages = document.querySelectorAll('.bday-memory-image');
+
+        memoryImages.forEach((item) => {
+            item.addEventListener('click', function() {
+                const img = this.querySelector('img');
+                if (!img) return;
+
+                const lightbox = document.createElement('div');
+                lightbox.style.cssText = `
+                    position: fixed;
+                    inset: 0;
+                    z-index: 99999;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background: rgba(15, 7, 11, 0.95);
+                    backdrop-filter: blur(14px);
+                    -webkit-backdrop-filter: blur(14px);
+                    padding: 60px 30px 30px;
+                    cursor: pointer;
+                    opacity: 0;
+                    transition: opacity 0.35s ease;
+                `;
+
+                const image = document.createElement('img');
+                image.src = img.src;
+                image.alt = img.alt || 'Birthday memory moment';
+                image.style.cssText = `
+                    max-width: 92vw;
+                    max-height: calc(100vh - 100px);
+                    object-fit: contain;
+                    border-radius: 14px;
+                    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+                    transform: scale(0.95);
+                    transition: transform 0.35s ease;
+                `;
+
+                const closeBtn = document.createElement('button');
+                closeBtn.innerHTML = '×';
+                closeBtn.style.cssText = `
+                    position: fixed;
+                    top: 18px;
+                    right: 22px;
+                    width: 48px;
+                    height: 48px;
+                    display: grid;
+                    place-items: center;
+                    border: 1px solid rgba(255, 255, 255, 0.2);
+                    border-radius: 50%;
+                    color: #fff;
+                    background: rgba(255, 255, 255, 0.08);
+                    font-size: 28px;
+                    font-weight: 300;
+                    cursor: pointer;
+                    transition: background 0.25s ease, transform 0.25s ease;
+                    z-index: 100000;
+                `;
+                closeBtn.setAttribute('aria-label', 'Close image viewer');
+
+                closeBtn.addEventListener('mouseenter', () => {
+                    closeBtn.style.background = '#ef2d83';
+                    closeBtn.style.transform = 'rotate(90deg)';
+                });
+                closeBtn.addEventListener('mouseleave', () => {
+                    closeBtn.style.background = 'rgba(255, 255, 255, 0.08)';
+                    closeBtn.style.transform = 'rotate(0)';
+                });
+
+                lightbox.appendChild(image);
+                lightbox.appendChild(closeBtn);
+                document.body.appendChild(lightbox);
+
+                document.body.style.overflow = 'hidden';
+
+                requestAnimationFrame(() => {
+                    lightbox.style.opacity = '1';
+                    image.style.transform = 'scale(1)';
+                });
+
+                const closeLightbox = () => {
+                    lightbox.style.opacity = '0';
+                    image.style.transform = 'scale(0.95)';
+                    document.body.style.overflow = '';
+
+                    setTimeout(() => {
+                        lightbox.remove();
+                    }, 350);
+                };
+
+                lightbox.addEventListener('click', (e) => {
+                    if (e.target === lightbox) {
+                        closeLightbox();
+                    }
+                });
+
+                closeBtn.addEventListener('click', closeLightbox);
+
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape') {
+                        closeLightbox();
+                    }
+                });
+            });
+        });
+
+        // Reduced motion
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            memoryRevealElements.forEach((el) => {
+                el.classList.add('visible');
+            });
+        }
+    })();
+</script>
+    <!-- ===== TESTIMONIAL SECTION ===== -->
+    <section class="bday-testimonial">
+        <div class="bday-container">
+            <div class="bday-testimonial-wrapper bday-reveal">
+                <div class="bday-testimonial-image">
+                    <img src="https://images.unsplash.com/photo-1530023367847-a683933f4172?auto=format&fit=crop&w=800&q=88" alt="Happy client" loading="lazy">
+                    <span class="quote-mark" aria-hidden="true">"</span>
+                </div>
+
+                <div class="bday-testimonial-content">
+                    <span class="bday-section-label">Client Testimonial</span>
+                    <div class="bday-testimonial-stars">★★★★★</div>
+                    <blockquote>DLM captured my daughter's birthday celebration beautifully. Every moment, every smile, every detail was perfectly preserved. We'll treasure these photos forever!</blockquote>
+                    <div class="bday-testimonial-author">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=88" alt="Priya" class="avatar" loading="lazy">
+                        <div class="info">
+                            <strong>Priya</strong>
+                            <span>Birthday Shoot Session · Chennai</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CTA SECTION ===== -->
+    <section class="bday-cta">
+        <div class="bday-container">
+            <div class="bday-cta-inner bday-reveal">
+                <div class="bday-cta-content">
+                    <h2>Ready to <span style="color: #ffd4e6;">Celebrate Your Special Day?</span></h2>
+                    <p>Book your birthday shoot session today and let us capture the joy, laughter and beautiful moments of your celebration.</p>
+                </div>
+                <a href="https://wa.me/919789029012?text=Hello%2C%20I%20would%20like%20to%20book%20a%20birthday%20shoot%20session." target="_blank" rel="noopener noreferrer" class="bday-btn">Book Now</a>
+            </div>
+        </div>
+    </section>
+
+</section>
+
+<!-- =========================================================
+     BIRTHDAY SHOOT — SCRIPT
+     ========================================================= -->
+
+<script>
+    (() => {
+        // =========================================================
+        // SCROLL REVEAL
+        // =========================================================
+
+        const revealElements = document.querySelectorAll('.bday-reveal');
+
+        if ('IntersectionObserver' in window) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -30px 0px'
+            });
+
+            revealElements.forEach((el) => {
+                observer.observe(el);
+            });
+        } else {
+            revealElements.forEach((el) => {
+                el.classList.add('visible');
+            });
+        }
+
+        // =========================================================
+        // GALLERY LIGHTBOX
+        // =========================================================
+
+        const galleryItems = document.querySelectorAll('.bday-gallery-item');
+
+        galleryItems.forEach((item) => {
+            item.addEventListener('click', function() {
+                const img = this.querySelector('img');
+                if (!img) return;
+
+                // Create lightbox
+                const lightbox = document.createElement('div');
+                lightbox.style.cssText = `
+                    position: fixed;
+                    inset: 0;
+                    z-index: 99999;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background: rgba(15, 7, 11, 0.95);
+                    backdrop-filter: blur(14px);
+                    -webkit-backdrop-filter: blur(14px);
+                    padding: 60px 30px 30px;
+                    cursor: pointer;
+                    opacity: 0;
+                    transition: opacity 0.35s ease;
+                `;
+
+                const image = document.createElement('img');
+                image.src = img.src;
+                image.alt = img.alt || 'Birthday portrait';
+                image.style.cssText = `
+                    max-width: 92vw;
+                    max-height: calc(100vh - 100px);
+                    object-fit: contain;
+                    border-radius: 14px;
+                    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+                    transform: scale(0.95);
+                    transition: transform 0.35s ease;
+                `;
+
+                const closeBtn = document.createElement('button');
+                closeBtn.innerHTML = '×';
+                closeBtn.style.cssText = `
+                    position: fixed;
+                    top: 18px;
+                    right: 22px;
+                    width: 48px;
+                    height: 48px;
+                    display: grid;
+                    place-items: center;
+                    border: 1px solid rgba(255, 255, 255, 0.2);
+                    border-radius: 50%;
+                    color: #fff;
+                    background: rgba(255, 255, 255, 0.08);
+                    font-size: 28px;
+                    font-weight: 300;
+                    cursor: pointer;
+                    transition: background 0.25s ease, transform 0.25s ease;
+                    z-index: 100000;
+                `;
+                closeBtn.setAttribute('aria-label', 'Close image viewer');
+
+                closeBtn.addEventListener('mouseenter', () => {
+                    closeBtn.style.background = '#ef2d83';
+                    closeBtn.style.transform = 'rotate(90deg)';
+                });
+                closeBtn.addEventListener('mouseleave', () => {
+                    closeBtn.style.background = 'rgba(255, 255, 255, 0.08)';
+                    closeBtn.style.transform = 'rotate(0)';
+                });
+
+                lightbox.appendChild(image);
+                lightbox.appendChild(closeBtn);
+                document.body.appendChild(lightbox);
+
+                document.body.style.overflow = 'hidden';
+
+                requestAnimationFrame(() => {
+                    lightbox.style.opacity = '1';
+                    image.style.transform = 'scale(1)';
+                });
+
+                const closeLightbox = () => {
+                    lightbox.style.opacity = '0';
+                    image.style.transform = 'scale(0.95)';
+                    document.body.style.overflow = '';
+
+                    setTimeout(() => {
+                        lightbox.remove();
+                    }, 350);
+                };
+
+                lightbox.addEventListener('click', (e) => {
+                    if (e.target === lightbox) {
+                        closeLightbox();
+                    }
+                });
+
+                closeBtn.addEventListener('click', closeLightbox);
+
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape') {
+                        closeLightbox();
+                    }
+                });
+            });
+        });
+
+        // =========================================================
+        // REDUCED MOTION
+        // =========================================================
+
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            revealElements.forEach((el) => {
+                el.classList.add('visible');
+            });
+        }
+    })();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,4683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hindu Wedding Photography | DLM Photography</title>
+  
+    <style>
+          :root {
+            --pink: #ef2d83;
+            --pink-dark: #c91567;
+            --soft: #fff0f7;
+            --ink: #241723;
+            --muted: #7a6572;
+            --border: rgba(36, 23, 35, 0.1);
+            --white: #ffffff;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Inter", "Segoe UI", sans-serif;
+            color: var(--ink);
+            background: #fff8fb;
+        }
+
+        body.menu-open {
+            overflow: hidden;
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+        button,
+        a {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .navbar-wrap {
+            position: absolute;
+            top: 18px;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 0 28px;
+        }
+
+        .navbar-wrap.is-sticky {
+            position: fixed;
+            top: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            width: min(100%, 1180px);
+            min-height: 76px;
+            margin: auto;
+            padding: 0 30px;
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            gap: 24px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.94);
+            box-shadow: 0 18px 50px rgba(108, 20, 64, 0.14);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            transition: border-radius 0.25s ease, min-height 0.25s ease;
+        }
+
+        .navbar-wrap.is-sticky .navbar {
+            width: 100%;
+            min-height: 70px;
+            border-radius: 0;
+        }
+
+        .brand {
+            justify-self: start;
+            display: flex;
+            align-items: center;
+        }
+
+        .brand-logo {
+            width: 56px;
+            height: 56px;
+            object-fit: contain;
+            border-radius: 50%;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 28px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-links a,
+        .wedding-button {
+            min-height: 70px;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            border: 0;
+            color: var(--ink);
+            background: none;
+            font: 700 14px "Inter", "Segoe UI", sans-serif;
+            text-decoration: none;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .nav-links a:hover,
+        .wedding-button:hover {
+            color: var(--pink);
+        }
+
+        .arrow {
+            width: 8px;
+            height: 8px;
+            border-right: 2px solid currentColor;
+            border-bottom: 2px solid currentColor;
+            transform: rotate(45deg);
+            transition: transform 0.25s ease;
+        }
+
+        .wedding-item:hover .arrow,
+        .wedding-item:focus-within .arrow {
+            transform: rotate(225deg);
+        }
+
+        .wedding-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            width: 560px;
+            padding: 26px;
+            display: grid;
+            grid-template-columns: 160px 1fr 1fr;
+            gap: 24px;
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            background: #fff;
+            box-shadow: 0 24px 60px rgba(40, 20, 32, 0.16);
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transform: translate(-50%, -10px);
+            transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
+        }
+
+        .wedding-item:hover .wedding-dropdown,
+        .wedding-item:focus-within .wedding-dropdown {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transform: translate(-50%, 0);
+        }
+
+        .wedding-dropdown img {
+            width: 100%;
+            height: 180px;
+            object-fit: contain;
+            border-radius: 14px;
+            background: #fff4f9;
+        }
+
+        .wedding-column {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .wedding-column a {
+            min-height: 44px;
+            font-size: 15px;
+        }
+
+        .nav-actions {
+            justify-self: end;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .login-button {
+            min-width: 96px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 999px;
+            color: #fff;
+            background: var(--pink);
+            font-weight: 800;
+            text-decoration: none;
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+
+        .login-button:hover {
+            background: var(--pink-dark);
+            transform: translateY(-1px);
+        }
+
+        .menu-toggle {
+            flex: 0 0 auto;
+            width: 44px;
+            height: 44px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            border: 0;
+            border-radius: 50%;
+            color: var(--pink);
+            background: var(--soft);
+            cursor: pointer;
+        }
+
+        .menu-lines,
+        .menu-lines::before,
+        .menu-lines::after {
+            width: 20px;
+            height: 2px;
+            display: block;
+            border-radius: 10px;
+            background: currentColor;
+        }
+
+        .menu-lines {
+            position: relative;
+        }
+
+        .menu-lines::before,
+        .menu-lines::after {
+            content: "";
+            position: absolute;
+            left: 0;
+        }
+
+        .menu-lines::before {
+            top: -6px;
+        }
+
+        .menu-lines::after {
+            top: 6px;
+        }
+
+        .menu-backdrop {
+            position: fixed;
+            inset: 0;
+            z-index: 1100;
+            visibility: hidden;
+            opacity: 0;
+            background: rgba(36, 23, 35, 0.5);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .menu-backdrop.open {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1200;
+            width: min(88vw, 370px);
+            height: 100vh;
+            height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            background: #fff;
+            box-shadow: -25px 0 60px rgba(30, 15, 24, 0.2);
+            visibility: hidden;
+            transform: translateX(105%);
+            transition: transform 0.35s ease, visibility 0.35s ease;
+        }
+
+        .mobile-menu.open {
+            visibility: visible;
+            transform: translateX(0);
+        }
+
+        .mobile-menu-header {
+            flex: 0 0 auto;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .mobile-logo {
+            width: 52px;
+            height: 52px;
+            object-fit: contain;
+            border-radius: 50%;
+        }
+
+        .menu-close {
+            width: 42px;
+            height: 42px;
+            border: 0;
+            border-radius: 50%;
+            color: var(--pink);
+            background: var(--soft);
+            font-size: 27px;
+            line-height: 1;
+            cursor: pointer;
+        }
+
+        .mobile-links {
+            flex: 1 1 auto;
+            margin: 0;
+            padding: 16px 20px;
+            list-style: none;
+            overflow-y: auto;
+            overscroll-behavior: contain;
+        }
+
+        .mobile-links > li {
+            border-bottom: 1px solid var(--border);
+        }
+
+        .mobile-links a,
+        .mobile-wedding-button {
+            width: 100%;
+            min-height: 56px;
+            padding: 0 8px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border: 0;
+            color: var(--ink);
+            background: none;
+            font: 700 16px "Inter", "Segoe UI", sans-serif;
+            text-decoration: none;
+            text-align: left;
+            cursor: pointer;
+        }
+
+        .mobile-wedding-panel {
+            max-height: 0;
+            overflow: hidden;
+            background: #fff8fb;
+            transition: max-height 0.3s ease;
+        }
+
+        .mobile-wedding-panel.open {
+            max-height: 520px;
+        }
+
+        .mobile-wedding-panel a {
+            min-height: 43px;
+            padding-left: 22px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .mobile-login {
+            flex: 0 0 auto;
+            margin: 20px;
+            min-height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 999px;
+            color: #fff;
+            background: var(--pink);
+            font-weight: 800;
+            text-decoration: none;
+        }
+          @media (max-width: 900px) {
+            .navbar-wrap {
+                padding: 0 16px;
+            }
+
+            .navbar-wrap.is-sticky {
+                padding: 0;
+            }
+
+            .navbar {
+                grid-template-columns: 1fr auto;
+                min-height: 70px;
+                padding: 9px 16px;
+                gap: 14px;
+            }
+
+            .nav-links,
+            .login-button {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .brand-logo {
+                width: 48px;
+                height: 48px;
+            }
+
+            .nav-actions {
+                min-width: 0;
+            }
+
+            .hero-slider {
+                min-height: 720px;
+            }
+
+            .slider-content {
+                bottom: 110px;
+            }
+
+            .slider-controls {
+                right: 24px;
+                bottom: 34px;
+            }
+
+            .slider-dots {
+                left: 28px;
+                bottom: 48px;
+                transform: none;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .navbar-wrap {
+                top: 12px;
+                padding: 0 14px;
+            }
+
+            .navbar-wrap.is-sticky {
+                top: 0;
+                padding: 0;
+            }
+
+            .navbar {
+                min-height: 66px;
+                padding: 8px 12px;
+                border-radius: 34px;
+            }
+
+            .navbar-wrap.is-sticky .navbar {
+                border-radius: 0;
+            }
+
+            .mobile-menu {
+                width: min(92vw, 350px);
+            }
+
+            .mobile-menu-header {
+                padding: 14px 16px;
+            }
+
+            .mobile-links {
+                padding: 12px 16px;
+            }
+
+            .mobile-links a,
+            .mobile-wedding-button {
+                min-height: 52px;
+                font-size: 15px;
+            }
+
+            .mobile-login {
+                margin: 16px;
+            }
+
+            .hero-slider {
+                min-height: min(680px, 100svh);
+            }
+
+            .hero-slide::after {
+                background:
+                    linear-gradient(0deg, rgba(22, 10, 16, 0.76) 0%, rgba(22, 10, 16, 0.2) 72%),
+                    linear-gradient(90deg, rgba(22, 10, 16, 0.42), transparent);
+            }
+
+            .hero-slide img {
+                object-position: center;
+            }
+
+            .slider-content {
+                left: 20px;
+                right: 20px;
+                bottom: 118px;
+                width: auto;
+            }
+
+            .slider-kicker {
+                font-size: 12px;
+            }
+
+            .slider-title {
+                font-size: clamp(38px, 14vw, 58px);
+            }
+
+            .slider-copy {
+                margin-top: 16px;
+                font-size: 16px;
+                line-height: 1.6;
+            }
+
+            .slider-controls {
+                right: 18px;
+                bottom: 30px;
+            }
+
+            .slider-arrow {
+                width: 42px;
+                height: 42px;
+            }
+
+            .slider-dots {
+                left: 20px;
+                bottom: 45px;
+            }
+
+            .content-section {
+                padding: 72px 20px;
+            }
+
+            .services-section {
+                padding: 74px 20px 80px;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+                gap: 86px;
+                padding-top: 74px;
+            }
+
+            .service-card {
+                width: min(100%, 380px);
+                margin: 0 auto;
+            }
+
+            .studio-about {
+                padding: 86px 20px 78px;
+            }
+
+            .studio-about-inner {
+                grid-template-columns: 1fr;
+                gap: 26px;
+            }
+
+            .about-gallery {
+                order: 2;
+                width: 100%;
+                justify-self: center;
+            }
+
+            .studio-about-copy {
+                order: 1;
+                display: contents;
+            }
+
+            .about-eyebrow,
+            .studio-about-copy h2,
+            .about-description {
+                order: 1;
+            }
+
+            .about-photo-frame {
+                width: min(84vw, 340px);
+                transform: perspective(900px) rotateY(-7deg) rotateZ(-1.5deg);
+            }
+
+            .about-highlights {
+                order: 3;
+                grid-template-columns: 72px 1fr;
+                padding: 24px;
+                gap: 18px;
+            }
+
+            .about-avatar {
+                width: 66px;
+                height: 66px;
+            }
+
+            .about-actions {
+                order: 4;
+                align-items: stretch;
+            }
+
+            .availability-text {
+                width: 100%;
+                margin: 0 0 2px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .navbar-wrap {
+                padding: 0 10px;
+            }
+
+            .navbar {
+                min-height: 60px;
+                padding: 7px 10px;
+            }
+
+            .brand-logo {
+                width: 42px;
+                height: 42px;
+            }
+
+            .menu-toggle {
+                width: 40px;
+                height: 40px;
+            }
+
+            .mobile-menu {
+                width: 100vw;
+            }
+
+            .mobile-logo {
+                width: 46px;
+                height: 46px;
+            }
+
+            .hero-slider {
+                min-height: min(640px, 100svh);
+            }
+
+            .slider-title {
+                font-size: 36px;
+            }
+
+            .slider-copy {
+                font-size: 15px;
+            }
+
+            .studio-about {
+                padding: 72px 16px 64px;
+            }
+
+            .studio-about-copy h2 {
+                font-size: 34px;
+            }
+
+            .about-description {
+                font-size: 15.5px;
+            }
+
+            .about-highlights {
+                grid-template-columns: 1fr;
+                justify-items: start;
+                border-radius: 22px;
+            }
+
+            .about-actions {
+                gap: 12px;
+            }
+
+            .about-action,
+            .about-gallery-button {
+                width: 100%;
+            }
+
+            .services-section {
+                padding: 66px 16px 72px;
+            }
+
+            .services-intro {
+                margin-bottom: 58px;
+            }
+
+            .service-card {
+                min-height: 226px;
+                padding: 88px 20px 22px;
+            }
+
+            .service-image {
+                height: 150px;
+            }
+
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            .slider-track,
+            .hero-slide img,
+            .about-carousel-track,
+            .mobile-menu,
+            .menu-backdrop,
+            .mobile-wedding-panel {
+                transition: none;
+            }
+
+            .slider-progress-bar.is-running {
+                animation: none;
+            }
+
+            .about-carousel-track {
+                animation: none;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+ <header class="navbar-wrap" id="siteNavbar">
+        <nav class="navbar" aria-label="Main navigation">
+            <a class="brand" href="#home">
+                <img class="brand-logo" src="assets/image.png" alt="DLM logo">
+            </a>
+
+            <ul class="nav-links">
+                <li class="nav-item"><a href="index.html">Home</a></li>
+
+                <li class="nav-item wedding-item">
+                    <button class="wedding-button" type="button">
+                        Weddings
+                        <span class="arrow"></span>
+                    </button>
+
+                    <div class="wedding-dropdown">
+                        <img src="https://i.pinimg.com/736x/c3/08/2a/c3082adc6d4155cb01949f67dbfb0788.jpg" alt="Wedding photography preview">
+
+                        <div class="wedding-column">
+                            <a href="hindumarriage.html">Hindu Wedding</a>
+                            <a href="brahminmarriage.html">Brahmin Wedding</a>
+                            <a href="christianmarriage.html">Christian Wedding</a>
+                            <a href="bridepotrait.html">Bride Portrait</a>
+                            <a href="groompotrait.html">Groom Portrait</a>
+                        </div>
+
+                        <div class="wedding-column">
+                            <a href="babyshower.html">Baby Shower</a>
+                            <a href="beautyshoot.html">Beauty Shoot</a>
+                            <a href="coupleshoot.html">Couple Shoot</a>
+                            <a href="birthdayshoot.html">Birthday Shoot</a>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="nav-item"><a href="index.html#about">About</a></li>
+                <li class="nav-item"><a href="index.html#services">Services</a></li>
+                <li class="nav-item"><a href="index.html#gallery-legacy">Portfolio</a></li>
+                <li class="nav-item"><a href="index.html#packages">Packages</a></li>
+                <li class="nav-item"><a href="blog.html">Stories</a></li>
+                <li class="nav-item"><a href="index.html#contact">Contact</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <a class="login-button" href="customer/login.html">Login</a>
+
+                <button class="menu-toggle" id="menuOpen" type="button" aria-label="Open menu" aria-controls="mobileMenu">
+                    <span class="menu-lines"></span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <div class="menu-backdrop" id="menuBackdrop"></div>
+
+    <aside class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation">
+        <div class="mobile-menu-header">
+            <img class="mobile-logo" src="assets/image.png" alt="DLM logo">
+
+            <button class="menu-close" id="menuClose" type="button" aria-label="Close menu">
+                &times;
+            </button>
+        </div>
+
+        <ul class="mobile-links">
+            <li><a href="index.html">Home</a></li>
+
+            <li>
+                <button class="mobile-wedding-button" id="mobileWeddingButton" type="button">
+                    Weddings
+                    <span class="arrow"></span>
+                </button>
+
+                <div class="mobile-wedding-panel" id="mobileWeddingPanel">
+                    <a href="hindumarriage.html">Hindu Wedding</a>
+                    <a href="brahminmarriage.html">Brahmin Wedding</a>
+                    <a href="christianmarriage.html">Christian Wedding</a>
+                    <a href="bridepotrait.html">Bride Portrait</a>
+                    <a href="groompotrait.html">Groom Portrait</a>
+                    <a href="babyshower.html">Baby Shower</a>
+                    <a href="beautyshoot.html">Beauty Shoot</a>
+                    <a href="coupleshoot.html">Couple Shoot</a>
+                    <a href="birthdayshoot.html">Birthday Shoot</a>
+                </div>
+            </li>
+
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#services">Services</a></li>
+            <li><a href="index.html#gallery-legacy">Portfolio</a></li>
+            <li><a href="index.html#packages">Packages</a></li>
+            <li><a href="blog.html">Stories</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+
+        <a class="mobile-login" href="customer/login.html">Customer Login</a>
+    </aside>
+     <script>
+        (() => {
+            const navbar = document.getElementById("siteNavbar");
+            const menu = document.getElementById("mobileMenu");
+            const backdrop = document.getElementById("menuBackdrop");
+            const openButton = document.getElementById("menuOpen");
+            const closeButton = document.getElementById("menuClose");
+            const weddingButton = document.getElementById("mobileWeddingButton");
+            const weddingPanel = document.getElementById("mobileWeddingPanel");
+
+            const openMenu = () => {
+                menu.classList.add("open");
+                backdrop.classList.add("open");
+                document.body.classList.add("menu-open");
+                openButton.setAttribute("aria-expanded", "true");
+            };
+
+            const closeMenu = () => {
+                menu.classList.remove("open");
+                backdrop.classList.remove("open");
+                document.body.classList.remove("menu-open");
+                openButton.setAttribute("aria-expanded", "false");
+            };
+
+            openButton.addEventListener("click", openMenu);
+            closeButton.addEventListener("click", closeMenu);
+            backdrop.addEventListener("click", closeMenu);
+
+            weddingButton.addEventListener("click", () => {
+                weddingPanel.classList.toggle("open");
+            });
+
+            menu.querySelectorAll("a").forEach(link => {
+                link.addEventListener("click", closeMenu);
+            });
+
+            window.addEventListener("scroll", () => {
+                navbar.classList.toggle("is-sticky", window.scrollY > 20);
+            });
+
+            document.addEventListener("keydown", event => {
+                if (event.key === "Escape") closeMenu();
+            });
+
+            window.addEventListener("resize", () => {
+                if (window.innerWidth > 900) closeMenu();
+            });
+        })();
+
+        (() => {
+            const slider = document.getElementById("home");
+            const track = document.getElementById("sliderTrack");
+            const previousButton = document.getElementById("sliderPrev");
+            const nextButton = document.getElementById("sliderNext");
+            const dotsContainer = document.getElementById("sliderDots");
+            const progressBar = document.getElementById("sliderProgress");
+
+            if (!slider || !track || !previousButton || !nextButton || !dotsContainer || !progressBar) {
+                return;
+            }
+
+            const originalSlides = Array.from(track.querySelectorAll(".hero-slide"));
+            const slideDuration = 4000;
+            const swipeThreshold = 45;
+
+            if (originalSlides.length === 0) {
+                return;
+            }
+
+            const firstClone = originalSlides[0].cloneNode(true);
+            const lastClone = originalSlides[originalSlides.length - 1].cloneNode(true);
+
+            firstClone.classList.remove("is-active");
+            lastClone.classList.remove("is-active");
+            firstClone.setAttribute("aria-hidden", "true");
+            lastClone.setAttribute("aria-hidden", "true");
+
+            track.appendChild(firstClone);
+            track.insertBefore(lastClone, originalSlides[0]);
+
+            const slides = Array.from(track.querySelectorAll(".hero-slide"));
+
+            let currentIndex = 1;
+            let autoPlayTimer = null;
+            let touchStartX = 0;
+            let touchEndX = 0;
+            let isSliding = false;
+            let slideFallbackTimer = null;
+
+            const getRealIndex = () => {
+                if (currentIndex === 0) {
+                    return originalSlides.length - 1;
+                }
+
+                if (currentIndex === originalSlides.length + 1) {
+                    return 0;
+                }
+
+                return currentIndex - 1;
+            };
+
+            const dots = originalSlides.map((_, index) => {
+                const dot = document.createElement("button");
+                dot.className = "slider-dot";
+                dot.type = "button";
+                dot.setAttribute("aria-label", `Show image ${index + 1}`);
+                dot.addEventListener("click", () => {
+                    showSlide(index);
+                    restartAutoPlay();
+                });
+                dotsContainer.appendChild(dot);
+                return dot;
+            });
+
+            const restartProgress = () => {
+                progressBar.classList.remove("is-running");
+                void progressBar.offsetWidth;
+                progressBar.classList.add("is-running");
+            };
+
+            const completeSlideTransition = () => {
+                window.clearTimeout(slideFallbackTimer);
+                slideFallbackTimer = null;
+                isSliding = false;
+
+                if (currentIndex === 0) {
+                    currentIndex = originalSlides.length;
+                    setTrackPosition(false);
+                    updateSliderState(false);
+                }
+
+                if (currentIndex === originalSlides.length + 1) {
+                    currentIndex = 1;
+                    setTrackPosition(false);
+                    updateSliderState(false);
+                }
+            };
+
+            const setTrackPosition = shouldAnimate => {
+                if (shouldAnimate) {
+                    isSliding = true;
+                    window.clearTimeout(slideFallbackTimer);
+                    slideFallbackTimer = window.setTimeout(completeSlideTransition, 950);
+                }
+
+                track.style.transition = shouldAnimate ? "" : "none";
+                track.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+                if (!shouldAnimate) {
+                    isSliding = false;
+
+                    requestAnimationFrame(() => {
+                        track.style.transition = "";
+                    });
+                }
+            };
+
+            const updateSliderState = shouldRestartProgress => {
+                const realIndex = getRealIndex();
+
+                slides.forEach((slide, slideIndex) => {
+                    slide.classList.toggle("is-active", slideIndex === currentIndex);
+                });
+
+                dots.forEach((dot, dotIndex) => {
+                    const isActive = dotIndex === realIndex;
+                    dot.classList.toggle("is-active", isActive);
+                    dot.setAttribute("aria-current", isActive ? "true" : "false");
+                });
+
+                if (shouldRestartProgress) {
+                    restartProgress();
+                }
+            };
+
+            const showSlide = index => {
+                if (isSliding) {
+                    return;
+                }
+
+                currentIndex = index + 1;
+                setTrackPosition(true);
+                updateSliderState(true);
+            };
+
+            const showNextSlide = () => {
+                if (isSliding) {
+                    return;
+                }
+
+                currentIndex += 1;
+                setTrackPosition(true);
+                updateSliderState(true);
+            };
+
+            const showPreviousSlide = () => {
+                if (isSliding) {
+                    return;
+                }
+
+                currentIndex -= 1;
+                setTrackPosition(true);
+                updateSliderState(true);
+            };
+
+            const stopAutoPlay = () => {
+                window.clearInterval(autoPlayTimer);
+                autoPlayTimer = null;
+                progressBar.classList.remove("is-running");
+            };
+
+            const startAutoPlay = () => {
+                stopAutoPlay();
+                autoPlayTimer = window.setInterval(showNextSlide, slideDuration);
+                restartProgress();
+            };
+
+            const restartAutoPlay = () => {
+                stopAutoPlay();
+                startAutoPlay();
+            };
+
+            nextButton.addEventListener("click", () => {
+                showNextSlide();
+                restartAutoPlay();
+            });
+
+            previousButton.addEventListener("click", () => {
+                showPreviousSlide();
+                restartAutoPlay();
+            });
+
+            track.addEventListener("transitionend", event => {
+                if (event.target !== track || event.propertyName !== "transform") {
+                    return;
+                }
+
+                completeSlideTransition();
+            });
+
+            slider.addEventListener("mouseenter", stopAutoPlay);
+            slider.addEventListener("mouseleave", startAutoPlay);
+            slider.addEventListener("focusin", stopAutoPlay);
+            slider.addEventListener("focusout", event => {
+                if (!slider.contains(event.relatedTarget)) startAutoPlay();
+            });
+
+            slider.addEventListener("touchstart", event => {
+                touchStartX = event.changedTouches[0].clientX;
+                stopAutoPlay();
+            }, { passive: true });
+
+            slider.addEventListener("touchend", event => {
+                touchEndX = event.changedTouches[0].clientX;
+                const swipeDistance = touchStartX - touchEndX;
+
+                if (Math.abs(swipeDistance) > swipeThreshold) {
+                    if (swipeDistance > 0) {
+                        showNextSlide();
+                    } else {
+                        showPreviousSlide();
+                    }
+                }
+
+                startAutoPlay();
+            }, { passive: true });
+
+            document.addEventListener("visibilitychange", () => {
+                if (document.hidden) {
+                    stopAutoPlay();
+                } else {
+                    startAutoPlay();
+                }
+            });
+
+            setTrackPosition(false);
+            updateSliderState(true);
+            startAutoPlay();
+        })();
+    </script>
+
+
+
+<style>
+  /* =========================================================
+     DLM BABY SHOWER PAGE — FULL PAGE SECTIONS ONLY
+     Paste between existing navbar and footer
+  ========================================================= */
+
+  .bsh-page {
+    --bsh-pink: #ef2d83;
+    --bsh-pink-dark: #bd145f;
+    --bsh-blush: #fff0f7;
+    --bsh-pearl: #fffdfb;
+    --bsh-ivory: #fff9f5;
+    --bsh-gold: #d2ac70;
+    --bsh-burgundy: #6a2438;
+    --bsh-ink: #2a1d25;
+    --bsh-muted: #78646e;
+    --bsh-white: #ffffff;
+    --bsh-line: rgba(42, 29, 37, 0.09);
+
+    width: 100%;
+    overflow: hidden;
+    color: var(--bsh-ink);
+    background:
+      radial-gradient(circle at 8% 8%, rgba(239, 45, 131, 0.08), transparent 26%),
+      radial-gradient(circle at 92% 92%, rgba(210, 172, 112, 0.13), transparent 28%),
+      linear-gradient(135deg, #fffdfb 0%, #ffffff 48%, #fff9f5 100%);
+  }
+
+  .bsh-page *,
+  .bsh-page *::before,
+  .bsh-page *::after {
+    box-sizing: border-box;
+  }
+
+  .bsh-section {
+    position: relative;
+    padding: 64px 22px;
+    overflow: hidden;
+  }
+
+  .bsh-container {
+    width: min(100%, 1140px);
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+  }
+
+  .bsh-kicker {
+    width: fit-content;
+    margin: 0 0 12px;
+    padding: 7px 14px;
+    border: 1px solid rgba(239, 45, 131, 0.16);
+    border-radius: 999px;
+    color: var(--bsh-pink);
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 8px 22px rgba(239, 45, 131, 0.07);
+    font-family: Arial, sans-serif;
+    font-size: 8px;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .bsh-title {
+    margin: 0;
+    color: var(--bsh-ink);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(34px, 4.2vw, 54px);
+    font-weight: 500;
+    line-height: 1.04;
+    letter-spacing: -1.3px;
+  }
+
+  .bsh-title span {
+    color: var(--bsh-burgundy);
+    font-style: italic;
+  }
+
+  .bsh-text {
+    margin: 14px 0 0;
+    color: var(--bsh-muted);
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    line-height: 1.72;
+  }
+
+  .bsh-btn-row {
+    margin-top: 22px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .bsh-btn {
+    min-height: 44px;
+    padding: 0 18px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border-radius: 999px;
+    font-family: Arial, sans-serif;
+    font-size: 10px;
+    font-weight: 800;
+    text-decoration: none;
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease,
+      background 0.25s ease,
+      color 0.25s ease;
+  }
+
+  .bsh-btn-primary {
+    color: var(--bsh-white);
+    background: linear-gradient(135deg, var(--bsh-pink), var(--bsh-pink-dark));
+    box-shadow: 0 14px 30px rgba(239, 45, 131, 0.23);
+  }
+
+  .bsh-btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 20px 38px rgba(239, 45, 131, 0.32);
+  }
+
+  .bsh-btn-outline {
+    border: 1px solid rgba(106, 36, 56, 0.16);
+    color: var(--bsh-burgundy);
+    background: rgba(255, 255, 255, 0.88);
+  }
+
+  .bsh-btn-outline:hover {
+    color: var(--bsh-white);
+    background: var(--bsh-burgundy);
+    transform: translateY(-3px);
+  }
+
+  .bsh-btn:focus-visible,
+  .bsh-faq-question:focus-visible,
+  .bsh-lightbox-item:focus-visible,
+  .bsh-lightbox-close:focus-visible,
+  .bsh-lightbox-nav:focus-visible {
+    outline: 2px solid var(--bsh-pink);
+    outline-offset: 3px;
+  }
+
+  /* =========================================================
+     HERO
+  ========================================================= */
+
+  .bsh-hero {
+    padding: 96px 22px 58px;
+  }
+
+  .bsh-hero::before {
+    content: "";
+    position: absolute;
+    top: -160px;
+    right: -160px;
+    width: 420px;
+    height: 420px;
+    border-radius: 50%;
+    background: rgba(239, 45, 131, 0.055);
+    pointer-events: none;
+  }
+
+  .bsh-hero-card {
+    min-height: 545px;
+    padding: 12px;
+    display: grid;
+    grid-template-columns: minmax(330px, 0.82fr) minmax(420px, 1fr);
+    gap: 12px;
+    border: 1px solid var(--bsh-line);
+    border-radius: 30px;
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(255, 246, 250, 0.94));
+    box-shadow:
+      0 28px 74px rgba(72, 43, 57, 0.12),
+      inset 0 1px 0 rgba(255, 255, 255, 0.97);
+    overflow: hidden;
+  }
+
+  .bsh-hero-content {
+    padding: 42px 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 22px;
+    background:
+      radial-gradient(circle at 100% 0%, rgba(239, 45, 131, 0.1), transparent 38%),
+      linear-gradient(145deg, #ffffff, #fff5f9);
+  }
+
+  .bsh-hero-content h1 {
+    max-width: 530px;
+    margin: 0;
+    color: var(--bsh-ink);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(40px, 4.5vw, 62px);
+    font-weight: 500;
+    line-height: 0.99;
+    letter-spacing: -1.8px;
+  }
+
+  .bsh-hero-content h1 span {
+    display: block;
+    margin-top: 8px;
+    color: var(--bsh-burgundy);
+    font-size: 0.55em;
+    font-style: italic;
+    line-height: 1.15;
+  }
+
+  .bsh-hero-chips {
+    margin-top: 22px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border: 1px solid rgba(210, 172, 112, 0.28);
+    border-radius: 16px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.78);
+  }
+
+  .bsh-hero-chip {
+    min-height: 64px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-family: Arial, sans-serif;
+  }
+
+  .bsh-hero-chip + .bsh-hero-chip {
+    border-left: 1px solid rgba(210, 172, 112, 0.23);
+  }
+
+  .bsh-hero-chip strong {
+    color: var(--bsh-burgundy);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .bsh-hero-chip span {
+    margin-top: 4px;
+    color: var(--bsh-muted);
+    font-size: 8px;
+    line-height: 1.35;
+  }
+
+  .bsh-hero-visual {
+    position: relative;
+    min-height: 521px;
+    border: 1px solid rgba(42, 29, 37, 0.09);
+    border-radius: 24px 140px 24px 24px;
+    overflow: hidden;
+    background: #eadfe5;
+    box-shadow: 0 24px 58px rgba(57, 33, 46, 0.18);
+  }
+
+  .bsh-hero-visual::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background:
+      linear-gradient(to top, rgba(76, 27, 48, 0.72) 0%, rgba(76, 27, 48, 0.08) 48%, transparent 74%);
+    pointer-events: none;
+  }
+
+  .bsh-hero-main-img {
+    width: 100%;
+    height: 100%;
+    min-height: 521px;
+    display: block;
+    object-fit: cover;
+    object-position: center 20%;
+  }
+
+  .bsh-hero-floating {
+    position: absolute;
+    left: 22px;
+    bottom: 22px;
+    z-index: 4;
+    width: 180px;
+    padding: 7px;
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .bsh-hero-floating img {
+    width: 100%;
+    height: 118px;
+    display: block;
+    object-fit: cover;
+    border-radius: 13px;
+  }
+
+  .bsh-hero-floating span {
+    display: block;
+    padding: 8px 5px 2px;
+    color: var(--bsh-white);
+    font-family: Arial, sans-serif;
+    font-size: 7px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .bsh-hero-badge {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 4;
+    padding: 9px 14px;
+    border-radius: 999px;
+    color: var(--bsh-white);
+    background: rgba(106, 36, 56, 0.55);
+    font-family: Arial, sans-serif;
+    font-size: 6.5px;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    backdrop-filter: blur(11px);
+    -webkit-backdrop-filter: blur(11px);
+  }
+
+  /* =========================================================
+     SHARED HEADINGS
+  ========================================================= */
+
+  .bsh-split-heading {
+    margin-bottom: 30px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(290px, 0.66fr);
+    gap: 42px;
+    align-items: end;
+  }
+
+  .bsh-split-heading .bsh-text {
+    position: relative;
+    margin: 0;
+    padding-left: 22px;
+  }
+
+  .bsh-split-heading .bsh-text::before {
+    content: "";
+    position: absolute;
+    top: 4px;
+    bottom: 4px;
+    left: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--bsh-pink), var(--bsh-gold));
+  }
+
+  .bsh-center-heading {
+    max-width: 760px;
+    margin: 0 auto 30px;
+    text-align: center;
+  }
+
+  .bsh-center-heading .bsh-kicker {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .bsh-center-heading .bsh-text {
+    max-width: 610px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* =========================================================
+     INTRO
+  ========================================================= */
+
+  .bsh-intro-grid {
+    display: grid;
+    grid-template-columns: minmax(380px, 0.95fr) minmax(360px, 1fr);
+    gap: 36px;
+    align-items: center;
+  }
+
+  .bsh-intro-images {
+    position: relative;
+    min-height: 470px;
+  }
+
+  .bsh-intro-main-img {
+    width: 76%;
+    height: 450px;
+    display: block;
+    object-fit: cover;
+    object-position: center 20%;
+    border: 1px solid var(--bsh-line);
+    border-radius: 150px 22px 22px 22px;
+    box-shadow: 0 24px 58px rgba(72, 43, 57, 0.16);
+  }
+
+  .bsh-intro-small-img {
+    position: absolute;
+    right: 0;
+    bottom: 12px;
+    width: 42%;
+    height: 220px;
+    object-fit: cover;
+    border: 7px solid var(--bsh-white);
+    border-radius: 22px 90px 22px 22px;
+    box-shadow: 0 18px 42px rgba(72, 43, 57, 0.16);
+  }
+
+  .bsh-feature-grid {
+    margin-top: 22px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .bsh-feature-card {
+    min-height: 92px;
+    padding: 17px;
+    border: 1px solid rgba(210, 172, 112, 0.25);
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.82);
+    box-shadow: 0 13px 30px rgba(72, 43, 57, 0.06);
+    transition: transform 0.28s ease, box-shadow 0.28s ease;
+  }
+
+  .bsh-feature-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(72, 43, 57, 0.11);
+  }
+
+  .bsh-feature-card span {
+    display: inline-grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    margin-bottom: 10px;
+    border-radius: 50%;
+    color: var(--bsh-pink);
+    background: var(--bsh-blush);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 13px;
+  }
+
+  .bsh-feature-card strong {
+    display: block;
+    color: var(--bsh-burgundy);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  .bsh-feature-card p {
+    margin: 6px 0 0;
+    color: var(--bsh-muted);
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    line-height: 1.5;
+  }
+
+  /* =========================================================
+     MOMENTS CARDS
+  ========================================================= */
+
+  .bsh-moments-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .bsh-moment-card {
+    position: relative;
+    min-height: 380px;
+    overflow: hidden;
+    border: 1px solid var(--bsh-line);
+    border-radius: 22px;
+    background: #eadfe5;
+    box-shadow: 0 18px 42px rgba(72, 43, 57, 0.12);
+    transition: transform 0.32s ease, box-shadow 0.32s ease, border-color 0.32s ease;
+  }
+
+  .bsh-moment-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: linear-gradient(to top, rgba(42, 18, 32, 0.86), rgba(42, 18, 32, 0.16), transparent);
+  }
+
+  .bsh-moment-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(239, 45, 131, 0.28);
+    box-shadow: 0 26px 58px rgba(72, 43, 57, 0.17);
+  }
+
+  .bsh-moment-card img {
+    width: 100%;
+    height: 100%;
+    min-height: 380px;
+    display: block;
+    object-fit: cover;
+    transition: transform 0.75s ease;
+  }
+
+  .bsh-moment-card:hover img {
+    transform: scale(1.06);
+  }
+
+  .bsh-moment-content {
+    position: absolute;
+    left: 18px;
+    right: 18px;
+    bottom: 18px;
+    z-index: 3;
+    color: var(--bsh-white);
+  }
+
+  .bsh-moment-no {
+    width: 35px;
+    height: 35px;
+    margin-bottom: 12px;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.12);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 12px;
+  }
+
+  .bsh-moment-content h3 {
+    margin: 0;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 23px;
+    font-weight: 500;
+    line-height: 1.12;
+  }
+
+  .bsh-moment-content p {
+    margin: 8px 0 0;
+    color: rgba(255, 255, 255, 0.72);
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    line-height: 1.55;
+  }
+
+  /* =========================================================
+     MOM-TO-BE + FAMILY
+  ========================================================= */
+
+  .bsh-story-box {
+    padding: 12px;
+    display: grid;
+    grid-template-columns: minmax(390px, 1fr) minmax(360px, 0.86fr);
+    gap: 12px;
+    border: 1px solid var(--bsh-line);
+    border-radius: 28px;
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(255, 246, 250, 0.94));
+    box-shadow: 0 24px 62px rgba(72, 43, 57, 0.1);
+    overflow: hidden;
+  }
+
+  .bsh-story-box-reverse {
+    grid-template-columns: minmax(360px, 0.86fr) minmax(390px, 1fr);
+  }
+
+  .bsh-story-visual {
+    position: relative;
+    min-height: 430px;
+    overflow: hidden;
+    border-radius: 22px 120px 22px 22px;
+  }
+
+  .bsh-story-box-reverse .bsh-story-visual {
+    border-radius: 120px 22px 22px 22px;
+  }
+
+  .bsh-story-visual img {
+    width: 100%;
+    height: 100%;
+    min-height: 430px;
+    display: block;
+    object-fit: cover;
+    object-position: center 22%;
+  }
+
+  .bsh-story-mini {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    width: 165px;
+    height: 145px;
+    object-fit: cover;
+    border: 6px solid var(--bsh-white);
+    border-radius: 18px 70px 18px 18px;
+    box-shadow: 0 18px 38px rgba(72, 43, 57, 0.16);
+  }
+
+  .bsh-story-content {
+    padding: 36px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 20px;
+    background:
+      radial-gradient(circle at 100% 0%, rgba(239, 45, 131, 0.09), transparent 38%),
+      #ffffff;
+  }
+
+  .bsh-point-list {
+    margin: 20px 0 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 9px;
+  }
+
+  .bsh-point-list li {
+    position: relative;
+    min-height: 42px;
+    padding: 11px 12px 11px 36px;
+    border: 1px solid rgba(210, 172, 112, 0.24);
+    border-radius: 13px;
+    background: rgba(255, 255, 255, 0.75);
+    color: var(--bsh-ink);
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    font-weight: 800;
+    line-height: 1.35;
+  }
+
+  .bsh-point-list li::before {
+    content: "";
+    position: absolute;
+    left: 13px;
+    top: 50%;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--bsh-pink) 0 36%, rgba(239, 45, 131, 0.12) 40% 100%);
+    transform: translateY(-50%);
+  }
+
+  .bsh-quote-card {
+    margin-top: 20px;
+    padding: 18px;
+    border: 1px solid rgba(239, 45, 131, 0.12);
+    border-radius: 18px;
+    background: #fff7fb;
+    color: var(--bsh-burgundy);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 18px;
+    font-style: italic;
+    line-height: 1.45;
+  }
+
+  /* =========================================================
+     DETAILS + GALLERY
+  ========================================================= */
+
+  .bsh-detail-grid,
+  .bsh-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    grid-auto-rows: 86px;
+    gap: 10px;
+    grid-auto-flow: dense;
+    align-items: stretch;
+  }
+
+  .bsh-detail-card,
+  .bsh-gallery-card {
+    position: relative;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid var(--bsh-line);
+    border-radius: 18px;
+    background: #eadfe5;
+    box-shadow: 0 16px 38px rgba(72, 43, 57, 0.1);
+    cursor: pointer;
+    appearance: none;
+    transition: transform 0.32s ease, box-shadow 0.32s ease;
+  }
+
+  .bsh-detail-card:hover,
+  .bsh-gallery-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 24px 54px rgba(72, 43, 57, 0.16);
+  }
+
+  .bsh-detail-card::before,
+  .bsh-gallery-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: linear-gradient(to top, rgba(42, 18, 32, 0.78), rgba(42, 18, 32, 0.08), transparent);
+  }
+
+  .bsh-detail-card img,
+  .bsh-gallery-card img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    transition: transform 0.75s ease;
+  }
+
+  .bsh-detail-card:hover img,
+  .bsh-gallery-card:hover img {
+    transform: scale(1.06);
+  }
+
+  .bsh-card-caption {
+    position: absolute;
+    left: 14px;
+    right: 14px;
+    bottom: 13px;
+    z-index: 3;
+    color: var(--bsh-white);
+    text-align: left;
+  }
+
+  .bsh-card-caption span {
+    display: block;
+    color: rgba(255, 255, 255, 0.66);
+    font-family: Arial, sans-serif;
+    font-size: 5.4px;
+    font-weight: 800;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+  }
+
+  .bsh-card-caption strong {
+    display: block;
+    margin-top: 4px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.14;
+  }
+
+  .bsh-detail-wide {
+    grid-column: 1 / span 5;
+    grid-row: 1 / span 4;
+    border-radius: 22px 90px 22px 22px;
+  }
+
+  .bsh-detail-tall {
+    grid-column: 6 / span 3;
+    grid-row: 1 / span 4;
+    border-radius: 90px 22px 22px 22px;
+  }
+
+  .bsh-detail-small {
+    grid-column: span 4;
+    grid-row: span 3;
+  }
+
+  .bsh-detail-statement {
+    grid-column: 9 / span 4;
+    grid-row: 1 / span 4;
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 1px solid rgba(239, 45, 131, 0.11);
+    border-radius: 18px;
+    background:
+      radial-gradient(circle at 100% 0%, rgba(239, 45, 131, 0.1), transparent 42%),
+      linear-gradient(145deg, #ffffff, #fff5f9);
+    box-shadow: 0 16px 38px rgba(72, 43, 57, 0.08);
+  }
+
+  .bsh-detail-grid > :nth-child(1) {
+    grid-column: 1 / span 5;
+    grid-row: 1 / span 4;
+  }
+
+  .bsh-detail-grid > :nth-child(2) {
+    grid-column: 6 / span 3;
+    grid-row: 1 / span 4;
+  }
+
+  .bsh-detail-grid > :nth-child(3) {
+    grid-column: 9 / span 4;
+    grid-row: 1 / span 4;
+  }
+
+  .bsh-detail-grid > :nth-child(4) {
+    grid-column: 1 / span 4;
+    grid-row: 5 / span 3;
+  }
+
+  .bsh-detail-grid > :nth-child(5) {
+    grid-column: 5 / span 4;
+    grid-row: 5 / span 3;
+  }
+
+  .bsh-detail-grid > :nth-child(6) {
+    grid-column: 9 / span 4;
+    grid-row: 5 / span 3;
+  }
+
+  .bsh-detail-statement small {
+    color: var(--bsh-pink);
+    font-family: Arial, sans-serif;
+    font-size: 7px;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .bsh-detail-statement strong {
+    margin-top: 8px;
+    color: var(--bsh-burgundy);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 1.14;
+  }
+
+  .bsh-gallery-large {
+    grid-column: span 5;
+    grid-row: span 4;
+  }
+
+  .bsh-gallery-medium {
+    grid-column: span 4;
+    grid-row: span 3;
+  }
+
+  .bsh-gallery-small {
+    grid-column: span 3;
+    grid-row: span 2;
+  }
+
+  .bsh-gallery-tall {
+    grid-column: span 3;
+    grid-row: span 5;
+  }
+
+  /* =========================================================
+     INCLUSIONS + PACKAGES
+  ========================================================= */
+
+  .bsh-card-grid-4 {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .bsh-inclusion-card {
+    position: relative;
+    overflow: hidden;
+    min-height: 190px;
+    padding: 24px 20px;
+    border: 1px solid rgba(210, 172, 112, 0.26);
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.88);
+    box-shadow: 0 16px 38px rgba(72, 43, 57, 0.08);
+    transition:
+      transform 0.32s ease,
+      box-shadow 0.32s ease,
+      border-color 0.32s ease,
+      background 0.32s ease;
+  }
+
+  .bsh-inclusion-card:hover {
+    transform: translateY(-7px);
+    border-color: rgba(239, 45, 131, 0.24);
+    box-shadow: 0 24px 54px rgba(72, 43, 57, 0.13);
+    background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255, 244, 249, 0.92));
+  }
+
+  .bsh-inclusion-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      transparent 0%,
+      rgba(239, 45, 131, 0.06) 46%,
+      transparent 72%
+    );
+    opacity: 0;
+    transform: translateX(-18%);
+    transition: opacity 0.32s ease, transform 0.32s ease;
+    pointer-events: none;
+  }
+
+  .bsh-inclusion-card:hover::after {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .bsh-inclusion-card:hover .bsh-inclusion-icon {
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 10px 24px rgba(239, 45, 131, 0.14);
+  }
+
+  .bsh-inclusion-icon {
+    width: 46px;
+    height: 46px;
+    margin-bottom: 16px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    color: var(--bsh-pink);
+    background: var(--bsh-blush);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 17px;
+    transition: transform 0.28s ease, box-shadow 0.28s ease;
+  }
+
+  .bsh-inclusion-card h3,
+  .bsh-package h3 {
+    margin: 0;
+    color: var(--bsh-burgundy);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 1.15;
+  }
+
+  .bsh-inclusion-card p,
+  .bsh-package p {
+    margin: 10px 0 0;
+    color: var(--bsh-muted);
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    line-height: 1.6;
+  }
+
+  .bsh-package-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .bsh-package {
+    position: relative;
+    min-height: 430px;
+    padding: 26px 22px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(210, 172, 112, 0.28);
+    border-radius: 22px;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 18px 44px rgba(72, 43, 57, 0.09);
+  }
+
+  .bsh-package-featured {
+    border-color: rgba(239, 45, 131, 0.25);
+    background:
+      radial-gradient(circle at 100% 0%, rgba(239, 45, 131, 0.1), transparent 38%),
+      #ffffff;
+  }
+
+  .bsh-package-badge {
+    width: fit-content;
+    margin-bottom: 14px;
+    padding: 7px 12px;
+    border-radius: 999px;
+    color: var(--bsh-white);
+    background: linear-gradient(135deg, var(--bsh-pink), var(--bsh-pink-dark));
+    font-family: Arial, sans-serif;
+    font-size: 7px;
+    font-weight: 800;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+  }
+
+  .bsh-package ul {
+    margin: 18px 0 22px;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 9px;
+  }
+
+  .bsh-package li {
+    position: relative;
+    padding-left: 21px;
+    color: var(--bsh-muted);
+    font-family: Arial, sans-serif;
+    font-size: 11.5px;
+    line-height: 1.45;
+  }
+
+  .bsh-package li::before {
+    content: "";
+    position: absolute;
+    top: 7px;
+    left: 0;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--bsh-pink);
+  }
+
+  .bsh-package-actions {
+    margin-top: auto;
+    display: grid;
+    gap: 9px;
+  }
+
+  .bsh-package-note {
+    max-width: 760px;
+    margin: 22px auto 0;
+    color: var(--bsh-muted);
+    font-family: Arial, sans-serif;
+    font-size: 11.5px;
+    line-height: 1.65;
+    text-align: center;
+  }
+
+  /* =========================================================
+     TESTIMONIAL + FAQ + CTA
+  ========================================================= */
+
+  .bsh-testimonial-card {
+    padding: 12px;
+    display: grid;
+    grid-template-columns: minmax(360px, 0.82fr) minmax(380px, 1fr);
+    gap: 12px;
+    border: 1px solid var(--bsh-line);
+    border-radius: 28px;
+    background: linear-gradient(145deg, #ffffff, #fff5f9);
+    box-shadow: 0 24px 62px rgba(72, 43, 57, 0.1);
+  }
+
+  .bsh-testimonial-img {
+    width: 100%;
+    height: 390px;
+    object-fit: cover;
+    object-position: center 22%;
+    border-radius: 22px 110px 22px 22px;
+  }
+
+  .bsh-testimonial-content {
+    padding: 34px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .bsh-stars {
+    color: var(--bsh-gold);
+    font-size: 20px;
+    letter-spacing: 2px;
+  }
+
+  .bsh-testimonial-content blockquote {
+    margin: 16px 0 0;
+    color: var(--bsh-burgundy);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 25px;
+    font-weight: 500;
+    line-height: 1.35;
+  }
+
+  .bsh-client {
+    margin-top: 18px;
+    color: var(--bsh-muted);
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .bsh-client strong {
+    display: block;
+    color: var(--bsh-ink);
+    font-size: 13px;
+  }
+
+  .bsh-faq-wrap {
+    max-width: 900px;
+    margin: 0 auto;
+    display: grid;
+    gap: 10px;
+  }
+
+  .bsh-faq-item {
+    border: 1px solid rgba(210, 172, 112, 0.24);
+    border-radius: 16px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.88);
+    box-shadow: 0 12px 28px rgba(72, 43, 57, 0.06);
+  }
+
+  .bsh-faq-question {
+    width: 100%;
+    min-height: 54px;
+    padding: 0 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    border: 0;
+    color: var(--bsh-burgundy);
+    background: transparent;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 17px;
+    font-weight: 500;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .bsh-faq-icon {
+    width: 28px;
+    height: 28px;
+    flex: 0 0 auto;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    color: var(--bsh-pink);
+    background: var(--bsh-blush);
+    font-family: Arial, sans-serif;
+    font-weight: 800;
+  }
+
+  .bsh-faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.32s ease;
+  }
+
+  .bsh-faq-answer p {
+    margin: 0;
+    padding: 0 18px 18px;
+    color: var(--bsh-muted);
+    font-family: Arial, sans-serif;
+    font-size: 12.5px;
+    line-height: 1.7;
+  }
+
+  .bsh-cta-card {
+    min-height: 390px;
+    padding: 12px;
+    display: grid;
+    grid-template-columns: minmax(380px, 1fr) minmax(330px, 0.8fr);
+    gap: 12px;
+    border-radius: 30px;
+    border: 1px solid var(--bsh-line);
+    background: linear-gradient(145deg, #ffffff, #fff5f9);
+    box-shadow: 0 26px 70px rgba(72, 43, 57, 0.12);
+    overflow: hidden;
+  }
+
+  .bsh-cta-img {
+    width: 100%;
+    height: 100%;
+    min-height: 366px;
+    object-fit: cover;
+    object-position: center 25%;
+    border-radius: 22px 120px 22px 22px;
+  }
+
+  .bsh-cta-content {
+    padding: 36px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  /* =========================================================
+     LIGHTBOX
+  ========================================================= */
+
+  .bsh-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    visibility: hidden;
+    opacity: 0;
+    background: rgba(25, 15, 21, 0.94);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+
+  .bsh-lightbox.is-open {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .bsh-lightbox-dialog {
+    position: relative;
+    width: min(100%, 1080px);
+    height: min(88vh, 780px);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 270px;
+    overflow: hidden;
+    border-radius: 24px;
+    background: #24161f;
+    box-shadow: 0 35px 100px rgba(0, 0, 0, 0.48);
+  }
+
+  .bsh-lightbox-img-wrap {
+    padding: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #1d1219;
+  }
+
+  .bsh-lightbox-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .bsh-lightbox-info {
+    padding: 38px 26px 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    color: var(--bsh-white);
+    background: linear-gradient(160deg, rgba(106, 36, 56, 0.38), rgba(30, 18, 25, 0.98));
+  }
+
+  .bsh-lightbox-count {
+    margin-bottom: auto;
+    color: rgba(255, 255, 255, 0.52);
+    font-family: Arial, sans-serif;
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .bsh-lightbox-title {
+    margin: 10px 0 0;
+    color: var(--bsh-white);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 28px;
+    font-weight: 500;
+    line-height: 1.12;
+  }
+
+  .bsh-lightbox-text {
+    margin: 12px 0 0;
+    color: rgba(255, 255, 255, 0.68);
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    line-height: 1.65;
+  }
+
+  .bsh-lightbox-close,
+  .bsh-lightbox-nav {
+    position: absolute;
+    z-index: 5;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 50%;
+    color: var(--bsh-white);
+    background: rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .bsh-lightbox-close {
+    top: 16px;
+    right: 16px;
+    width: 44px;
+    height: 44px;
+    font-size: 24px;
+  }
+
+  .bsh-lightbox-prev,
+  .bsh-lightbox-next {
+    top: 50%;
+    width: 46px;
+    height: 46px;
+    font-size: 24px;
+    transform: translateY(-50%);
+  }
+
+  .bsh-lightbox-prev {
+    left: 16px;
+  }
+
+  .bsh-lightbox-next {
+    right: 286px;
+  }
+
+  /* =========================================================
+     SAFE REVEAL
+  ========================================================= */
+
+  .bsh-reveal {
+    opacity: 1;
+    transform: none;
+  }
+
+  .bsh-page.bsh-js-ready .bsh-reveal {
+    opacity: 0;
+    transform: translateY(26px);
+    transition:
+      opacity 0.75s ease,
+      transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .bsh-page.bsh-js-ready .bsh-reveal-left {
+    transform: translateX(-30px);
+  }
+
+  .bsh-page.bsh-js-ready .bsh-reveal-right {
+    transform: translateX(30px);
+  }
+
+  .bsh-page.bsh-js-ready .bsh-reveal.bsh-visible {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+
+  /* =========================================================
+     RESPONSIVE
+  ========================================================= */
+
+  @media (max-width: 1060px) {
+    .bsh-section {
+      padding: 58px 17px;
+    }
+
+    .bsh-hero {
+      padding-top: 90px;
+    }
+
+    .bsh-hero-card,
+    .bsh-story-box,
+    .bsh-story-box-reverse,
+    .bsh-testimonial-card,
+    .bsh-cta-card {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .bsh-moments-grid,
+    .bsh-card-grid-4 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .bsh-package-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .bsh-package {
+      min-height: auto;
+    }
+  }
+
+  @media (max-width: 780px) {
+    .bsh-section {
+      padding: 54px 12px;
+    }
+
+    .bsh-hero {
+      padding: 88px 12px 50px;
+    }
+
+    .bsh-title,
+    .bsh-hero-content h1 {
+      font-size: clamp(32px, 9vw, 42px);
+      line-height: 1.08;
+      letter-spacing: -0.8px;
+    }
+
+    .bsh-kicker {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .bsh-text {
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .bsh-hero-card {
+      display: flex;
+      flex-direction: column-reverse;
+      padding: 9px;
+      border-radius: 23px;
+    }
+
+    .bsh-hero-visual {
+      min-height: 430px;
+      border-radius: 18px 90px 18px 18px;
+    }
+
+    .bsh-hero-main-img {
+      min-height: 430px;
+    }
+
+    .bsh-hero-floating {
+      width: 138px;
+      left: 14px;
+      bottom: 14px;
+    }
+
+    .bsh-hero-floating img {
+      height: 90px;
+    }
+
+    .bsh-hero-content {
+      padding: 28px 18px 24px;
+      text-align: center;
+    }
+
+    .bsh-hero-chips {
+      grid-template-columns: 1fr;
+    }
+
+    .bsh-hero-chip + .bsh-hero-chip {
+      border-left: 0;
+      border-top: 1px solid rgba(210, 172, 112, 0.23);
+    }
+
+    .bsh-btn-row {
+      flex-direction: column;
+    }
+
+    .bsh-btn {
+      width: 100%;
+    }
+
+    .bsh-split-heading {
+      display: block;
+      text-align: center;
+    }
+
+    .bsh-split-heading .bsh-text {
+      max-width: 360px;
+      margin: 14px auto 0;
+      padding-left: 0;
+    }
+
+    .bsh-split-heading .bsh-text::before {
+      display: none;
+    }
+
+    .bsh-intro-grid,
+    .bsh-story-box,
+    .bsh-story-box-reverse,
+    .bsh-testimonial-card,
+    .bsh-cta-card {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .bsh-intro-images {
+      min-height: 390px;
+      order: -1;
+    }
+
+    .bsh-intro-main-img {
+      width: 82%;
+      height: 365px;
+      border-radius: 120px 18px 18px 18px;
+    }
+
+    .bsh-intro-small-img {
+      width: 45%;
+      height: 170px;
+    }
+
+    .bsh-feature-grid,
+    .bsh-point-list,
+    .bsh-card-grid-4,
+    .bsh-moments-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .bsh-moment-card,
+    .bsh-moment-card img {
+      min-height: 390px;
+    }
+
+    .bsh-story-visual,
+    .bsh-story-visual img {
+      min-height: 390px;
+    }
+
+    .bsh-story-content,
+    .bsh-testimonial-content,
+    .bsh-cta-content {
+      padding: 28px 18px;
+      text-align: center;
+    }
+
+    .bsh-story-mini {
+      width: 132px;
+      height: 115px;
+      right: 14px;
+      bottom: 14px;
+    }
+
+    .bsh-point-list li {
+      text-align: left;
+    }
+
+    .bsh-detail-grid,
+    .bsh-gallery-grid {
+      grid-template-columns: 1fr;
+      grid-auto-rows: auto;
+      gap: 10px;
+    }
+
+    .bsh-detail-wide,
+    .bsh-detail-tall,
+    .bsh-detail-statement,
+    .bsh-gallery-large,
+    .bsh-gallery-tall {
+      grid-column: 1 / -1;
+      grid-row: auto;
+    }
+
+    .bsh-detail-small,
+    .bsh-gallery-small,
+    .bsh-gallery-medium {
+      grid-column: 1 / -1;
+      grid-row: auto;
+    }
+
+    .bsh-detail-statement {
+      min-height: 160px;
+      text-align: center;
+    }
+
+    .bsh-testimonial-img,
+    .bsh-cta-img {
+      height: 360px;
+      min-height: 0;
+    }
+
+    .bsh-testimonial-content blockquote {
+      font-size: 21px;
+    }
+
+    .bsh-lightbox {
+      padding: 10px;
+    }
+
+    .bsh-lightbox-dialog {
+      width: 100%;
+      height: 94vh;
+      display: flex;
+      flex-direction: column;
+      border-radius: 18px;
+    }
+
+    .bsh-lightbox-img-wrap {
+      flex: 1 1 auto;
+      padding: 12px;
+    }
+
+    .bsh-lightbox-info {
+      min-height: 155px;
+      padding: 22px 18px;
+    }
+
+    .bsh-lightbox-count {
+      margin-bottom: 14px;
+    }
+
+    .bsh-lightbox-title {
+      font-size: 23px;
+    }
+
+    .bsh-lightbox-close {
+      top: 12px;
+      right: 12px;
+      width: 40px;
+      height: 40px;
+    }
+
+    .bsh-lightbox-prev,
+    .bsh-lightbox-next {
+      top: 44%;
+      width: 40px;
+      height: 40px;
+    }
+
+    .bsh-lightbox-prev {
+      left: 10px;
+    }
+
+    .bsh-lightbox-next {
+      right: 10px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .bsh-section {
+      padding-left: 9px;
+      padding-right: 9px;
+    }
+
+    .bsh-hero {
+      padding-left: 9px;
+      padding-right: 9px;
+    }
+
+    .bsh-hero-visual,
+    .bsh-hero-main-img {
+      min-height: 390px;
+    }
+
+    .bsh-intro-main-img {
+      height: 330px;
+    }
+
+    .bsh-intro-small-img {
+      height: 150px;
+    }
+
+    .bsh-moment-card,
+    .bsh-moment-card img,
+    .bsh-story-visual,
+    .bsh-story-visual img {
+      min-height: 360px;
+    }
+
+    .bsh-detail-grid,
+    .bsh-gallery-grid {
+      grid-auto-rows: auto;
+      gap: 8px;
+    }
+
+    .bsh-detail-card,
+    .bsh-gallery-card {
+      min-height: 220px;
+    }
+
+    .bsh-faq-question {
+      font-size: 15px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bsh-page.bsh-js-ready .bsh-reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+
+    .bsh-moment-card,
+    .bsh-detail-card,
+    .bsh-gallery-card,
+    .bsh-btn,
+    .bsh-feature-card,
+    .bsh-inclusion-card,
+    .bsh-faq-answer,
+    .bsh-lightbox {
+      transition: none;
+    }
+  }
+</style>
+
+<main class="bsh-page">
+
+  <!-- HERO -->
+
+  <section class="bsh-section bsh-hero" id="baby-shower-home">
+    <div class="bsh-container">
+      <div class="bsh-hero-card bsh-reveal">
+
+
+    <div class="bsh-hero-content">
+      <p class="bsh-kicker">DLM Baby Shower Stories</p>
+
+      <h1>
+        Celebrating Motherhood,
+        <span>Love & New Beginnings</span>
+      </h1>
+
+      <p class="bsh-text">
+        Capture the joy, blessings and beautiful emotions of your baby shower
+        with timeless photographs by DLM Photography.
+      </p>
+
+      <div class="bsh-btn-row">
+        <a class="bsh-btn bsh-btn-primary" href="#baby-shower-gallery">
+          Explore Baby Shower Gallery
+        </a>
+        <a
+          class="bsh-btn bsh-btn-outline"
+          href="https://wa.me/919789029012?text=Hello%2C%20I%20would%20like%20to%20check%20availability%20for%20baby%20shower%20photography."
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Check Availability
+        </a>
+      </div>
+
+      <div class="bsh-hero-chips" aria-label="Baby shower photography highlights">
+        <div class="bsh-hero-chip">
+          <strong>Motherhood</strong>
+          <span>Elegant mom-to-be portraits</span>
+        </div>
+        <div class="bsh-hero-chip">
+          <strong>Blessings</strong>
+          <span>Family rituals and emotions</span>
+        </div>
+        <div class="bsh-hero-chip">
+          <strong>Details</strong>
+          <span>Décor, gifts and celebration</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="bsh-hero-visual">
+      <img
+        class="bsh-hero-main-img"
+        src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1500&q=90"
+        alt="Elegant baby shower celebration with mother-to-be"
+        loading="eager"
+        fetchpriority="high"
+      >
+
+      <span class="bsh-hero-badge">
+        Blessing Story · 01
+      </span>
+
+      <div class="bsh-hero-floating">
+        <img
+          src="https://images.unsplash.com/photo-1523438885200-e635ba2c371e?auto=format&fit=crop&w=700&q=88"
+          alt="Soft baby shower floral décor detail"
+          loading="lazy"
+        >
+        <span>Celebration Details</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+  </section>
+
+  <!-- INTRO -->
+
+  <section class="bsh-section bsh-intro" id="baby-shower-approach">
+    <div class="bsh-container">
+      <div class="bsh-intro-grid">
+
+
+    <div class="bsh-intro-images bsh-reveal-left bsh-reveal">
+      <img
+        class="bsh-intro-main-img"
+        src="https://images.unsplash.com/photo-1606800052052-a08af7148866?auto=format&fit=crop&w=1100&q=88"
+        alt="Mother-to-be portrait during a traditional celebration"
+        loading="lazy"
+      >
+      <img
+        class="bsh-intro-small-img"
+        src="https://images.unsplash.com/photo-1523438885200-e635ba2c371e?auto=format&fit=crop&w=700&q=88"
+        alt="Baby shower flower and décor detail"
+        loading="lazy"
+      >
+    </div>
+
+    <div class="bsh-reveal-right bsh-reveal">
+      <p class="bsh-kicker">Our Baby Shower Approach</p>
+      <h2 class="bsh-title">
+        Every Blessing, Smile and Emotion
+        <span>Beautifully Preserved</span>
+      </h2>
+      <p class="bsh-text">
+        We photograph baby showers with a calm, emotional and elegant approach,
+        preserving the rituals, family blessings, décor and natural candid moments.
+      </p>
+      <p class="bsh-text">
+        From the mother-to-be’s portraits to meaningful family interactions,
+        every frame is crafted to feel timeless and album-ready.
+      </p>
+
+      <div class="bsh-feature-grid">
+        <article class="bsh-feature-card">
+          <span>01</span>
+          <strong>Mom-to-Be Portraits</strong>
+          <p>Soft, graceful and natural portraits that celebrate motherhood.</p>
+        </article>
+        <article class="bsh-feature-card">
+          <span>02</span>
+          <strong>Family Blessings</strong>
+          <p>Emotional frames with parents, grandparents and loved ones.</p>
+        </article>
+        <article class="bsh-feature-card">
+          <span>03</span>
+          <strong>Candid Celebration</strong>
+          <p>Laughter, rituals and real expressions captured naturally.</p>
+        </article>
+        <article class="bsh-feature-card">
+          <span>04</span>
+          <strong>Décor Details</strong>
+          <p>Stage, flowers, gifts and celebration details preserved beautifully.</p>
+        </article>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+  </section>
+
+  <!-- MOMENTS -->
+
+  <section class="bsh-section bsh-moments" id="baby-shower-moments">
+    <div class="bsh-container">
+      <header class="bsh-center-heading bsh-reveal">
+        <p class="bsh-kicker">Baby Shower Moments</p>
+        <h2 class="bsh-title">
+          The Moments That Make
+          <span>The Day Special</span>
+        </h2>
+        <p class="bsh-text">
+          From traditional blessings to joyful celebration details, every part of the day deserves to be remembered.
+        </p>
+      </header>
+
+
+  <div class="bsh-moments-grid">
+    <article class="bsh-moment-card bsh-reveal">
+      <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=900&q=88" alt="Family blessing ceremony during baby shower" loading="lazy">
+      <div class="bsh-moment-content">
+        <span class="bsh-moment-no">01</span>
+        <h3>Blessing Ceremony</h3>
+        <p>Traditional rituals and blessings captured with emotional depth.</p>
+      </div>
+    </article>
+
+    <article class="bsh-moment-card bsh-reveal">
+      <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=900&q=88" alt="Mother-to-be portrait during baby shower" loading="lazy">
+      <div class="bsh-moment-content">
+        <span class="bsh-moment-no">02</span>
+        <h3>Mom-to-Be Portraits</h3>
+        <p>Elegant portraits that celebrate motherhood, beauty and joy.</p>
+      </div>
+    </article>
+
+    <article class="bsh-moment-card bsh-reveal">
+      <img src="https://images.unsplash.com/photo-1523438885200-e635ba2c371e?auto=format&fit=crop&w=900&q=88" alt="Family members celebrating baby shower" loading="lazy">
+      <div class="bsh-moment-content">
+        <span class="bsh-moment-no">03</span>
+        <h3>Family Moments</h3>
+        <p>Warm emotions, laughter and love shared with close family.</p>
+      </div>
+    </article>
+
+    <article class="bsh-moment-card bsh-reveal">
+      <img src="https://images.unsplash.com/photo-1464349153735-7db50ed83c84?auto=format&fit=crop&w=900&q=88" alt="Baby shower cake and celebration details" loading="lazy">
+      <div class="bsh-moment-content">
+        <span class="bsh-moment-no">04</span>
+        <h3>Celebration Details</h3>
+        <p>Décor, cake, gifts and beautiful details preserved clearly.</p>
+      </div>
+    </article>
+  </div>
+</div>
+
+
+  </section>
+
+  <!-- MOM TO BE -->
+
+  <section class="bsh-section bsh-mom-to-be" id="mom-to-be-portraits">
+    <div class="bsh-container">
+      <div class="bsh-story-box bsh-reveal">
+        <div class="bsh-story-visual">
+          <img src="https://images.unsplash.com/photo-1606800052052-a08af7148866?auto=format&fit=crop&w=1200&q=88" alt="Elegant mother-to-be portrait" loading="lazy">
+          <img class="bsh-story-mini" src="https://images.unsplash.com/photo-1523438885200-e635ba2c371e?auto=format&fit=crop&w=600&q=88" alt="Close-up baby shower floral detail" loading="lazy">
+        </div>
+
+    <div class="bsh-story-content">
+      <p class="bsh-kicker">Mom-to-Be Portraits</p>
+      <h2 class="bsh-title">
+        Portraits That Celebrate
+        <span>The Mother-to-Be</span>
+      </h2>
+      <p class="bsh-text">
+        We create graceful portraits that highlight the mother-to-be’s beauty,
+        emotion and quiet joy before the arrival of a new life.
+      </p>
+
+      <ul class="bsh-point-list">
+        <li>Solo portraits</li>
+        <li>Couple portraits</li>
+        <li>Saree or gown details</li>
+        <li>Natural expressions</li>
+        <li>Family emotions</li>
+        <li>Album-ready frames</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+  </section>
+
+  <!-- FAMILY -->
+
+  <section class="bsh-section bsh-family" id="baby-shower-family">
+    <div class="bsh-container">
+      <div class="bsh-story-box bsh-story-box-reverse bsh-reveal">
+        <div class="bsh-story-content">
+          <p class="bsh-kicker">Family & Blessings</p>
+          <h2 class="bsh-title">
+            The People Who Make
+            <span>The Day Meaningful</span>
+          </h2>
+          <p class="bsh-text">
+            Baby shower memories become more special when family emotions,
+            blessings and shared happiness are preserved naturally.
+          </p>
+
+
+      <div class="bsh-quote-card">
+        A baby shower is not only a celebration of a new life, but also a gathering of love, blessings and family emotions.
+      </div>
+    </div>
+
+    <div class="bsh-story-visual">
+      <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1200&q=88" alt="Family blessings during baby shower celebration" loading="lazy">
+      <img class="bsh-story-mini" src="https://images.unsplash.com/photo-1523438885200-e635ba2c371e?auto=format&fit=crop&w=600&q=88" alt="Small baby shower group celebration moment" loading="lazy">
+    </div>
+  </div>
+</div>
+
+
+  </section>
+
+ 
+
+  <section class="bsh-section bsh-details" id="baby-shower-details">
+    <div class="bsh-container">
+      <header class="bsh-split-heading bsh-reveal">
+        <div>
+          <p class="bsh-kicker">Decor & Detail Photography</p>
+          <h2 class="bsh-title">
+            Little Details,
+            <span>Beautifully Remembered</span>
+          </h2>
+        </div>
+        <p class="bsh-text">
+          Stage decor, flowers, gifts, cake, traditional items and celebration details are captured with a premium editorial eye.
+        </p>
+      </header>
+
+  <div class="bsh-detail-grid">
+    <button class="bsh-detail-card bsh-detail-wide bsh-lightbox-item bsh-reveal" type="button" data-bsh-title="Stage Décor" data-bsh-text="Soft stage décor and celebration setup photographed with elegant framing.">
+      <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1000&q=88" alt="Baby shower stage décor" loading="lazy">
+      <span class="bsh-card-caption"><span>01</span><strong>Stage Décor</strong></span>
+    </button>
+
+    <button class="bsh-detail-card bsh-detail-tall bsh-lightbox-item bsh-reveal" type="button" data-bsh-title="Floral Details" data-bsh-text="Flowers and celebration styling details captured with soft tones.">
+      <img src="https://images.unsplash.com/photo-1523438885200-e635ba2c371e?auto=format&fit=crop&w=800&q=88" alt="Baby shower floral arrangement" loading="lazy">
+      <span class="bsh-card-caption"><span>02</span><strong>Flowers</strong></span>
+    </button>
+
+    <article class="bsh-detail-statement bsh-reveal">
+      <small>DLM Detail Story</small>
+      <strong>Every detail adds softness, meaning and beauty to the celebration.</strong>
+    </article>
+
+    <button class="bsh-detail-card bsh-detail-small bsh-lightbox-item bsh-reveal" type="button" data-bsh-title="Cake Detail" data-bsh-text="Cake and dessert details photographed as part of the celebration story.">
+      <img src="https://images.unsplash.com/photo-1464349153735-7db50ed83c84?auto=format&fit=crop&w=700&q=88" alt="Baby shower cake detail" loading="lazy">
+      <span class="bsh-card-caption"><span>03</span><strong>Cake</strong></span>
+    </button>
+
+    <button class="bsh-detail-card bsh-detail-small bsh-lightbox-item bsh-reveal" type="button" data-bsh-title="Gift Details" data-bsh-text="Return gifts and celebration elements preserved beautifully.">
+      <img src="https://images.unsplash.com/photo-1513201099705-a9746e1e201f?auto=format&fit=crop&w=700&q=88" alt="Baby shower gift detail" loading="lazy">
+      <span class="bsh-card-caption"><span>04</span><strong>Gifts</strong></span>
+    </button>
+
+    <button class="bsh-detail-card bsh-detail-small bsh-lightbox-item bsh-reveal" type="button" data-bsh-title="Traditional Items" data-bsh-text="Traditional celebration items and meaningful elements photographed respectfully.">
+      <img src="https://images.unsplash.com/photo-1606800052052-a08af7148866?auto=format&fit=crop&w=700&q=88" alt="Traditional baby shower detail" loading="lazy">
+      <span class="bsh-card-caption"><span>05</span><strong>Tradition</strong></span>
+    </button>
+  </div>
+</div>
+
+
+  </section>
+
+
+ 
+
+  <section class="bsh-section bsh-inclusions" id="baby-shower-inclusions">
+    <div class="bsh-container">
+      <header class="bsh-center-heading bsh-reveal">
+        <p class="bsh-kicker">Package Inclusions</p>
+        <h2 class="bsh-title">
+          What We Cover in Your
+          <span>Baby Shower Story</span>
+        </h2>
+      </header>
+
+
+  <div class="bsh-card-grid-4">
+    <article class="bsh-inclusion-card bsh-reveal">
+      <span class="bsh-inclusion-icon">01</span>
+      <h3>Event Photography</h3>
+      <p>Complete coverage of baby shower rituals, stage moments and celebration flow.</p>
+    </article>
+    <article class="bsh-inclusion-card bsh-reveal">
+      <span class="bsh-inclusion-icon">02</span>
+      <h3>Mom-to-Be Portraits</h3>
+      <p>Soft solo portraits with elegant lighting, styling and natural direction.</p>
+    </article>
+    <article class="bsh-inclusion-card bsh-reveal">
+      <span class="bsh-inclusion-icon">03</span>
+      <h3>Family & Candids</h3>
+      <p>Parents, relatives, couple moments, group photos and emotional candids.</p>
+    </article>
+    <article class="bsh-inclusion-card bsh-reveal">
+      <span class="bsh-inclusion-icon">04</span>
+      <h3>Premium Deliverables</h3>
+      <p>Edited digital photographs, private gallery and album-ready final frames.</p>
+    </article>
+  </div>
+</div>
+
+
+  </section>
+
+
+
+  <!-- TESTIMONIAL -->
+
+  <section class="bsh-section bsh-testimonial" id="baby-shower-testimonial">
+    <div class="bsh-container">
+      <div class="bsh-testimonial-card bsh-reveal">
+        <img
+          class="bsh-testimonial-img"
+          src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1000&q=88"
+          alt="Happy baby shower client portrait"
+          loading="lazy"
+        >
+
+
+    <div class="bsh-testimonial-content">
+      <p class="bsh-kicker">Client Words</p>
+      <div class="bsh-stars" aria-label="Five star rating">★★★★★</div>
+      <blockquote>
+        DLM Photography captured our baby shower so beautifully. Every blessing, family smile and small detail was preserved naturally.
+      </blockquote>
+      <p class="bsh-client">
+        <strong>Priya & Arjun</strong>
+        Baby Shower Celebration · Chennai
+      </p>
+    </div>
+  </div>
+</div>
+
+
+  </section>
+
+  <!-- FAQ -->
+
+  <section class="bsh-section bsh-faq" id="baby-shower-faq">
+    <div class="bsh-container">
+      <header class="bsh-center-heading bsh-reveal">
+        <p class="bsh-kicker">FAQ</p>
+        <h2 class="bsh-title">
+          Baby Shower Photography
+          <span>Questions</span>
+        </h2>
+      </header>
+
+  <div class="bsh-faq-wrap bsh-reveal">
+    <article class="bsh-faq-item">
+      <button class="bsh-faq-question" type="button" aria-expanded="true">
+        When should we book baby shower photography?
+        <span class="bsh-faq-icon">−</span>
+      </button>
+      <div class="bsh-faq-answer">
+        <p>It is best to book once your event date, venue and timing are confirmed so the photographer can be reserved in advance.</p>
+      </div>
+    </article>
+
+    <article class="bsh-faq-item">
+      <button class="bsh-faq-question" type="button" aria-expanded="false">
+        Do you cover traditional baby shower rituals?
+        <span class="bsh-faq-icon">+</span>
+      </button>
+      <div class="bsh-faq-answer">
+        <p>Yes. We cover traditional rituals, family blessings, couple moments, décor details and candid celebration moments.</p>
+      </div>
+    </article>
+
+    <article class="bsh-faq-item">
+      <button class="bsh-faq-question" type="button" aria-expanded="false">
+        Can you photograph mom-to-be portraits separately?
+        <span class="bsh-faq-icon">+</span>
+      </button>
+      <div class="bsh-faq-answer">
+        <p>Yes. Mom-to-be portraits can be included before or during the event based on available time and location.</p>
+      </div>
+    </article>
+
+    <article class="bsh-faq-item">
+      <button class="bsh-faq-question" type="button" aria-expanded="false">
+        Can the package be customised?
+        <span class="bsh-faq-icon">+</span>
+      </button>
+      <div class="bsh-faq-answer">
+        <p>Yes. The package can be customised based on duration, deliverables, albums, location and event requirements.</p>
+      </div>
+    </article>
+
+    <article class="bsh-faq-item">
+      <button class="bsh-faq-question" type="button" aria-expanded="false">
+        Do you provide albums?
+        <span class="bsh-faq-icon">+</span>
+      </button>
+      <div class="bsh-faq-answer">
+        <p>Albums can be added as an optional deliverable based on the selected package and design requirements.</p>
+      </div>
+    </article>
+  </div>
+</div>
+
+
+  </section>
+
+  <!-- CTA -->
+
+  <section class="bsh-section bsh-cta" id="baby-shower-contact">
+    <div class="bsh-container">
+      <div class="bsh-cta-card bsh-reveal">
+        <img
+          class="bsh-cta-img"
+          src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1300&q=90"
+          alt="Beautiful baby shower celebration booking banner"
+          loading="lazy"
+        >
+
+
+    <div class="bsh-cta-content">
+      <p class="bsh-kicker">Book Your Baby Shower Story</p>
+      <h2 class="bsh-title">
+        Let Us Preserve This
+        <span>Beautiful Beginning</span>
+      </h2>
+      <p class="bsh-text">
+        Celebrate motherhood, family blessings and joyful memories with elegant baby shower photography by DLM Photography.
+      </p>
+
+      <div class="bsh-btn-row">
+        <a
+          class="bsh-btn bsh-btn-primary"
+          href="https://wa.me/919789029012?text=Hello%2C%20I%20would%20like%20to%20check%20availability%20for%20baby%20shower%20photography."
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Check Baby Shower Availability
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  </section>
+
+</main>
+
+<div class="bsh-lightbox" role="dialog" aria-modal="true" aria-label="Baby shower image viewer" aria-hidden="true">
+  <div class="bsh-lightbox-dialog">
+    <div class="bsh-lightbox-img-wrap">
+      <img class="bsh-lightbox-img" src="" alt="">
+    </div>
+
+```
+<div class="bsh-lightbox-info">
+  <span class="bsh-lightbox-count">Image 01</span>
+  <h3 class="bsh-lightbox-title">Image Title</h3>
+  <p class="bsh-lightbox-text">Image description</p>
+</div>
+
+<button class="bsh-lightbox-close" type="button" aria-label="Close image viewer">×</button>
+<button class="bsh-lightbox-nav bsh-lightbox-prev" type="button" aria-label="Previous image">‹</button>
+<button class="bsh-lightbox-nav bsh-lightbox-next" type="button" aria-label="Next image">›</button>
+
+
+  </div>
+</div>
+
+<script>
+  (() => {
+    const page = document.querySelector(".bsh-page");
+
+    if (!page) {
+      return;
+    }
+
+    const revealItems = page.querySelectorAll(".bsh-reveal");
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (reducedMotion || !("IntersectionObserver" in window)) {
+      revealItems.forEach((item) => item.classList.add("bsh-visible"));
+    } else {
+      page.classList.add("bsh-js-ready");
+
+      const revealObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) {
+              return;
+            }
+
+            entry.target.classList.add("bsh-visible");
+            revealObserver.unobserve(entry.target);
+          });
+        },
+        {
+          threshold: 0.06,
+          rootMargin: "0px 0px -20px 0px"
+        }
+      );
+
+      requestAnimationFrame(() => {
+        revealItems.forEach((item) => revealObserver.observe(item));
+      });
+
+      window.setTimeout(() => {
+        revealItems.forEach((item) => item.classList.add("bsh-visible"));
+      }, 1500);
+    }
+
+    const faqItems = Array.from(document.querySelectorAll(".bsh-faq-item"));
+
+    const updateFaqHeights = () => {
+      faqItems.forEach((item) => {
+        const button = item.querySelector(".bsh-faq-question");
+        const answer = item.querySelector(".bsh-faq-answer");
+        const icon = item.querySelector(".bsh-faq-icon");
+        const isOpen = button.getAttribute("aria-expanded") === "true";
+
+        answer.style.maxHeight = isOpen ? answer.scrollHeight + "px" : "0px";
+        icon.textContent = isOpen ? "−" : "+";
+      });
+    };
+
+    faqItems.forEach((item) => {
+      const button = item.querySelector(".bsh-faq-question");
+
+      button.addEventListener("click", () => {
+        faqItems.forEach((otherItem) => {
+          const otherButton = otherItem.querySelector(".bsh-faq-question");
+          otherButton.setAttribute("aria-expanded", otherItem === item ? String(otherButton.getAttribute("aria-expanded") !== "true") : "false");
+        });
+
+        updateFaqHeights();
+      });
+    });
+
+    updateFaqHeights();
+    window.addEventListener("resize", updateFaqHeights);
+
+    const lightbox = document.querySelector(".bsh-lightbox");
+    const items = Array.from(document.querySelectorAll(".bsh-lightbox-item"));
+    const lightboxImg = lightbox.querySelector(".bsh-lightbox-img");
+    const lightboxCount = lightbox.querySelector(".bsh-lightbox-count");
+    const lightboxTitle = lightbox.querySelector(".bsh-lightbox-title");
+    const lightboxText = lightbox.querySelector(".bsh-lightbox-text");
+    const closeButton = lightbox.querySelector(".bsh-lightbox-close");
+    const prevButton = lightbox.querySelector(".bsh-lightbox-prev");
+    const nextButton = lightbox.querySelector(".bsh-lightbox-next");
+
+    let currentIndex = 0;
+    let lastFocusedElement = null;
+
+    const updateLightbox = () => {
+      const item = items[currentIndex];
+      const img = item.querySelector("img");
+
+      lightboxImg.src = img.src;
+      lightboxImg.alt = img.alt;
+      lightboxCount.textContent = "Image " + String(currentIndex + 1).padStart(2, "0") + " of " + String(items.length).padStart(2, "0");
+      lightboxTitle.textContent = item.dataset.bshTitle || "Baby Shower Story";
+      lightboxText.textContent = item.dataset.bshText || "A beautiful baby shower photography moment.";
+    };
+
+    const openLightbox = (index, trigger) => {
+      currentIndex = index;
+      lastFocusedElement = trigger;
+      updateLightbox();
+
+      lightbox.classList.add("is-open");
+      lightbox.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+
+      window.setTimeout(() => {
+        closeButton.focus();
+      }, 40);
+    };
+
+    const closeLightbox = () => {
+      lightbox.classList.remove("is-open");
+      lightbox.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+
+      if (lastFocusedElement) {
+        lastFocusedElement.focus();
+      }
+    };
+
+    const showPrev = () => {
+      currentIndex = (currentIndex - 1 + items.length) % items.length;
+      updateLightbox();
+    };
+
+    const showNext = () => {
+      currentIndex = (currentIndex + 1) % items.length;
+      updateLightbox();
+    };
+
+    items.forEach((item, index) => {
+      item.addEventListener("click", () => openLightbox(index, item));
+    });
+
+    closeButton.addEventListener("click", closeLightbox);
+    prevButton.addEventListener("click", showPrev);
+    nextButton.addEventListener("click", showNext);
+
+    lightbox.addEventListener("click", (event) => {
+      if (event.target === lightbox) {
+        closeLightbox();
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (!lightbox.classList.contains("is-open")) {
+        return;
+      }
+
+      if (event.key === "Escape") {
+        closeLightbox();
+      }
+
+      if (event.key === "ArrowLeft") {
+        showPrev();
+      }
+
+      if (event.key === "ArrowRight") {
+        showNext();
+      }
+    });
+  })();
+</script>
+
+
+
+   <style>
+    /* =========================================
+       PREMIUM DLM FOOTER
+    ========================================= */
+
+    .dlm-premium-footer {
+        --footer-pink: #ef2d83;
+        --footer-pink-dark: #bd145f;
+        --footer-blush: #fff0f7;
+        --footer-gold: #d4aa68;
+        --footer-plum: #24151f;
+        --footer-plum-light: #34202d;
+        --footer-text: #fdf8fb;
+        --footer-muted: rgba(255, 255, 255, 0.67);
+        --footer-border: rgba(255, 255, 255, 0.1);
+
+        position: relative;
+        width: 100%;
+        margin-top: 110px;
+        overflow: visible;
+        color: var(--footer-text);
+
+        background:
+            radial-gradient(
+                circle at 12% 20%,
+                rgba(239, 45, 131, 0.18),
+                transparent 34%
+            ),
+            radial-gradient(
+                circle at 90% 90%,
+                rgba(212, 170, 104, 0.13),
+                transparent 30%
+            ),
+            linear-gradient(
+                145deg,
+                #2d1926 0%,
+                #1d1219 48%,
+                #150d13 100%
+            );
+    }
+
+    .dlm-premium-footer * {
+        box-sizing: border-box;
+    }
+
+    .dlm-footer-container {
+        position: relative;
+        z-index: 2;
+        width: min(100%, 1220px);
+        margin: 0 auto;
+        padding: 0 28px;
+    }
+
+    /* =========================================
+       FLOATING CTA
+    ========================================= */
+
+    .dlm-footer-cta {
+        position: relative;
+        top: -72px;
+
+        min-height: 185px;
+        padding: 34px 40px;
+
+        display: grid;
+        grid-template-columns: minmax(0, 1.25fr) auto;
+        align-items: center;
+        gap: 36px;
+
+        overflow: hidden;
+
+        border: 1px solid rgba(239, 45, 131, 0.16);
+        border-radius: 30px;
+
+        color: #2a1d25;
+
+        background:
+            radial-gradient(
+                circle at 90% 10%,
+                rgba(239, 45, 131, 0.16),
+                transparent 35%
+            ),
+            linear-gradient(
+                135deg,
+                rgba(255, 255, 255, 0.98),
+                rgba(255, 239, 247, 0.97)
+            );
+
+        box-shadow:
+            0 30px 80px rgba(8, 4, 7, 0.28),
+            inset 0 1px 0 rgba(255, 255, 255, 0.95);
+    }
+
+    .dlm-footer-cta::before {
+        content: "";
+        position: absolute;
+        top: -85px;
+        right: 13%;
+
+        width: 210px;
+        height: 210px;
+
+        border: 1px solid rgba(239, 45, 131, 0.12);
+        border-radius: 50%;
+    }
+
+    .dlm-footer-cta::after {
+        content: "";
+        position: absolute;
+        right: 5%;
+        bottom: -135px;
+
+        width: 250px;
+        height: 250px;
+
+        border-radius: 50%;
+
+        background: rgba(212, 170, 104, 0.1);
+    }
+
+    .dlm-footer-cta-content {
+        position: relative;
+        z-index: 2;
+    }
+
+    .dlm-footer-cta-label {
+        width: fit-content;
+        margin: 0 0 12px;
+        padding: 7px 14px;
+
+        border: 1px solid rgba(239, 45, 131, 0.18);
+        border-radius: 999px;
+
+        color: var(--footer-pink);
+        background: rgba(255, 255, 255, 0.8);
+
+        font-size: 9px;
+        font-weight: 850;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+    }
+
+    .dlm-footer-cta h2 {
+        max-width: 720px;
+        margin: 0;
+
+        color: #281a23;
+
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: clamp(31px, 3.5vw, 50px);
+        font-weight: 500;
+        line-height: 1.05;
+        letter-spacing: -1.3px;
+    }
+
+    .dlm-footer-cta p:not(.dlm-footer-cta-label) {
+        max-width: 650px;
+        margin: 14px 0 0;
+
+        color: #7b6570;
+
+        font-size: 13px;
+        line-height: 1.7;
+    }
+
+    .dlm-footer-cta-actions {
+        position: relative;
+        z-index: 3;
+
+        display: flex;
+        flex-direction: column;
+        gap: 11px;
+    }
+
+    .dlm-footer-primary-button,
+    .dlm-footer-secondary-button {
+        min-width: 190px;
+        min-height: 50px;
+        padding: 0 22px;
+
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 9px;
+
+        border-radius: 999px;
+
+        font-size: 12px;
+        font-weight: 850;
+        text-decoration: none;
+
+        transition:
+            transform 0.25s ease,
+            box-shadow 0.25s ease,
+            background 0.25s ease;
+    }
+
+    .dlm-footer-primary-button {
+        color: #ffffff;
+
+        background:
+            linear-gradient(
+                135deg,
+                var(--footer-pink),
+                var(--footer-pink-dark)
+            );
+
+        box-shadow:
+            0 14px 30px rgba(239, 45, 131, 0.25);
+    }
+
+    .dlm-footer-secondary-button {
+        border: 1px solid rgba(42, 29, 37, 0.12);
+
+        color: #3b2933;
+        background: rgba(255, 255, 255, 0.78);
+    }
+
+    .dlm-footer-primary-button:hover,
+    .dlm-footer-secondary-button:hover {
+        transform: translateY(-3px);
+    }
+
+    .dlm-footer-primary-button:hover {
+        box-shadow:
+            0 20px 38px rgba(239, 45, 131, 0.33);
+    }
+
+    .dlm-footer-secondary-button:hover {
+        background: #ffffff;
+        box-shadow:
+            0 14px 28px rgba(46, 27, 38, 0.1);
+    }
+
+    /* =========================================
+       PHOTO STRIP
+    ========================================= */
+
+    .dlm-footer-photo-strip {
+        margin-top: -36px;
+        margin-bottom: 48px;
+
+        display: grid;
+        grid-template-columns: 1.35fr 0.8fr 1fr 0.8fr;
+        gap: 12px;
+    }
+
+    .dlm-footer-photo {
+        position: relative;
+        height: 145px;
+        overflow: hidden;
+
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 20px;
+
+        background: #31202a;
+    }
+
+    .dlm-footer-photo:nth-child(2),
+    .dlm-footer-photo:nth-child(4) {
+        transform: translateY(16px);
+    }
+
+    .dlm-footer-photo img {
+        width: 100%;
+        height: 100%;
+        display: block;
+
+        object-fit: cover;
+
+        filter:
+            brightness(0.82)
+            saturate(0.88);
+
+        transition:
+            transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+            filter 0.4s ease;
+    }
+
+    .dlm-footer-photo::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+
+        background:
+            linear-gradient(
+                to top,
+                rgba(24, 12, 19, 0.45),
+                transparent 58%
+            );
+
+        pointer-events: none;
+    }
+
+    .dlm-footer-photo:hover img {
+        transform: scale(1.08);
+        filter:
+            brightness(0.98)
+            saturate(1.05);
+    }
+
+    /* =========================================
+       FOOTER CONTENT
+    ========================================= */
+
+    .dlm-footer-main {
+        padding: 34px 0 52px;
+    }
+
+    .dlm-footer-grid {
+        display: grid;
+        grid-template-columns:
+            minmax(0, 1.45fr)
+            minmax(0, 0.7fr)
+            minmax(0, 0.85fr)
+            minmax(0, 1.15fr);
+
+        gap: 45px;
+    }
+
+    /* Brand */
+
+    .dlm-footer-brand {
+        max-width: 360px;
+    }
+
+    .dlm-footer-logo-row {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+    }
+
+    .dlm-footer-logo {
+        width: 72px;
+        height: 72px;
+        display: block;
+
+        border: 2px solid rgba(255, 255, 255, 0.12);
+        border-radius: 50%;
+
+        object-fit: contain;
+
+        box-shadow:
+            0 15px 32px rgba(0, 0, 0, 0.24);
+    }
+
+    .dlm-footer-brand-name strong {
+        display: block;
+
+        color: #ffffff;
+
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 20px;
+        font-weight: 500;
+    }
+
+    .dlm-footer-brand-name span {
+        display: block;
+        margin-top: 4px;
+
+        color: var(--footer-pink);
+
+        font-size: 9px;
+        font-weight: 800;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+    }
+
+    .dlm-footer-brand-description {
+        margin: 19px 0 0;
+
+        color: var(--footer-muted);
+
+        font-size: 12px;
+        line-height: 1.8;
+    }
+
+    /* Social */
+
+    .dlm-footer-socials {
+        margin-top: 22px;
+
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .dlm-footer-social {
+        position: relative;
+
+        width: 43px;
+        height: 43px;
+
+        display: grid;
+        place-items: center;
+
+        overflow: hidden;
+
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 14px;
+
+        color: #ffffff;
+        background: rgba(255, 255, 255, 0.06);
+
+        text-decoration: none;
+
+        transition:
+            transform 0.3s ease,
+            border-color 0.3s ease,
+            background 0.3s ease,
+            box-shadow 0.3s ease;
+    }
+
+    .dlm-footer-social::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+
+        opacity: 0;
+
+        background:
+            linear-gradient(
+                135deg,
+                var(--footer-pink),
+                var(--footer-pink-dark)
+            );
+
+        transition: opacity 0.3s ease;
+    }
+
+    .dlm-footer-social:hover {
+        border-color: transparent;
+
+        transform:
+            translateY(-5px)
+            rotate(-3deg);
+
+        box-shadow:
+            0 15px 28px rgba(239, 45, 131, 0.2);
+    }
+
+    .dlm-footer-social:hover::before {
+        opacity: 1;
+    }
+
+    .dlm-footer-social svg {
+        position: relative;
+        z-index: 2;
+
+        width: 18px;
+        height: 18px;
+
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 1.8;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+    }
+
+    /* Columns */
+
+    .dlm-footer-column h3 {
+        position: relative;
+        margin: 0 0 22px;
+        padding-bottom: 12px;
+
+        color: #ffffff;
+
+        font-size: 12px;
+        font-weight: 850;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+    }
+
+    .dlm-footer-column h3::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+
+        width: 34px;
+        height: 2px;
+
+        border-radius: 999px;
+
+        background:
+            linear-gradient(
+                90deg,
+                var(--footer-pink),
+                var(--footer-gold)
+            );
+    }
+
+    .dlm-footer-links {
+        margin: 0;
+        padding: 0;
+
+        display: grid;
+        gap: 13px;
+
+        list-style: none;
+    }
+
+    .dlm-footer-links a {
+        width: fit-content;
+
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+
+        color: var(--footer-muted);
+
+        font-size: 12px;
+        text-decoration: none;
+
+        transition:
+            color 0.25s ease,
+            transform 0.25s ease;
+    }
+
+    .dlm-footer-links a::before {
+        content: "";
+
+        width: 5px;
+        height: 5px;
+
+        border-radius: 50%;
+
+        background: var(--footer-pink);
+        opacity: 0.6;
+    }
+
+    .dlm-footer-links a:hover {
+        color: #ffffff;
+        transform: translateX(5px);
+    }
+
+    /* Contact cards */
+
+    .dlm-footer-contact-list {
+        display: grid;
+        gap: 11px;
+    }
+
+    .dlm-footer-contact {
+        padding: 11px;
+
+        display: grid;
+        grid-template-columns: 39px minmax(0, 1fr);
+        align-items: center;
+        gap: 11px;
+
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 15px;
+
+        color: inherit;
+        background: rgba(255, 255, 255, 0.045);
+
+        text-decoration: none;
+
+        transition:
+            transform 0.25s ease,
+            border-color 0.25s ease,
+            background 0.25s ease;
+    }
+
+    .dlm-footer-contact:hover {
+        border-color: rgba(239, 45, 131, 0.3);
+        background: rgba(255, 255, 255, 0.08);
+
+        transform: translateX(4px);
+    }
+
+    .dlm-footer-contact-icon {
+        width: 39px;
+        height: 39px;
+
+        display: grid;
+        place-items: center;
+
+        border-radius: 12px;
+
+        color: var(--footer-pink);
+        background: rgba(239, 45, 131, 0.12);
+    }
+
+    .dlm-footer-contact-icon svg {
+        width: 17px;
+        height: 17px;
+
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 1.8;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+    }
+
+    .dlm-footer-contact-text span {
+        display: block;
+        margin-bottom: 3px;
+
+        color: rgba(255, 255, 255, 0.45);
+
+        font-size: 8px;
+        font-weight: 800;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+    }
+
+    .dlm-footer-contact-text strong {
+        display: block;
+
+        color: rgba(255, 255, 255, 0.82);
+
+        font-size: 11px;
+        font-weight: 600;
+        line-height: 1.45;
+    }
+
+    /* =========================================
+       BOTTOM BAR
+    ========================================= */
+
+    .dlm-footer-bottom {
+        border-top: 1px solid var(--footer-border);
+    }
+
+    .dlm-footer-bottom-inner {
+        min-height: 74px;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+    }
+
+    .dlm-footer-copyright {
+        margin: 0;
+
+        color: rgba(255, 255, 255, 0.48);
+
+        font-size: 10px;
+        line-height: 1.6;
+    }
+
+    .dlm-footer-legal {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 18px;
+    }
+
+    .dlm-footer-legal a {
+        color: rgba(255, 255, 255, 0.48);
+
+        font-size: 10px;
+        text-decoration: none;
+
+        transition: color 0.25s ease;
+    }
+
+    .dlm-footer-legal a:hover {
+        color: var(--footer-pink);
+    }
+
+    /* Back to top */
+
+    .dlm-footer-top {
+        position: fixed;
+        right: 20px;
+        bottom: 20px;
+        z-index: 950;
+
+        width: 47px;
+        height: 47px;
+
+        display: grid;
+        place-items: center;
+
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 16px;
+
+        color: #ffffff;
+
+        background:
+            linear-gradient(
+                135deg,
+                var(--footer-pink),
+                var(--footer-pink-dark)
+            );
+
+        box-shadow:
+            0 15px 32px rgba(239, 45, 131, 0.28);
+
+        cursor: pointer;
+
+        visibility: hidden;
+        opacity: 0;
+
+        transform:
+            translateY(14px)
+            rotate(8deg);
+
+        transition:
+            opacity 0.3s ease,
+            visibility 0.3s ease,
+            transform 0.3s ease;
+    }
+
+    .dlm-footer-top.is-visible {
+        visibility: visible;
+        opacity: 1;
+        transform:
+            translateY(0)
+            rotate(0);
+    }
+
+    .dlm-footer-top span {
+        width: 10px;
+        height: 10px;
+
+        border-top: 2px solid currentColor;
+        border-left: 2px solid currentColor;
+
+        transform:
+            translateY(3px)
+            rotate(45deg);
+    }
+
+    /* =========================================
+       RESPONSIVE
+    ========================================= */
+
+    @media (max-width: 980px) {
+        .dlm-footer-grid {
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+        }
+
+        .dlm-footer-photo-strip {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .dlm-footer-photo:nth-child(2),
+        .dlm-footer-photo:nth-child(4) {
+            transform: none;
+        }
+    }
+
+    @media (max-width: 760px) {
+        .dlm-premium-footer {
+            margin-top: 90px;
+        }
+
+        .dlm-footer-cta {
+            top: -58px;
+
+            grid-template-columns: 1fr;
+            gap: 25px;
+
+            padding: 29px 25px;
+        }
+
+        .dlm-footer-cta-actions {
+            width: 100%;
+            flex-direction: row;
+        }
+
+        .dlm-footer-primary-button,
+        .dlm-footer-secondary-button {
+            flex: 1;
+            min-width: 0;
+        }
+    }
+
+    @media (max-width: 560px) {
+        .dlm-footer-container {
+            padding: 0 14px;
+        }
+
+        .dlm-footer-cta {
+            top: -48px;
+            padding: 25px 18px;
+            border-radius: 23px;
+        }
+
+        .dlm-footer-cta h2 {
+            font-size: 31px;
+        }
+
+        .dlm-footer-cta-actions {
+            flex-direction: column;
+        }
+
+        .dlm-footer-primary-button,
+        .dlm-footer-secondary-button {
+            width: 100%;
+        }
+
+        .dlm-footer-photo-strip {
+            margin-top: -20px;
+
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+        }
+
+        .dlm-footer-photo {
+            height: 112px;
+            border-radius: 15px;
+        }
+
+        .dlm-footer-main {
+            padding-top: 20px;
+        }
+
+        .dlm-footer-grid {
+            grid-template-columns: 1fr;
+            gap: 35px;
+        }
+
+        .dlm-footer-brand {
+            max-width: 100%;
+        }
+
+        .dlm-footer-bottom-inner {
+            padding: 18px 0;
+
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .dlm-footer-top {
+            right: 13px;
+            bottom: 13px;
+
+            width: 44px;
+            height: 44px;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .dlm-footer-photo img,
+        .dlm-footer-primary-button,
+        .dlm-footer-secondary-button,
+        .dlm-footer-social,
+        .dlm-footer-links a,
+        .dlm-footer-contact,
+        .dlm-footer-top {
+            transition: none;
+        }
+    }
+</style>
+
+<footer class="dlm-premium-footer">
+
+    <div class="dlm-footer-container">
+
+        <!-- Floating CTA -->
+
+        <div class="dlm-footer-cta">
+
+            <div class="dlm-footer-cta-content">
+
+                <p class="dlm-footer-cta-label">
+                    Let’s Create Something Timeless
+                </p>
+
+                <h2>
+                    Your story deserves more than ordinary photographs.
+                </h2>
+
+                <p>
+                    Connect with DLM Photography to plan your wedding,
+                    celebration, portrait session or cinematic event coverage.
+                </p>
+
+            </div>
+
+            <div class="dlm-footer-cta-actions">
+
+                <a
+                    class="dlm-footer-primary-button"
+                    href="#contact"
+                >
+                    Book Your Shoot
+                </a>
+
+                <a
+                    class="dlm-footer-secondary-button"
+                    href="https://wa.me/919789029012"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Chat on WhatsApp
+                </a>
+
+            </div>
+
+        </div>
+
+        <!-- Photo strip -->
+
+        <div class="dlm-footer-photo-strip">
+
+            <div class="dlm-footer-photo">
+                <img
+                    src="https://picsum.photos/seed/dlm-footer-1/700/450"
+                    alt="Wedding photography"
+                    loading="lazy"
+                >
+            </div>
+
+            <div class="dlm-footer-photo">
+                <img
+                    src="https://picsum.photos/seed/dlm-footer-2/500/450"
+                    alt="Couple photography"
+                    loading="lazy"
+                >
+            </div>
+
+            <div class="dlm-footer-photo">
+                <img
+                    src="https://picsum.photos/seed/dlm-footer-3/650/450"
+                    alt="Event photography"
+                    loading="lazy"
+                >
+            </div>
+
+            <div class="dlm-footer-photo">
+                <img
+                    src="https://picsum.photos/seed/dlm-footer-4/500/450"
+                    alt="Portrait photography"
+                    loading="lazy"
+                >
+            </div>
+
+        </div>
+
+        <!-- Main footer -->
+
+        <div class="dlm-footer-main">
+
+            <div class="dlm-footer-grid">
+
+                <!-- Brand -->
+
+                <div class="dlm-footer-brand">
+
+                    <div class="dlm-footer-logo-row">
+
+                        <img
+                            class="dlm-footer-logo"
+                            src="assets/image.png"
+                            alt="DLM Photography logo"
+                        >
+
+                        <div class="dlm-footer-brand-name">
+                            <strong>DLM Photography</strong>
+                            <span>Dream Light Media</span>
+                        </div>
+
+                    </div>
+
+                    <p class="dlm-footer-brand-description">
+                        Capturing weddings, portraits, celebrations and
+                        meaningful stories through elegant photography
+                        and cinematic visual experiences.
+                    </p>
+
+                    <div class="dlm-footer-socials">
+
+                        <a
+                            class="dlm-footer-social"
+                            href="https://www.instagram.com/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="Instagram"
+                        >
+                            <svg viewBox="0 0 24 24">
+                                <rect x="3" y="3" width="18" height="18" rx="5"></rect>
+                                <circle cx="12" cy="12" r="4"></circle>
+                                <circle cx="17.5" cy="6.5" r="1"></circle>
+                            </svg>
+                        </a>
+
+                        <a
+                            class="dlm-footer-social"
+                            href="https://www.facebook.com/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="Facebook"
+                        >
+                            <svg viewBox="0 0 24 24">
+                                <path d="M14 8h3V4h-3c-3 0-5 2-5 5v3H6v4h3v6h4v-6h3l1-4h-4V9c0-.7.3-1 1-1z"></path>
+                            </svg>
+                        </a>
+
+                        <a
+                            class="dlm-footer-social"
+                            href="https://www.youtube.com/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="YouTube"
+                        >
+                            <svg viewBox="0 0 24 24">
+                                <path d="M22 12s0-4-1-6c-.6-1-1.5-1.3-2.5-1.5C16.5 4 12 4 12 4s-4.5 0-6.5.5C4.5 4.7 3.6 5 3 6c-1 2-1 6-1 6s0 4 1 6c.6 1 1.5 1.3 2.5 1.5C7.5 20 12 20 12 20s4.5 0 6.5-.5c1-.2 1.9-.5 2.5-1.5 1-2 1-6 1-6z"></path>
+                                <path d="m10 9 5 3-5 3z"></path>
+                            </svg>
+                        </a>
+
+                        <a
+                            class="dlm-footer-social"
+                            href="https://wa.me/919789029012"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="WhatsApp"
+                        >
+                            <svg viewBox="0 0 24 24">
+                                <path d="M21 11.5a8.4 8.4 0 0 1-9 8.5 8.8 8.8 0 0 1-3.8-.9L3 21l1.8-5A8.7 8.7 0 1 1 21 11.5z"></path>
+                                <path d="M8.5 8.5c.5 3 2.5 5 5.5 6"></path>
+                            </svg>
+                        </a>
+
+                    </div>
+
+                </div>
+
+                <!-- Quick Links -->
+
+                <div class="dlm-footer-column">
+
+                    <h3>Explore</h3>
+
+                    <ul class="dlm-footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#gallery">Gallery</a></li>
+                        <li><a href="#packages">Packages</a></li>
+                        <li><a href="#instagram">Instagram</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+
+                </div>
+
+                <!-- Services -->
+
+                <div class="dlm-footer-column">
+
+                    <h3>Photography</h3>
+
+                    <ul class="dlm-footer-links">
+                        <li><a href="#packages">Weddings</a></li>
+                        <li><a href="#packages">Birthdays</a></li>
+                        <li><a href="#packages">Baby Shoots</a></li>
+                        <li><a href="#packages">Maternity</a></li>
+                        <li><a href="#packages">Couple Shoots</a></li>
+                        <li><a href="#packages">Cinematic Films</a></li>
+                    </ul>
+
+                </div>
+
+                <!-- Contact -->
+
+                <div class="dlm-footer-column">
+
+                    <h3>Contact Studio</h3>
+
+                    <div class="dlm-footer-contact-list">
+
+                        <a
+                            class="dlm-footer-contact"
+                            href="tel:+919789029012"
+                        >
+                            <div class="dlm-footer-contact-icon">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72"></path>
+                                </svg>
+                            </div>
+
+                            <div class="dlm-footer-contact-text">
+                                <span>Call</span>
+                                <strong>+91 97890 29012</strong>
+                            </div>
+                        </a>
+
+                        <a
+                            class="dlm-footer-contact"
+                            href="https://wa.me/919789029012"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            <div class="dlm-footer-contact-icon">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M21 11.5a8.4 8.4 0 0 1-9 8.5 8.8 8.8 0 0 1-3.8-.9L3 21l1.8-5A8.7 8.7 0 1 1 21 11.5z"></path>
+                                </svg>
+                            </div>
+
+                            <div class="dlm-footer-contact-text">
+                                <span>WhatsApp</span>
+                                <strong>Send a quick enquiry</strong>
+                            </div>
+                        </a>
+
+                        <a
+                            class="dlm-footer-contact"
+                            href="https://www.google.com/maps/place/DLM+Photography+-+DREAM+LIGHT+MEDIA/@13.0859999,80.2081111,17z"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            <div class="dlm-footer-contact-icon">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0z"></path>
+                                    <circle cx="12" cy="10" r="2.5"></circle>
+                                </svg>
+                            </div>
+
+                            <div class="dlm-footer-contact-text">
+                                <span>Location</span>
+                                <strong>
+                                    DLM Photography, Chennai
+                                </strong>
+                            </div>
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Bottom -->
+
+        <div class="dlm-footer-bottom">
+
+            <div class="dlm-footer-bottom-inner">
+
+                <p class="dlm-footer-copyright">
+                    © <span id="dlmFooterYear"></span>
+                    DLM Photography – Dream Light Media.
+                    All rights reserved.
+                </p>
+
+                <div class="dlm-footer-legal">
+                    <a href="#privacy">Privacy Policy</a>
+                    <a href="#terms">Terms & Conditions</a>
+                    <a href="#refund">Refund Policy</a>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <button
+        class="dlm-footer-top"
+        id="dlmFooterTop"
+        type="button"
+        aria-label="Back to top"
+    >
+        <span></span>
+    </button>
+
+</footer>
+
+<script>
+    (() => {
+        const year = document.getElementById("dlmFooterYear");
+        const topButton = document.getElementById("dlmFooterTop");
+
+        if (year) {
+            year.textContent = new Date().getFullYear();
+        }
+
+        if (!topButton) {
+            return;
+        }
+
+        const updateTopButton = () => {
+            topButton.classList.toggle(
+                "is-visible",
+                window.scrollY > 550
+            );
+        };
+
+        topButton.addEventListener("click", () => {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        });
+
+        window.addEventListener(
+            "scroll",
+            updateTopButton,
+            { passive: true }
+        );
+
+        updateTopButton();
+    })();
+</script>
+
+</body>
+</html>

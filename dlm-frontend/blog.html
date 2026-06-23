@@ -1,0 +1,1292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Wedding stories, photography guidance and studio journals from DLM Photography.">
+    <title>DLM Stories — Dream Light Media</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,600;14..32,700;14..32,800;14..32,900&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        /* =========================================================
+           ROOT VARIABLES — MATCHING WEBSITE THEME
+           ========================================================= */
+        :root {
+            --pink: #ef2d83;
+            --pink-dark: #c91567;
+            --pink-soft: #fff0f7;
+            --gold: #cfa766;
+            --gold-soft: #f5ede0;
+            --ink: #241723;
+            --muted: #7a6572;
+            --border: rgba(36, 23, 35, 0.1);
+            --white: #ffffff;
+            --cream: #fff8fb;
+            --shadow: rgba(143, 28, 82, 0.10);
+        }
+
+        /* =========================================================
+           RESET & BASE
+           ========================================================= */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Inter", "Segoe UI", sans-serif;
+            color: var(--ink);
+            background: var(--cream);
+        }
+
+        body.menu-open {
+            overflow: hidden;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        button,
+        a {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* =========================================================
+           NAVBAR — MATCHING WEBSITE THEME
+           ========================================================= */
+        .navbar-wrap {
+            position: absolute;
+            top: 18px;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 0 28px;
+        }
+
+        .navbar-wrap.is-sticky {
+            position: fixed;
+            top: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            width: min(100%, 1180px);
+            min-height: 76px;
+            margin: auto;
+            padding: 0 30px;
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            gap: 24px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.94);
+            box-shadow: 0 18px 50px rgba(108, 20, 64, 0.14);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            transition: border-radius 0.25s ease, min-height 0.25s ease;
+        }
+
+        .navbar-wrap.is-sticky .navbar {
+            width: 100%;
+            min-height: 70px;
+            border-radius: 0;
+        }
+
+        .brand {
+            justify-self: start;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .brand-logo {
+            width: 48px;
+            height: 48px;
+            object-fit: contain;
+            border-radius: 50%;
+            background: var(--white);
+        }
+
+        .brand-name {
+            font-weight: 900;
+            font-size: 16px;
+            color: var(--ink);
+        }
+
+        .brand-name span {
+            display: block;
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--muted);
+            letter-spacing: 0.06em;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 28px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-links a,
+        .wedding-button {
+            min-height: 70px;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            border: 0;
+            color: var(--ink);
+            background: none;
+            font: 700 14px "Inter", "Segoe UI", sans-serif;
+            text-decoration: none;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .nav-links a:hover,
+        .wedding-button:hover {
+            color: var(--pink);
+        }
+
+        .nav-links a.active {
+            color: var(--pink);
+        }
+
+        .arrow {
+            width: 8px;
+            height: 8px;
+            border-right: 2px solid currentColor;
+            border-bottom: 2px solid currentColor;
+            transform: rotate(45deg);
+            transition: transform 0.25s ease;
+        }
+
+        .wedding-item:hover .arrow,
+        .wedding-item:focus-within .arrow {
+            transform: rotate(225deg);
+        }
+
+        .wedding-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            width: 560px;
+            padding: 26px;
+            display: grid;
+            grid-template-columns: 160px 1fr 1fr;
+            gap: 24px;
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            background: #fff;
+            box-shadow: 0 24px 60px rgba(40, 20, 32, 0.16);
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transform: translate(-50%, -10px);
+            transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
+        }
+
+        .wedding-item:hover .wedding-dropdown,
+        .wedding-item:focus-within .wedding-dropdown {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transform: translate(-50%, 0);
+        }
+
+        .wedding-dropdown img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 14px;
+            background: var(--pink-soft);
+        }
+
+        .wedding-column {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .wedding-column .label {
+            font-size: 10px;
+            font-weight: 800;
+            color: var(--muted);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .wedding-column a {
+            min-height: 40px;
+            padding: 4px 0;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--ink);
+            transition: color 0.2s ease;
+        }
+
+        .wedding-column a:hover {
+            color: var(--pink);
+        }
+
+        .nav-actions {
+            justify-self: end;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .login-button {
+            min-width: 96px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 999px;
+            color: #fff;
+            background: var(--pink);
+            font-weight: 800;
+            font-size: 13px;
+            text-decoration: none;
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+
+        .login-button:hover {
+            background: var(--pink-dark);
+            transform: translateY(-1px);
+        }
+
+        .menu-toggle {
+            flex: 0 0 auto;
+            width: 44px;
+            height: 44px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            border: 0;
+            border-radius: 50%;
+            color: var(--pink);
+            background: var(--pink-soft);
+            cursor: pointer;
+        }
+
+        .menu-lines,
+        .menu-lines::before,
+        .menu-lines::after {
+            width: 20px;
+            height: 2px;
+            display: block;
+            border-radius: 10px;
+            background: currentColor;
+        }
+
+        .menu-lines {
+            position: relative;
+        }
+
+        .menu-lines::before,
+        .menu-lines::after {
+            content: "";
+            position: absolute;
+            left: 0;
+        }
+
+        .menu-lines::before {
+            top: -6px;
+        }
+
+        .menu-lines::after {
+            top: 6px;
+        }
+
+        .menu-backdrop {
+            position: fixed;
+            inset: 0;
+            z-index: 1100;
+            visibility: hidden;
+            opacity: 0;
+            background: rgba(36, 23, 35, 0.5);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .menu-backdrop.open {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1200;
+            width: min(88vw, 370px);
+            height: 100vh;
+            height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            background: #fff;
+            box-shadow: -25px 0 60px rgba(30, 15, 24, 0.2);
+            visibility: hidden;
+            transform: translateX(105%);
+            transition: transform 0.35s ease, visibility 0.35s ease;
+        }
+
+        .mobile-menu.open {
+            visibility: visible;
+            transform: translateX(0);
+        }
+
+        .mobile-menu-header {
+            flex: 0 0 auto;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .mobile-logo {
+            width: 48px;
+            height: 48px;
+            object-fit: contain;
+            border-radius: 50%;
+        }
+
+        .menu-close {
+            width: 42px;
+            height: 42px;
+            border: 0;
+            border-radius: 50%;
+            color: var(--pink);
+            background: var(--pink-soft);
+            font-size: 27px;
+            line-height: 1;
+            cursor: pointer;
+        }
+
+        .mobile-links {
+            flex: 1 1 auto;
+            margin: 0;
+            padding: 16px 20px;
+            list-style: none;
+            overflow-y: auto;
+            overscroll-behavior: contain;
+        }
+
+        .mobile-links>li {
+            border-bottom: 1px solid var(--border);
+        }
+
+        .mobile-links a,
+        .mobile-wedding-button {
+            width: 100%;
+            min-height: 56px;
+            padding: 0 8px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border: 0;
+            color: var(--ink);
+            background: none;
+            font: 700 16px "Inter", "Segoe UI", sans-serif;
+            text-decoration: none;
+            text-align: left;
+            cursor: pointer;
+        }
+
+        .mobile-links a.active {
+            color: var(--pink);
+        }
+
+        .mobile-wedding-panel {
+            max-height: 0;
+            overflow: hidden;
+            background: var(--pink-soft);
+            transition: max-height 0.3s ease;
+        }
+
+        .mobile-wedding-panel.open {
+            max-height: 520px;
+        }
+
+        .mobile-wedding-panel a {
+            min-height: 43px;
+            padding-left: 22px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .mobile-login {
+            flex: 0 0 auto;
+            margin: 20px;
+            min-height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 999px;
+            color: #fff;
+            background: var(--pink);
+            font-weight: 800;
+            text-decoration: none;
+        }
+
+        /* =========================================================
+           STORIES HERO
+           ========================================================= */
+
+        .stories-hero {
+            position: relative;
+            overflow: hidden;
+            padding: 180px 24px 80px;
+            text-align: center;
+            background:
+                radial-gradient(circle at 18% 20%, rgba(239, 45, 131, 0.10), transparent 24%),
+                radial-gradient(circle at 82% 82%, rgba(207, 167, 102, 0.16), transparent 28%),
+                linear-gradient(180deg, #ffffff 0%, var(--cream) 100%);
+            border-bottom: 1px solid rgba(207, 167, 102, 0.15);
+        }
+
+        .stories-hero::before,
+        .stories-hero::after {
+            content: "";
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .stories-hero::before {
+            top: -40px;
+            right: -90px;
+            width: 260px;
+            height: 260px;
+            background: rgba(239, 45, 131, 0.05);
+        }
+
+        .stories-hero::after {
+            left: -100px;
+            bottom: -110px;
+            width: 320px;
+            height: 320px;
+            background: rgba(207, 167, 102, 0.07);
+        }
+
+        .stories-hero-inner {
+            position: relative;
+            z-index: 1;
+            max-width: 860px;
+            margin: 0 auto;
+        }
+
+        .stories-label {
+            display: inline-block;
+            padding: 7px 16px;
+            border: 1px solid rgba(239, 45, 131, 0.16);
+            border-radius: 999px;
+            color: var(--pink-dark);
+            background: rgba(255, 255, 255, 0.88);
+            font-size: 10px;
+            font-weight: 900;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+
+        .stories-hero h1 {
+            margin: 0 auto;
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(38px, 6vw, 66px);
+            font-weight: 600;
+            line-height: 1.04;
+            letter-spacing: -0.02em;
+            color: var(--ink);
+        }
+
+        .stories-hero h1 span {
+            color: var(--pink);
+            font-style: italic;
+        }
+
+        .stories-hero p {
+            max-width: 640px;
+            margin: 16px auto 0;
+            color: var(--muted);
+            font-size: 16px;
+            line-height: 1.75;
+        }
+
+        .stories-chips {
+            margin-top: 24px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .chip {
+            min-height: 36px;
+            padding: 0 16px;
+            display: inline-flex;
+            align-items: center;
+            border-radius: 999px;
+            border: 1px solid rgba(42, 29, 37, 0.08);
+            background: rgba(255, 255, 255, 0.82);
+            color: var(--ink);
+            font-size: 12px;
+            font-weight: 700;
+            box-shadow: 0 8px 20px rgba(83, 41, 62, 0.06);
+        }
+
+        /* =========================================================
+           FILTERS
+           ========================================================= */
+
+        .stories-filters {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 24px 24px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .search-wrap {
+            position: relative;
+            flex: 1;
+            min-width: 200px;
+            max-width: 400px;
+        }
+
+        .search-wrap input {
+            width: 100%;
+            min-height: 48px;
+            padding: 0 16px 0 44px;
+            border: 1px solid rgba(42, 29, 37, 0.12);
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.94);
+            color: var(--ink);
+            font: inherit;
+            outline: none;
+            box-shadow: 0 12px 28px rgba(83, 41, 62, 0.05);
+            transition: border-color 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .search-wrap input:focus {
+            border-color: rgba(239, 45, 131, 0.3);
+            box-shadow: 0 0 0 4px rgba(239, 45, 131, 0.08);
+        }
+
+        .search-wrap input::placeholder {
+            color: var(--muted);
+        }
+
+        .search-wrap::before {
+            content: "⌕";
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--pink);
+            font-size: 18px;
+            pointer-events: none;
+        }
+
+        .stories-count {
+            color: var(--muted);
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        /* =========================================================
+           GRID — FULLY CLICKABLE CARDS
+           ========================================================= */
+
+        .stories-grid {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 24px 24px 80px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .story-card {
+            display: block;
+            overflow: hidden;
+            border: 1px solid rgba(42, 29, 37, 0.08);
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.96);
+            box-shadow: 0 16px 40px rgba(83, 41, 62, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .story-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 28px 56px rgba(83, 41, 62, 0.14);
+        }
+
+        .story-card:focus-visible {
+            outline: 3px solid var(--pink);
+            outline-offset: 2px;
+        }
+
+        .story-cover {
+            width: 100%;
+            aspect-ratio: 16 / 10;
+            display: block;
+            object-fit: cover;
+            background: linear-gradient(135deg, var(--pink-soft), var(--gold-soft));
+            transition: transform 0.55s ease, filter 0.55s ease;
+        }
+
+        .story-card:hover .story-cover {
+            transform: scale(1.03);
+            filter: saturate(1.03);
+        }
+
+        .story-body {
+            padding: 20px 20px 22px;
+        }
+
+        .story-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            align-items: center;
+            color: var(--pink-dark);
+            font-size: 10px;
+            font-weight: 900;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .story-meta::before {
+            content: "";
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--pink), var(--gold));
+        }
+
+        .story-title {
+            margin: 12px 0 8px;
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 22px;
+            font-weight: 600;
+            line-height: 1.12;
+            color: var(--ink);
+        }
+
+        .story-excerpt {
+            margin: 0;
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        .story-read {
+            margin-top: 16px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--pink);
+            font-size: 12px;
+            font-weight: 900;
+            text-decoration: none;
+            transition: gap 0.25s ease;
+        }
+
+        .story-read::after {
+            content: "→";
+            transition: transform 0.25s ease;
+        }
+
+        .story-card:hover .story-read::after {
+            transform: translateX(4px);
+        }
+
+        /* Remove underline from the card */
+        .story-card .story-read {
+            pointer-events: none;
+        }
+
+        .empty-state {
+            grid-column: 1 / -1;
+            padding: 48px 20px;
+            border: 1px dashed rgba(239, 45, 131, 0.24);
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.72);
+            color: var(--muted);
+            text-align: center;
+        }
+
+        /* =========================================================
+           FOOTER
+           ========================================================= */
+
+        .stories-footer {
+            padding: 32px 24px;
+            border-top: 1px solid var(--border);
+            background: var(--white);
+            color: var(--muted);
+            font-size: 13px;
+            text-align: center;
+        }
+
+        .stories-footer strong {
+            color: var(--ink);
+        }
+
+        /* =========================================================
+           RESPONSIVE
+           ========================================================= */
+
+        @media (max-width: 1050px) {
+            .wedding-dropdown {
+                width: 480px;
+                grid-template-columns: 140px 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 980px) {
+            .stories-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .wedding-dropdown {
+                width: 420px;
+                grid-template-columns: 120px 1fr 1fr;
+                padding: 20px;
+                gap: 16px;
+            }
+
+            .wedding-dropdown img {
+                height: 150px;
+            }
+        }
+
+        @media (max-width: 850px) {
+            .navbar-wrap {
+                padding: 0 16px;
+                top: 12px;
+            }
+
+            .navbar {
+                padding: 0 18px;
+                border-radius: 999px;
+                min-height: 64px;
+                gap: 12px;
+            }
+
+            .brand-name {
+                font-size: 14px;
+            }
+
+            .brand-name span {
+                font-size: 9px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .nav-actions {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .stories-hero {
+                padding: 150px 16px 60px;
+            }
+
+            .stories-hero h1 {
+                font-size: clamp(32px, 8vw, 44px);
+            }
+
+            .stories-filters {
+                padding: 18px 16px 0;
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .search-wrap {
+                max-width: 100%;
+            }
+
+            .stories-grid {
+                padding: 18px 16px 60px;
+                gap: 16px;
+            }
+        }
+
+        @media (max-width: 620px) {
+            .stories-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stories-hero {
+                padding: 130px 14px 48px;
+            }
+
+            .stories-hero p {
+                font-size: 14px;
+            }
+
+            .story-title {
+                font-size: 20px;
+            }
+
+            .stories-chips {
+                gap: 8px;
+            }
+
+            .chip {
+                font-size: 11px;
+                padding: 0 12px;
+                min-height: 32px;
+            }
+
+            .wedding-dropdown {
+                display: none;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .navbar-wrap {
+                padding: 0 10px;
+                top: 8px;
+            }
+
+            .navbar {
+                padding: 0 14px;
+                min-height: 56px;
+                border-radius: 999px;
+            }
+
+            .brand-logo {
+                width: 40px;
+                height: 40px;
+            }
+
+            .brand-name {
+                font-size: 12px;
+            }
+
+            .brand-name span {
+                display: none;
+            }
+
+            .stories-hero {
+                padding: 110px 12px 40px;
+            }
+
+            .stories-hero h1 {
+                font-size: 28px;
+            }
+        }
+
+        /* Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+
+            .story-card:hover {
+                transform: none !important;
+            }
+
+            .story-card:hover .story-cover {
+                transform: none !important;
+            }
+
+            .story-card:hover .story-read::after {
+                transform: none !important;
+            }
+        }
+        /* =========================================================
+   GRID — FULLY CLICKABLE CARDS WITH FULL IMAGES
+   ========================================================= */
+
+.story-cover {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    display: block;
+    object-fit: contain; /* Changed from cover to contain */
+    background: #f5f0ee;
+    transition: transform 0.55s ease, filter 0.55s ease;
+}
+
+/* Optional: Add a fallback background color */
+.story-card .story-cover {
+    background: #f5f0ee;
+}
+    </style>
+</head>
+<body>
+
+   <header class="navbar-wrap" id="siteNavbar">
+        <nav class="navbar" aria-label="Main navigation">
+            <a class="brand" href="#home">
+                <img class="brand-logo" src="assets/image.png" alt="DLM logo">
+            </a>
+
+            <ul class="nav-links">
+                <li class="nav-item"><a href="index.html">Home</a></li>
+
+                <li class="nav-item wedding-item">
+                    <button class="wedding-button" type="button">
+                        Weddings
+                        <span class="arrow"></span>
+                    </button>
+
+                    <div class="wedding-dropdown">
+                        <img src="https://i.pinimg.com/736x/c3/08/2a/c3082adc6d4155cb01949f67dbfb0788.jpg" alt="Wedding photography preview">
+
+                        <div class="wedding-column">
+                            <a href="hindumarriage.html">Hindu Wedding</a>
+                            <a href="brahminmarriage.html">Brahmin Wedding</a>
+                            <a href="christianmarriage.html">Christian Wedding</a>
+                            <a href="bridepotrait.html">Bride Portrait</a>
+                            <a href="groompotrait.html">Groom Portrait</a>
+                        </div>
+
+                        <div class="wedding-column">
+                            <a href="babyshower.html">Baby Shower</a>
+                            <a href="beautyshoot.html">Beauty Shoot</a>
+                            <a href="coupleshoot.html">Couple Shoot</a>
+                            <a href="birthdayshoot.html">Birthday Shoot</a>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="nav-item"><a href="index.html#about">About</a></li>
+                <li class="nav-item"><a href="index.html#services">Services</a></li>
+                <li class="nav-item"><a href="index.html#gallery-legacy">Portfolio</a></li>
+                <li class="nav-item"><a href="index.html#packages">Packages</a></li>
+                <li class="nav-item"><a href="blog.html">Stories</a></li>
+                <li class="nav-item"><a href="index.html#contact">Contact</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <a class="login-button" href="customer/login.html">Login</a>
+
+                <button class="menu-toggle" id="menuOpen" type="button" aria-label="Open menu" aria-controls="mobileMenu">
+                    <span class="menu-lines"></span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <div class="menu-backdrop" id="menuBackdrop"></div>
+
+    <aside class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation">
+        <div class="mobile-menu-header">
+            <img class="mobile-logo" src="assets/image.png" alt="DLM logo">
+
+            <button class="menu-close" id="menuClose" type="button" aria-label="Close menu">
+                &times;
+            </button>
+        </div>
+
+        <ul class="mobile-links">
+            <li><a href="index.html">Home</a></li>
+
+            <li>
+                <button class="mobile-wedding-button" id="mobileWeddingButton" type="button">
+                    Weddings
+                    <span class="arrow"></span>
+                </button>
+
+                <div class="mobile-wedding-panel" id="mobileWeddingPanel">
+                    <a href="hindumarriage.html">Hindu Wedding</a>
+                    <a href="brahminmarriage.html">Brahmin Wedding</a>
+                    <a href="christianmarriage.html">Christian Wedding</a>
+                    <a href="bridepotrait.html">Bride Portrait</a>
+                    <a href="groompotrait.html">Groom Portrait</a>
+                    <a href="babyshower.html">Baby Shower</a>
+                    <a href="beautyshoot.html">Beauty Shoot</a>
+                    <a href="coupleshoot.html">Couple Shoot</a>
+                    <a href="birthdayshoot.html">Birthday Shoot</a>
+                </div>
+            </li>
+
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#services">Services</a></li>
+            <li><a href="index.html#gallery-legacy">Portfolio</a></li>
+            <li><a href="index.html#packages">Packages</a></li>
+            <li><a href="blog.html">Stories</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+
+        <a class="mobile-login" href="customer/login.html">Customer Login</a>
+    </aside>
+    <!-- =========================================================
+    STORIES HERO
+    ========================================================= -->
+
+    <section class="stories-hero">
+        <div class="stories-hero-inner">
+            <span class="stories-label">DLM Studio Journal</span>
+            <h1>Stories Behind <span>Every Beautiful Frame</span></h1>
+            <p>Wedding stories, thoughtful photography guidance and moments from celebrations documented by Dream Light Media.</p>
+           
+        </div>
+    </section>
+
+    <!-- =========================================================
+    FILTERS
+    ========================================================= -->
+
+    <section class="stories-filters">
+        <label class="search-wrap" aria-label="Search stories">
+            <input id="searchInput" type="search" placeholder="Search stories..." aria-label="Search blog posts">
+        </label>
+        <span class="stories-count" id="postCount">Loading stories...</span>
+    </section>
+
+    <!-- =========================================================
+    GRID — FULLY CLICKABLE CARDS
+    ========================================================= -->
+
+    <section class="stories-grid" id="blogGrid" role="list"></section>
+
+    <!-- =========================================================
+    FOOTER
+    ========================================================= -->
+
+    <footer class="stories-footer">
+        <p>&copy; 2026 <strong>DLM Photography</strong> — Dream Light Media. All rights reserved.</p>
+    </footer>
+
+  
+
+    <script>
+        (() => {
+            // =========================================================
+            // NAVBAR
+            // =========================================================
+
+            const navbarWrap = document.getElementById('navbarWrap') || document.getElementById('siteNavbar');
+            const menuToggle = document.getElementById('menuToggle') || document.getElementById('menuOpen');
+            const menuClose = document.getElementById('menuClose');
+            const menuBackdrop = document.getElementById('menuBackdrop');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const mobileWeddingToggle = document.getElementById('mobileWeddingToggle') || document.getElementById('mobileWeddingButton');
+            const mobileWeddingPanel = document.getElementById('mobileWeddingPanel');
+
+            if (navbarWrap) {
+                // Sticky navbar
+                window.addEventListener('scroll', () => {
+                    navbarWrap.classList.toggle('is-sticky', window.scrollY > 60);
+                }, { passive: true });
+            }
+
+            if (menuToggle && menuClose && menuBackdrop && mobileMenu) {
+                // Mobile menu
+                const openMenu = () => {
+                    mobileMenu.classList.add('open');
+                    menuBackdrop.classList.add('open');
+                    document.body.classList.add('menu-open');
+                    menuToggle.setAttribute('aria-expanded', 'true');
+                };
+
+                const closeMenu = () => {
+                    mobileMenu.classList.remove('open');
+                    menuBackdrop.classList.remove('open');
+                    document.body.classList.remove('menu-open');
+                    menuToggle.setAttribute('aria-expanded', 'false');
+                };
+
+                menuToggle.addEventListener('click', openMenu);
+                menuClose.addEventListener('click', closeMenu);
+                menuBackdrop.addEventListener('click', closeMenu);
+
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape' && mobileMenu.classList.contains('open')) {
+                        closeMenu();
+                    }
+                });
+
+                // Mobile wedding dropdown
+                if (mobileWeddingToggle && mobileWeddingPanel) {
+                    mobileWeddingToggle.addEventListener('click', () => {
+                        const isOpen = mobileWeddingPanel.classList.toggle('open');
+                        mobileWeddingToggle.setAttribute('aria-expanded', isOpen);
+                    });
+                }
+
+                // Close mobile menu on link click
+                mobileMenu.querySelectorAll('a').forEach((link) => {
+                    link.addEventListener('click', closeMenu);
+                });
+
+                // Close mobile menu on resize to desktop
+                window.addEventListener('resize', () => {
+                    if (window.innerWidth > 850 && mobileMenu.classList.contains('open')) {
+                        closeMenu();
+                    }
+                });
+            }
+
+            // =========================================================
+            // BLOG POSTS — FULLY CLICKABLE CARDS
+            // =========================================================
+
+            const API_BASE = localStorage.getItem("dlmApiBase") || "http://192.168.0.101:8080";
+            const grid = document.getElementById("blogGrid");
+            const search = document.getElementById("searchInput");
+            const count = document.getElementById("postCount");
+            let posts = [];
+
+            fetch(`${API_BASE}/api/public/blogs`)
+                .then((response) => {
+                    if (!response.ok) throw new Error();
+                    return response.json();
+                })
+                .then((data) => {
+                    posts = data;
+                    render();
+                })
+                .catch(() => {
+                    grid.innerHTML = '<div class="empty-state">Stories could not be loaded right now. Please try again later.</div>';
+                    count.textContent = "Unavailable";
+                });
+
+            search.addEventListener("input", render);
+
+            function render() {
+                const query = search.value.trim().toLowerCase();
+                const items = posts.filter((post) => {
+                    const searchable =
+                        `${post.title || ""} ${post.category || ""} ${post.excerpt || ""}`.toLowerCase();
+                    return !query || searchable.includes(query);
+                });
+
+                count.textContent = `${items.length} stor${items.length === 1 ? "y" : "ies"}`;
+                grid.replaceChildren();
+
+                if (!items.length) {
+                    const empty = document.createElement("div");
+                    empty.className = "empty-state";
+                    empty.textContent = "No stories match your search.";
+                    grid.appendChild(empty);
+                    return;
+                }
+
+                items.forEach((post) => {
+                    const card = createCard(post);
+                    grid.appendChild(card);
+                });
+            }
+
+            function createCard(post) {
+                // Create anchor card - the entire card is clickable
+                const link = document.createElement("a");
+                link.className = "story-card";
+                link.href = `blog-detail.html?slug=${encodeURIComponent(post.slug)}`;
+                link.setAttribute("role", "listitem");
+                link.setAttribute("aria-label", `Read: ${post.title || "Untitled story"}`);
+
+                // Cover image
+                if (post.coverUrl) {
+                    const cover = document.createElement("img");
+                    cover.className = "story-cover";
+                    cover.src = `${API_BASE}${post.coverUrl}`;
+                    cover.alt = post.title || "Blog cover image";
+                    cover.loading = "lazy";
+                    link.appendChild(cover);
+                } else {
+                    const cover = document.createElement("div");
+                    cover.className = "story-cover";
+                    cover.style.background = "linear-gradient(135deg, var(--pink-soft), var(--gold-soft))";
+                    link.appendChild(cover);
+                }
+
+                // Body
+                const body = document.createElement("div");
+                body.className = "story-body";
+
+                // Meta
+                const meta = document.createElement("div");
+                meta.className = "story-meta";
+                meta.textContent = `${post.category || "Studio Story"} · ${formatDate(post.published_at)}`;
+
+                // Title
+                const title = document.createElement("h3");
+                title.className = "story-title";
+                title.textContent = post.title || "Untitled story";
+
+                // Excerpt
+                const excerpt = document.createElement("p");
+                excerpt.className = "story-excerpt";
+                excerpt.textContent = post.excerpt || "Read this story from DLM Photography.";
+
+                // Read more indicator (non-interactive, just visual)
+                const readMore = document.createElement("span");
+                readMore.className = "story-read";
+                readMore.textContent = "Read Story";
+
+                body.append(meta, title, excerpt, readMore);
+                link.appendChild(body);
+
+                return link;
+            }
+
+            function formatDate(value) {
+                const date = new Date(value);
+                if (Number.isNaN(date.getTime())) return "";
+                return date.toLocaleDateString(undefined, {
+                    day: "numeric",
+                    month: "short",
+                    year: "numeric"
+                });
+            }
+        })();
+    </script>
+
+</body>
+</html>

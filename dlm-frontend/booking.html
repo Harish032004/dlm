@@ -1,0 +1,1431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DLM Booking Availability</title>
+    <style>
+        :root {
+            --pink: #ef2d83;
+            --pink-dark: #c91567;
+            --ink: #241723;
+            --muted: #7a6572;
+            --line: rgba(36, 23, 35, 0.1);
+            --soft: #fff0f7;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            font-family: Inter, "Segoe UI", sans-serif;
+            color: var(--ink);
+            background: linear-gradient(180deg, #fff3f8, #fff);
+        }
+
+        header {
+            min-height: 76px;
+            padding: 0 28px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--line);
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(14px);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--ink);
+            font-weight: 900;
+            text-decoration: none;
+        }
+
+        .brand img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+
+        .home-link {
+            min-height: 42px;
+            padding: 0 18px;
+            display: inline-flex;
+            align-items: center;
+            border-radius: 999px;
+            color: #fff;
+            background: var(--pink);
+            font-weight: 900;
+            text-decoration: none;
+        }
+
+        main {
+            width: min(100%, 1120px);
+            margin: 0 auto;
+            padding: 54px 20px 70px;
+        }
+
+        .intro {
+            max-width: 720px;
+            margin-bottom: 28px;
+        }
+
+        .intro p {
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: clamp(34px, 5vw, 58px);
+            line-height: 1.04;
+        }
+
+        .panel {
+            padding: 24px;
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            background: #fff;
+            box-shadow: 0 18px 42px rgba(143, 28, 82, 0.1);
+        }
+
+        .controls {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr 1fr auto;
+            gap: 14px;
+            align-items: end;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 7px;
+            font-size: 13px;
+            font-weight: 900;
+        }
+
+        select,
+        input {
+            width: 100%;
+            min-height: 46px;
+            padding: 0 13px;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            background: #fff;
+            font: inherit;
+        }
+
+        button {
+            min-height: 46px;
+            padding: 0 22px;
+            border: 0;
+            border-radius: 999px;
+            color: #fff;
+            background: var(--pink);
+            font-weight: 900;
+            cursor: pointer;
+        }
+
+        .message {
+            min-height: 24px;
+            margin-top: 14px;
+            color: var(--pink-dark);
+            font-weight: 800;
+        }
+
+        .date-grid {
+            margin-top: 24px;
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .date-card {
+            min-height: 150px;
+            padding: 17px;
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            background: #fff;
+        }
+
+        .date-card.available {
+            border-color: rgba(239, 45, 131, 0.26);
+            background: var(--soft);
+        }
+
+        .date-card.booked {
+            border-color: rgba(22, 163, 74, 0.2);
+            background: #f0fdf4;
+        }
+
+        .date-card strong {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .slot {
+            margin-top: 8px;
+            padding: 9px 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            border-radius: 8px;
+            background: #fff;
+            color: #604252;
+            font-size: 13px;
+            font-weight: 800;
+            text-decoration: none;
+            box-shadow: 0 8px 18px rgba(143, 28, 82, 0.08);
+            transition: color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .slot:hover {
+            color: var(--pink);
+            transform: translateY(-2px);
+            box-shadow: 0 14px 24px rgba(143, 28, 82, 0.14);
+        }
+
+        .slot span {
+            flex: 0 0 auto;
+            color: var(--pink);
+            font-size: 12px;
+        }
+
+        .date-card p {
+            margin: 8px 0 0;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        @media (max-width: 820px) {
+            .controls,
+            .date-grid {
+                grid-template-columns: 1fr;
+            }
+
+            header {
+                padding: 0 18px;
+            }
+        }
+    </style>
+      <style>
+          :root {
+            --pink: #ef2d83;
+            --pink-dark: #c91567;
+            --soft: #fff0f7;
+            --ink: #241723;
+            --muted: #7a6572;
+            --border: rgba(36, 23, 35, 0.1);
+            --white: #ffffff;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Inter", "Segoe UI", sans-serif;
+            color: var(--ink);
+            background: #fff8fb;
+        }
+
+        body.menu-open {
+            overflow: hidden;
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+        button,
+        a {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .navbar-wrap {
+            position: absolute;
+            top: 18px;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 0 28px;
+        }
+
+        .navbar-wrap.is-sticky {
+            position: fixed;
+            top: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            width: min(100%, 1180px);
+            min-height: 76px;
+            margin: auto;
+            padding: 0 30px;
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            gap: 24px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.94);
+            box-shadow: 0 18px 50px rgba(108, 20, 64, 0.14);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            transition: border-radius 0.25s ease, min-height 0.25s ease;
+        }
+
+        .navbar-wrap.is-sticky .navbar {
+            width: 100%;
+            min-height: 70px;
+            border-radius: 0;
+        }
+
+        .brand {
+            justify-self: start;
+            display: flex;
+            align-items: center;
+        }
+
+        .brand-logo {
+            width: 56px;
+            height: 56px;
+            object-fit: contain;
+            border-radius: 50%;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 28px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-links a,
+        .wedding-button {
+            min-height: 70px;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            border: 0;
+            color: var(--ink);
+            background: none;
+            font: 700 14px "Inter", "Segoe UI", sans-serif;
+            text-decoration: none;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .nav-links a:hover,
+        .wedding-button:hover {
+            color: var(--pink);
+        }
+
+        .arrow {
+            width: 8px;
+            height: 8px;
+            border-right: 2px solid currentColor;
+            border-bottom: 2px solid currentColor;
+            transform: rotate(45deg);
+            transition: transform 0.25s ease;
+        }
+
+        .wedding-item:hover .arrow,
+        .wedding-item:focus-within .arrow {
+            transform: rotate(225deg);
+        }
+
+        .wedding-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            width: 560px;
+            padding: 26px;
+            display: grid;
+            grid-template-columns: 160px 1fr 1fr;
+            gap: 24px;
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            background: #fff;
+            box-shadow: 0 24px 60px rgba(40, 20, 32, 0.16);
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transform: translate(-50%, -10px);
+            transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
+        }
+
+        .wedding-item:hover .wedding-dropdown,
+        .wedding-item:focus-within .wedding-dropdown {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transform: translate(-50%, 0);
+        }
+
+        .wedding-dropdown img {
+            width: 100%;
+            height: 180px;
+            object-fit: contain;
+            border-radius: 14px;
+            background: #fff4f9;
+        }
+
+        .wedding-column {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .wedding-column a {
+            min-height: 44px;
+            font-size: 15px;
+        }
+
+        .nav-actions {
+            justify-self: end;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .login-button {
+            min-width: 96px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 999px;
+            color: #fff;
+            background: var(--pink);
+            font-weight: 800;
+            text-decoration: none;
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+
+        .login-button:hover {
+            background: var(--pink-dark);
+            transform: translateY(-1px);
+        }
+
+        .menu-toggle {
+            flex: 0 0 auto;
+            width: 44px;
+            height: 44px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            border: 0;
+            border-radius: 50%;
+            color: var(--pink);
+            background: var(--soft);
+            cursor: pointer;
+        }
+
+        .menu-lines,
+        .menu-lines::before,
+        .menu-lines::after {
+            width: 20px;
+            height: 2px;
+            display: block;
+            border-radius: 10px;
+            background: currentColor;
+        }
+
+        .menu-lines {
+            position: relative;
+        }
+
+        .menu-lines::before,
+        .menu-lines::after {
+            content: "";
+            position: absolute;
+            left: 0;
+        }
+
+        .menu-lines::before {
+            top: -6px;
+        }
+
+        .menu-lines::after {
+            top: 6px;
+        }
+
+        .menu-backdrop {
+            position: fixed;
+            inset: 0;
+            z-index: 1100;
+            visibility: hidden;
+            opacity: 0;
+            background: rgba(36, 23, 35, 0.5);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .menu-backdrop.open {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1200;
+            width: min(88vw, 370px);
+            height: 100vh;
+            height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            background: #fff;
+            box-shadow: -25px 0 60px rgba(30, 15, 24, 0.2);
+            visibility: hidden;
+            transform: translateX(105%);
+            transition: transform 0.35s ease, visibility 0.35s ease;
+        }
+
+        .mobile-menu.open {
+            visibility: visible;
+            transform: translateX(0);
+        }
+
+        .mobile-menu-header {
+            flex: 0 0 auto;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .mobile-logo {
+            width: 52px;
+            height: 52px;
+            object-fit: contain;
+            border-radius: 50%;
+        }
+
+        .menu-close {
+            width: 42px;
+            height: 42px;
+            border: 0;
+            border-radius: 50%;
+            color: var(--pink);
+            background: var(--soft);
+            font-size: 27px;
+            line-height: 1;
+            cursor: pointer;
+        }
+
+        .mobile-links {
+            flex: 1 1 auto;
+            margin: 0;
+            padding: 16px 20px;
+            list-style: none;
+            overflow-y: auto;
+            overscroll-behavior: contain;
+        }
+
+        .mobile-links > li {
+            border-bottom: 1px solid var(--border);
+        }
+
+        .mobile-links a,
+        .mobile-wedding-button {
+            width: 100%;
+            min-height: 56px;
+            padding: 0 8px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border: 0;
+            color: var(--ink);
+            background: none;
+            font: 700 16px "Inter", "Segoe UI", sans-serif;
+            text-decoration: none;
+            text-align: left;
+            cursor: pointer;
+        }
+
+        .mobile-wedding-panel {
+            max-height: 0;
+            overflow: hidden;
+            background: #fff8fb;
+            transition: max-height 0.3s ease;
+        }
+
+        .mobile-wedding-panel.open {
+            max-height: 520px;
+        }
+
+        .mobile-wedding-panel a {
+            min-height: 43px;
+            padding-left: 22px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .mobile-login {
+            flex: 0 0 auto;
+            margin: 20px;
+            min-height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 999px;
+            color: #fff;
+            background: var(--pink);
+            font-weight: 800;
+            text-decoration: none;
+        }
+          @media (max-width: 900px) {
+            .navbar-wrap {
+                padding: 0 16px;
+            }
+
+            .navbar-wrap.is-sticky {
+                padding: 0;
+            }
+
+            .navbar {
+                grid-template-columns: 1fr auto;
+                min-height: 70px;
+                padding: 9px 16px;
+                gap: 14px;
+            }
+
+            .nav-links,
+            .login-button {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .brand-logo {
+                width: 48px;
+                height: 48px;
+            }
+
+            .nav-actions {
+                min-width: 0;
+            }
+
+            .hero-slider {
+                min-height: 720px;
+            }
+
+            .slider-content {
+                bottom: 110px;
+            }
+
+            .slider-controls {
+                right: 24px;
+                bottom: 34px;
+            }
+
+            .slider-dots {
+                left: 28px;
+                bottom: 48px;
+                transform: none;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .navbar-wrap {
+                top: 12px;
+                padding: 0 14px;
+            }
+
+            .navbar-wrap.is-sticky {
+                top: 0;
+                padding: 0;
+            }
+
+            .navbar {
+                min-height: 66px;
+                padding: 8px 12px;
+                border-radius: 34px;
+            }
+
+            .navbar-wrap.is-sticky .navbar {
+                border-radius: 0;
+            }
+
+            .mobile-menu {
+                width: min(92vw, 350px);
+            }
+
+            .mobile-menu-header {
+                padding: 14px 16px;
+            }
+
+            .mobile-links {
+                padding: 12px 16px;
+            }
+
+            .mobile-links a,
+            .mobile-wedding-button {
+                min-height: 52px;
+                font-size: 15px;
+            }
+
+            .mobile-login {
+                margin: 16px;
+            }
+
+            .hero-slider {
+                min-height: min(680px, 100svh);
+            }
+
+            .hero-slide::after {
+                background:
+                    linear-gradient(0deg, rgba(22, 10, 16, 0.76) 0%, rgba(22, 10, 16, 0.2) 72%),
+                    linear-gradient(90deg, rgba(22, 10, 16, 0.42), transparent);
+            }
+
+            .hero-slide img {
+                object-position: center;
+            }
+
+            .slider-content {
+                left: 20px;
+                right: 20px;
+                bottom: 118px;
+                width: auto;
+            }
+
+            .slider-kicker {
+                font-size: 12px;
+            }
+
+            .slider-title {
+                font-size: clamp(38px, 14vw, 58px);
+            }
+
+            .slider-copy {
+                margin-top: 16px;
+                font-size: 16px;
+                line-height: 1.6;
+            }
+
+            .slider-controls {
+                right: 18px;
+                bottom: 30px;
+            }
+
+            .slider-arrow {
+                width: 42px;
+                height: 42px;
+            }
+
+            .slider-dots {
+                left: 20px;
+                bottom: 45px;
+            }
+
+            .content-section {
+                padding: 72px 20px;
+            }
+
+            .services-section {
+                padding: 74px 20px 80px;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+                gap: 86px;
+                padding-top: 74px;
+            }
+
+            .service-card {
+                width: min(100%, 380px);
+                margin: 0 auto;
+            }
+
+            .studio-about {
+                padding: 86px 20px 78px;
+            }
+
+            .studio-about-inner {
+                grid-template-columns: 1fr;
+                gap: 26px;
+            }
+
+            .about-gallery {
+                order: 2;
+                width: 100%;
+                justify-self: center;
+            }
+
+            .studio-about-copy {
+                order: 1;
+                display: contents;
+            }
+
+            .about-eyebrow,
+            .studio-about-copy h2,
+            .about-description {
+                order: 1;
+            }
+
+            .about-photo-frame {
+                width: min(84vw, 340px);
+                transform: perspective(900px) rotateY(-7deg) rotateZ(-1.5deg);
+            }
+
+            .about-highlights {
+                order: 3;
+                grid-template-columns: 72px 1fr;
+                padding: 24px;
+                gap: 18px;
+            }
+
+            .about-avatar {
+                width: 66px;
+                height: 66px;
+            }
+
+            .about-actions {
+                order: 4;
+                align-items: stretch;
+            }
+
+            .availability-text {
+                width: 100%;
+                margin: 0 0 2px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .navbar-wrap {
+                padding: 0 10px;
+            }
+
+            .navbar {
+                min-height: 60px;
+                padding: 7px 10px;
+            }
+
+            .brand-logo {
+                width: 42px;
+                height: 42px;
+            }
+
+            .menu-toggle {
+                width: 40px;
+                height: 40px;
+            }
+
+            .mobile-menu {
+                width: 100vw;
+            }
+
+            .mobile-logo {
+                width: 46px;
+                height: 46px;
+            }
+
+            .hero-slider {
+                min-height: min(640px, 100svh);
+            }
+
+            .slider-title {
+                font-size: 36px;
+            }
+
+            .slider-copy {
+                font-size: 15px;
+            }
+
+            .studio-about {
+                padding: 72px 16px 64px;
+            }
+
+            .studio-about-copy h2 {
+                font-size: 34px;
+            }
+
+            .about-description {
+                font-size: 15.5px;
+            }
+
+            .about-highlights {
+                grid-template-columns: 1fr;
+                justify-items: start;
+                border-radius: 22px;
+            }
+
+            .about-actions {
+                gap: 12px;
+            }
+
+            .about-action,
+            .about-gallery-button {
+                width: 100%;
+            }
+
+            .services-section {
+                padding: 66px 16px 72px;
+            }
+
+            .services-intro {
+                margin-bottom: 58px;
+            }
+
+            .service-card {
+                min-height: 226px;
+                padding: 88px 20px 22px;
+            }
+
+            .service-image {
+                height: 150px;
+            }
+
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            .slider-track,
+            .hero-slide img,
+            .about-carousel-track,
+            .mobile-menu,
+            .menu-backdrop,
+            .mobile-wedding-panel {
+                transition: none;
+            }
+
+            .slider-progress-bar.is-running {
+                animation: none;
+            }
+
+            .about-carousel-track {
+                animation: none;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <header class="navbar-wrap" id="siteNavbar">
+        <nav class="navbar" aria-label="Main navigation">
+            <a class="brand" href="#home">
+                <img class="brand-logo" src="assets/image.png" alt="DLM logo">
+            </a>
+
+            <ul class="nav-links">
+                <li class="nav-item"><a href="index.html">Home</a></li>
+
+                <li class="nav-item wedding-item">
+                    <button class="wedding-button" type="button">
+                        Weddings
+                        <span class="arrow"></span>
+                    </button>
+
+                    <div class="wedding-dropdown">
+                        <img src="https://i.pinimg.com/736x/c3/08/2a/c3082adc6d4155cb01949f67dbfb0788.jpg" alt="Wedding photography preview">
+
+                        <div class="wedding-column">
+                            <a href="hindumarriage.html">Hindu Wedding</a>
+                            <a href="brahminmarriage.html">Brahmin Wedding</a>
+                            <a href="christianmarriage.html">Christian Wedding</a>
+                            <a href="bridepotrait.html">Bride Portrait</a>
+                            <a href="groompotrait.html">Groom Portrait</a>
+                        </div>
+
+                        <div class="wedding-column">
+                            <a href="babyshower.html">Baby Shower</a>
+                            <a href="beautyshoot.html">Beauty Shoot</a>
+                            <a href="coupleshoot.html">Couple Shoot</a>
+                            <a href="birthdayshoot.html">Birthday Shoot</a>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="nav-item"><a href="index.html#about">About</a></li>
+                <li class="nav-item"><a href="index.html#services">Services</a></li>
+                <li class="nav-item"><a href="index.html#gallery-legacy">Portfolio</a></li>
+                <li class="nav-item"><a href="index.html#packages">Packages</a></li>
+                <li class="nav-item"><a href="blog.html">Stories</a></li>
+                <li class="nav-item"><a href="index.html#contact">Contact</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <a class="login-button" href="customer/login.html">Login</a>
+
+                <button class="menu-toggle" id="menuOpen" type="button" aria-label="Open menu" aria-controls="mobileMenu">
+                    <span class="menu-lines"></span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <div class="menu-backdrop" id="menuBackdrop"></div>
+
+    <aside class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation">
+        <div class="mobile-menu-header">
+            <img class="mobile-logo" src="assets/image.png" alt="DLM logo">
+
+            <button class="menu-close" id="menuClose" type="button" aria-label="Close menu">
+                &times;
+            </button>
+        </div>
+
+        <ul class="mobile-links">
+            <li><a href="index.html">Home</a></li>
+
+            <li>
+                <button class="mobile-wedding-button" id="mobileWeddingButton" type="button">
+                    Weddings
+                    <span class="arrow"></span>
+                </button>
+
+                <div class="mobile-wedding-panel" id="mobileWeddingPanel">
+                    <a href="hindumarriage.html">Hindu Wedding</a>
+                    <a href="brahminmarriage.html">Brahmin Wedding</a>
+                    <a href="christianmarriage.html">Christian Wedding</a>
+                    <a href="bridepotrait.html">Bride Portrait</a>
+                    <a href="groompotrait.html">Groom Portrait</a>
+                    <a href="babyshower.html">Baby Shower</a>
+                    <a href="beautyshoot.html">Beauty Shoot</a>
+                    <a href="coupleshoot.html">Couple Shoot</a>
+                    <a href="birthdayshoot.html">Birthday Shoot</a>
+                </div>
+            </li>
+
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#services">Services</a></li>
+            <li><a href="index.html#gallery-legacy">Portfolio</a></li>
+            <li><a href="index.html#packages">Packages</a></li>
+            <li><a href="blog.html">Stories</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+
+        <a class="mobile-login" href="customer/login.html">Customer Login</a>
+    </aside>
+  <script>
+        (() => {
+            const navbar = document.getElementById("siteNavbar");
+            const menu = document.getElementById("mobileMenu");
+            const backdrop = document.getElementById("menuBackdrop");
+            const openButton = document.getElementById("menuOpen");
+            const closeButton = document.getElementById("menuClose");
+            const weddingButton = document.getElementById("mobileWeddingButton");
+            const weddingPanel = document.getElementById("mobileWeddingPanel");
+
+            const openMenu = () => {
+                menu.classList.add("open");
+                backdrop.classList.add("open");
+                document.body.classList.add("menu-open");
+                openButton.setAttribute("aria-expanded", "true");
+            };
+
+            const closeMenu = () => {
+                menu.classList.remove("open");
+                backdrop.classList.remove("open");
+                document.body.classList.remove("menu-open");
+                openButton.setAttribute("aria-expanded", "false");
+            };
+
+            openButton.addEventListener("click", openMenu);
+            closeButton.addEventListener("click", closeMenu);
+            backdrop.addEventListener("click", closeMenu);
+
+            weddingButton.addEventListener("click", () => {
+                weddingPanel.classList.toggle("open");
+            });
+
+            menu.querySelectorAll("a").forEach(link => {
+                link.addEventListener("click", closeMenu);
+            });
+
+            window.addEventListener("scroll", () => {
+                navbar.classList.toggle("is-sticky", window.scrollY > 20);
+            });
+
+            document.addEventListener("keydown", event => {
+                if (event.key === "Escape") closeMenu();
+            });
+
+            window.addEventListener("resize", () => {
+                if (window.innerWidth > 900) closeMenu();
+            });
+        })();
+
+        (() => {
+            const slider = document.getElementById("home");
+            const track = document.getElementById("sliderTrack");
+            const previousButton = document.getElementById("sliderPrev");
+            const nextButton = document.getElementById("sliderNext");
+            const dotsContainer = document.getElementById("sliderDots");
+            const progressBar = document.getElementById("sliderProgress");
+
+            if (!slider || !track || !previousButton || !nextButton || !dotsContainer || !progressBar) {
+                return;
+            }
+
+            const originalSlides = Array.from(track.querySelectorAll(".hero-slide"));
+            const slideDuration = 4000;
+            const swipeThreshold = 45;
+
+            if (originalSlides.length === 0) {
+                return;
+            }
+
+            const firstClone = originalSlides[0].cloneNode(true);
+            const lastClone = originalSlides[originalSlides.length - 1].cloneNode(true);
+
+            firstClone.classList.remove("is-active");
+            lastClone.classList.remove("is-active");
+            firstClone.setAttribute("aria-hidden", "true");
+            lastClone.setAttribute("aria-hidden", "true");
+
+            track.appendChild(firstClone);
+            track.insertBefore(lastClone, originalSlides[0]);
+
+            const slides = Array.from(track.querySelectorAll(".hero-slide"));
+
+            let currentIndex = 1;
+            let autoPlayTimer = null;
+            let touchStartX = 0;
+            let touchEndX = 0;
+            let isSliding = false;
+            let slideFallbackTimer = null;
+
+            const getRealIndex = () => {
+                if (currentIndex === 0) {
+                    return originalSlides.length - 1;
+                }
+
+                if (currentIndex === originalSlides.length + 1) {
+                    return 0;
+                }
+
+                return currentIndex - 1;
+            };
+
+            const dots = originalSlides.map((_, index) => {
+                const dot = document.createElement("button");
+                dot.className = "slider-dot";
+                dot.type = "button";
+                dot.setAttribute("aria-label", `Show image ${index + 1}`);
+                dot.addEventListener("click", () => {
+                    showSlide(index);
+                    restartAutoPlay();
+                });
+                dotsContainer.appendChild(dot);
+                return dot;
+            });
+
+            const restartProgress = () => {
+                progressBar.classList.remove("is-running");
+                void progressBar.offsetWidth;
+                progressBar.classList.add("is-running");
+            };
+
+            const completeSlideTransition = () => {
+                window.clearTimeout(slideFallbackTimer);
+                slideFallbackTimer = null;
+                isSliding = false;
+
+                if (currentIndex === 0) {
+                    currentIndex = originalSlides.length;
+                    setTrackPosition(false);
+                    updateSliderState(false);
+                }
+
+                if (currentIndex === originalSlides.length + 1) {
+                    currentIndex = 1;
+                    setTrackPosition(false);
+                    updateSliderState(false);
+                }
+            };
+
+            const setTrackPosition = shouldAnimate => {
+                if (shouldAnimate) {
+                    isSliding = true;
+                    window.clearTimeout(slideFallbackTimer);
+                    slideFallbackTimer = window.setTimeout(completeSlideTransition, 950);
+                }
+
+                track.style.transition = shouldAnimate ? "" : "none";
+                track.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+                if (!shouldAnimate) {
+                    isSliding = false;
+
+                    requestAnimationFrame(() => {
+                        track.style.transition = "";
+                    });
+                }
+            };
+
+            const updateSliderState = shouldRestartProgress => {
+                const realIndex = getRealIndex();
+
+                slides.forEach((slide, slideIndex) => {
+                    slide.classList.toggle("is-active", slideIndex === currentIndex);
+                });
+
+                dots.forEach((dot, dotIndex) => {
+                    const isActive = dotIndex === realIndex;
+                    dot.classList.toggle("is-active", isActive);
+                    dot.setAttribute("aria-current", isActive ? "true" : "false");
+                });
+
+                if (shouldRestartProgress) {
+                    restartProgress();
+                }
+            };
+
+            const showSlide = index => {
+                if (isSliding) {
+                    return;
+                }
+
+                currentIndex = index + 1;
+                setTrackPosition(true);
+                updateSliderState(true);
+            };
+
+            const showNextSlide = () => {
+                if (isSliding) {
+                    return;
+                }
+
+                currentIndex += 1;
+                setTrackPosition(true);
+                updateSliderState(true);
+            };
+
+            const showPreviousSlide = () => {
+                if (isSliding) {
+                    return;
+                }
+
+                currentIndex -= 1;
+                setTrackPosition(true);
+                updateSliderState(true);
+            };
+
+            const stopAutoPlay = () => {
+                window.clearInterval(autoPlayTimer);
+                autoPlayTimer = null;
+                progressBar.classList.remove("is-running");
+            };
+
+            const startAutoPlay = () => {
+                stopAutoPlay();
+                autoPlayTimer = window.setInterval(showNextSlide, slideDuration);
+                restartProgress();
+            };
+
+            const restartAutoPlay = () => {
+                stopAutoPlay();
+                startAutoPlay();
+            };
+
+            nextButton.addEventListener("click", () => {
+                showNextSlide();
+                restartAutoPlay();
+            });
+
+            previousButton.addEventListener("click", () => {
+                showPreviousSlide();
+                restartAutoPlay();
+            });
+
+            track.addEventListener("transitionend", event => {
+                if (event.target !== track || event.propertyName !== "transform") {
+                    return;
+                }
+
+                completeSlideTransition();
+            });
+
+            slider.addEventListener("mouseenter", stopAutoPlay);
+            slider.addEventListener("mouseleave", startAutoPlay);
+            slider.addEventListener("focusin", stopAutoPlay);
+            slider.addEventListener("focusout", event => {
+                if (!slider.contains(event.relatedTarget)) startAutoPlay();
+            });
+
+            slider.addEventListener("touchstart", event => {
+                touchStartX = event.changedTouches[0].clientX;
+                stopAutoPlay();
+            }, { passive: true });
+
+            slider.addEventListener("touchend", event => {
+                touchEndX = event.changedTouches[0].clientX;
+                const swipeDistance = touchStartX - touchEndX;
+
+                if (Math.abs(swipeDistance) > swipeThreshold) {
+                    if (swipeDistance > 0) {
+                        showNextSlide();
+                    } else {
+                        showPreviousSlide();
+                    }
+                }
+
+                startAutoPlay();
+            }, { passive: true });
+
+            document.addEventListener("visibilitychange", () => {
+                if (document.hidden) {
+                    stopAutoPlay();
+                } else {
+                    startAutoPlay();
+                }
+            });
+
+            setTrackPosition(false);
+            updateSliderState(true);
+            startAutoPlay();
+        })();
+    </script>
+    <main>
+        <br><br><br><br>
+        <section class="intro">
+            <h1>Check Package Availability</h1>
+            <p>Select a package and date range to see the same available slots generated from the admin availability calendar.</p>
+        </section>
+
+        <section class="panel">
+            <form class="controls" id="availabilityForm">
+                <div>
+                    <label>Package</label>
+                    <select id="packageSelect" name="packageId" required>
+                        <option value="">Loading packages...</option>
+                    </select>
+                </div>
+                <div>
+                    <label>Start Date</label>
+                    <input name="startDate" type="date" required>
+                </div>
+                <div>
+                    <label>End Date</label>
+                    <input name="endDate" type="date" required>
+                </div>
+                <button type="submit">Check Slots</button>
+            </form>
+
+            <div class="message" id="message"></div>
+            <div class="date-grid" id="dateGrid"></div>
+        </section>
+    </main>
+
+    <script>
+        const API_BASE = localStorage.getItem("dlmApiBase") || "http://192.168.0.101:8080";
+        const packageSelect = document.getElementById("packageSelect");
+        const dateGrid = document.getElementById("dateGrid");
+        const message = document.getElementById("message");
+        const params = new URLSearchParams(location.search);
+
+        const today = new Date();
+        const nextWeek = new Date();
+        nextWeek.setDate(today.getDate() + 7);
+        document.querySelector("[name='startDate']").valueAsDate = today;
+        document.querySelector("[name='endDate']").valueAsDate = nextWeek;
+
+        function formatSlot(slot) {
+            const type = slot.bookingType.replace("_", " ");
+            const time = slot.startTime ? `${slot.startTime}${slot.endTime ? ` - ${slot.endTime}` : ""}` : "Full day";
+            return `${type} | ${time} | ${slot.remainingCapacity} left`;
+        }
+
+        function bookingUrl(day, slot) {
+            const selectedPackageId = packageSelect.value;
+            const query = new URLSearchParams({
+                packageId: selectedPackageId,
+                eventDate: day.date,
+                bookingType: slot.bookingType,
+                startTime: slot.startTime || "",
+                endTime: slot.endTime || ""
+            });
+            const addOnIds = params.get("addOnIds");
+            if (addOnIds) {
+                query.set("addOnIds", addOnIds);
+            }
+            return `booking-details.html?${query.toString()}`;
+        }
+
+        function renderAvailability(result) {
+            dateGrid.innerHTML = result.dates.map(day => `
+                <article class="date-card ${day.available ? "available" : day.reason === "Booked" ? "booked" : ""}">
+                    <strong>${day.date}</strong>
+                    ${day.available
+                        ? day.slots.map(slot => `<a class="slot" href="${bookingUrl(day, slot)}">${formatSlot(slot)} <span>Select</span></a>`).join("")
+                        : `<p>${day.reason || "Unavailable"}</p>`}
+                </article>
+            `).join("");
+        }
+
+        async function loadPackages() {
+            const response = await fetch(`${API_BASE}/api/public/packages`);
+            if (!response.ok) throw new Error("Could not load packages");
+            const packages = await response.json();
+            packageSelect.innerHTML = packages.length
+                ? `<option value="">Select package</option>` + packages.map(item => `<option value="${item.id}">${item.title}</option>`).join("")
+                : `<option value="">No packages available</option>`;
+
+            const selectedPackage = params.get("packageId");
+            if (selectedPackage) {
+                packageSelect.value = selectedPackage;
+                document.getElementById("availabilityForm").requestSubmit();
+            }
+        }
+
+        document.getElementById("availabilityForm").addEventListener("submit", async event => {
+            event.preventDefault();
+            const data = Object.fromEntries(new FormData(event.target).entries());
+            if (!data.packageId) {
+                message.textContent = "Select a package first.";
+                return;
+            }
+
+            message.textContent = "Checking availability...";
+            dateGrid.innerHTML = "";
+
+            try {
+                const response = await fetch(`${API_BASE}/api/public/availability?packageId=${data.packageId}&startDate=${data.startDate}&endDate=${data.endDate}`);
+                if (!response.ok) throw new Error(await response.text());
+                renderAvailability(await response.json());
+                message.textContent = "";
+            } catch (error) {
+                message.textContent = "Could not load slots. Check backend server and availability rules.";
+            }
+        });
+
+        loadPackages().catch(() => {
+            packageSelect.innerHTML = `<option value="">Backend not connected</option>`;
+            message.textContent = "Start the backend server to load packages.";
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,2606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beauty Shoot |DLM </title>
+</head>
+<body>
+      <style>
+          :root {
+            --pink: #ef2d83;
+            --pink-dark: #c91567;
+            --soft: #fff0f7;
+            --ink: #241723;
+            --muted: #7a6572;
+            --border: rgba(36, 23, 35, 0.1);
+            --white: #ffffff;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Inter", "Segoe UI", sans-serif;
+            color: var(--ink);
+            background: #fff8fb;
+        }
+
+        body.menu-open {
+            overflow: hidden;
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+        button,
+        a {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .navbar-wrap {
+            position: absolute;
+            top: 18px;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 0 28px;
+        }
+
+        .navbar-wrap.is-sticky {
+            position: fixed;
+            top: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            width: min(100%, 1180px);
+            min-height: 76px;
+            margin: auto;
+            padding: 0 30px;
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            gap: 24px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.94);
+            box-shadow: 0 18px 50px rgba(108, 20, 64, 0.14);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            transition: border-radius 0.25s ease, min-height 0.25s ease;
+        }
+
+        .navbar-wrap.is-sticky .navbar {
+            width: 100%;
+            min-height: 70px;
+            border-radius: 0;
+        }
+
+        .brand {
+            justify-self: start;
+            display: flex;
+            align-items: center;
+        }
+
+        .brand-logo {
+            width: 56px;
+            height: 56px;
+            object-fit: contain;
+            border-radius: 50%;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 28px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-links a,
+        .wedding-button {
+            min-height: 70px;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            border: 0;
+            color: var(--ink);
+            background: none;
+            font: 700 14px "Inter", "Segoe UI", sans-serif;
+            text-decoration: none;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .nav-links a:hover,
+        .wedding-button:hover {
+            color: var(--pink);
+        }
+
+        .arrow {
+            width: 8px;
+            height: 8px;
+            border-right: 2px solid currentColor;
+            border-bottom: 2px solid currentColor;
+            transform: rotate(45deg);
+            transition: transform 0.25s ease;
+        }
+
+        .wedding-item:hover .arrow,
+        .wedding-item:focus-within .arrow {
+            transform: rotate(225deg);
+        }
+
+        .wedding-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            width: 560px;
+            padding: 26px;
+            display: grid;
+            grid-template-columns: 160px 1fr 1fr;
+            gap: 24px;
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            background: #fff;
+            box-shadow: 0 24px 60px rgba(40, 20, 32, 0.16);
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transform: translate(-50%, -10px);
+            transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
+        }
+
+        .wedding-item:hover .wedding-dropdown,
+        .wedding-item:focus-within .wedding-dropdown {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transform: translate(-50%, 0);
+        }
+
+        .wedding-dropdown img {
+            width: 100%;
+            height: 180px;
+            object-fit: contain;
+            border-radius: 14px;
+            background: #fff4f9;
+        }
+
+        .wedding-column {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .wedding-column a {
+            min-height: 44px;
+            font-size: 15px;
+        }
+
+        .nav-actions {
+            justify-self: end;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .login-button {
+            min-width: 96px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 999px;
+            color: #fff;
+            background: var(--pink);
+            font-weight: 800;
+            text-decoration: none;
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+
+        .login-button:hover {
+            background: var(--pink-dark);
+            transform: translateY(-1px);
+        }
+
+        .menu-toggle {
+            flex: 0 0 auto;
+            width: 44px;
+            height: 44px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            border: 0;
+            border-radius: 50%;
+            color: var(--pink);
+            background: var(--soft);
+            cursor: pointer;
+        }
+
+        .menu-lines,
+        .menu-lines::before,
+        .menu-lines::after {
+            width: 20px;
+            height: 2px;
+            display: block;
+            border-radius: 10px;
+            background: currentColor;
+        }
+
+        .menu-lines {
+            position: relative;
+        }
+
+        .menu-lines::before,
+        .menu-lines::after {
+            content: "";
+            position: absolute;
+            left: 0;
+        }
+
+        .menu-lines::before {
+            top: -6px;
+        }
+
+        .menu-lines::after {
+            top: 6px;
+        }
+
+        .menu-backdrop {
+            position: fixed;
+            inset: 0;
+            z-index: 1100;
+            visibility: hidden;
+            opacity: 0;
+            background: rgba(36, 23, 35, 0.5);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .menu-backdrop.open {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1200;
+            width: min(88vw, 370px);
+            height: 100vh;
+            height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            background: #fff;
+            box-shadow: -25px 0 60px rgba(30, 15, 24, 0.2);
+            visibility: hidden;
+            transform: translateX(105%);
+            transition: transform 0.35s ease, visibility 0.35s ease;
+        }
+
+        .mobile-menu.open {
+            visibility: visible;
+            transform: translateX(0);
+        }
+
+        .mobile-menu-header {
+            flex: 0 0 auto;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .mobile-logo {
+            width: 52px;
+            height: 52px;
+            object-fit: contain;
+            border-radius: 50%;
+        }
+
+        .menu-close {
+            width: 42px;
+            height: 42px;
+            border: 0;
+            border-radius: 50%;
+            color: var(--pink);
+            background: var(--soft);
+            font-size: 27px;
+            line-height: 1;
+            cursor: pointer;
+        }
+
+        .mobile-links {
+            flex: 1 1 auto;
+            margin: 0;
+            padding: 16px 20px;
+            list-style: none;
+            overflow-y: auto;
+            overscroll-behavior: contain;
+        }
+
+        .mobile-links > li {
+            border-bottom: 1px solid var(--border);
+        }
+
+        .mobile-links a,
+        .mobile-wedding-button {
+            width: 100%;
+            min-height: 56px;
+            padding: 0 8px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border: 0;
+            color: var(--ink);
+            background: none;
+            font: 700 16px "Inter", "Segoe UI", sans-serif;
+            text-decoration: none;
+            text-align: left;
+            cursor: pointer;
+        }
+
+        .mobile-wedding-panel {
+            max-height: 0;
+            overflow: hidden;
+            background: #fff8fb;
+            transition: max-height 0.3s ease;
+        }
+
+        .mobile-wedding-panel.open {
+            max-height: 520px;
+        }
+
+        .mobile-wedding-panel a {
+            min-height: 43px;
+            padding-left: 22px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .mobile-login {
+            flex: 0 0 auto;
+            margin: 20px;
+            min-height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 999px;
+            color: #fff;
+            background: var(--pink);
+            font-weight: 800;
+            text-decoration: none;
+        }
+          @media (max-width: 900px) {
+            .navbar-wrap {
+                padding: 0 16px;
+            }
+
+            .navbar-wrap.is-sticky {
+                padding: 0;
+            }
+
+            .navbar {
+                grid-template-columns: 1fr auto;
+                min-height: 70px;
+                padding: 9px 16px;
+                gap: 14px;
+            }
+
+            .nav-links,
+            .login-button {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .brand-logo {
+                width: 48px;
+                height: 48px;
+            }
+
+            .nav-actions {
+                min-width: 0;
+            }
+
+            .hero-slider {
+                min-height: 720px;
+            }
+
+            .slider-content {
+                bottom: 110px;
+            }
+
+            .slider-controls {
+                right: 24px;
+                bottom: 34px;
+            }
+
+            .slider-dots {
+                left: 28px;
+                bottom: 48px;
+                transform: none;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .navbar-wrap {
+                top: 12px;
+                padding: 0 14px;
+            }
+
+            .navbar-wrap.is-sticky {
+                top: 0;
+                padding: 0;
+            }
+
+            .navbar {
+                min-height: 66px;
+                padding: 8px 12px;
+                border-radius: 34px;
+            }
+
+            .navbar-wrap.is-sticky .navbar {
+                border-radius: 0;
+            }
+
+            .mobile-menu {
+                width: min(92vw, 350px);
+            }
+
+            .mobile-menu-header {
+                padding: 14px 16px;
+            }
+
+            .mobile-links {
+                padding: 12px 16px;
+            }
+
+            .mobile-links a,
+            .mobile-wedding-button {
+                min-height: 52px;
+                font-size: 15px;
+            }
+
+            .mobile-login {
+                margin: 16px;
+            }
+
+            .hero-slider {
+                min-height: min(680px, 100svh);
+            }
+
+            .hero-slide::after {
+                background:
+                    linear-gradient(0deg, rgba(22, 10, 16, 0.76) 0%, rgba(22, 10, 16, 0.2) 72%),
+                    linear-gradient(90deg, rgba(22, 10, 16, 0.42), transparent);
+            }
+
+            .hero-slide img {
+                object-position: center;
+            }
+
+            .slider-content {
+                left: 20px;
+                right: 20px;
+                bottom: 118px;
+                width: auto;
+            }
+
+            .slider-kicker {
+                font-size: 12px;
+            }
+
+            .slider-title {
+                font-size: clamp(38px, 14vw, 58px);
+            }
+
+            .slider-copy {
+                margin-top: 16px;
+                font-size: 16px;
+                line-height: 1.6;
+            }
+
+            .slider-controls {
+                right: 18px;
+                bottom: 30px;
+            }
+
+            .slider-arrow {
+                width: 42px;
+                height: 42px;
+            }
+
+            .slider-dots {
+                left: 20px;
+                bottom: 45px;
+            }
+
+            .content-section {
+                padding: 72px 20px;
+            }
+
+            .services-section {
+                padding: 74px 20px 80px;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+                gap: 86px;
+                padding-top: 74px;
+            }
+
+            .service-card {
+                width: min(100%, 380px);
+                margin: 0 auto;
+            }
+
+            .studio-about {
+                padding: 86px 20px 78px;
+            }
+
+            .studio-about-inner {
+                grid-template-columns: 1fr;
+                gap: 26px;
+            }
+
+            .about-gallery {
+                order: 2;
+                width: 100%;
+                justify-self: center;
+            }
+
+            .studio-about-copy {
+                order: 1;
+                display: contents;
+            }
+
+            .about-eyebrow,
+            .studio-about-copy h2,
+            .about-description {
+                order: 1;
+            }
+
+            .about-photo-frame {
+                width: min(84vw, 340px);
+                transform: perspective(900px) rotateY(-7deg) rotateZ(-1.5deg);
+            }
+
+            .about-highlights {
+                order: 3;
+                grid-template-columns: 72px 1fr;
+                padding: 24px;
+                gap: 18px;
+            }
+
+            .about-avatar {
+                width: 66px;
+                height: 66px;
+            }
+
+            .about-actions {
+                order: 4;
+                align-items: stretch;
+            }
+
+            .availability-text {
+                width: 100%;
+                margin: 0 0 2px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .navbar-wrap {
+                padding: 0 10px;
+            }
+
+            .navbar {
+                min-height: 60px;
+                padding: 7px 10px;
+            }
+
+            .brand-logo {
+                width: 42px;
+                height: 42px;
+            }
+
+            .menu-toggle {
+                width: 40px;
+                height: 40px;
+            }
+
+            .mobile-menu {
+                width: 100vw;
+            }
+
+            .mobile-logo {
+                width: 46px;
+                height: 46px;
+            }
+
+            .hero-slider {
+                min-height: min(640px, 100svh);
+            }
+
+            .slider-title {
+                font-size: 36px;
+            }
+
+            .slider-copy {
+                font-size: 15px;
+            }
+
+            .studio-about {
+                padding: 72px 16px 64px;
+            }
+
+            .studio-about-copy h2 {
+                font-size: 34px;
+            }
+
+            .about-description {
+                font-size: 15.5px;
+            }
+
+            .about-highlights {
+                grid-template-columns: 1fr;
+                justify-items: start;
+                border-radius: 22px;
+            }
+
+            .about-actions {
+                gap: 12px;
+            }
+
+            .about-action,
+            .about-gallery-button {
+                width: 100%;
+            }
+
+            .services-section {
+                padding: 66px 16px 72px;
+            }
+
+            .services-intro {
+                margin-bottom: 58px;
+            }
+
+            .service-card {
+                min-height: 226px;
+                padding: 88px 20px 22px;
+            }
+
+            .service-image {
+                height: 150px;
+            }
+
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            .slider-track,
+            .hero-slide img,
+            .about-carousel-track,
+            .mobile-menu,
+            .menu-backdrop,
+            .mobile-wedding-panel {
+                transition: none;
+            }
+
+            .slider-progress-bar.is-running {
+                animation: none;
+            }
+
+            .about-carousel-track {
+                animation: none;
+            }
+        }
+
+    </style>
+     <header class="navbar-wrap" id="siteNavbar">
+        <nav class="navbar" aria-label="Main navigation">
+            <a class="brand" href="#home">
+                <img class="brand-logo" src="assets/image.png" alt="DLM logo">
+            </a>
+
+            <ul class="nav-links">
+                <li class="nav-item"><a href="index.html">Home</a></li>
+
+                <li class="nav-item wedding-item">
+                    <button class="wedding-button" type="button">
+                        Weddings
+                        <span class="arrow"></span>
+                    </button>
+
+                    <div class="wedding-dropdown">
+                        <img src="https://i.pinimg.com/736x/c3/08/2a/c3082adc6d4155cb01949f67dbfb0788.jpg" alt="Wedding photography preview">
+
+                        <div class="wedding-column">
+                            <a href="hindumarriage.html">Hindu Wedding</a>
+                            <a href="brahminmarriage.html">Brahmin Wedding</a>
+                            <a href="christianmarriage.html">Christian Wedding</a>
+                            <a href="bridepotrait.html">Bride Portrait</a>
+                            <a href="groompotrait.html">Groom Portrait</a>
+                        </div>
+
+                        <div class="wedding-column">
+                            <a href="babyshower.html">Baby Shower</a>
+                            <a href="beautyshoot.html">Beauty Shoot</a>
+                            <a href="coupleshoot.html">Couple Shoot</a>
+                            <a href="birthdayshoot.html">Birthday Shoot</a>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="nav-item"><a href="index.html#about">About</a></li>
+                <li class="nav-item"><a href="index.html#services">Services</a></li>
+                <li class="nav-item"><a href="index.html#gallery-legacy">Portfolio</a></li>
+                <li class="nav-item"><a href="index.html#packages">Packages</a></li>
+                <li class="nav-item"><a href="blog.html">Stories</a></li>
+                <li class="nav-item"><a href="index.html#contact">Contact</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <a class="login-button" href="customer/login.html">Login</a>
+
+                <button class="menu-toggle" id="menuOpen" type="button" aria-label="Open menu" aria-controls="mobileMenu">
+                    <span class="menu-lines"></span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <div class="menu-backdrop" id="menuBackdrop"></div>
+
+    <aside class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation">
+        <div class="mobile-menu-header">
+            <img class="mobile-logo" src="assets/image.png" alt="DLM logo">
+
+            <button class="menu-close" id="menuClose" type="button" aria-label="Close menu">
+                &times;
+            </button>
+        </div>
+
+        <ul class="mobile-links">
+            <li><a href="index.html">Home</a></li>
+
+            <li>
+                <button class="mobile-wedding-button" id="mobileWeddingButton" type="button">
+                    Weddings
+                    <span class="arrow"></span>
+                </button>
+
+                <div class="mobile-wedding-panel" id="mobileWeddingPanel">
+                    <a href="hindumarriage.html">Hindu Wedding</a>
+                    <a href="brahminmarriage.html">Brahmin Wedding</a>
+                    <a href="christianmarriage.html">Christian Wedding</a>
+                    <a href="bridepotrait.html">Bride Portrait</a>
+                    <a href="groompotrait.html">Groom Portrait</a>
+                    <a href="babyshower.html">Baby Shower</a>
+                    <a href="beautyshoot.html">Beauty Shoot</a>
+                    <a href="coupleshoot.html">Couple Shoot</a>
+                    <a href="birthdayshoot.html">Birthday Shoot</a>
+                </div>
+            </li>
+
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#services">Services</a></li>
+            <li><a href="index.html#gallery-legacy">Portfolio</a></li>
+            <li><a href="index.html#packages">Packages</a></li>
+            <li><a href="blog.html">Stories</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+
+        <a class="mobile-login" href="customer/login.html">Customer Login</a>
+    </aside>
+     <script>
+        (() => {
+            const navbar = document.getElementById("siteNavbar");
+            const menu = document.getElementById("mobileMenu");
+            const backdrop = document.getElementById("menuBackdrop");
+            const openButton = document.getElementById("menuOpen");
+            const closeButton = document.getElementById("menuClose");
+            const weddingButton = document.getElementById("mobileWeddingButton");
+            const weddingPanel = document.getElementById("mobileWeddingPanel");
+
+            const openMenu = () => {
+                menu.classList.add("open");
+                backdrop.classList.add("open");
+                document.body.classList.add("menu-open");
+                openButton.setAttribute("aria-expanded", "true");
+            };
+
+            const closeMenu = () => {
+                menu.classList.remove("open");
+                backdrop.classList.remove("open");
+                document.body.classList.remove("menu-open");
+                openButton.setAttribute("aria-expanded", "false");
+            };
+
+            openButton.addEventListener("click", openMenu);
+            closeButton.addEventListener("click", closeMenu);
+            backdrop.addEventListener("click", closeMenu);
+
+            weddingButton.addEventListener("click", () => {
+                weddingPanel.classList.toggle("open");
+            });
+
+            menu.querySelectorAll("a").forEach(link => {
+                link.addEventListener("click", closeMenu);
+            });
+
+            window.addEventListener("scroll", () => {
+                navbar.classList.toggle("is-sticky", window.scrollY > 20);
+            });
+
+            document.addEventListener("keydown", event => {
+                if (event.key === "Escape") closeMenu();
+            });
+
+            window.addEventListener("resize", () => {
+                if (window.innerWidth > 900) closeMenu();
+            });
+        })();
+
+        (() => {
+            const slider = document.getElementById("home");
+            const track = document.getElementById("sliderTrack");
+            const previousButton = document.getElementById("sliderPrev");
+            const nextButton = document.getElementById("sliderNext");
+            const dotsContainer = document.getElementById("sliderDots");
+            const progressBar = document.getElementById("sliderProgress");
+
+            if (!slider || !track || !previousButton || !nextButton || !dotsContainer || !progressBar) {
+                return;
+            }
+
+            const originalSlides = Array.from(track.querySelectorAll(".hero-slide"));
+            const slideDuration = 4000;
+            const swipeThreshold = 45;
+
+            if (originalSlides.length === 0) {
+                return;
+            }
+
+            const firstClone = originalSlides[0].cloneNode(true);
+            const lastClone = originalSlides[originalSlides.length - 1].cloneNode(true);
+
+            firstClone.classList.remove("is-active");
+            lastClone.classList.remove("is-active");
+            firstClone.setAttribute("aria-hidden", "true");
+            lastClone.setAttribute("aria-hidden", "true");
+
+            track.appendChild(firstClone);
+            track.insertBefore(lastClone, originalSlides[0]);
+
+            const slides = Array.from(track.querySelectorAll(".hero-slide"));
+
+            let currentIndex = 1;
+            let autoPlayTimer = null;
+            let touchStartX = 0;
+            let touchEndX = 0;
+            let isSliding = false;
+            let slideFallbackTimer = null;
+
+            const getRealIndex = () => {
+                if (currentIndex === 0) {
+                    return originalSlides.length - 1;
+                }
+
+                if (currentIndex === originalSlides.length + 1) {
+                    return 0;
+                }
+
+                return currentIndex - 1;
+            };
+
+            const dots = originalSlides.map((_, index) => {
+                const dot = document.createElement("button");
+                dot.className = "slider-dot";
+                dot.type = "button";
+                dot.setAttribute("aria-label", `Show image ${index + 1}`);
+                dot.addEventListener("click", () => {
+                    showSlide(index);
+                    restartAutoPlay();
+                });
+                dotsContainer.appendChild(dot);
+                return dot;
+            });
+
+            const restartProgress = () => {
+                progressBar.classList.remove("is-running");
+                void progressBar.offsetWidth;
+                progressBar.classList.add("is-running");
+            };
+
+            const completeSlideTransition = () => {
+                window.clearTimeout(slideFallbackTimer);
+                slideFallbackTimer = null;
+                isSliding = false;
+
+                if (currentIndex === 0) {
+                    currentIndex = originalSlides.length;
+                    setTrackPosition(false);
+                    updateSliderState(false);
+                }
+
+                if (currentIndex === originalSlides.length + 1) {
+                    currentIndex = 1;
+                    setTrackPosition(false);
+                    updateSliderState(false);
+                }
+            };
+
+            const setTrackPosition = shouldAnimate => {
+                if (shouldAnimate) {
+                    isSliding = true;
+                    window.clearTimeout(slideFallbackTimer);
+                    slideFallbackTimer = window.setTimeout(completeSlideTransition, 950);
+                }
+
+                track.style.transition = shouldAnimate ? "" : "none";
+                track.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+                if (!shouldAnimate) {
+                    isSliding = false;
+
+                    requestAnimationFrame(() => {
+                        track.style.transition = "";
+                    });
+                }
+            };
+
+            const updateSliderState = shouldRestartProgress => {
+                const realIndex = getRealIndex();
+
+                slides.forEach((slide, slideIndex) => {
+                    slide.classList.toggle("is-active", slideIndex === currentIndex);
+                });
+
+                dots.forEach((dot, dotIndex) => {
+                    const isActive = dotIndex === realIndex;
+                    dot.classList.toggle("is-active", isActive);
+                    dot.setAttribute("aria-current", isActive ? "true" : "false");
+                });
+
+                if (shouldRestartProgress) {
+                    restartProgress();
+                }
+            };
+
+            const showSlide = index => {
+                if (isSliding) {
+                    return;
+                }
+
+                currentIndex = index + 1;
+                setTrackPosition(true);
+                updateSliderState(true);
+            };
+
+            const showNextSlide = () => {
+                if (isSliding) {
+                    return;
+                }
+
+                currentIndex += 1;
+                setTrackPosition(true);
+                updateSliderState(true);
+            };
+
+            const showPreviousSlide = () => {
+                if (isSliding) {
+                    return;
+                }
+
+                currentIndex -= 1;
+                setTrackPosition(true);
+                updateSliderState(true);
+            };
+
+            const stopAutoPlay = () => {
+                window.clearInterval(autoPlayTimer);
+                autoPlayTimer = null;
+                progressBar.classList.remove("is-running");
+            };
+
+            const startAutoPlay = () => {
+                stopAutoPlay();
+                autoPlayTimer = window.setInterval(showNextSlide, slideDuration);
+                restartProgress();
+            };
+
+            const restartAutoPlay = () => {
+                stopAutoPlay();
+                startAutoPlay();
+            };
+
+            nextButton.addEventListener("click", () => {
+                showNextSlide();
+                restartAutoPlay();
+            });
+
+            previousButton.addEventListener("click", () => {
+                showPreviousSlide();
+                restartAutoPlay();
+            });
+
+            track.addEventListener("transitionend", event => {
+                if (event.target !== track || event.propertyName !== "transform") {
+                    return;
+                }
+
+                completeSlideTransition();
+            });
+
+            slider.addEventListener("mouseenter", stopAutoPlay);
+            slider.addEventListener("mouseleave", startAutoPlay);
+            slider.addEventListener("focusin", stopAutoPlay);
+            slider.addEventListener("focusout", event => {
+                if (!slider.contains(event.relatedTarget)) startAutoPlay();
+            });
+
+            slider.addEventListener("touchstart", event => {
+                touchStartX = event.changedTouches[0].clientX;
+                stopAutoPlay();
+            }, { passive: true });
+
+            slider.addEventListener("touchend", event => {
+                touchEndX = event.changedTouches[0].clientX;
+                const swipeDistance = touchStartX - touchEndX;
+
+                if (Math.abs(swipeDistance) > swipeThreshold) {
+                    if (swipeDistance > 0) {
+                        showNextSlide();
+                    } else {
+                        showPreviousSlide();
+                    }
+                }
+
+                startAutoPlay();
+            }, { passive: true });
+
+            document.addEventListener("visibilitychange", () => {
+                if (document.hidden) {
+                    stopAutoPlay();
+                } else {
+                    startAutoPlay();
+                }
+            });
+
+            setTrackPosition(false);
+            updateSliderState(true);
+            startAutoPlay();
+        })();
+    </script>
+
+<!-- =========================================================
+     BEAUTY SHOOT — DLM PHOTOGRAPHY (UPDATED)
+     ========================================================= -->
+
+<style>
+    /* =========================================================
+       BEAUTY SHOOT — ROOT VARIABLES
+       ========================================================= */
+    .bs-page {
+        --bs-pink: #ef2d83;
+        --bs-pink-dark: #c91567;
+        --bs-pink-soft: #fff0f7;
+        --bs-pink-light: #ffe6f1;
+        --bs-gold: #cfa766;
+        --bs-gold-soft: #f5ede0;
+        --bs-ink: #241723;
+        --bs-muted: #7a6572;
+        --bs-muted-light: #a08a96;
+        --bs-border: rgba(36, 23, 35, 0.08);
+        --bs-white: #ffffff;
+        --bs-cream: #fff8fb;
+        --bs-shadow-sm: 0 8px 24px rgba(83, 41, 62, 0.06);
+        --bs-shadow-md: 0 18px 44px rgba(83, 41, 62, 0.10);
+        --bs-shadow-lg: 0 28px 68px rgba(83, 41, 62, 0.14);
+        --bs-shadow-xl: 0 36px 80px rgba(83, 41, 62, 0.18);
+        --bs-radius-sm: 12px;
+        --bs-radius-md: 18px;
+        --bs-radius-lg: 24px;
+        --bs-radius-xl: 30px;
+        --bs-transition: 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .bs-page {
+        width: 100%;
+        overflow: hidden;
+        color: var(--bs-ink);
+        background: var(--bs-cream);
+        font-family: "Inter", "Segoe UI", sans-serif;
+    }
+
+    .bs-page *,
+    .bs-page *::before,
+    .bs-page *::after {
+        box-sizing: border-box;
+    }
+
+    .bs-container {
+        width: min(100%, 1180px);
+        margin: 0 auto;
+        padding: 0 24px;
+    }
+
+    /* =========================================================
+       SECTION HEADING
+       ========================================================= */
+
+    .bs-section-label {
+        display: inline-block;
+        padding: 6px 18px;
+        border: 1px solid rgba(239, 45, 131, 0.15);
+        border-radius: 999px;
+        color: var(--bs-pink-dark);
+        background: rgba(255, 255, 255, 0.9);
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        margin-bottom: 16px;
+        box-shadow: var(--bs-shadow-sm);
+    }
+
+    .bs-heading {
+        font-family: 'Playfair Display', Georgia, serif;
+        font-size: clamp(34px, 4.5vw, 52px);
+        font-weight: 600;
+        line-height: 1.08;
+        margin: 0 0 14px;
+        letter-spacing: -1px;
+        color: var(--bs-ink);
+    }
+
+    .bs-heading span {
+        color: var(--bs-pink);
+        font-style: italic;
+    }
+
+    .bs-subheading {
+        color: var(--bs-muted);
+        font-size: 15px;
+        line-height: 1.7;
+        max-width: 620px;
+        margin: 0 auto;
+    }
+
+    .bs-text-center {
+        text-align: center;
+    }
+
+    .bs-text-center .bs-subheading {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* =========================================================
+       BUTTONS
+       ========================================================= */
+
+    .bs-btn {
+        min-height: 48px;
+        padding: 0 28px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        border-radius: 999px;
+        font-family: "Inter", sans-serif;
+        font-size: 12px;
+        font-weight: 800;
+        text-decoration: none;
+        cursor: pointer;
+        transition: all var(--bs-transition);
+        border: none;
+    }
+
+    .bs-btn-primary {
+        color: #fff;
+        background: linear-gradient(135deg, var(--bs-pink), var(--bs-pink-dark));
+        box-shadow: 0 14px 30px rgba(239, 45, 131, 0.25);
+    }
+
+    .bs-btn-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 20px 40px rgba(239, 45, 131, 0.35);
+    }
+
+    .bs-btn-secondary {
+        color: var(--bs-ink);
+        background: var(--bs-white);
+        border: 1px solid var(--bs-border);
+    }
+
+    .bs-btn-secondary:hover {
+        border-color: var(--bs-pink);
+        color: var(--bs-pink);
+        transform: translateY(-3px);
+        box-shadow: var(--bs-shadow-sm);
+    }
+
+    .bs-btn-outline {
+        color: var(--bs-pink);
+        background: transparent;
+        border: 1px solid rgba(239, 45, 131, 0.25);
+    }
+
+    .bs-btn-outline:hover {
+        background: var(--bs-pink-soft);
+        transform: translateY(-2px);
+    }
+
+    /* =========================================================
+       SCROLL REVEAL
+       ========================================================= */
+
+    .bs-reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .bs-reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .bs-reveal-left {
+        transform: translateX(-30px);
+    }
+
+    .bs-reveal-right {
+        transform: translateX(30px);
+    }
+
+    .bs-reveal-left.visible,
+    .bs-reveal-right.visible {
+        transform: translateX(0);
+    }
+
+    /* =========================================================
+       HERO SECTION
+       ========================================================= */
+
+    .bs-hero {
+        position: relative;
+        padding: 120px 0 80px;
+        min-height: 80vh;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+        background:
+            radial-gradient(circle at 20% 30%, rgba(239, 45, 131, 0.10), transparent 40%),
+            radial-gradient(circle at 80% 70%, rgba(207, 167, 102, 0.12), transparent 40%),
+            linear-gradient(180deg, #ffffff 0%, var(--bs-cream) 100%);
+    }
+
+    .bs-hero-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 50px;
+        align-items: center;
+    }
+
+    .bs-hero-content {
+        padding-right: 20px;
+    }
+
+    .bs-hero-content .bs-section-label {
+        margin-bottom: 20px;
+    }
+
+    .bs-hero-content h1 {
+        font-family: 'Playfair Display', Georgia, serif;
+        font-size: clamp(40px, 5.5vw, 68px);
+        font-weight: 600;
+        line-height: 1.04;
+        letter-spacing: -1.5px;
+        margin: 0 0 16px;
+        color: var(--bs-ink);
+    }
+
+    .bs-hero-content h1 span {
+        color: var(--bs-pink);
+        font-style: italic;
+    }
+
+    .bs-hero-content p {
+        max-width: 480px;
+        color: var(--bs-muted);
+        font-size: 16px;
+        line-height: 1.75;
+        margin: 0 0 28px;
+    }
+
+    .bs-hero-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    /* Hero Image Grid */
+    .bs-hero-grid-images {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+    }
+
+    .bs-hero-grid-images .bs-img-wrapper {
+        position: relative;
+        overflow: hidden;
+        border-radius: var(--bs-radius-lg);
+        background: #f0e8e4;
+        box-shadow: var(--bs-shadow-md);
+        transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .bs-hero-grid-images .bs-img-wrapper:hover {
+        transform: translateY(-6px);
+        box-shadow: var(--bs-shadow-lg);
+    }
+
+    .bs-hero-grid-images .bs-img-wrapper img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+        transition: transform 0.6s ease;
+        image-rendering: auto;
+        image-rendering: -webkit-optimize-contrast;
+    }
+
+    .bs-hero-grid-images .bs-img-wrapper:hover img {
+        transform: scale(1.05);
+    }
+
+    .bs-hero-grid-images .bs-img-wrapper:first-child {
+        grid-column: 1 / -1;
+        aspect-ratio: 16 / 9;
+    }
+
+    .bs-hero-grid-images .bs-img-wrapper:not(:first-child) {
+        aspect-ratio: 1 / 1;
+    }
+
+    /* =========================================================
+       BEAUTY SERVICES SECTION — PROFESSIONAL
+       ========================================================= */
+
+    .bs-services {
+        padding: 80px 0 90px;
+        background: var(--bs-white);
+        position: relative;
+    }
+
+    .bs-services::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: min(80%, 400px);
+        height: 4px;
+        background: linear-gradient(90deg, transparent, var(--bs-pink), var(--bs-gold), var(--bs-pink), transparent);
+        border-radius: 0 0 999px 999px;
+    }
+
+    .bs-services-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+        margin-top: 40px;
+    }
+
+    .bs-service-card {
+        position: relative;
+        padding: 32px 24px 28px;
+        border-radius: var(--bs-radius-md);
+        background: var(--bs-white);
+        border: 1px solid var(--bs-border);
+        box-shadow: var(--bs-shadow-sm);
+        text-align: center;
+        transition: all var(--bs-transition);
+        overflow: hidden;
+        cursor: default;
+        isolation: isolate;
+    }
+
+    /* Animated gradient border */
+    .bs-service-card::before {
+        content: "";
+        position: absolute;
+        inset: -2px;
+        z-index: -1;
+        border-radius: var(--bs-radius-md);
+        background: linear-gradient(135deg, var(--bs-pink), var(--bs-gold), var(--bs-pink));
+        background-size: 300% 300%;
+        opacity: 0;
+        transition: opacity 0.5s ease;
+        animation: borderGlow 3s ease-in-out infinite;
+    }
+
+    .bs-service-card:hover::before {
+        opacity: 1;
+    }
+
+    @keyframes borderGlow {
+        0%,
+        100% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+    }
+
+    /* Inner card background */
+    .bs-service-card::after {
+        content: "";
+        position: absolute;
+        inset: 1px;
+        border-radius: calc(var(--bs-radius-md) - 1px);
+        background: var(--bs-white);
+        z-index: -1;
+    }
+
+    .bs-service-card:hover {
+        transform: translateY(-8px);
+        box-shadow: var(--bs-shadow-lg);
+        border-color: transparent;
+    }
+
+    .bs-service-icon {
+        width: 72px;
+        height: 72px;
+        margin: 0 auto 16px;
+        display: grid;
+        place-items: center;
+        border-radius: 50%;
+        background: var(--bs-pink-soft);
+        font-size: 30px;
+        transition: all var(--bs-transition);
+        position: relative;
+    }
+
+    .bs-service-card:hover .bs-service-icon {
+        transform: scale(1.1) rotate(-8deg);
+        background: linear-gradient(135deg, var(--bs-pink), var(--bs-pink-dark));
+        color: #fff;
+        box-shadow: 0 12px 32px rgba(239, 45, 131, 0.25);
+    }
+
+    .bs-service-card h3 {
+        font-family: 'Playfair Display', Georgia, serif;
+        font-size: 19px;
+        font-weight: 600;
+        margin: 0 0 10px;
+        color: var(--bs-ink);
+        transition: color var(--bs-transition);
+    }
+
+    .bs-service-card:hover h3 {
+        color: var(--bs-pink);
+    }
+
+    .bs-service-card p {
+        color: var(--bs-muted);
+        font-size: 13px;
+        line-height: 1.6;
+        margin: 0;
+    }
+
+    /* Service card highlight ring */
+    .bs-service-card .highlight-ring {
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(239, 45, 131, 0.06), transparent 60%);
+        opacity: 0;
+        transition: opacity var(--bs-transition);
+        pointer-events: none;
+        z-index: 0;
+    }
+
+    .bs-service-card:hover .highlight-ring {
+        opacity: 1;
+    }
+
+    /* =========================================================
+       GALLERY SECTION — FIXED LAST ROW
+       ========================================================= */
+
+    .bs-gallery {
+        padding: 80px 0 90px;
+        background: var(--bs-cream);
+    }
+
+    .bs-gallery-mosaic {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-auto-rows: 140px;
+        gap: 14px;
+        grid-auto-flow: dense;
+        margin-top: 40px;
+    }
+
+    .bs-gallery-item {
+        position: relative;
+        overflow: hidden;
+        border-radius: var(--bs-radius-md);
+        background: #f0e8e4;
+        box-shadow: var(--bs-shadow-sm);
+        cursor: pointer;
+        transition: all var(--bs-transition);
+    }
+
+    .bs-gallery-item:hover {
+        transform: translateY(-6px);
+        box-shadow: var(--bs-shadow-lg);
+        z-index: 2;
+    }
+
+    .bs-gallery-item img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+        transition: transform 0.6s ease;
+        image-rendering: auto;
+        image-rendering: -webkit-optimize-contrast;
+    }
+
+    .bs-gallery-item:hover img {
+        transform: scale(1.06);
+    }
+
+    .bs-gallery-item::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to top, rgba(36, 23, 35, 0.4), transparent 55%);
+        opacity: 0;
+        transition: opacity var(--bs-transition);
+    }
+
+    .bs-gallery-item:hover::after {
+        opacity: 1;
+    }
+
+    .bs-gallery-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 20px 18px 16px;
+        color: #fff;
+        opacity: 0;
+        transform: translateY(10px);
+        transition: all var(--bs-transition);
+        z-index: 2;
+    }
+
+    .bs-gallery-item:hover .bs-gallery-overlay {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .bs-gallery-overlay span {
+        display: block;
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        opacity: 0.7;
+    }
+
+    .bs-gallery-overlay strong {
+        display: block;
+        font-family: 'Playfair Display', Georgia, serif;
+        font-size: 16px;
+        font-weight: 600;
+        margin-top: 2px;
+    }
+
+    /* Gallery Grid Spans — 13 items */
+    .bs-gallery-item:nth-child(1) {
+        grid-column: span 2;
+        grid-row: span 2;
+    }
+    .bs-gallery-item:nth-child(2) {
+        grid-column: span 1;
+        grid-row: span 2;
+    }
+    .bs-gallery-item:nth-child(3) {
+        grid-column: span 1;
+        grid-row: span 2;
+    }
+    .bs-gallery-item:nth-child(4) {
+        grid-column: span 1;
+        grid-row: span 1;
+    }
+    .bs-gallery-item:nth-child(5) {
+        grid-column: span 2;
+        grid-row: span 2;
+    }
+    .bs-gallery-item:nth-child(6) {
+        grid-column: span 1;
+        grid-row: span 2;
+    }
+    .bs-gallery-item:nth-child(7) {
+        grid-column: span 1;
+        grid-row: span 2;
+    }
+    .bs-gallery-item:nth-child(8) {
+        grid-column: span 2;
+        grid-row: span 2;
+    }
+    .bs-gallery-item:nth-child(9) {
+        grid-column: span 1;
+        grid-row: span 2;
+    }
+    .bs-gallery-item:nth-child(10) {
+        grid-column: span 1;
+        grid-row: span 1;
+    }
+    .bs-gallery-item:nth-child(11) {
+        grid-column: span 2;
+        grid-row: span 2;
+    }
+    .bs-gallery-item:nth-child(12) {
+        grid-column: span 1;
+        grid-row: span 2;
+    }
+    .bs-gallery-item:nth-child(13) {
+        grid-column: span 1;
+        grid-row: span 2;
+    }
+
+    /* =========================================================
+       TESTIMONIAL SECTION — NEW STYLE
+       ========================================================= */
+
+    .bs-testimonial {
+        padding: 80px 0 90px;
+        background: var(--bs-white);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .bs-testimonial::before {
+        content: "";
+        position: absolute;
+        top: -200px;
+        right: -200px;
+        width: 500px;
+        height: 500px;
+        border-radius: 50%;
+        background: rgba(239, 45, 131, 0.04);
+        pointer-events: none;
+    }
+
+    .bs-testimonial::after {
+        content: "";
+        position: absolute;
+        bottom: -250px;
+        left: -250px;
+        width: 600px;
+        height: 600px;
+        border-radius: 50%;
+        background: rgba(207, 167, 102, 0.05);
+        pointer-events: none;
+    }
+
+    .bs-testimonial-wrapper {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        grid-template-columns: 1fr 1.2fr;
+        align-items: center;
+        gap: 50px;
+        max-width: 1020px;
+        margin: 0 auto;
+        padding: 48px 56px;
+        background: var(--bs-cream);
+        border-radius: var(--bs-radius-xl);
+        border: 1px solid var(--bs-border);
+        box-shadow: var(--bs-shadow-md);
+        overflow: hidden;
+    }
+
+    .bs-testimonial-wrapper::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, var(--bs-pink), var(--bs-gold), var(--bs-pink));
+        background-size: 200% 100%;
+        animation: shimmer 4s ease-in-out infinite;
+    }
+
+    @keyframes shimmer {
+        0%,
+        100% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+    }
+
+    .bs-testimonial-image {
+        position: relative;
+        border-radius: var(--bs-radius-md);
+        overflow: hidden;
+        aspect-ratio: 4 / 3;
+        box-shadow: var(--bs-shadow-md);
+    }
+
+    .bs-testimonial-image img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+        transition: transform 0.6s ease;
+        image-rendering: auto;
+        image-rendering: -webkit-optimize-contrast;
+    }
+
+    .bs-testimonial-image:hover img {
+        transform: scale(1.03);
+    }
+
+    .bs-testimonial-image .quote-mark {
+        position: absolute;
+        top: -20px;
+        right: -10px;
+        font-family: 'Playfair Display', Georgia, serif;
+        font-size: 80px;
+        color: rgba(239, 45, 131, 0.12);
+        line-height: 1;
+        pointer-events: none;
+    }
+
+    .bs-testimonial-content {
+        padding: 10px 0;
+    }
+
+    .bs-testimonial-content .bs-section-label {
+        margin-bottom: 12px;
+    }
+
+    .bs-testimonial-stars {
+        color: #e9ad32;
+        font-size: 20px;
+        letter-spacing: 4px;
+        margin-bottom: 14px;
+    }
+
+    .bs-testimonial-content blockquote {
+        font-family: 'Playfair Display', Georgia, serif;
+        font-size: clamp(20px, 2.4vw, 30px);
+        font-weight: 500;
+        color: var(--bs-ink);
+        margin: 0 0 18px;
+        line-height: 1.35;
+        font-style: italic;
+    }
+
+    .bs-testimonial-content blockquote::before {
+        content: '"';
+        color: var(--bs-pink);
+        font-size: 1.2em;
+        opacity: 0.5;
+        margin-right: 2px;
+    }
+
+    .bs-testimonial-content blockquote::after {
+        content: '"';
+        color: var(--bs-pink);
+        font-size: 1.2em;
+        opacity: 0.5;
+        margin-left: 2px;
+    }
+
+    .bs-testimonial-author {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin-top: 4px;
+    }
+
+    .bs-testimonial-author .avatar {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        object-fit: cover;
+        background: var(--bs-pink-soft);
+        box-shadow: var(--bs-shadow-sm);
+    }
+
+    .bs-testimonial-author .info {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .bs-testimonial-author .info strong {
+        color: var(--bs-pink);
+        font-size: 14px;
+        font-weight: 800;
+    }
+
+    .bs-testimonial-author .info span {
+        color: var(--bs-muted);
+        font-size: 12px;
+        font-weight: 400;
+    }
+
+    /* =========================================================
+       CTA SECTION — COMPACT
+       ========================================================= */
+
+    .bs-cta {
+        padding: 60px 0;
+        background:
+            linear-gradient(135deg, rgba(239, 45, 131, 0.92), rgba(200, 24, 103, 0.92)),
+            url("https://images.unsplash.com/photo-1606800052052-a08af7148866?auto=format&fit=crop&w=1900&q=88") center/cover no-repeat;
+        color: #fff;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .bs-cta::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at 30% 40%, rgba(255, 255, 255, 0.08), transparent 50%);
+        pointer-events: none;
+    }
+
+    .bs-cta-inner {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 30px;
+        max-width: 1020px;
+        margin: 0 auto;
+        padding: 40px 50px;
+        background: rgba(255, 255, 255, 0.06);
+        border-radius: var(--bs-radius-lg);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+    }
+
+    .bs-cta-content {
+        flex: 1;
+    }
+
+    .bs-cta-content h2 {
+        font-family: 'Playfair Display', Georgia, serif;
+        font-size: clamp(28px, 3.2vw, 38px);
+        font-weight: 600;
+        margin: 0 0 8px;
+        line-height: 1.08;
+    }
+
+    .bs-cta-content p {
+        font-size: 14px;
+        opacity: 0.8;
+        line-height: 1.6;
+        margin: 0;
+        max-width: 500px;
+    }
+
+    .bs-cta .bs-btn {
+        flex-shrink: 0;
+        background: var(--bs-white);
+        color: var(--bs-pink);
+        min-height: 50px;
+        padding: 0 32px;
+        font-size: 13px;
+        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .bs-cta .bs-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 24px 50px rgba(0, 0, 0, 0.25);
+    }
+
+    /* =========================================================
+       RESPONSIVE
+       ========================================================= */
+
+    @media (max-width: 1024px) {
+        .bs-hero-grid {
+            gap: 35px;
+        }
+
+        .bs-hero-content h1 {
+            font-size: clamp(34px, 4.5vw, 50px);
+        }
+
+        .bs-services-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .bs-testimonial-wrapper {
+            grid-template-columns: 1fr;
+            gap: 30px;
+            padding: 32px 28px;
+        }
+
+        .bs-testimonial-image {
+            max-height: 280px;
+        }
+
+        .bs-cta-inner {
+            flex-direction: column;
+            text-align: center;
+            padding: 32px 28px;
+        }
+
+        .bs-cta-content p {
+            max-width: 100%;
+        }
+    }
+
+    @media (max-width: 850px) {
+        .bs-hero {
+            padding: 100px 0 60px;
+        }
+
+        .bs-hero-grid {
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+
+        .bs-hero-content {
+            padding-right: 0;
+            text-align: center;
+        }
+
+        .bs-hero-content p {
+            max-width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .bs-hero-buttons {
+            justify-content: center;
+        }
+
+        .bs-hero-grid-images {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .bs-services-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .bs-gallery-mosaic {
+            grid-template-columns: repeat(2, 1fr);
+            grid-auto-rows: auto;
+            gap: 12px;
+        }
+
+        .bs-gallery-item {
+            grid-column: auto !important;
+            grid-row: auto !important;
+            aspect-ratio: 4 / 3;
+        }
+
+        .bs-gallery-item:nth-child(3n+1) {
+            aspect-ratio: 3 / 4;
+        }
+    }
+
+    @media (max-width: 620px) {
+        .bs-container {
+            padding: 0 16px;
+        }
+
+        .bs-hero {
+            padding: 80px 0 50px;
+        }
+
+        .bs-hero-content h1 {
+            font-size: 28px;
+        }
+
+        .bs-hero-content p {
+            font-size: 14px;
+        }
+
+        .bs-hero-buttons {
+            flex-direction: column;
+            align-items: stretch;
+        }
+
+        .bs-hero-buttons .bs-btn {
+            width: 100%;
+            justify-content: center;
+        }
+
+        .bs-hero-grid-images {
+            gap: 10px;
+        }
+
+        .bs-services {
+            padding: 60px 0 70px;
+        }
+
+        .bs-services-grid {
+            grid-template-columns: 1fr;
+            gap: 14px;
+        }
+
+        .bs-gallery {
+            padding: 60px 0 70px;
+        }
+
+        .bs-gallery-mosaic {
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .bs-gallery-item {
+            aspect-ratio: 4 / 3;
+            min-height: 140px;
+        }
+
+        .bs-gallery-item:nth-child(3n+1) {
+            aspect-ratio: 3 / 4;
+            min-height: 180px;
+        }
+
+        .bs-gallery-overlay strong {
+            font-size: 13px;
+        }
+
+        .bs-testimonial {
+            padding: 60px 0 70px;
+        }
+
+        .bs-testimonial-wrapper {
+            padding: 24px 18px;
+            gap: 20px;
+        }
+
+        .bs-testimonial-content blockquote {
+            font-size: 18px;
+        }
+
+        .bs-testimonial-image {
+            max-height: 220px;
+        }
+
+        .bs-testimonial-author .avatar {
+            width: 40px;
+            height: 40px;
+        }
+
+        .bs-cta {
+            padding: 40px 0;
+        }
+
+        .bs-cta-inner {
+            padding: 24px 18px;
+        }
+
+        .bs-cta-content h2 {
+            font-size: 24px;
+        }
+
+        .bs-cta-content p {
+            font-size: 13px;
+        }
+
+        .bs-cta .bs-btn {
+            width: 100%;
+            justify-content: center;
+        }
+    }
+
+    @media (max-width: 400px) {
+        .bs-hero-content h1 {
+            font-size: 24px;
+        }
+
+        .bs-gallery-mosaic {
+            grid-template-columns: 1fr;
+        }
+
+        .bs-gallery-item {
+            aspect-ratio: 4 / 3;
+            min-height: 120px;
+        }
+
+        .bs-gallery-item:nth-child(3n+1) {
+            aspect-ratio: 4 / 3;
+            min-height: 120px;
+        }
+    }
+
+    /* Reduced Motion */
+    @media (prefers-reduced-motion: reduce) {
+        .bs-reveal {
+            opacity: 1;
+            transform: none;
+            transition: none;
+        }
+
+        .bs-hero-grid-images .bs-img-wrapper,
+        .bs-hero-grid-images .bs-img-wrapper img,
+        .bs-service-card,
+        .bs-gallery-item,
+        .bs-gallery-item img {
+            transition: none !important;
+        }
+
+        .bs-hero-grid-images .bs-img-wrapper:hover {
+            transform: none !important;
+        }
+
+        .bs-hero-grid-images .bs-img-wrapper:hover img {
+            transform: none !important;
+        }
+
+        .bs-service-card:hover {
+            transform: none !important;
+        }
+
+        .bs-gallery-item:hover {
+            transform: none !important;
+        }
+
+        .bs-gallery-item:hover img {
+            transform: none !important;
+        }
+
+        .bs-testimonial-wrapper::before {
+            animation: none !important;
+        }
+
+        .bs-service-card::before {
+            animation: none !important;
+        }
+    }
+</style>
+
+<!-- =========================================================
+     BEAUTY SHOOT PAGE
+     ========================================================= -->
+
+<section class="bs-page">
+
+    <!-- ===== HERO SECTION ===== -->
+    <section class="bs-hero">
+        <div class="bs-container">
+            <div class="bs-hero-grid">
+
+                <div class="bs-hero-content bs-reveal">
+                    <span class="bs-section-label">DLM Beauty Shoot</span>
+                    <h1>Celebrate Your <span>Inner Radiance</span></h1>
+                    <p>From bridal beauty portraits to editorial glamour sessions, we create stunning visuals that celebrate your unique beauty, confidence and style.</p>
+                    <div class="bs-hero-buttons">
+                        <a href="#bs-gallery" class="bs-btn bs-btn-primary">Explore Gallery</a>
+                        <a href="https://wa.me/919789029012?text=Hello%2C%20I%20would%20like%20to%20enquire%20about%20beauty%20shoot%20photography." target="_blank" rel="noopener noreferrer" class="bs-btn bs-btn-secondary">Book Your Session</a>
+                    </div>
+                </div>
+
+                <div class="bs-hero-grid-images bs-reveal bs-reveal-right">
+                    <div class="bs-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1594552072238-b8a33785b261?auto=format&fit=crop&w=1200&q=88" alt="Beauty portrait" loading="eager">
+                    </div>
+                    <div class="bs-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1587271407850-8d438ca9fdf2?auto=format&fit=crop&w=800&q=88" alt="Beauty shoot detail" loading="lazy">
+                    </div>
+                    <div class="bs-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=88" alt="Bridal beauty" loading="lazy">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SERVICES SECTION — PROFESSIONAL ===== -->
+    <section class="bs-services">
+        <div class="bs-container">
+            <div class="bs-text-center bs-reveal">
+                <span class="bs-section-label">Our Services</span>
+                <h2 class="bs-heading">Beauty Shoot <span>Collections</span></h2>
+                <p class="bs-subheading">Tailored beauty photography experiences designed to capture your most radiant self.</p>
+            </div>
+
+            <div class="bs-services-grid">
+                <div class="bs-service-card bs-reveal bs-reveal-left">
+                    <span class="highlight-ring"></span>
+                    <div class="bs-service-icon">💄</div>
+                    <h3>Bridal Beauty</h3>
+                    <p>Elegant bridal portraits showcasing your wedding day glow, jewellery and attire.</p>
+                </div>
+
+                <div class="bs-service-card bs-reveal">
+                    <span class="highlight-ring"></span>
+                    <div class="bs-service-icon">✨</div>
+                    <h3>Editorial Glamour</h3>
+                    <p>High-fashion beauty portraits with creative lighting and editorial styling.</p>
+                </div>
+
+                <div class="bs-service-card bs-reveal">
+                    <span class="highlight-ring"></span>
+                    <div class="bs-service-icon">🌹</div>
+                    <h3>Natural Beauty</h3>
+                    <p>Soft, natural portraits that celebrate your authentic self with minimal styling.</p>
+                </div>
+
+                <div class="bs-service-card bs-reveal bs-reveal-right">
+                    <span class="highlight-ring"></span>
+                    <div class="bs-service-icon">📸</div>
+                    <h3>Studio &amp; Location</h3>
+                    <p>Flexible indoor studio or outdoor location shoots tailored to your vision.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== GALLERY SECTION — 13 IMAGES ===== -->
+    <section class="bs-gallery" id="bs-gallery">
+        <div class="bs-container">
+            <div class="bs-text-center bs-reveal">
+                <span class="bs-section-label">Beauty Gallery</span>
+                <h2 class="bs-heading">Capturing <span>Radiant Beauty</span></h2>
+                <p class="bs-subheading">A curated collection of beauty portraits that celebrate elegance, confidence and timeless style.</p>
+            </div>
+
+            <div class="bs-gallery-mosaic">
+                <div class="bs-gallery-item bs-reveal">
+                    <img src="https://images.unsplash.com/photo-1594552072238-b8a33785b261?auto=format&fit=crop&w=900&q=88" alt="Beauty portrait" loading="lazy">
+                    <div class="bs-gallery-overlay">
+                        <span>Editorial Beauty</span>
+                        <strong>Radiant Glow</strong>
+                    </div>
+                </div>
+
+                <div class="bs-gallery-item bs-reveal">
+                    <img src="https://images.unsplash.com/photo-1587271407850-8d438ca9fdf2?auto=format&fit=crop&w=800&q=88" alt="Bridal beauty" loading="lazy">
+                    <div class="bs-gallery-overlay">
+                        <span>Bridal Portrait</span>
+                        <strong>Bridal Elegance</strong>
+                    </div>
+                </div>
+
+                <div class="bs-gallery-item bs-reveal">
+                    <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=88" alt="Beauty detail" loading="lazy">
+                    <div class="bs-gallery-overlay">
+                        <span>Detail Story</span>
+                        <strong>Finishing Touches</strong>
+                    </div>
+                </div>
+
+                <div class="bs-gallery-item bs-reveal">
+                    <img src="https://images.unsplash.com/photo-1601482441062-b9f13131f33a?auto=format&fit=crop&w=800&q=88" alt="Beauty accessories" loading="lazy">
+                    <div class="bs-gallery-overlay">
+                        <span>Accessories</span>
+                        <strong>Perfect Details</strong>
+                    </div>
+                </div>
+
+                <div class="bs-gallery-item bs-reveal">
+                    <img src="https://images.unsplash.com/photo-1604608672516-f1b9b1d37076?auto=format&fit=crop&w=900&q=88" alt="Beauty portrait closeup" loading="lazy">
+                    <div class="bs-gallery-overlay">
+                        <span>Close-up</span>
+                        <strong>Natural Beauty</strong>
+                    </div>
+                </div>
+
+                <div class="bs-gallery-item bs-reveal">
+                    <img src="https://images.unsplash.com/photo-1597157639073-69284dc0fdaf?auto=format&fit=crop&w=800&q=88" alt="Jewellery detail" loading="lazy">
+                    <div class="bs-gallery-overlay">
+                        <span>Jewellery</span>
+                        <strong>Sparkling Details</strong>
+                    </div>
+                </div>
+
+                <div class="bs-gallery-item bs-reveal">
+                    <img src="https://images.unsplash.com/photo-1523438885200-e635ba2c371e?auto=format&fit=crop&w=800&q=88" alt="Beauty styling" loading="lazy">
+                    <div class="bs-gallery-overlay">
+                        <span>Styling</span>
+                        <strong>Editorial Glamour</strong>
+                    </div>
+                </div>
+
+                <div class="bs-gallery-item bs-reveal">
+                    <img src="https://images.unsplash.com/photo-1507504031003-b417219a0fde?auto=format&fit=crop&w=900&q=88" alt="Minimal beauty portrait" loading="lazy">
+                    <div class="bs-gallery-overlay">
+                        <span>Minimal Beauty</span>
+                        <strong>Pure &amp; Simple</strong>
+                    </div>
+                </div>
+
+                <div class="bs-gallery-item bs-reveal">
+                    <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=88" alt="Warm beauty portrait" loading="lazy">
+                    <div class="bs-gallery-overlay">
+                        <span>Warm Portrait</span>
+                        <strong>Golden Hour Glow</strong>
+                    </div>
+                </div>
+
+                <div class="bs-gallery-item bs-reveal">
+                    <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=800&q=88" alt="Beauty with flowers" loading="lazy">
+                    <div class="bs-gallery-overlay">
+                        <span>Floral Beauty</span>
+                        <strong>Soft &amp; Romantic</strong>
+                    </div>
+                </div>
+
+                <div class="bs-gallery-item bs-reveal">
+                    <img src="https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?auto=format&fit=crop&w=900&q=88" alt="Beauty accessories detail" loading="lazy">
+                    <div class="bs-gallery-overlay">
+                        <span>Detail Story</span>
+                        <strong>Elegant Accessories</strong>
+                    </div>
+                </div>
+
+                <div class="bs-gallery-item bs-reveal">
+                    <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=800&q=88" alt="Beauty portrait with natural light" loading="lazy">
+                    <div class="bs-gallery-overlay">
+                        <span>Natural Light</span>
+                        <strong>Effortless Beauty</strong>
+                    </div>
+                </div>
+
+                <!-- 13th IMAGE - fills the gap in last row -->
+                <div class="bs-gallery-item bs-reveal">
+                    <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=900&q=88" alt="Beauty portrait smiling" loading="lazy">
+                    <div class="bs-gallery-overlay">
+                        <span>Smiling Portrait</span>
+                        <strong>Joyful &amp; Radiant</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== TESTIMONIAL SECTION — NEW STYLE ===== -->
+    <section class="bs-testimonial">
+        <div class="bs-container">
+            <div class="bs-testimonial-wrapper bs-reveal">
+                <div class="bs-testimonial-image">
+                    <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=800&q=88" alt="Happy client" loading="lazy">
+                    <span class="quote-mark" aria-hidden="true">"</span>
+                </div>
+
+                <div class="bs-testimonial-content">
+                    <span class="bs-section-label">Client Testimonial</span>
+                    <div class="bs-testimonial-stars">★★★★★</div>
+                    <blockquote>DLM captured my beauty portraits with such elegance and care. Every detail was beautifully preserved. I felt so confident and radiant during the shoot!</blockquote>
+                    <div class="bs-testimonial-author">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=88" alt="Ananya" class="avatar" loading="lazy">
+                        <div class="info">
+                            <strong>Ananya</strong>
+                            <span>Beauty Shoot Session · Chennai</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CTA SECTION — COMPACT ===== -->
+    <section class="bs-cta">
+        <div class="bs-container">
+            <div class="bs-cta-inner bs-reveal">
+                <div class="bs-cta-content">
+                    <h2>Ready to <span style="color: #ffd4e6;">Celebrate Your Beauty?</span></h2>
+                    <p>Book your beauty shoot session today and let us create stunning portraits that reflect your unique radiance.</p>
+                </div>
+                <a href="https://wa.me/919789029012?text=Hello%2C%20I%20would%20like%20to%20book%20a%20beauty%20shoot%20session." target="_blank" rel="noopener noreferrer" class="bs-btn">Enquire Now</a>
+            </div>
+        </div>
+    </section>
+
+</section>
+
+<!-- =========================================================
+     BEAUTY SHOOT — SCRIPT
+     ========================================================= -->
+
+<script>
+    (() => {
+        // =========================================================
+        // SCROLL REVEAL
+        // =========================================================
+
+        const revealElements = document.querySelectorAll('.bs-reveal');
+
+        if ('IntersectionObserver' in window) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -30px 0px'
+            });
+
+            revealElements.forEach((el) => {
+                observer.observe(el);
+            });
+        } else {
+            revealElements.forEach((el) => {
+                el.classList.add('visible');
+            });
+        }
+
+        // =========================================================
+        // GALLERY LIGHTBOX
+        // =========================================================
+
+        const galleryItems = document.querySelectorAll('.bs-gallery-item');
+
+        galleryItems.forEach((item) => {
+            item.addEventListener('click', function() {
+                const img = this.querySelector('img');
+                if (!img) return;
+
+                // Create lightbox
+                const lightbox = document.createElement('div');
+                lightbox.style.cssText = `
+                    position: fixed;
+                    inset: 0;
+                    z-index: 99999;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background: rgba(15, 7, 11, 0.95);
+                    backdrop-filter: blur(14px);
+                    -webkit-backdrop-filter: blur(14px);
+                    padding: 60px 30px 30px;
+                    cursor: pointer;
+                    opacity: 0;
+                    transition: opacity 0.35s ease;
+                `;
+
+                const image = document.createElement('img');
+                image.src = img.src;
+                image.alt = img.alt || 'Beauty portrait';
+                image.style.cssText = `
+                    max-width: 92vw;
+                    max-height: calc(100vh - 100px);
+                    object-fit: contain;
+                    border-radius: 14px;
+                    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+                    transform: scale(0.95);
+                    transition: transform 0.35s ease;
+                `;
+
+                const closeBtn = document.createElement('button');
+                closeBtn.innerHTML = '×';
+                closeBtn.style.cssText = `
+                    position: fixed;
+                    top: 18px;
+                    right: 22px;
+                    width: 48px;
+                    height: 48px;
+                    display: grid;
+                    place-items: center;
+                    border: 1px solid rgba(255, 255, 255, 0.2);
+                    border-radius: 50%;
+                    color: #fff;
+                    background: rgba(255, 255, 255, 0.08);
+                    font-size: 28px;
+                    font-weight: 300;
+                    cursor: pointer;
+                    transition: background 0.25s ease, transform 0.25s ease;
+                    z-index: 100000;
+                `;
+                closeBtn.setAttribute('aria-label', 'Close image viewer');
+
+                closeBtn.addEventListener('mouseenter', () => {
+                    closeBtn.style.background = '#ef2d83';
+                    closeBtn.style.transform = 'rotate(90deg)';
+                });
+                closeBtn.addEventListener('mouseleave', () => {
+                    closeBtn.style.background = 'rgba(255, 255, 255, 0.08)';
+                    closeBtn.style.transform = 'rotate(0)';
+                });
+
+                lightbox.appendChild(image);
+                lightbox.appendChild(closeBtn);
+                document.body.appendChild(lightbox);
+
+                document.body.style.overflow = 'hidden';
+
+                requestAnimationFrame(() => {
+                    lightbox.style.opacity = '1';
+                    image.style.transform = 'scale(1)';
+                });
+
+                const closeLightbox = () => {
+                    lightbox.style.opacity = '0';
+                    image.style.transform = 'scale(0.95)';
+                    document.body.style.overflow = '';
+
+                    setTimeout(() => {
+                        lightbox.remove();
+                    }, 350);
+                };
+
+                lightbox.addEventListener('click', (e) => {
+                    if (e.target === lightbox) {
+                        closeLightbox();
+                    }
+                });
+
+                closeBtn.addEventListener('click', closeLightbox);
+
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape') {
+                        closeLightbox();
+                    }
+                });
+            });
+        });
+
+        // =========================================================
+        // REDUCED MOTION
+        // =========================================================
+
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            revealElements.forEach((el) => {
+                el.classList.add('visible');
+            });
+        }
+    })();
+</script>
+
+</body>
+</html>

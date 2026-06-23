@@ -1,0 +1,4248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hindu Wedding Photography | DLM Photography</title>
+    <style>
+        :root {
+            --dlm-pink: #ef2d83;
+            --dlm-pink-dark: #bd145f;
+            --dlm-gold: #c89a52;
+            --dlm-ink: #2a1d25;
+            --dlm-muted: #79656f;
+            --dlm-ivory: #fffdf8;
+            --dlm-blush: #fff0f7;
+            --dlm-line: rgba(42, 29, 37, 0.1);
+            --dlm-white: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: "Inter", "Segoe UI", sans-serif;
+            color: var(--dlm-ink);
+            background: var(--dlm-ivory);
+        }
+
+        a {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .hindu-page {
+            width: 100%;
+            background:
+                radial-gradient(circle at 8% 8%, rgba(239, 45, 131, 0.08), transparent 26%),
+                linear-gradient(180deg, var(--dlm-ivory) 0%, #ffffff 100%);
+        }
+
+        .hindu-container {
+            width: min(100%, 1180px);
+            margin: 0 auto;
+            padding: 0 28px;
+        }
+
+        .hindu-hero {
+            position: relative;
+            min-height: 660px;
+            padding: 94px 0 68px;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            isolation: isolate;
+            background:
+                linear-gradient(90deg, rgba(42, 29, 37, 0.82) 0%, rgba(42, 29, 37, 0.58) 45%, rgba(42, 29, 37, 0.18) 100%),
+                url("https://images.unsplash.com/photo-1606800052052-a08af7148866?auto=format&fit=crop&w=2200&q=88") center/cover no-repeat;
+        }
+
+        .hindu-hero::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: -1px;
+            height: 86px;
+            z-index: 1;
+            background: linear-gradient(to bottom, transparent, var(--dlm-ivory));
+            pointer-events: none;
+        }
+
+        .hindu-hero-grid {
+            position: relative;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(340px, 0.78fr);
+            align-items: center;
+            gap: clamp(34px, 5vw, 68px);
+        }
+
+        .hindu-copy {
+            color: #fff;
+        }
+
+        .hindu-label {
+            width: fit-content;
+            margin: 0 0 18px;
+            padding: 9px 17px;
+            border: 1px solid rgba(255, 255, 255, 0.28);
+            border-radius: 999px;
+            color: #ffe0ed;
+            background: rgba(255, 255, 255, 0.1);
+            font-size: 11px;
+            font-weight: 850;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            box-shadow: 0 16px 34px rgba(0, 0, 0, 0.12);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        .hindu-copy h1 {
+            max-width: 720px;
+            margin: 0;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(38px, 4.3vw, 58px);
+            font-weight: 600;
+            line-height: 1.08;
+            letter-spacing: 0;
+        }
+
+        .hindu-copy h1 span {
+            display: block;
+            color: #ffd5e7;
+        }
+
+        .hindu-copy p {
+            max-width: 610px;
+            margin: 18px 0 0;
+            color: rgba(255, 255, 255, 0.86);
+            font-size: 15px;
+            line-height: 1.68;
+        }
+
+        .hindu-actions {
+            margin-top: 24px;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 13px;
+        }
+
+        .hindu-btn {
+            min-height: 50px;
+            padding: 0 24px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 999px;
+            color: #fff;
+            font-size: 13px;
+            font-weight: 900;
+            text-decoration: none;
+            transition: transform 0.24s ease, box-shadow 0.24s ease, background 0.24s ease;
+        }
+
+        .hindu-btn.primary {
+            background: linear-gradient(135deg, var(--dlm-pink), var(--dlm-pink-dark));
+            box-shadow: 0 18px 36px rgba(239, 45, 131, 0.28);
+        }
+
+        .hindu-btn.whatsapp {
+            border: 1px solid rgba(255, 255, 255, 0.32);
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        .hindu-btn:hover {
+            transform: translateY(-3px);
+        }
+
+        .hindu-btn.primary:hover {
+            box-shadow: 0 22px 44px rgba(239, 45, 131, 0.36);
+        }
+
+        .hindu-collage {
+            position: relative;
+            min-height: 430px;
+        }
+
+        .hindu-collage figure {
+            position: absolute;
+            margin: 0;
+            overflow: hidden;
+            border: 6px solid rgba(255, 255, 255, 0.72);
+            border-radius: 24px;
+            background: #fff;
+            box-shadow: 0 28px 70px rgba(24, 10, 18, 0.32);
+        }
+
+        .hindu-collage img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            transition: transform 0.55s ease;
+        }
+
+        .hindu-collage figure:hover img {
+            transform: scale(1.06);
+        }
+
+        .hindu-collage figure:nth-child(1) {
+            top: 12px;
+            right: 8px;
+            width: 68%;
+            height: 270px;
+            transform: rotate(2.5deg);
+        }
+
+        .hindu-collage figure:nth-child(2) {
+            left: 0;
+            bottom: 28px;
+            width: 58%;
+            height: 205px;
+            transform: rotate(-3.5deg);
+        }
+
+        .hindu-collage figure:nth-child(3) {
+            right: 0;
+            bottom: 0;
+            width: 43%;
+            height: 170px;
+            transform: rotate(4deg);
+        }
+
+        .hindu-soft-band {
+            padding: 38px 0 58px;
+            background: var(--dlm-ivory);
+        }
+
+        .hindu-note {
+            width: min(100%, 900px);
+            margin: 0 auto;
+            padding: 26px;
+            border: 1px solid rgba(239, 45, 131, 0.12);
+            border-radius: 22px;
+            background: #fff;
+            box-shadow: 0 22px 54px rgba(143, 28, 82, 0.08);
+            text-align: center;
+        }
+
+        .hindu-note strong {
+            display: block;
+            color: var(--dlm-pink-dark);
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(26px, 3vw, 38px);
+            line-height: 1.12;
+        }
+
+        .hindu-note p {
+            max-width: 680px;
+            margin: 12px auto 0;
+            color: var(--dlm-muted);
+            line-height: 1.72;
+        }
+
+        .hindu-intro {
+            position: relative;
+            padding: 58px 0;
+            background:
+                radial-gradient(circle at 88% 18%, rgba(239, 45, 131, 0.08), transparent 26%),
+                #ffffff;
+            overflow: hidden;
+        }
+
+        .hindu-intro::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: min(86%, 680px);
+            height: 5px;
+            border-radius: 0 0 999px 999px;
+            background: linear-gradient(90deg, var(--dlm-pink), var(--dlm-pink-dark));
+            transform: translateX(-50%);
+        }
+
+        .hindu-intro-grid {
+            display: grid;
+            grid-template-columns: minmax(300px, 0.8fr) minmax(0, 1fr);
+            align-items: center;
+            gap: clamp(34px, 5vw, 64px);
+        }
+
+        .hindu-photo-stack {
+            position: relative;
+            min-height: 430px;
+            animation: hinduFloatIn 0.75s ease both;
+        }
+
+        .hindu-photo-main,
+        .hindu-photo-small {
+            position: absolute;
+            overflow: hidden;
+            border-radius: 24px;
+            background: #fff;
+            box-shadow: 0 24px 58px rgba(143, 28, 82, 0.16);
+            transition: transform 0.35s ease, box-shadow 0.35s ease;
+        }
+
+        .hindu-photo-main {
+            inset: 0 50px 52px 0;
+        }
+
+        .hindu-photo-small {
+            right: 0;
+            bottom: 0;
+            width: 48%;
+            height: 176px;
+            border: 7px solid #fff;
+        }
+
+        .hindu-photo-main img,
+        .hindu-photo-small img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            transition: transform 0.55s ease;
+        }
+
+        .hindu-photo-stack:hover img {
+            transform: scale(1.045);
+        }
+
+        .hindu-photo-stack:hover .hindu-photo-main {
+            transform: translateY(-4px);
+            box-shadow: 0 30px 64px rgba(143, 28, 82, 0.18);
+        }
+
+        .hindu-photo-stack:hover .hindu-photo-small {
+            transform: translateY(-6px) rotate(1.5deg);
+            box-shadow: 0 28px 58px rgba(143, 28, 82, 0.2);
+        }
+
+        .hindu-section-label {
+            width: fit-content;
+            margin: 0 0 14px;
+            padding: 8px 16px;
+            border: 1px solid rgba(239, 45, 131, 0.16);
+            border-radius: 999px;
+            color: var(--dlm-pink);
+            background: #fff;
+            font-size: 11px;
+            font-weight: 850;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            box-shadow: 0 10px 24px rgba(239, 45, 131, 0.08);
+        }
+
+        .hindu-intro-copy h2 {
+            max-width: 760px;
+            margin: 0;
+            color: var(--dlm-ink);
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(28px, 3vw, 38px);
+            font-weight: 600;
+            line-height: 1.12;
+            letter-spacing: 0;
+        }
+
+        .hindu-intro-copy {
+            animation: hinduSlideUp 0.75s ease both;
+        }
+
+        .hindu-intro-copy p {
+            margin: 12px 0 0;
+            color: var(--dlm-muted);
+            font-size: 14.5px;
+            line-height: 1.68;
+        }
+
+        .hindu-feature-grid {
+            margin-top: 18px;
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .hindu-feature-card {
+            padding: 16px;
+            border: 1px solid rgba(239, 45, 131, 0.12);
+            border-radius: 18px;
+            background: linear-gradient(135deg, #fff, #fff8fb);
+            box-shadow: 0 16px 34px rgba(143, 28, 82, 0.07);
+            transition: transform 0.24s ease, box-shadow 0.24s ease, border-color 0.24s ease;
+        }
+
+        .hindu-feature-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(239, 45, 131, 0.22);
+            box-shadow: 0 22px 44px rgba(143, 28, 82, 0.12);
+        }
+
+        @keyframes hinduFloatIn {
+            from {
+                opacity: 0;
+                transform: translateY(18px) scale(0.98);
+            }
+            to {
+                opacity: 1;
+                transform: none;
+            }
+        }
+
+        @keyframes hinduSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(18px);
+            }
+            to {
+                opacity: 1;
+                transform: none;
+            }
+        }
+
+        .hindu-feature-card span {
+            width: 34px;
+            height: 34px;
+            margin-bottom: 10px;
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+            color: #fff;
+            background: linear-gradient(135deg, var(--dlm-pink), var(--dlm-pink-dark));
+            font-weight: 900;
+        }
+
+        .hindu-feature-card strong {
+            display: block;
+            color: var(--dlm-ink);
+            font-size: 16px;
+            line-height: 1.25;
+        }
+
+        .hindu-rituals {
+            padding: 64px 0 74px;
+            background:
+                radial-gradient(circle at 8% 12%, rgba(239, 45, 131, 0.08), transparent 24%),
+                linear-gradient(180deg, #fff7fb 0%, #ffffff 100%);
+        }
+
+        .hindu-section-head {
+            max-width: 720px;
+            margin: 0 auto 34px;
+            text-align: center;
+        }
+
+        .hindu-section-head .hindu-section-label {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hindu-section-head h2 {
+            margin: 0;
+            color: var(--dlm-ink);
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(29px, 3.2vw, 40px);
+            font-weight: 600;
+            line-height: 1.1;
+        }
+
+        .hindu-section-head p {
+            max-width: 610px;
+            margin: 12px auto 0;
+            color: var(--dlm-muted);
+            font-size: 14.5px;
+            line-height: 1.7;
+        }
+
+        .hindu-ritual-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .hindu-ritual-card {
+            position: relative;
+            min-height: 430px;
+            overflow: hidden;
+            border-radius: 20px;
+            background: var(--dlm-ink);
+            box-shadow: 0 22px 48px rgba(143, 28, 82, 0.13);
+            isolation: isolate;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .hindu-ritual-card img {
+            position: absolute;
+            inset: 0;
+            z-index: -2;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.55s ease;
+        }
+
+        .hindu-ritual-card::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            background:
+                linear-gradient(180deg, rgba(42, 29, 37, 0.06) 0%, rgba(42, 29, 37, 0.48) 52%, rgba(42, 29, 37, 0.88) 100%),
+                linear-gradient(90deg, rgba(42, 29, 37, 0.34), transparent);
+        }
+
+        .hindu-ritual-content {
+            min-height: inherit;
+            padding: 22px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            color: #fff;
+        }
+
+        .hindu-ritual-number {
+            position: absolute;
+            top: 18px;
+            left: 18px;
+            width: 44px;
+            height: 44px;
+            display: grid;
+            place-items: center;
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            border-radius: 50%;
+            color: #fff;
+            background: rgba(239, 45, 131, 0.86);
+            font-size: 13px;
+            font-weight: 900;
+            box-shadow: 0 12px 26px rgba(0, 0, 0, 0.22);
+        }
+
+        .hindu-ritual-card h3 {
+            margin: 0;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 30px;
+            line-height: 1.05;
+            font-weight: 600;
+        }
+
+        .hindu-ritual-card p {
+            margin: 10px 0 0;
+            color: rgba(255, 255, 255, 0.84);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .hindu-ritual-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 30px 64px rgba(143, 28, 82, 0.22);
+        }
+
+        .hindu-ritual-card:hover img {
+            transform: scale(1.08);
+        }
+
+        .hindu-bridal {
+            padding: 70px 0;
+            background:
+                radial-gradient(circle at 84% 12%, rgba(200, 154, 82, 0.12), transparent 26%),
+                #ffffff;
+        }
+
+        .hindu-bridal-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(320px, 0.82fr);
+            align-items: center;
+            gap: clamp(34px, 5vw, 64px);
+        }
+
+        .hindu-bridal-images {
+            position: relative;
+            min-height: 500px;
+        }
+
+        .hindu-bridal-main,
+        .hindu-bridal-detail {
+            position: absolute;
+            overflow: hidden;
+            border-radius: 24px;
+            background: #fff;
+            box-shadow: 0 24px 58px rgba(143, 28, 82, 0.15);
+            transition: transform 0.35s ease, box-shadow 0.35s ease;
+        }
+
+        .hindu-bridal-main {
+            inset: 0 64px 54px 0;
+        }
+
+        .hindu-bridal-detail {
+            right: 0;
+            bottom: 0;
+            width: 46%;
+            height: 205px;
+            border: 7px solid #fff;
+        }
+
+        .hindu-bridal-main img,
+        .hindu-bridal-detail img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            transition: transform 0.55s ease;
+        }
+
+        .hindu-bridal-images:hover img {
+            transform: scale(1.045);
+        }
+
+        .hindu-bridal-images:hover .hindu-bridal-main {
+            transform: translateY(-4px);
+        }
+
+        .hindu-bridal-images:hover .hindu-bridal-detail {
+            transform: translateY(-6px) rotate(1.5deg);
+            box-shadow: 0 28px 58px rgba(143, 28, 82, 0.2);
+        }
+
+        .hindu-bridal-copy {
+            padding: 28px;
+            border: 1px solid rgba(239, 45, 131, 0.12);
+            border-radius: 22px;
+            background: linear-gradient(135deg, #fff, #fff8fb);
+            box-shadow: 0 22px 54px rgba(143, 28, 82, 0.08);
+        }
+
+        .hindu-bridal-copy h2 {
+            margin: 0;
+            color: var(--dlm-ink);
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(28px, 3vw, 38px);
+            font-weight: 600;
+            line-height: 1.12;
+        }
+
+        .hindu-couple {
+            padding: 64px 0;
+            background:
+                radial-gradient(circle at 12% 14%, rgba(239, 45, 131, 0.08), transparent 24%),
+                linear-gradient(180deg, #fff7fb 0%, #ffffff 100%);
+        }
+
+        .hindu-couple-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(320px, 0.82fr);
+            align-items: center;
+            gap: clamp(34px, 5vw, 64px);
+        }
+
+        .hindu-couple-images {
+            position: relative;
+            min-height: 440px;
+            order: 1;
+        }
+
+        .hindu-couple-copy {
+            order: 2;
+            padding: 26px;
+            border: 1px solid rgba(239, 45, 131, 0.12);
+            border-radius: 22px;
+            background: #fff;
+            box-shadow: 0 22px 54px rgba(143, 28, 82, 0.08);
+        }
+
+        .hindu-couple-main,
+        .hindu-couple-candid {
+            position: absolute;
+            overflow: hidden;
+            border-radius: 24px;
+            background: #fff;
+            box-shadow: 0 24px 58px rgba(143, 28, 82, 0.15);
+            transition: transform 0.35s ease, box-shadow 0.35s ease;
+        }
+
+        .hindu-couple-main {
+            inset: 0 0 58px 54px;
+        }
+
+        .hindu-couple-candid {
+            left: 0;
+            bottom: 0;
+            width: 48%;
+            height: 178px;
+            border: 7px solid #fff;
+        }
+
+        .hindu-couple-main img,
+        .hindu-couple-candid img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            transition: transform 0.55s ease;
+        }
+
+        .hindu-couple-images:hover img {
+            transform: scale(1.045);
+        }
+
+        .hindu-couple-images:hover .hindu-couple-main {
+            transform: translateY(-4px);
+        }
+
+        .hindu-couple-images:hover .hindu-couple-candid {
+            transform: translateY(-6px) rotate(-1.5deg);
+            box-shadow: 0 28px 58px rgba(143, 28, 82, 0.2);
+        }
+
+        .hindu-couple-copy h2 {
+            margin: 0;
+            color: var(--dlm-ink);
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(28px, 3vw, 38px);
+            font-weight: 600;
+            line-height: 1.12;
+        }
+
+        .hindu-couple-copy p {
+            margin: 12px 0 0;
+            color: var(--dlm-muted);
+            font-size: 13.6px;
+            line-height: 1.62;
+        }
+
+        .hindu-couple-list {
+            margin: 20px 0 0;
+            padding: 0;
+            display: grid;
+            gap: 10px;
+            list-style: none;
+        }
+
+        .hindu-couple-list li {
+            min-height: 44px;
+            padding: 11px 14px;
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            border: 1px solid rgba(239, 45, 131, 0.1);
+            border-radius: 14px;
+            background: linear-gradient(135deg, #fff, #fff8fb);
+            color: var(--dlm-ink);
+            font-size: 14px;
+            font-weight: 850;
+        }
+
+        .hindu-couple-list li::before {
+            content: "";
+            width: 9px;
+            height: 15px;
+            flex: 0 0 auto;
+            border-right: 2px solid var(--dlm-pink);
+            border-bottom: 2px solid var(--dlm-pink);
+            transform: rotate(45deg);
+        }
+
+        .hindu-bridal-copy p {
+            margin: 13px 0 0;
+            color: var(--dlm-muted);
+            font-size: 14.5px;
+            line-height: 1.68;
+        }
+
+        .hindu-bridal-list {
+            margin: 22px 0 0;
+            padding: 0;
+            display: grid;
+            gap: 12px;
+            list-style: none;
+        }
+
+        .hindu-bridal-list li {
+            min-height: 46px;
+            padding: 12px 14px;
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            border: 1px solid rgba(239, 45, 131, 0.1);
+            border-radius: 14px;
+            background: #fff;
+            color: var(--dlm-ink);
+            font-size: 14px;
+            font-weight: 850;
+            box-shadow: 0 12px 26px rgba(143, 28, 82, 0.05);
+        }
+
+        .hindu-bridal-list li::before {
+            content: "";
+            width: 9px;
+            height: 15px;
+            flex: 0 0 auto;
+            border-right: 2px solid var(--dlm-pink);
+            border-bottom: 2px solid var(--dlm-pink);
+            transform: rotate(45deg);
+        }
+
+        @media (max-width: 900px) {
+            .hindu-container {
+                padding: 0 20px;
+            }
+
+            .hindu-hero {
+                min-height: auto;
+                padding: 82px 0 46px;
+                background:
+                    linear-gradient(180deg, rgba(42, 29, 37, 0.78), rgba(42, 29, 37, 0.56)),
+                    url("https://images.unsplash.com/photo-1606800052052-a08af7148866?auto=format&fit=crop&w=1600&q=86") center/cover no-repeat;
+            }
+
+            .hindu-hero-grid {
+                grid-template-columns: 1fr;
+                gap: 26px;
+            }
+
+            .hindu-copy {
+                text-align: center;
+            }
+
+            .hindu-label {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hindu-copy h1,
+            .hindu-copy p {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hindu-actions {
+                justify-content: center;
+            }
+
+            .hindu-collage {
+                width: min(100%, 560px);
+                min-height: 350px;
+                margin: 0 auto;
+            }
+
+            .hindu-collage figure {
+                border-width: 5px;
+                border-radius: 20px;
+            }
+
+            .hindu-collage figure:nth-child(1) {
+                width: 70%;
+                height: 195px;
+            }
+
+            .hindu-collage figure:nth-child(2) {
+                width: 58%;
+                height: 160px;
+            }
+
+            .hindu-collage figure:nth-child(3) {
+                width: 44%;
+                height: 130px;
+            }
+
+            .hindu-intro-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hindu-intro-copy {
+                order: 1;
+            }
+
+            .hindu-photo-stack {
+                order: 2;
+                width: min(100%, 560px);
+                margin: 0 auto;
+            }
+
+            .hindu-ritual-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .hindu-bridal-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hindu-bridal-copy {
+                order: 1;
+            }
+
+            .hindu-bridal-images {
+                order: 2;
+                width: min(100%, 560px);
+                margin: 0 auto;
+            }
+
+            .hindu-couple-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hindu-couple-images {
+                order: 2;
+                width: min(100%, 560px);
+                margin: 0 auto;
+            }
+
+            .hindu-couple-copy {
+                order: 1;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .hindu-container {
+                padding: 0 16px;
+            }
+
+            .hindu-hero {
+                padding: 66px 0 30px;
+            }
+
+            .hindu-copy h1 {
+                max-width: 310px;
+                font-size: clamp(27px, 7.6vw, 34px);
+                line-height: 1.14;
+                text-align: center;
+            }
+
+            .hindu-copy h1 span {
+                width: 100%;
+                text-align: center;
+            }
+
+            .hindu-copy p {
+                margin-top: 14px;
+                font-size: 13.5px;
+                line-height: 1.6;
+            }
+
+            .hindu-actions {
+                margin-top: 18px;
+                flex-direction: column;
+                gap: 9px;
+            }
+
+            .hindu-btn {
+                width: 100%;
+                min-height: 44px;
+            }
+
+            .hindu-collage {
+                position: relative;
+                min-height: 310px;
+                display: block;
+                margin-top: 0;
+            }
+
+            .hindu-collage figure,
+            .hindu-collage figure:nth-child(1),
+            .hindu-collage figure:nth-child(2),
+            .hindu-collage figure:nth-child(3) {
+                position: absolute;
+                overflow: hidden;
+                border: 6px solid rgba(255, 255, 255, 0.92);
+                border-radius: 22px;
+                background: #fff;
+                box-shadow: 0 20px 44px rgba(22, 10, 16, 0.28);
+            }
+
+            .hindu-collage figure:nth-child(1) {
+                top: 0;
+                right: 2px;
+                width: 70%;
+                height: 155px;
+                transform: rotate(2.8deg);
+                z-index: 1;
+            }
+
+            .hindu-collage figure:nth-child(2) {
+                left: 0;
+                top: 112px;
+                width: 69%;
+                height: 150px;
+                transform: rotate(-3.5deg);
+                z-index: 2;
+            }
+
+            .hindu-collage figure:nth-child(3) {
+                right: 0;
+                bottom: 0;
+                width: 46%;
+                height: 116px;
+                transform: rotate(4deg);
+                z-index: 3;
+            }
+
+            .hindu-soft-band {
+                padding: 42px 0 56px;
+            }
+
+            .hindu-note {
+                padding: 22px 18px;
+                border-radius: 18px;
+            }
+
+            .hindu-intro {
+                padding: 34px 0;
+                background:
+                    radial-gradient(circle at 16% 0%, rgba(239, 45, 131, 0.1), transparent 26%),
+                    linear-gradient(180deg, #fff7fb 0%, #ffffff 100%);
+            }
+
+            .hindu-intro-copy {
+                padding: 16px;
+                border: 1px solid rgba(239, 45, 131, 0.12);
+                border-radius: 18px;
+                background:
+                    linear-gradient(135deg, #ffffff 0%, #fff8fb 100%);
+                box-shadow: 0 18px 42px rgba(143, 28, 82, 0.08);
+            }
+
+            .hindu-intro-copy h2 {
+                font-size: clamp(26px, 7.4vw, 32px);
+                line-height: 1.14;
+            }
+
+            .hindu-intro-copy p {
+                margin-top: 10px;
+                font-size: 13.2px;
+                line-height: 1.58;
+            }
+
+            .hindu-feature-grid {
+                grid-template-columns: 1fr;
+                gap: 9px;
+                margin-top: 14px;
+            }
+
+            .hindu-feature-card {
+                padding: 13px 14px;
+                display: flex;
+                align-items: center;
+                gap: 11px;
+                border-radius: 14px;
+            }
+
+            .hindu-feature-card span {
+                width: 30px;
+                height: 30px;
+                margin: 0;
+                flex: 0 0 auto;
+            }
+
+            .hindu-feature-card strong {
+                font-size: 14px;
+            }
+
+            .hindu-photo-stack {
+                min-height: 270px;
+            }
+
+            .hindu-photo-main {
+                inset: 0 36px 58px 0;
+                border-radius: 18px;
+            }
+
+            .hindu-photo-small {
+                right: 0;
+                bottom: 0;
+                width: 52%;
+                height: 108px;
+                border-width: 5px;
+                border-radius: 16px;
+            }
+
+            .hindu-rituals {
+                padding: 46px 0 56px;
+            }
+
+            .hindu-section-head {
+                margin-bottom: 24px;
+                text-align: left;
+            }
+
+            .hindu-section-head .hindu-section-label {
+                margin-left: 0;
+                margin-right: 0;
+            }
+
+            .hindu-section-head h2 {
+                font-size: clamp(29px, 8.5vw, 38px);
+            }
+
+            .hindu-section-head p {
+                font-size: 13.5px;
+                line-height: 1.62;
+            }
+
+            .hindu-ritual-grid {
+                grid-template-columns: 1fr;
+                gap: 14px;
+            }
+
+            .hindu-ritual-card {
+                min-height: 400px;
+                border-radius: 18px;
+            }
+
+            .hindu-ritual-content {
+                padding: 20px;
+            }
+
+            .hindu-ritual-card h3 {
+                font-size: 32px;
+            }
+
+            .hindu-ritual-card p {
+                font-size: 15px;
+                line-height: 1.58;
+            }
+
+            .hindu-bridal {
+                padding: 44px 0;
+                background:
+                    radial-gradient(circle at 18% 0%, rgba(239, 45, 131, 0.09), transparent 26%),
+                    #fff7fb;
+            }
+
+            .hindu-bridal-grid {
+                gap: 20px;
+            }
+
+            .hindu-bridal-copy {
+                padding: 18px;
+                border-radius: 18px;
+            }
+
+            .hindu-bridal-copy h2 {
+                font-size: clamp(28px, 8.2vw, 36px);
+                line-height: 1.14;
+            }
+
+            .hindu-bridal-copy p {
+                font-size: 13.2px;
+                line-height: 1.58;
+            }
+
+            .hindu-bridal-list {
+                gap: 9px;
+                margin-top: 16px;
+            }
+
+            .hindu-bridal-list li {
+                min-height: 42px;
+                padding: 11px 13px;
+                font-size: 13.5px;
+            }
+
+            .hindu-bridal-images {
+                min-height: 290px;
+            }
+
+            .hindu-bridal-main {
+                inset: 0 38px 58px 0;
+                border-radius: 18px;
+            }
+
+            .hindu-bridal-detail {
+                width: 52%;
+                height: 112px;
+                border-width: 5px;
+                border-radius: 16px;
+            }
+
+            .hindu-couple {
+                padding: 40px 0;
+            }
+
+            .hindu-couple-grid {
+                gap: 18px;
+            }
+
+            .hindu-couple-images {
+                min-height: 270px;
+            }
+
+            .hindu-couple-main {
+                inset: 0 0 58px 36px;
+                border-radius: 18px;
+            }
+
+            .hindu-couple-candid {
+                width: 52%;
+                height: 108px;
+                border-width: 5px;
+                border-radius: 16px;
+            }
+
+            .hindu-couple-copy {
+                padding: 17px;
+                border-radius: 18px;
+            }
+
+            .hindu-couple-copy h2 {
+                max-width: 310px;
+                font-size: clamp(26px, 7.4vw, 32px);
+                line-height: 1.14;
+            }
+
+            .hindu-couple-copy p {
+                font-size: 12.8px;
+                line-height: 1.54;
+            }
+
+            .hindu-couple-list {
+                gap: 9px;
+                margin-top: 14px;
+            }
+
+            .hindu-couple-list li {
+                min-height: 42px;
+                padding: 11px 13px;
+                font-size: 13.5px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .hindu-photo-stack,
+            .hindu-intro-copy,
+            .hindu-photo-main,
+            .hindu-photo-small,
+            .hindu-feature-card,
+            .hindu-ritual-card,
+            .hindu-ritual-card img,
+            .hindu-bridal-main,
+            .hindu-bridal-detail,
+            .hindu-bridal-main img,
+            .hindu-bridal-detail img,
+            .hindu-couple-main,
+            .hindu-couple-candid,
+            .hindu-couple-main img,
+            .hindu-couple-candid img,
+            .hindu-photo-main img,
+            .hindu-photo-small img {
+                animation: none;
+                transition: none;
+            }
+        }
+    </style>
+    <style>
+          :root {
+            --pink: #ef2d83;
+            --pink-dark: #c91567;
+            --soft: #fff0f7;
+            --ink: #241723;
+            --muted: #7a6572;
+            --border: rgba(36, 23, 35, 0.1);
+            --white: #ffffff;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Inter", "Segoe UI", sans-serif;
+            color: var(--ink);
+            background: #fff8fb;
+        }
+
+        body.menu-open {
+            overflow: hidden;
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+        button,
+        a {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .navbar-wrap {
+            position: absolute;
+            top: 18px;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 0 28px;
+        }
+
+        .navbar-wrap.is-sticky {
+            position: fixed;
+            top: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            width: min(100%, 1180px);
+            min-height: 76px;
+            margin: auto;
+            padding: 0 30px;
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            gap: 24px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.94);
+            box-shadow: 0 18px 50px rgba(108, 20, 64, 0.14);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            transition: border-radius 0.25s ease, min-height 0.25s ease;
+        }
+
+        .navbar-wrap.is-sticky .navbar {
+            width: 100%;
+            min-height: 70px;
+            border-radius: 0;
+        }
+
+        .brand {
+            justify-self: start;
+            display: flex;
+            align-items: center;
+        }
+
+        .brand-logo {
+            width: 56px;
+            height: 56px;
+            object-fit: contain;
+            border-radius: 50%;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 28px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-links a,
+        .wedding-button {
+            min-height: 70px;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            border: 0;
+            color: var(--ink);
+            background: none;
+            font: 700 14px "Inter", "Segoe UI", sans-serif;
+            text-decoration: none;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .nav-links a:hover,
+        .wedding-button:hover {
+            color: var(--pink);
+        }
+
+        .arrow {
+            width: 8px;
+            height: 8px;
+            border-right: 2px solid currentColor;
+            border-bottom: 2px solid currentColor;
+            transform: rotate(45deg);
+            transition: transform 0.25s ease;
+        }
+
+        .wedding-item:hover .arrow,
+        .wedding-item:focus-within .arrow {
+            transform: rotate(225deg);
+        }
+
+        .wedding-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            width: 560px;
+            padding: 26px;
+            display: grid;
+            grid-template-columns: 160px 1fr 1fr;
+            gap: 24px;
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            background: #fff;
+            box-shadow: 0 24px 60px rgba(40, 20, 32, 0.16);
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transform: translate(-50%, -10px);
+            transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
+        }
+
+        .wedding-item:hover .wedding-dropdown,
+        .wedding-item:focus-within .wedding-dropdown {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transform: translate(-50%, 0);
+        }
+
+        .wedding-dropdown img {
+            width: 100%;
+            height: 180px;
+            object-fit: contain;
+            border-radius: 14px;
+            background: #fff4f9;
+        }
+
+        .wedding-column {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .wedding-column a {
+            min-height: 44px;
+            font-size: 15px;
+        }
+
+        .nav-actions {
+            justify-self: end;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .login-button {
+            min-width: 96px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 999px;
+            color: #fff;
+            background: var(--pink);
+            font-weight: 800;
+            text-decoration: none;
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+
+        .login-button:hover {
+            background: var(--pink-dark);
+            transform: translateY(-1px);
+        }
+
+        .menu-toggle {
+            flex: 0 0 auto;
+            width: 44px;
+            height: 44px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            border: 0;
+            border-radius: 50%;
+            color: var(--pink);
+            background: var(--soft);
+            cursor: pointer;
+        }
+
+        .menu-lines,
+        .menu-lines::before,
+        .menu-lines::after {
+            width: 20px;
+            height: 2px;
+            display: block;
+            border-radius: 10px;
+            background: currentColor;
+        }
+
+        .menu-lines {
+            position: relative;
+        }
+
+        .menu-lines::before,
+        .menu-lines::after {
+            content: "";
+            position: absolute;
+            left: 0;
+        }
+
+        .menu-lines::before {
+            top: -6px;
+        }
+
+        .menu-lines::after {
+            top: 6px;
+        }
+
+        .menu-backdrop {
+            position: fixed;
+            inset: 0;
+            z-index: 1100;
+            visibility: hidden;
+            opacity: 0;
+            background: rgba(36, 23, 35, 0.5);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .menu-backdrop.open {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1200;
+            width: min(88vw, 370px);
+            height: 100vh;
+            height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            background: #fff;
+            box-shadow: -25px 0 60px rgba(30, 15, 24, 0.2);
+            visibility: hidden;
+            transform: translateX(105%);
+            transition: transform 0.35s ease, visibility 0.35s ease;
+        }
+
+        .mobile-menu.open {
+            visibility: visible;
+            transform: translateX(0);
+        }
+
+        .mobile-menu-header {
+            flex: 0 0 auto;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .mobile-logo {
+            width: 52px;
+            height: 52px;
+            object-fit: contain;
+            border-radius: 50%;
+        }
+
+        .menu-close {
+            width: 42px;
+            height: 42px;
+            border: 0;
+            border-radius: 50%;
+            color: var(--pink);
+            background: var(--soft);
+            font-size: 27px;
+            line-height: 1;
+            cursor: pointer;
+        }
+
+        .mobile-links {
+            flex: 1 1 auto;
+            margin: 0;
+            padding: 16px 20px;
+            list-style: none;
+            overflow-y: auto;
+            overscroll-behavior: contain;
+        }
+
+        .mobile-links > li {
+            border-bottom: 1px solid var(--border);
+        }
+
+        .mobile-links a,
+        .mobile-wedding-button {
+            width: 100%;
+            min-height: 56px;
+            padding: 0 8px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border: 0;
+            color: var(--ink);
+            background: none;
+            font: 700 16px "Inter", "Segoe UI", sans-serif;
+            text-decoration: none;
+            text-align: left;
+            cursor: pointer;
+        }
+
+        .mobile-wedding-panel {
+            max-height: 0;
+            overflow: hidden;
+            background: #fff8fb;
+            transition: max-height 0.3s ease;
+        }
+
+        .mobile-wedding-panel.open {
+            max-height: 520px;
+        }
+
+        .mobile-wedding-panel a {
+            min-height: 43px;
+            padding-left: 22px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .mobile-login {
+            flex: 0 0 auto;
+            margin: 20px;
+            min-height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 999px;
+            color: #fff;
+            background: var(--pink);
+            font-weight: 800;
+            text-decoration: none;
+        }
+          @media (max-width: 900px) {
+            .navbar-wrap {
+                padding: 0 16px;
+            }
+
+            .navbar-wrap.is-sticky {
+                padding: 0;
+            }
+
+            .navbar {
+                grid-template-columns: 1fr auto;
+                min-height: 70px;
+                padding: 9px 16px;
+                gap: 14px;
+            }
+
+            .nav-links,
+            .login-button {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .brand-logo {
+                width: 48px;
+                height: 48px;
+            }
+
+            .nav-actions {
+                min-width: 0;
+            }
+
+            .hero-slider {
+                min-height: 720px;
+            }
+
+            .slider-content {
+                bottom: 110px;
+            }
+
+            .slider-controls {
+                right: 24px;
+                bottom: 34px;
+            }
+
+            .slider-dots {
+                left: 28px;
+                bottom: 48px;
+                transform: none;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .navbar-wrap {
+                top: 12px;
+                padding: 0 14px;
+            }
+
+            .navbar-wrap.is-sticky {
+                top: 0;
+                padding: 0;
+            }
+
+            .navbar {
+                min-height: 66px;
+                padding: 8px 12px;
+                border-radius: 34px;
+            }
+
+            .navbar-wrap.is-sticky .navbar {
+                border-radius: 0;
+            }
+
+            .mobile-menu {
+                width: min(92vw, 350px);
+            }
+
+            .mobile-menu-header {
+                padding: 14px 16px;
+            }
+
+            .mobile-links {
+                padding: 12px 16px;
+            }
+
+            .mobile-links a,
+            .mobile-wedding-button {
+                min-height: 52px;
+                font-size: 15px;
+            }
+
+            .mobile-login {
+                margin: 16px;
+            }
+
+            .hero-slider {
+                min-height: min(680px, 100svh);
+            }
+
+            .hero-slide::after {
+                background:
+                    linear-gradient(0deg, rgba(22, 10, 16, 0.76) 0%, rgba(22, 10, 16, 0.2) 72%),
+                    linear-gradient(90deg, rgba(22, 10, 16, 0.42), transparent);
+            }
+
+            .hero-slide img {
+                object-position: center;
+            }
+
+            .slider-content {
+                left: 20px;
+                right: 20px;
+                bottom: 118px;
+                width: auto;
+            }
+
+            .slider-kicker {
+                font-size: 12px;
+            }
+
+            .slider-title {
+                font-size: clamp(38px, 14vw, 58px);
+            }
+
+            .slider-copy {
+                margin-top: 16px;
+                font-size: 16px;
+                line-height: 1.6;
+            }
+
+            .slider-controls {
+                right: 18px;
+                bottom: 30px;
+            }
+
+            .slider-arrow {
+                width: 42px;
+                height: 42px;
+            }
+
+            .slider-dots {
+                left: 20px;
+                bottom: 45px;
+            }
+
+            .content-section {
+                padding: 72px 20px;
+            }
+
+            .services-section {
+                padding: 74px 20px 80px;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+                gap: 86px;
+                padding-top: 74px;
+            }
+
+            .service-card {
+                width: min(100%, 380px);
+                margin: 0 auto;
+            }
+
+            .studio-about {
+                padding: 86px 20px 78px;
+            }
+
+            .studio-about-inner {
+                grid-template-columns: 1fr;
+                gap: 26px;
+            }
+
+            .about-gallery {
+                order: 2;
+                width: 100%;
+                justify-self: center;
+            }
+
+            .studio-about-copy {
+                order: 1;
+                display: contents;
+            }
+
+            .about-eyebrow,
+            .studio-about-copy h2,
+            .about-description {
+                order: 1;
+            }
+
+            .about-photo-frame {
+                width: min(84vw, 340px);
+                transform: perspective(900px) rotateY(-7deg) rotateZ(-1.5deg);
+            }
+
+            .about-highlights {
+                order: 3;
+                grid-template-columns: 72px 1fr;
+                padding: 24px;
+                gap: 18px;
+            }
+
+            .about-avatar {
+                width: 66px;
+                height: 66px;
+            }
+
+            .about-actions {
+                order: 4;
+                align-items: stretch;
+            }
+
+            .availability-text {
+                width: 100%;
+                margin: 0 0 2px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .navbar-wrap {
+                padding: 0 10px;
+            }
+
+            .navbar {
+                min-height: 60px;
+                padding: 7px 10px;
+            }
+
+            .brand-logo {
+                width: 42px;
+                height: 42px;
+            }
+
+            .menu-toggle {
+                width: 40px;
+                height: 40px;
+            }
+
+            .mobile-menu {
+                width: 100vw;
+            }
+
+            .mobile-logo {
+                width: 46px;
+                height: 46px;
+            }
+
+            .hero-slider {
+                min-height: min(640px, 100svh);
+            }
+
+            .slider-title {
+                font-size: 36px;
+            }
+
+            .slider-copy {
+                font-size: 15px;
+            }
+
+            .studio-about {
+                padding: 72px 16px 64px;
+            }
+
+            .studio-about-copy h2 {
+                font-size: 34px;
+            }
+
+            .about-description {
+                font-size: 15.5px;
+            }
+
+            .about-highlights {
+                grid-template-columns: 1fr;
+                justify-items: start;
+                border-radius: 22px;
+            }
+
+            .about-actions {
+                gap: 12px;
+            }
+
+            .about-action,
+            .about-gallery-button {
+                width: 100%;
+            }
+
+            .services-section {
+                padding: 66px 16px 72px;
+            }
+
+            .services-intro {
+                margin-bottom: 58px;
+            }
+
+            .service-card {
+                min-height: 226px;
+                padding: 88px 20px 22px;
+            }
+
+            .service-image {
+                height: 150px;
+            }
+
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            .slider-track,
+            .hero-slide img,
+            .about-carousel-track,
+            .mobile-menu,
+            .menu-backdrop,
+            .mobile-wedding-panel {
+                transition: none;
+            }
+
+            .slider-progress-bar.is-running {
+                animation: none;
+            }
+
+            .about-carousel-track {
+                animation: none;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+      <header class="navbar-wrap" id="siteNavbar">
+        <nav class="navbar" aria-label="Main navigation">
+            <a class="brand" href="#home">
+                <img class="brand-logo" src="assets/image.png" alt="DLM logo">
+            </a>
+
+            <ul class="nav-links">
+                <li class="nav-item"><a href="index.html">Home</a></li>
+
+                <li class="nav-item wedding-item">
+                    <button class="wedding-button" type="button">
+                        Weddings
+                        <span class="arrow"></span>
+                    </button>
+
+                    <div class="wedding-dropdown">
+                        <img src="https://i.pinimg.com/736x/c3/08/2a/c3082adc6d4155cb01949f67dbfb0788.jpg" alt="Wedding photography preview">
+
+                        <div class="wedding-column">
+                            <a href="hindumarriage.html">Hindu Wedding</a>
+                            <a href="brahminmarriage.html">Brahmin Wedding</a>
+                            <a href="christianmarriage.html">Christian Wedding</a>
+                            <a href="bridepotrait.html">Bride Portrait</a>
+                            <a href="groompotrait.html">Groom Portrait</a>
+                        </div>
+
+                        <div class="wedding-column">
+                            <a href="babyshower.html">Baby Shower</a>
+                            <a href="beautyshoot.html">Beauty Shoot</a>
+                            <a href="coupleshoot.html">Couple Shoot</a>
+                            <a href="birthdayshoot.html">Birthday Shoot</a>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="nav-item"><a href="index.html#about">About</a></li>
+                <li class="nav-item"><a href="index.html#services">Services</a></li>
+                <li class="nav-item"><a href="index.html#gallery-legacy">Portfolio</a></li>
+                <li class="nav-item"><a href="index.html#packages">Packages</a></li>
+                <li class="nav-item"><a href="blog.html">Stories</a></li>
+                <li class="nav-item"><a href="index.html#contact">Contact</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <a class="login-button" href="customer/login.html">Login</a>
+
+                <button class="menu-toggle" id="menuOpen" type="button" aria-label="Open menu" aria-controls="mobileMenu">
+                    <span class="menu-lines"></span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <div class="menu-backdrop" id="menuBackdrop"></div>
+
+    <aside class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation">
+        <div class="mobile-menu-header">
+            <img class="mobile-logo" src="assets/image.png" alt="DLM logo">
+
+            <button class="menu-close" id="menuClose" type="button" aria-label="Close menu">
+                &times;
+            </button>
+        </div>
+
+        <ul class="mobile-links">
+            <li><a href="index.html">Home</a></li>
+
+            <li>
+                <button class="mobile-wedding-button" id="mobileWeddingButton" type="button">
+                    Weddings
+                    <span class="arrow"></span>
+                </button>
+
+                <div class="mobile-wedding-panel" id="mobileWeddingPanel">
+                    <a href="hindumarriage.html">Hindu Wedding</a>
+                    <a href="brahminmarriage.html">Brahmin Wedding</a>
+                    <a href="christianmarriage.html">Christian Wedding</a>
+                    <a href="bridepotrait.html">Bride Portrait</a>
+                    <a href="groompotrait.html">Groom Portrait</a>
+                    <a href="babyshower.html">Baby Shower</a>
+                    <a href="beautyshoot.html">Beauty Shoot</a>
+                    <a href="coupleshoot.html">Couple Shoot</a>
+                    <a href="birthdayshoot.html">Birthday Shoot</a>
+                </div>
+            </li>
+
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#services">Services</a></li>
+            <li><a href="index.html#gallery-legacy">Portfolio</a></li>
+            <li><a href="index.html#packages">Packages</a></li>
+            <li><a href="blog.html">Stories</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+
+        <a class="mobile-login" href="customer/login.html">Customer Login</a>
+    </aside>
+    <main class="hindu-page">
+        <section class="hindu-hero" id="hindu-wedding-hero">
+            <div class="hindu-container hindu-hero-grid">
+                <div class="hindu-copy">
+                    <p class="hindu-label" style="color: #ef2d83;">DLM Hindu Wedding Stories</p>
+                    <h1>Sacred Traditions. <span>Timeless Emotions.</span></h1>
+                    <p>
+                        DLM Photography captures Hindu wedding rituals with grace, emotion, and detail,
+                        preserving the sacred moments, family blessings, vibrant celebrations, and timeless
+                        traditions that make every wedding story unforgettable.
+                    </p>
+                    <div class="hindu-actions">
+                        <a class="hindu-btn primary" href="index.html#gallery">Explore Gallery</a>
+                        <a class="hindu-btn whatsapp" href="https://wa.me/919999999999" target="_blank" rel="noreferrer">Check Availability WhatsApp</a>
+                    </div>
+                </div>
+
+                <div class="hindu-collage" aria-label="Hindu wedding photography collage">
+                    <figure>
+                        <img src="assets/hindumarriageimages/image1.webp" alt="Hindu wedding bride portrait">
+                    </figure>
+                    <figure>
+                        <img src="assets/hindumarriageimages/image2.webp" alt="Hindu wedding ritual moment">
+                    </figure>
+                    <figure>
+                        <img src="assets/hindumarriageimages/image3.webp" alt="Wedding celebration detail">
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+    
+        <section class="hindu-intro" id="hindu-introduction">
+            <div class="hindu-container hindu-intro-grid">
+                <div class="hindu-photo-stack">
+                    <div class="hindu-photo-main">
+                        <img src="assets/hindumarriageimages/image4.webp" alt="Hindu wedding ceremony photography">
+                    </div>
+                    <div class="hindu-photo-small">
+                        <img src="assets/hindumarriageimages/image5.webp" alt="Hindu bride portrait photography">
+                    </div>
+                </div>
+
+                <div class="hindu-intro-copy">
+                    <p class="hindu-section-label" style="color: #ef2d83;">Our Hindu Wedding Approach</p>
+                    <h2>Photographing Rituals With Emotion, Grace & Detail</h2>
+                    <p>
+                        At DLM Photography, every Hindu wedding is treated as a sacred story filled with blessings,
+                        rituals, family emotions, vibrant colors, and once-in-a-lifetime moments.
+                    </p>
+                    <p>
+                        We blend ritual awareness with natural candid coverage, editorial portraits, and cinematic
+                        storytelling so your wedding memories feel elegant, emotional, and deeply personal.
+                    </p>
+
+                    <div class="hindu-feature-grid">
+                        <article class="hindu-feature-card">
+                            <span>1</span>
+                            <strong>Ritual Awareness</strong>
+                        </article>
+                        <article class="hindu-feature-card">
+                            <span>2</span>
+                            <strong>Natural Candid Photography</strong>
+                        </article>
+                        <article class="hindu-feature-card">
+                            <span>3</span>
+                            <strong>Editorial Portraits</strong>
+                        </article>
+                        <article class="hindu-feature-card">
+                            <span>4</span>
+                            <strong>Cinematic Storytelling</strong>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="hindu-rituals" id="hindu-rituals">
+            <div class="hindu-container">
+                <div class="hindu-section-head">
+                    <p class="hindu-section-label" style="color: #ef2d83;">Wedding Rituals</p>
+                    <h2>Every Sacred Moment, Beautifully Preserved</h2>
+                    <p>From joyful pre-wedding traditions to the emotional ceremony and reception, DLM captures each ritual with care and elegance.</p>
+                </div>
+
+                <div class="hindu-ritual-grid">
+                    <article class="hindu-ritual-card">
+                        <img src="https://images.unsplash.com/photo-1610173827002-62c0f1f05d04?auto=format&fit=crop&w=900&q=86" alt="Haldi ceremony photography">
+                        <div class="hindu-ritual-content">
+                            <span class="hindu-ritual-number">01</span>
+                            <h3>Haldi</h3>
+                            <p>Bright, joyful frames filled with turmeric tones, laughter, family blessings, and playful celebration.</p>
+                        </div>
+                    </article>
+
+                    <article class="hindu-ritual-card">
+                        <img src="assets/hindumarriageimages/image6.webp" alt="Mehendi ceremony photography">
+                        <div class="hindu-ritual-content">
+                            <span class="hindu-ritual-number">02</span>
+                            <h3>Mehendi</h3>
+                            <p>Elegant detail shots, candid emotions, and vibrant portraits from the bride's mehendi celebration.</p>
+                        </div>
+                    </article>
+
+                    <article class="hindu-ritual-card">
+                        <img src="assets/hindumarriageimages/image7.webp" alt="Muhurtham ceremony photography">
+                        <div class="hindu-ritual-content">
+                            <span class="hindu-ritual-number">03</span>
+                            <h3>Muhurtham</h3>
+                            <p>The sacred ceremony captured with ritual awareness, emotional timing, and timeless composition.</p>
+                        </div>
+                    </article>
+
+                    <article class="hindu-ritual-card">
+                        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=900&q=86" alt="Wedding reception photography">
+                        <div class="hindu-ritual-content">
+                            <span class="hindu-ritual-number">04</span>
+                            <h3>Reception</h3>
+                            <p>Premium couple portraits, stage moments, guest candids, and celebration highlights after the ceremony.</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="hindu-bridal" id="hindu-bridal-story">
+            <div class="hindu-container hindu-bridal-grid">
+                <div class="hindu-bridal-copy">
+                    <p class="hindu-section-label" style="color: #ef2d83;">Bridal Story</p>
+                    <h2>Elegant Bridal Portraits Before The Sacred Moment</h2>
+                    <p>
+                        The bridal story is where quiet anticipation, delicate details, and emotional family moments
+                        come together before the ceremony begins.
+                    </p>
+                    <ul class="hindu-bridal-list">
+                        <li>Bridal portraits</li>
+                        <li>Saree and jewellery details</li>
+                        <li>Makeup and preparation</li>
+                        <li>Family emotions before the ceremony</li>
+                    </ul>
+                </div>
+
+                <div class="hindu-bridal-images">
+                    <div class="hindu-bridal-main">
+                        <img src="assets/hindumarriageimages/image8.webp" alt="Elegant Hindu bridal portrait">
+                    </div>
+                    <div class="hindu-bridal-detail">
+                        <img src="assets/hindumarriageimages/image9.webp" alt="Bridal jewellery and wedding details">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="hindu-couple" id="hindu-couple-story" >
+            <div class="hindu-container hindu-couple-grid">
+                <div class="hindu-couple-copy">
+                    <p class="hindu-section-label" style="color: #ef2d83;">Couple Story</p>
+                    <h2>Natural Couple Photography With Real Emotion</h2>
+                    <p>
+                        We guide couples with calm direction while preserving natural chemistry, candid laughter,
+                        venue ambience, and elegant frames that feel ready for your wedding album.
+                    </p>
+                    <ul class="hindu-couple-list">
+                        <li>Couple portraits with graceful posing</li>
+                        <li>Natural candids between rituals</li>
+                        <li>Creative use of venue and decor</li>
+                        <li>Album-ready photographs with premium finish</li>
+                    </ul>
+                </div>
+
+                <div class="hindu-couple-images">
+                    <div class="hindu-couple-main">
+                        <img src="assets/hindumarriageimages/image10.webp" alt="Natural Hindu wedding couple portrait">
+                    </div>
+                    <div class="hindu-couple-candid">
+                        <img src="assets/hindumarriageimages/image11.webp" alt="Candid couple wedding moment">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+<style>
+    .hindu-gallery-section {
+        padding: 68px 0 78px;
+        background:
+            radial-gradient(circle at 12% 8%, rgba(239, 45, 131, 0.08), transparent 26%),
+            linear-gradient(180deg, #ffffff 0%, #fff7fb 100%);
+    }
+
+    .hindu-gallery-head {
+        max-width: 720px;
+        margin: 0 auto 34px;
+        text-align: center;
+    }
+
+    .hindu-gallery-head h2 {
+        margin: 0;
+        color: var(--dlm-ink, #241723);
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: clamp(29px, 3.2vw, 40px);
+        font-weight: 600;
+        line-height: 1.1;
+    }
+
+    .hindu-gallery-head p {
+        max-width: 620px;
+        margin: 12px auto 0;
+        color: var(--dlm-muted, #7a6572);
+        font-size: 13.6px;
+        line-height: 1.62;
+    }
+
+    .hindu-gallery-mosaic {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-auto-rows: 140px;
+        gap: 14px;
+        grid-auto-flow: dense;
+    }
+
+    .hindu-gallery-item {
+        position: relative;
+        overflow: hidden;
+        border: 0;
+        border-radius: 18px;
+        background: #fff0f7;
+        box-shadow: 0 18px 38px rgba(143, 28, 82, 0.12);
+        cursor: pointer;
+        isolation: isolate;
+        min-height: 0;
+        transition: box-shadow 0.3s ease;
+    }
+
+    .hindu-gallery-item img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+        transition: transform 0.55s ease, filter 0.35s ease;
+    }
+
+    .hindu-gallery-item::after {
+        content: "View";
+        position: absolute;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        color: #fff;
+        background: linear-gradient(180deg, rgba(42, 29, 37, 0.08), rgba(42, 29, 37, 0.66));
+        font-size: 13px;
+        font-weight: 900;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        opacity: 0;
+        transition: opacity 0.28s ease;
+    }
+
+    .hindu-gallery-item:hover {
+        box-shadow: 0 26px 52px rgba(143, 28, 82, 0.18);
+        z-index: 2;
+    }
+
+    .hindu-gallery-item:hover img {
+        transform: scale(1.08);
+        filter: saturate(1.08);
+    }
+
+    .hindu-gallery-item:hover::after {
+        opacity: 1;
+    }
+
+    /* Desktop grid spans - properly balanced */
+    .hindu-gallery-item:nth-child(1) { 
+        grid-column: span 2; 
+        grid-row: span 3; 
+    }
+    .hindu-gallery-item:nth-child(2) { 
+        grid-column: span 1; 
+        grid-row: span 2; 
+    }
+    .hindu-gallery-item:nth-child(3) { 
+        grid-column: span 1; 
+        grid-row: span 2; 
+    }
+    .hindu-gallery-item:nth-child(4) { 
+        grid-column: span 1; 
+        grid-row: span 1; 
+    }
+    .hindu-gallery-item:nth-child(5) { 
+        grid-column: span 2; 
+        grid-row: span 2; 
+    }
+    .hindu-gallery-item:nth-child(6) { 
+        grid-column: span 1; 
+        grid-row: span 2; 
+    }
+    .hindu-gallery-item:nth-child(7) { 
+        grid-column: span 1; 
+        grid-row: span 2; 
+    }
+    .hindu-gallery-item:nth-child(8) { 
+        grid-column: span 2; 
+        grid-row: span 2; 
+    }
+    .hindu-gallery-item:nth-child(9) { 
+        grid-column: span 1; 
+        grid-row: span 2; 
+    }
+    .hindu-gallery-item:nth-child(10) { 
+        grid-column: span 1; 
+        grid-row: span 1; 
+    }
+    .hindu-gallery-item:nth-child(11) { 
+        grid-column: span 2; 
+        grid-row: span 3; 
+    }
+    .hindu-gallery-item:nth-child(12) { 
+        grid-column: span 1; 
+        grid-row: span 2; 
+    }
+    .hindu-gallery-item:nth-child(13) {
+        grid-column: span 1;
+        grid-row: span 2;
+    }
+
+    /* ===== LIGHTBOX ===== */
+    .hindu-lightbox {
+        position: fixed;
+        inset: 0;
+        z-index: 5000;
+        padding: 24px;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        background: rgba(20, 10, 16, 0.86);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+    }
+
+    .hindu-lightbox.open {
+        display: flex;
+    }
+
+    .hindu-lightbox img {
+        max-width: min(100%, 1180px);
+        max-height: calc(100vh - 74px);
+        object-fit: contain;
+        border-radius: 16px;
+        background: #fff;
+        box-shadow: 0 28px 80px rgba(0, 0, 0, 0.38);
+        animation: lightboxFadeIn 0.3s ease;
+    }
+
+    @keyframes lightboxFadeIn {
+        from {
+            opacity: 0;
+            transform: scale(0.95);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    .hindu-lightbox-close {
+        position: fixed;
+        top: 18px;
+        right: 18px;
+        width: 46px;
+        height: 46px;
+        display: grid;
+        place-items: center;
+        border: 0;
+        border-radius: 50%;
+        color: var(--dlm-pink, #ef2d83);
+        background: #fff;
+        font-size: 30px;
+        line-height: 1;
+        cursor: pointer;
+        box-shadow: 0 16px 34px rgba(0, 0, 0, 0.24);
+        transition: transform 0.25s ease, background 0.25s ease;
+    }
+
+    .hindu-lightbox-close:hover {
+        transform: rotate(90deg);
+        background: var(--dlm-pink, #ef2d83);
+        color: #fff;
+    }
+
+    .hindu-final-cta {
+        padding: 72px 0 84px;
+        background:
+            radial-gradient(circle at 18% 20%, rgba(239, 45, 131, 0.08), transparent 24%),
+            linear-gradient(180deg, #fff7fb 0%, #ffffff 100%);
+    }
+
+    .hindu-final-card {
+        position: relative;
+        min-height: 420px;
+        overflow: hidden;
+        border-radius: 26px;
+        background:
+            linear-gradient(90deg, rgba(42, 29, 37, 0.8) 0%, rgba(42, 29, 37, 0.52) 52%, rgba(42, 29, 37, 0.28) 100%),
+            url("https://images.unsplash.com/photo-1606800052052-a08af7148866?auto=format&fit=crop&w=1600&q=86") center/cover no-repeat;
+        box-shadow: 0 26px 64px rgba(143, 28, 82, 0.18);
+    }
+
+    .hindu-final-card::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, rgba(42, 29, 37, 0.04), rgba(42, 29, 37, 0.52));
+        pointer-events: none;
+    }
+
+    .hindu-final-content {
+        position: relative;
+        z-index: 1;
+        min-height: inherit;
+        padding: 42px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        max-width: 720px;
+        color: #fff;
+    }
+
+    .hindu-final-content h2 {
+        margin: 0;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: clamp(34px, 4vw, 56px);
+        font-weight: 600;
+        line-height: 1.08;
+        letter-spacing: 0;
+    }
+
+    .hindu-final-content p {
+        max-width: 620px;
+        margin: 14px 0 0;
+        color: rgba(255, 255, 255, 0.84);
+        font-size: 15px;
+        line-height: 1.68;
+    }
+
+    .hindu-final-content .hindu-btn {
+        width: fit-content;
+        margin-top: 24px;
+        padding: 0 24px;
+        background: linear-gradient(135deg, var(--dlm-pink), var(--dlm-pink-dark));
+        box-shadow: 0 18px 36px rgba(239, 45, 131, 0.28);
+    }
+
+    /* ============================================
+       TABLET (up to 900px)
+       ============================================ */
+    @media (max-width: 900px) {
+        .hindu-gallery-mosaic {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            grid-auto-rows: 180px;
+            gap: 12px;
+            grid-auto-flow: row;
+        }
+
+        /* Reset all grid spans for tablet */
+        .hindu-gallery-item {
+            grid-column: auto !important;
+            grid-row: auto !important;
+            min-height: 180px;
+            aspect-ratio: 4 / 3;
+        }
+
+        .hindu-final-cta {
+            padding: 56px 0 68px;
+        }
+
+        .hindu-final-card {
+            min-height: 360px;
+            border-radius: 22px;
+        }
+
+        .hindu-final-content {
+            padding: 32px;
+        }
+
+        .hindu-final-content h2 {
+            font-size: clamp(30px, 8vw, 42px);
+        }
+
+        .hindu-final-content p {
+            font-size: 14px;
+        }
+    }
+
+    /* ============================================
+       MOBILE (up to 560px)
+       ============================================ */
+    @media (max-width: 560px) {
+        .hindu-gallery-section {
+            padding: 44px 0 54px;
+        }
+
+        .hindu-gallery-head {
+            margin-bottom: 24px;
+            text-align: left;
+        }
+
+        .hindu-gallery-head .hindu-section-label {
+            margin-left: 0;
+            margin-right: 0;
+        }
+
+        .hindu-gallery-head h2 {
+            font-size: clamp(26px, 7.4vw, 32px);
+            line-height: 1.14;
+        }
+
+        .hindu-gallery-head p {
+            font-size: 12.8px;
+            line-height: 1.54;
+        }
+
+        .hindu-gallery-mosaic {
+            grid-template-columns: 1fr;
+            grid-auto-rows: auto;
+            gap: 12px;
+            grid-auto-flow: row;
+        }
+
+        /* Reset all grid spans for mobile */
+        .hindu-gallery-item {
+            grid-column: auto !important;
+            grid-row: auto !important;
+            aspect-ratio: 4 / 3;
+            border-radius: 14px;
+            box-shadow: 0 14px 28px rgba(143, 28, 82, 0.1);
+            min-height: 180px;
+        }
+
+        .hindu-gallery-item::after {
+            font-size: 11px;
+        }
+
+        .hindu-lightbox {
+            padding: 62px 12px 18px;
+        }
+
+        .hindu-lightbox img {
+            max-height: calc(100svh - 86px);
+            border-radius: 12px;
+        }
+
+        .hindu-lightbox-close {
+            top: 12px;
+            right: 12px;
+            width: 42px;
+            height: 42px;
+            font-size: 26px;
+        }
+
+        .hindu-final-cta {
+            padding: 48px 0 58px;
+        }
+
+        .hindu-final-card {
+            min-height: 330px;
+            border-radius: 20px;
+        }
+
+        .hindu-final-content {
+            padding: 24px;
+            text-align: center;
+            align-items: center;
+        }
+
+        .hindu-final-content h2 {
+            font-size: clamp(28px, 8.6vw, 36px);
+        }
+
+        .hindu-final-content p {
+            font-size: 13px;
+            line-height: 1.58;
+        }
+
+        .hindu-final-content .hindu-btn {
+            width: 100%;
+            justify-content: center;
+        }
+    }
+
+    /* ============================================
+       EXTRA SMALL (up to 400px)
+       ============================================ */
+    @media (max-width: 400px) {
+        .hindu-gallery-mosaic {
+            grid-template-columns: 1fr;
+            gap: 10px;
+            grid-auto-flow: row;
+        }
+        
+        .hindu-gallery-item {
+            min-height: 120px;
+            aspect-ratio: 4 / 3;
+        }
+    }
+</style>
+
+        <section class="hindu-gallery-section" id="hindu-gallery">
+            <div class="hindu-container">
+                <div class="hindu-gallery-head">
+                    <p class="hindu-section-label" style="color: #ef2d83;">Hindu Wedding Gallery</p>
+                    <h2>A Visual Mosaic Of Sacred Wedding Moments</h2>
+                    <p>Browse a rich collection of rituals, bridal portraits, couple frames, decor details, and joyful family moments.</p>
+                </div>
+
+                <div class="hindu-gallery-mosaic" aria-label="Hindu wedding gallery">
+                    <button class="hindu-gallery-item" type="button"><img src="assets/hindumarriageimages/image12.webp" alt="Hindu wedding couple ceremony"></button>
+                    <button class="hindu-gallery-item" type="button"><img src="assets/hindumarriageimages/image13.webp" alt="Bride portrait"></button>
+                    <button class="hindu-gallery-item" type="button"><img src="assets/hindumarriageimages/image14.webp" alt="Wedding ritual ceremony"></button>
+                    <button class="hindu-gallery-item" type="button"><img src="assets/hindumarriageimages/image15.webp" alt="Haldi celebration"></button>
+                    <button class="hindu-gallery-item" type="button"><img src="assets/hindumarriageimages/image16.webp" alt="Mehendi details"></button>
+                    <button class="hindu-gallery-item" type="button"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=86" alt="Wedding reception couple"></button>
+                    <button class="hindu-gallery-item" type="button"><img src="assets/hindumarriageimages/image17.webp" alt="Wedding decor detail"></button>
+                    <button class="hindu-gallery-item" type="button"><img src="assets/hindumarriageimages/image18.webp" alt="Wedding venue lights"></button>
+                    <button class="hindu-gallery-item" type="button"><img src="assets/hindumarriageimages/image19.webp" alt="Wedding banquet decor"></button>
+                    <button class="hindu-gallery-item" type="button"><img src="assets/hindumarriageimages/image19.webp" alt="Wedding rings detail"></button>
+                    <button class="hindu-gallery-item" type="button"><img src="assets/hindumarriageimages/image20.webp" alt="Wedding floral ceremony"></button>
+                    <button class="hindu-gallery-item" type="button"><img src="assets/hindumarriageimages/image21.webp" alt="Wedding bouquet detail"></button>
+                    <button class="hindu-gallery-item" type="button"><img src="assets/hindumarriageimages/image22.webp" alt="Wedding stage and decor detail"></button>
+                </div>
+            </div>
+        </section>
+
+        <section class="hindu-final-cta" id="hindu-final-cta">
+            <div class="hindu-container">
+                <div class="hindu-final-card">
+                    <div class="hindu-final-content">
+ <p class="hindu-section-label" style="color: #ef2d83; background: rgba(255,255,255,0.92); font-size: 9px; letter-spacing: 0.14em; padding: 5px 11px;">Final Booking CTA</p>
+                        <h2 style="font-size: clamp(24px, 5vw, 34px); line-height: 1.08;">Let Us Preserve Every Sacred Moment Beautifully</h2>
+                        <p>
+                            Reach out on WhatsApp to check availability for your Hindu wedding photography and secure a studio that understands the rituals, timing, and emotion of the day.
+                        </p>
+                        <a class="hindu-btn primary" href="https://wa.me/919789029012?text=Hello%2C%20I%20would%20like%20to%20check%20availability%20for%20Hindu%20wedding%20photography." target="_blank" rel="noreferrer">WhatsApp Enquiry</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="hindu-lightbox" id="hinduGalleryLightbox" aria-hidden="true">
+            <button class="hindu-lightbox-close" id="hinduGalleryClose" type="button" aria-label="Close gallery image">&times;</button>
+            <img id="hinduGalleryLightboxImage" src="" alt="">
+        </div>
+
+        <script>
+            (() => {
+                const lightbox = document.getElementById("hinduGalleryLightbox");
+                const lightboxImage = document.getElementById("hinduGalleryLightboxImage");
+                const closeButton = document.getElementById("hinduGalleryClose");
+                const galleryItems = document.querySelectorAll(".hindu-gallery-item img");
+
+                if (!lightbox || !lightboxImage || !closeButton || galleryItems.length === 0) {
+                    return;
+                }
+
+                const closeLightbox = () => {
+                    lightbox.classList.remove("open");
+                    lightbox.setAttribute("aria-hidden", "true");
+                    document.body.style.overflow = "";
+                    lightboxImage.src = "";
+                    lightboxImage.alt = "";
+                };
+
+                galleryItems.forEach(image => {
+                    image.closest(".hindu-gallery-item").addEventListener("click", () => {
+                        lightboxImage.src = image.src.replace("fit=crop", "fit=max");
+                        lightboxImage.alt = image.alt;
+                        lightbox.classList.add("open");
+                        lightbox.setAttribute("aria-hidden", "false");
+                        document.body.style.overflow = "hidden";
+                    });
+                });
+
+                closeButton.addEventListener("click", closeLightbox);
+                lightbox.addEventListener("click", event => {
+                    if (event.target === lightbox) {
+                        closeLightbox();
+                    }
+                });
+                document.addEventListener("keydown", event => {
+                    if (event.key === "Escape" && lightbox.classList.contains("open")) {
+                        closeLightbox();
+                    }
+                });
+            })();
+        </script>
+
+     <style>
+    /* =========================================
+       PREMIUM DLM FOOTER
+    ========================================= */
+
+    .dlm-premium-footer {
+        --footer-pink: #ef2d83;
+        --footer-pink-dark: #bd145f;
+        --footer-blush: #fff0f7;
+        --footer-gold: #d4aa68;
+        --footer-plum: #24151f;
+        --footer-plum-light: #34202d;
+        --footer-text: #fdf8fb;
+        --footer-muted: rgba(255, 255, 255, 0.67);
+        --footer-border: rgba(255, 255, 255, 0.1);
+
+        position: relative;
+        width: 100%;
+        margin-top: 110px;
+        overflow: visible;
+        color: var(--footer-text);
+
+        background:
+            radial-gradient(
+                circle at 12% 20%,
+                rgba(239, 45, 131, 0.18),
+                transparent 34%
+            ),
+            radial-gradient(
+                circle at 90% 90%,
+                rgba(212, 170, 104, 0.13),
+                transparent 30%
+            ),
+            linear-gradient(
+                145deg,
+                #2d1926 0%,
+                #1d1219 48%,
+                #150d13 100%
+            );
+    }
+
+    .dlm-premium-footer * {
+        box-sizing: border-box;
+    }
+
+    .dlm-footer-container {
+        position: relative;
+        z-index: 2;
+        width: min(100%, 1220px);
+        margin: 0 auto;
+        padding: 0 28px;
+    }
+
+    /* =========================================
+       FLOATING CTA
+    ========================================= */
+
+    .dlm-footer-cta {
+        position: relative;
+        top: -72px;
+
+        min-height: 185px;
+        padding: 34px 40px;
+
+        display: grid;
+        grid-template-columns: minmax(0, 1.25fr) auto;
+        align-items: center;
+        gap: 36px;
+
+        overflow: hidden;
+
+        border: 1px solid rgba(239, 45, 131, 0.16);
+        border-radius: 30px;
+
+        color: #2a1d25;
+
+        background:
+            radial-gradient(
+                circle at 90% 10%,
+                rgba(239, 45, 131, 0.16),
+                transparent 35%
+            ),
+            linear-gradient(
+                135deg,
+                rgba(255, 255, 255, 0.98),
+                rgba(255, 239, 247, 0.97)
+            );
+
+        box-shadow:
+            0 30px 80px rgba(8, 4, 7, 0.28),
+            inset 0 1px 0 rgba(255, 255, 255, 0.95);
+    }
+
+    .dlm-footer-cta::before {
+        content: "";
+        position: absolute;
+        top: -85px;
+        right: 13%;
+
+        width: 210px;
+        height: 210px;
+
+        border: 1px solid rgba(239, 45, 131, 0.12);
+        border-radius: 50%;
+    }
+
+    .dlm-footer-cta::after {
+        content: "";
+        position: absolute;
+        right: 5%;
+        bottom: -135px;
+
+        width: 250px;
+        height: 250px;
+
+        border-radius: 50%;
+
+        background: rgba(212, 170, 104, 0.1);
+    }
+
+    .dlm-footer-cta-content {
+        position: relative;
+        z-index: 2;
+    }
+
+    .dlm-footer-cta-label {
+        width: fit-content;
+        margin: 0 0 12px;
+        padding: 7px 14px;
+
+        border: 1px solid rgba(239, 45, 131, 0.18);
+        border-radius: 999px;
+
+        color: var(--footer-pink);
+        background: rgba(255, 255, 255, 0.8);
+
+        font-size: 9px;
+        font-weight: 850;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+    }
+
+    .dlm-footer-cta h2 {
+        max-width: 720px;
+        margin: 0;
+
+        color: #281a23;
+
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: clamp(31px, 3.5vw, 50px);
+        font-weight: 500;
+        line-height: 1.05;
+        letter-spacing: -1.3px;
+    }
+
+    .dlm-footer-cta p:not(.dlm-footer-cta-label) {
+        max-width: 650px;
+        margin: 14px 0 0;
+
+        color: #7b6570;
+
+        font-size: 13px;
+        line-height: 1.7;
+    }
+
+    .dlm-footer-cta-actions {
+        position: relative;
+        z-index: 3;
+
+        display: flex;
+        flex-direction: column;
+        gap: 11px;
+    }
+
+    .dlm-footer-primary-button,
+    .dlm-footer-secondary-button {
+        min-width: 190px;
+        min-height: 50px;
+        padding: 0 22px;
+
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 9px;
+
+        border-radius: 999px;
+
+        font-size: 12px;
+        font-weight: 850;
+        text-decoration: none;
+
+        transition:
+            transform 0.25s ease,
+            box-shadow 0.25s ease,
+            background 0.25s ease;
+    }
+
+    .dlm-footer-primary-button {
+        color: #ffffff;
+
+        background:
+            linear-gradient(
+                135deg,
+                var(--footer-pink),
+                var(--footer-pink-dark)
+            );
+
+        box-shadow:
+            0 14px 30px rgba(239, 45, 131, 0.25);
+    }
+
+    .dlm-footer-secondary-button {
+        border: 1px solid rgba(42, 29, 37, 0.12);
+
+        color: #3b2933;
+        background: rgba(255, 255, 255, 0.78);
+    }
+
+    .dlm-footer-primary-button:hover,
+    .dlm-footer-secondary-button:hover {
+        transform: translateY(-3px);
+    }
+
+    .dlm-footer-primary-button:hover {
+        box-shadow:
+            0 20px 38px rgba(239, 45, 131, 0.33);
+    }
+
+    .dlm-footer-secondary-button:hover {
+        background: #ffffff;
+        box-shadow:
+            0 14px 28px rgba(46, 27, 38, 0.1);
+    }
+
+    /* =========================================
+       PHOTO STRIP
+    ========================================= */
+
+    .dlm-footer-photo-strip {
+        margin-top: -36px;
+        margin-bottom: 48px;
+
+        display: grid;
+        grid-template-columns: 1.35fr 0.8fr 1fr 0.8fr;
+        gap: 12px;
+    }
+
+    .dlm-footer-photo {
+        position: relative;
+        height: 145px;
+        overflow: hidden;
+
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 20px;
+
+        background: #31202a;
+    }
+
+    .dlm-footer-photo:nth-child(2),
+    .dlm-footer-photo:nth-child(4) {
+        transform: translateY(16px);
+    }
+
+    .dlm-footer-photo img {
+        width: 100%;
+        height: 100%;
+        display: block;
+
+        object-fit: cover;
+
+        filter:
+            brightness(0.82)
+            saturate(0.88);
+
+        transition:
+            transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+            filter 0.4s ease;
+    }
+
+    .dlm-footer-photo::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+
+        background:
+            linear-gradient(
+                to top,
+                rgba(24, 12, 19, 0.45),
+                transparent 58%
+            );
+
+        pointer-events: none;
+    }
+
+    .dlm-footer-photo:hover img {
+        transform: scale(1.08);
+        filter:
+            brightness(0.98)
+            saturate(1.05);
+    }
+
+    /* =========================================
+       FOOTER CONTENT
+    ========================================= */
+
+    .dlm-footer-main {
+        padding: 34px 0 52px;
+    }
+
+    .dlm-footer-grid {
+        display: grid;
+        grid-template-columns:
+            minmax(0, 1.45fr)
+            minmax(0, 0.7fr)
+            minmax(0, 0.85fr)
+            minmax(0, 1.15fr);
+
+        gap: 45px;
+    }
+
+    /* Brand */
+
+    .dlm-footer-brand {
+        max-width: 360px;
+    }
+
+    .dlm-footer-logo-row {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+    }
+
+    .dlm-footer-logo {
+        width: 72px;
+        height: 72px;
+        display: block;
+
+        border: 2px solid rgba(255, 255, 255, 0.12);
+        border-radius: 50%;
+
+        object-fit: contain;
+
+        box-shadow:
+            0 15px 32px rgba(0, 0, 0, 0.24);
+    }
+
+    .dlm-footer-brand-name strong {
+        display: block;
+
+        color: #ffffff;
+
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 20px;
+        font-weight: 500;
+    }
+
+    .dlm-footer-brand-name span {
+        display: block;
+        margin-top: 4px;
+
+        color: var(--footer-pink);
+
+        font-size: 9px;
+        font-weight: 800;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+    }
+
+    .dlm-footer-brand-description {
+        margin: 19px 0 0;
+
+        color: var(--footer-muted);
+
+        font-size: 12px;
+        line-height: 1.8;
+    }
+
+    /* Social */
+
+    .dlm-footer-socials {
+        margin-top: 22px;
+
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .dlm-footer-social {
+        position: relative;
+
+        width: 43px;
+        height: 43px;
+
+        display: grid;
+        place-items: center;
+
+        overflow: hidden;
+
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 14px;
+
+        color: #ffffff;
+        background: rgba(255, 255, 255, 0.06);
+
+        text-decoration: none;
+
+        transition:
+            transform 0.3s ease,
+            border-color 0.3s ease,
+            background 0.3s ease,
+            box-shadow 0.3s ease;
+    }
+
+    .dlm-footer-social::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+
+        opacity: 0;
+
+        background:
+            linear-gradient(
+                135deg,
+                var(--footer-pink),
+                var(--footer-pink-dark)
+            );
+
+        transition: opacity 0.3s ease;
+    }
+
+    .dlm-footer-social:hover {
+        border-color: transparent;
+
+        transform:
+            translateY(-5px)
+            rotate(-3deg);
+
+        box-shadow:
+            0 15px 28px rgba(239, 45, 131, 0.2);
+    }
+
+    .dlm-footer-social:hover::before {
+        opacity: 1;
+    }
+
+    .dlm-footer-social svg {
+        position: relative;
+        z-index: 2;
+
+        width: 18px;
+        height: 18px;
+
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 1.8;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+    }
+
+    /* Columns */
+
+    .dlm-footer-column h3 {
+        position: relative;
+        margin: 0 0 22px;
+        padding-bottom: 12px;
+
+        color: #ffffff;
+
+        font-size: 12px;
+        font-weight: 850;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+    }
+
+    .dlm-footer-column h3::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+
+        width: 34px;
+        height: 2px;
+
+        border-radius: 999px;
+
+        background:
+            linear-gradient(
+                90deg,
+                var(--footer-pink),
+                var(--footer-gold)
+            );
+    }
+
+    .dlm-footer-links {
+        margin: 0;
+        padding: 0;
+
+        display: grid;
+        gap: 13px;
+
+        list-style: none;
+    }
+
+    .dlm-footer-links a {
+        width: fit-content;
+
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+
+        color: var(--footer-muted);
+
+        font-size: 12px;
+        text-decoration: none;
+
+        transition:
+            color 0.25s ease,
+            transform 0.25s ease;
+    }
+
+    .dlm-footer-links a::before {
+        content: "";
+
+        width: 5px;
+        height: 5px;
+
+        border-radius: 50%;
+
+        background: var(--footer-pink);
+        opacity: 0.6;
+    }
+
+    .dlm-footer-links a:hover {
+        color: #ffffff;
+        transform: translateX(5px);
+    }
+
+    /* Contact cards */
+
+    .dlm-footer-contact-list {
+        display: grid;
+        gap: 11px;
+    }
+
+    .dlm-footer-contact {
+        padding: 11px;
+
+        display: grid;
+        grid-template-columns: 39px minmax(0, 1fr);
+        align-items: center;
+        gap: 11px;
+
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 15px;
+
+        color: inherit;
+        background: rgba(255, 255, 255, 0.045);
+
+        text-decoration: none;
+
+        transition:
+            transform 0.25s ease,
+            border-color 0.25s ease,
+            background 0.25s ease;
+    }
+
+    .dlm-footer-contact:hover {
+        border-color: rgba(239, 45, 131, 0.3);
+        background: rgba(255, 255, 255, 0.08);
+
+        transform: translateX(4px);
+    }
+
+    .dlm-footer-contact-icon {
+        width: 39px;
+        height: 39px;
+
+        display: grid;
+        place-items: center;
+
+        border-radius: 12px;
+
+        color: var(--footer-pink);
+        background: rgba(239, 45, 131, 0.12);
+    }
+
+    .dlm-footer-contact-icon svg {
+        width: 17px;
+        height: 17px;
+
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 1.8;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+    }
+
+    .dlm-footer-contact-text span {
+        display: block;
+        margin-bottom: 3px;
+
+        color: rgba(255, 255, 255, 0.45);
+
+        font-size: 8px;
+        font-weight: 800;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+    }
+
+    .dlm-footer-contact-text strong {
+        display: block;
+
+        color: rgba(255, 255, 255, 0.82);
+
+        font-size: 11px;
+        font-weight: 600;
+        line-height: 1.45;
+    }
+
+    /* =========================================
+       BOTTOM BAR
+    ========================================= */
+
+    .dlm-footer-bottom {
+        border-top: 1px solid var(--footer-border);
+    }
+
+    .dlm-footer-bottom-inner {
+        min-height: 74px;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+    }
+
+    .dlm-footer-copyright {
+        margin: 0;
+
+        color: rgba(255, 255, 255, 0.48);
+
+        font-size: 10px;
+        line-height: 1.6;
+    }
+
+    .dlm-footer-legal {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 18px;
+    }
+
+    .dlm-footer-legal a {
+        color: rgba(255, 255, 255, 0.48);
+
+        font-size: 10px;
+        text-decoration: none;
+
+        transition: color 0.25s ease;
+    }
+
+    .dlm-footer-legal a:hover {
+        color: var(--footer-pink);
+    }
+
+    /* Back to top */
+
+    .dlm-footer-top {
+        position: fixed;
+        right: 20px;
+        bottom: 20px;
+        z-index: 950;
+
+        width: 47px;
+        height: 47px;
+
+        display: grid;
+        place-items: center;
+
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 16px;
+
+        color: #ffffff;
+
+        background:
+            linear-gradient(
+                135deg,
+                var(--footer-pink),
+                var(--footer-pink-dark)
+            );
+
+        box-shadow:
+            0 15px 32px rgba(239, 45, 131, 0.28);
+
+        cursor: pointer;
+
+        visibility: hidden;
+        opacity: 0;
+
+        transform:
+            translateY(14px)
+            rotate(8deg);
+
+        transition:
+            opacity 0.3s ease,
+            visibility 0.3s ease,
+            transform 0.3s ease;
+    }
+
+    .dlm-footer-top.is-visible {
+        visibility: visible;
+        opacity: 1;
+        transform:
+            translateY(0)
+            rotate(0);
+    }
+
+    .dlm-footer-top span {
+        width: 10px;
+        height: 10px;
+
+        border-top: 2px solid currentColor;
+        border-left: 2px solid currentColor;
+
+        transform:
+            translateY(3px)
+            rotate(45deg);
+    }
+
+    /* =========================================
+       RESPONSIVE
+    ========================================= */
+
+    @media (max-width: 980px) {
+        .dlm-footer-grid {
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+        }
+
+        .dlm-footer-photo-strip {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .dlm-footer-photo:nth-child(2),
+        .dlm-footer-photo:nth-child(4) {
+            transform: none;
+        }
+    }
+
+    @media (max-width: 760px) {
+        .dlm-premium-footer {
+            margin-top: 90px;
+        }
+
+        .dlm-footer-cta {
+            top: -58px;
+
+            grid-template-columns: 1fr;
+            gap: 25px;
+
+            padding: 29px 25px;
+        }
+
+        .dlm-footer-cta-actions {
+            width: 100%;
+            flex-direction: row;
+        }
+
+        .dlm-footer-primary-button,
+        .dlm-footer-secondary-button {
+            flex: 1;
+            min-width: 0;
+        }
+    }
+
+    @media (max-width: 560px) {
+        .dlm-footer-container {
+            padding: 0 14px;
+        }
+
+        .dlm-footer-cta {
+            top: -48px;
+            padding: 25px 18px;
+            border-radius: 23px;
+        }
+
+        .dlm-footer-cta h2 {
+            font-size: 31px;
+        }
+
+        .dlm-footer-cta-actions {
+            flex-direction: column;
+        }
+
+        .dlm-footer-primary-button,
+        .dlm-footer-secondary-button {
+            width: 100%;
+        }
+
+        .dlm-footer-photo-strip {
+            margin-top: -20px;
+
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+        }
+
+        .dlm-footer-photo {
+            height: 112px;
+            border-radius: 15px;
+        }
+
+        .dlm-footer-main {
+            padding-top: 20px;
+        }
+
+        .dlm-footer-grid {
+            grid-template-columns: 1fr;
+            gap: 35px;
+        }
+
+        .dlm-footer-brand {
+            max-width: 100%;
+        }
+
+        .dlm-footer-bottom-inner {
+            padding: 18px 0;
+
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .dlm-footer-top {
+            right: 13px;
+            bottom: 13px;
+
+            width: 44px;
+            height: 44px;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .dlm-footer-photo img,
+        .dlm-footer-primary-button,
+        .dlm-footer-secondary-button,
+        .dlm-footer-social,
+        .dlm-footer-links a,
+        .dlm-footer-contact,
+        .dlm-footer-top {
+            transition: none;
+        }
+    }
+</style>
+
+<footer class="dlm-premium-footer">
+
+    <div class="dlm-footer-container">
+
+        <!-- Floating CTA -->
+
+        <div class="dlm-footer-cta">
+
+            <div class="dlm-footer-cta-content">
+
+                <p class="dlm-footer-cta-label">
+                    Let’s Create Something Timeless
+                </p>
+
+                <h2>
+                    Your story deserves more than ordinary photographs.
+                </h2>
+
+                <p>
+                    Connect with DLM Photography to plan your wedding,
+                    celebration, portrait session or cinematic event coverage.
+                </p>
+
+            </div>
+
+            <div class="dlm-footer-cta-actions">
+
+                <a
+                    class="dlm-footer-primary-button"
+                    href="#contact"
+                >
+                    Book Your Shoot
+                </a>
+
+                <a
+                    class="dlm-footer-secondary-button"
+                    href="https://wa.me/919789029012"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Chat on WhatsApp
+                </a>
+
+            </div>
+
+        </div>
+
+        <!-- Photo strip -->
+
+        <div class="dlm-footer-photo-strip">
+
+            <div class="dlm-footer-photo">
+                <img
+                    src="https://picsum.photos/seed/dlm-footer-1/700/450"
+                    alt="Wedding photography"
+                    loading="lazy"
+                >
+            </div>
+
+            <div class="dlm-footer-photo">
+                <img
+                    src="https://picsum.photos/seed/dlm-footer-2/500/450"
+                    alt="Couple photography"
+                    loading="lazy"
+                >
+            </div>
+
+            <div class="dlm-footer-photo">
+                <img
+                    src="https://picsum.photos/seed/dlm-footer-3/650/450"
+                    alt="Event photography"
+                    loading="lazy"
+                >
+            </div>
+
+            <div class="dlm-footer-photo">
+                <img
+                    src="https://picsum.photos/seed/dlm-footer-4/500/450"
+                    alt="Portrait photography"
+                    loading="lazy"
+                >
+            </div>
+
+        </div>
+
+        <!-- Main footer -->
+
+        <div class="dlm-footer-main">
+
+            <div class="dlm-footer-grid">
+
+                <!-- Brand -->
+
+                <div class="dlm-footer-brand">
+
+                    <div class="dlm-footer-logo-row">
+
+                        <img
+                            class="dlm-footer-logo"
+                            src="assets/image.png"
+                            alt="DLM Photography logo"
+                        >
+
+                        <div class="dlm-footer-brand-name">
+                            <strong>DLM Photography</strong>
+                            <span>Dream Light Media</span>
+                        </div>
+
+                    </div>
+
+                    <p class="dlm-footer-brand-description">
+                        Capturing weddings, portraits, celebrations and
+                        meaningful stories through elegant photography
+                        and cinematic visual experiences.
+                    </p>
+
+                    <div class="dlm-footer-socials">
+
+                        <a
+                            class="dlm-footer-social"
+                            href="https://www.instagram.com/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="Instagram"
+                        >
+                            <svg viewBox="0 0 24 24">
+                                <rect x="3" y="3" width="18" height="18" rx="5"></rect>
+                                <circle cx="12" cy="12" r="4"></circle>
+                                <circle cx="17.5" cy="6.5" r="1"></circle>
+                            </svg>
+                        </a>
+
+                        <a
+                            class="dlm-footer-social"
+                            href="https://www.facebook.com/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="Facebook"
+                        >
+                            <svg viewBox="0 0 24 24">
+                                <path d="M14 8h3V4h-3c-3 0-5 2-5 5v3H6v4h3v6h4v-6h3l1-4h-4V9c0-.7.3-1 1-1z"></path>
+                            </svg>
+                        </a>
+
+                        <a
+                            class="dlm-footer-social"
+                            href="https://www.youtube.com/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="YouTube"
+                        >
+                            <svg viewBox="0 0 24 24">
+                                <path d="M22 12s0-4-1-6c-.6-1-1.5-1.3-2.5-1.5C16.5 4 12 4 12 4s-4.5 0-6.5.5C4.5 4.7 3.6 5 3 6c-1 2-1 6-1 6s0 4 1 6c.6 1 1.5 1.3 2.5 1.5C7.5 20 12 20 12 20s4.5 0 6.5-.5c1-.2 1.9-.5 2.5-1.5 1-2 1-6 1-6z"></path>
+                                <path d="m10 9 5 3-5 3z"></path>
+                            </svg>
+                        </a>
+
+                        <a
+                            class="dlm-footer-social"
+                            href="https://wa.me/919789029012"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="WhatsApp"
+                        >
+                            <svg viewBox="0 0 24 24">
+                                <path d="M21 11.5a8.4 8.4 0 0 1-9 8.5 8.8 8.8 0 0 1-3.8-.9L3 21l1.8-5A8.7 8.7 0 1 1 21 11.5z"></path>
+                                <path d="M8.5 8.5c.5 3 2.5 5 5.5 6"></path>
+                            </svg>
+                        </a>
+
+                    </div>
+
+                </div>
+
+                <!-- Quick Links -->
+
+                <div class="dlm-footer-column">
+
+                    <h3>Explore</h3>
+
+                    <ul class="dlm-footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#gallery">Gallery</a></li>
+                        <li><a href="#packages">Packages</a></li>
+                        <li><a href="#instagram">Instagram</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+
+                </div>
+
+                <!-- Services -->
+
+                <div class="dlm-footer-column">
+
+                    <h3>Photography</h3>
+
+                    <ul class="dlm-footer-links">
+                        <li><a href="#packages">Weddings</a></li>
+                        <li><a href="#packages">Birthdays</a></li>
+                        <li><a href="#packages">Baby Shoots</a></li>
+                        <li><a href="#packages">Maternity</a></li>
+                        <li><a href="#packages">Couple Shoots</a></li>
+                        <li><a href="#packages">Cinematic Films</a></li>
+                    </ul>
+
+                </div>
+
+                <!-- Contact -->
+
+                <div class="dlm-footer-column">
+
+                    <h3>Contact Studio</h3>
+
+                    <div class="dlm-footer-contact-list">
+
+                        <a
+                            class="dlm-footer-contact"
+                            href="tel:+919789029012"
+                        >
+                            <div class="dlm-footer-contact-icon">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72"></path>
+                                </svg>
+                            </div>
+
+                            <div class="dlm-footer-contact-text">
+                                <span>Call</span>
+                                <strong>+91 97890 29012</strong>
+                            </div>
+                        </a>
+
+                        <a
+                            class="dlm-footer-contact"
+                            href="https://wa.me/919789029012"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            <div class="dlm-footer-contact-icon">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M21 11.5a8.4 8.4 0 0 1-9 8.5 8.8 8.8 0 0 1-3.8-.9L3 21l1.8-5A8.7 8.7 0 1 1 21 11.5z"></path>
+                                </svg>
+                            </div>
+
+                            <div class="dlm-footer-contact-text">
+                                <span>WhatsApp</span>
+                                <strong>Send a quick enquiry</strong>
+                            </div>
+                        </a>
+
+                        <a
+                            class="dlm-footer-contact"
+                            href="https://www.google.com/maps/place/DLM+Photography+-+DREAM+LIGHT+MEDIA/@13.0859999,80.2081111,17z"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            <div class="dlm-footer-contact-icon">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0z"></path>
+                                    <circle cx="12" cy="10" r="2.5"></circle>
+                                </svg>
+                            </div>
+
+                            <div class="dlm-footer-contact-text">
+                                <span>Location</span>
+                                <strong>
+                                    DLM Photography, Chennai
+                                </strong>
+                            </div>
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Bottom -->
+
+        <div class="dlm-footer-bottom">
+
+            <div class="dlm-footer-bottom-inner">
+
+                <p class="dlm-footer-copyright">
+                    © <span id="dlmFooterYear"></span>
+                    DLM Photography – Dream Light Media.
+                    All rights reserved.
+                </p>
+
+                <div class="dlm-footer-legal">
+                    <a href="#privacy">Privacy Policy</a>
+                    <a href="#terms">Terms & Conditions</a>
+                    <a href="#refund">Refund Policy</a>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <button
+        class="dlm-footer-top"
+        id="dlmFooterTop"
+        type="button"
+        aria-label="Back to top"
+    >
+        <span></span>
+    </button>
+
+</footer>
+
+<script>
+    (() => {
+        const year = document.getElementById("dlmFooterYear");
+        const topButton = document.getElementById("dlmFooterTop");
+
+        if (year) {
+            year.textContent = new Date().getFullYear();
+        }
+
+        if (!topButton) {
+            return;
+        }
+
+        const updateTopButton = () => {
+            topButton.classList.toggle(
+                "is-visible",
+                window.scrollY > 550
+            );
+        };
+
+        topButton.addEventListener("click", () => {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        });
+
+        window.addEventListener(
+            "scroll",
+            updateTopButton,
+            { passive: true }
+        );
+
+        updateTopButton();
+    })();
+</script>
+         
+    </main>
+     <script>
+        (() => {
+            const navbar = document.getElementById("siteNavbar");
+            const menu = document.getElementById("mobileMenu");
+            const backdrop = document.getElementById("menuBackdrop");
+            const openButton = document.getElementById("menuOpen");
+            const closeButton = document.getElementById("menuClose");
+            const weddingButton = document.getElementById("mobileWeddingButton");
+            const weddingPanel = document.getElementById("mobileWeddingPanel");
+
+            const openMenu = () => {
+                menu.classList.add("open");
+                backdrop.classList.add("open");
+                document.body.classList.add("menu-open");
+                openButton.setAttribute("aria-expanded", "true");
+            };
+
+            const closeMenu = () => {
+                menu.classList.remove("open");
+                backdrop.classList.remove("open");
+                document.body.classList.remove("menu-open");
+                openButton.setAttribute("aria-expanded", "false");
+            };
+
+            openButton.addEventListener("click", openMenu);
+            closeButton.addEventListener("click", closeMenu);
+            backdrop.addEventListener("click", closeMenu);
+
+            weddingButton.addEventListener("click", () => {
+                weddingPanel.classList.toggle("open");
+            });
+
+            menu.querySelectorAll("a").forEach(link => {
+                link.addEventListener("click", closeMenu);
+            });
+
+            window.addEventListener("scroll", () => {
+                navbar.classList.toggle("is-sticky", window.scrollY > 20);
+            });
+
+            document.addEventListener("keydown", event => {
+                if (event.key === "Escape") closeMenu();
+            });
+
+            window.addEventListener("resize", () => {
+                if (window.innerWidth > 900) closeMenu();
+            });
+        })();
+
+        (() => {
+            const slider = document.getElementById("home");
+            const track = document.getElementById("sliderTrack");
+            const previousButton = document.getElementById("sliderPrev");
+            const nextButton = document.getElementById("sliderNext");
+            const dotsContainer = document.getElementById("sliderDots");
+            const progressBar = document.getElementById("sliderProgress");
+
+            if (!slider || !track || !previousButton || !nextButton || !dotsContainer || !progressBar) {
+                return;
+            }
+
+            const originalSlides = Array.from(track.querySelectorAll(".hero-slide"));
+            const slideDuration = 4000;
+            const swipeThreshold = 45;
+
+            if (originalSlides.length === 0) {
+                return;
+            }
+
+            const firstClone = originalSlides[0].cloneNode(true);
+            const lastClone = originalSlides[originalSlides.length - 1].cloneNode(true);
+
+            firstClone.classList.remove("is-active");
+            lastClone.classList.remove("is-active");
+            firstClone.setAttribute("aria-hidden", "true");
+            lastClone.setAttribute("aria-hidden", "true");
+
+            track.appendChild(firstClone);
+            track.insertBefore(lastClone, originalSlides[0]);
+
+            const slides = Array.from(track.querySelectorAll(".hero-slide"));
+
+            let currentIndex = 1;
+            let autoPlayTimer = null;
+            let touchStartX = 0;
+            let touchEndX = 0;
+            let isSliding = false;
+            let slideFallbackTimer = null;
+
+            const getRealIndex = () => {
+                if (currentIndex === 0) {
+                    return originalSlides.length - 1;
+                }
+
+                if (currentIndex === originalSlides.length + 1) {
+                    return 0;
+                }
+
+                return currentIndex - 1;
+            };
+
+            const dots = originalSlides.map((_, index) => {
+                const dot = document.createElement("button");
+                dot.className = "slider-dot";
+                dot.type = "button";
+                dot.setAttribute("aria-label", `Show image ${index + 1}`);
+                dot.addEventListener("click", () => {
+                    showSlide(index);
+                    restartAutoPlay();
+                });
+                dotsContainer.appendChild(dot);
+                return dot;
+            });
+
+            const restartProgress = () => {
+                progressBar.classList.remove("is-running");
+                void progressBar.offsetWidth;
+                progressBar.classList.add("is-running");
+            };
+
+            const completeSlideTransition = () => {
+                window.clearTimeout(slideFallbackTimer);
+                slideFallbackTimer = null;
+                isSliding = false;
+
+                if (currentIndex === 0) {
+                    currentIndex = originalSlides.length;
+                    setTrackPosition(false);
+                    updateSliderState(false);
+                }
+
+                if (currentIndex === originalSlides.length + 1) {
+                    currentIndex = 1;
+                    setTrackPosition(false);
+                    updateSliderState(false);
+                }
+            };
+
+            const setTrackPosition = shouldAnimate => {
+                if (shouldAnimate) {
+                    isSliding = true;
+                    window.clearTimeout(slideFallbackTimer);
+                    slideFallbackTimer = window.setTimeout(completeSlideTransition, 950);
+                }
+
+                track.style.transition = shouldAnimate ? "" : "none";
+                track.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+                if (!shouldAnimate) {
+                    isSliding = false;
+
+                    requestAnimationFrame(() => {
+                        track.style.transition = "";
+                    });
+                }
+            };
+
+            const updateSliderState = shouldRestartProgress => {
+                const realIndex = getRealIndex();
+
+                slides.forEach((slide, slideIndex) => {
+                    slide.classList.toggle("is-active", slideIndex === currentIndex);
+                });
+
+                dots.forEach((dot, dotIndex) => {
+                    const isActive = dotIndex === realIndex;
+                    dot.classList.toggle("is-active", isActive);
+                    dot.setAttribute("aria-current", isActive ? "true" : "false");
+                });
+
+                if (shouldRestartProgress) {
+                    restartProgress();
+                }
+            };
+
+            const showSlide = index => {
+                if (isSliding) {
+                    return;
+                }
+
+                currentIndex = index + 1;
+                setTrackPosition(true);
+                updateSliderState(true);
+            };
+
+            const showNextSlide = () => {
+                if (isSliding) {
+                    return;
+                }
+
+                currentIndex += 1;
+                setTrackPosition(true);
+                updateSliderState(true);
+            };
+
+            const showPreviousSlide = () => {
+                if (isSliding) {
+                    return;
+                }
+
+                currentIndex -= 1;
+                setTrackPosition(true);
+                updateSliderState(true);
+            };
+
+            const stopAutoPlay = () => {
+                window.clearInterval(autoPlayTimer);
+                autoPlayTimer = null;
+                progressBar.classList.remove("is-running");
+            };
+
+            const startAutoPlay = () => {
+                stopAutoPlay();
+                autoPlayTimer = window.setInterval(showNextSlide, slideDuration);
+                restartProgress();
+            };
+
+            const restartAutoPlay = () => {
+                stopAutoPlay();
+                startAutoPlay();
+            };
+
+            nextButton.addEventListener("click", () => {
+                showNextSlide();
+                restartAutoPlay();
+            });
+
+            previousButton.addEventListener("click", () => {
+                showPreviousSlide();
+                restartAutoPlay();
+            });
+
+            track.addEventListener("transitionend", event => {
+                if (event.target !== track || event.propertyName !== "transform") {
+                    return;
+                }
+
+                completeSlideTransition();
+            });
+
+            slider.addEventListener("mouseenter", stopAutoPlay);
+            slider.addEventListener("mouseleave", startAutoPlay);
+            slider.addEventListener("focusin", stopAutoPlay);
+            slider.addEventListener("focusout", event => {
+                if (!slider.contains(event.relatedTarget)) startAutoPlay();
+            });
+
+            slider.addEventListener("touchstart", event => {
+                touchStartX = event.changedTouches[0].clientX;
+                stopAutoPlay();
+            }, { passive: true });
+
+            slider.addEventListener("touchend", event => {
+                touchEndX = event.changedTouches[0].clientX;
+                const swipeDistance = touchStartX - touchEndX;
+
+                if (Math.abs(swipeDistance) > swipeThreshold) {
+                    if (swipeDistance > 0) {
+                        showNextSlide();
+                    } else {
+                        showPreviousSlide();
+                    }
+                }
+
+                startAutoPlay();
+            }, { passive: true });
+
+            document.addEventListener("visibilitychange", () => {
+                if (document.hidden) {
+                    stopAutoPlay();
+                } else {
+                    startAutoPlay();
+                }
+            });
+
+            setTrackPosition(false);
+            updateSliderState(true);
+            startAutoPlay();
+        })();
+    </script>
+
+</body>
+</html>
