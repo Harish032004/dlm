@@ -38,6 +38,15 @@
             background: #fff8fb;
         }
 
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: Georgia, "Times New Roman", serif !important;
+        }
+
         body.menu-open {
             overflow: hidden;
         }
@@ -400,7 +409,7 @@
             min-height: 100vh;
             min-height: 100svh;
             overflow: hidden;
-            background: #1c1218;
+            background: #fff;
             isolation: isolate;
             touch-action: pan-y;
         }
@@ -411,7 +420,7 @@
             display: flex;
             transform: translateX(0);
             transition: transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
-            will-change: transform;
+            will-change: auto;
         }
 
         .hero-slide {
@@ -426,37 +435,30 @@
             position: absolute;
             inset: 0;
             z-index: 1;
-            background:
-                linear-gradient(90deg, rgba(22, 10, 16, 0.72) 0%, rgba(22, 10, 16, 0.28) 43%, rgba(22, 10, 16, 0.12) 100%),
-                linear-gradient(0deg, rgba(22, 10, 16, 0.34) 0%, transparent 38%);
+            background: transparent;
             pointer-events: none;
         }
 
         .hero-slide img {
             width: 100%;
             height: 100%;
-            min-height: inherit;
+            min-height: 100%;
             display: block;
             object-fit: cover;
             object-position: center;
-            transform: scale(1.055);
-            transition: transform 4.5s ease;
+            image-rendering: auto;
+            transition: none;
             user-select: none;
             pointer-events: none;
             -webkit-user-drag: none;
         }
 
         .hero-slide.is-active img {
-            transform: scale(1);
+            transform: none;
         }
 
         .slider-content {
-            position: absolute;
-            left: max(28px, calc((100vw - 1180px) / 2));
-            bottom: 12vh;
-            z-index: 4;
-            width: min(560px, calc(100% - 56px));
-            color: #fff;
+            display: none;
         }
 
         .slider-kicker {
@@ -470,6 +472,7 @@
 
         .slider-title {
             margin: 0;
+            font-family: Georgia, "Times New Roman", serif;
             font-size: clamp(42px, 6vw, 86px);
             line-height: 0.95;
             letter-spacing: 0;
@@ -485,8 +488,8 @@
 
         .slider-controls {
             position: absolute;
-            right: max(28px, calc((100vw - 1180px) / 2));
-            bottom: 12vh;
+            right: max(24px, calc((100vw - 1180px) / 2));
+            bottom: 28px;
             z-index: 5;
             display: flex;
             align-items: center;
@@ -533,15 +536,7 @@
         }
 
         .slider-dots {
-            position: absolute;
-            left: 50%;
-            bottom: 34px;
-            z-index: 5;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 9px;
-            transform: translateX(-50%);
+            display: none;
         }
 
         .slider-dot {
@@ -562,14 +557,7 @@
         }
 
         .slider-progress {
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            z-index: 6;
-            width: 100%;
-            height: 3px;
-            background: rgba(255, 255, 255, 0.24);
-            overflow: hidden;
+            display: none;
         }
 
         .slider-progress-bar {
@@ -1139,9 +1127,7 @@
             }
 
             .hero-slide::after {
-                background:
-                    linear-gradient(0deg, rgba(22, 10, 16, 0.76) 0%, rgba(22, 10, 16, 0.2) 72%),
-                    linear-gradient(90deg, rgba(22, 10, 16, 0.42), transparent);
+                background: transparent;
             }
 
             .hero-slide img {
@@ -1367,6 +1353,8 @@
             }
         }
     </style>
+
+
 </head>
 <body>
     <header class="navbar-wrap" id="siteNavbar">
@@ -1388,26 +1376,27 @@
                         <img src="https://i.pinimg.com/736x/c3/08/2a/c3082adc6d4155cb01949f67dbfb0788.jpg" alt="Wedding photography preview">
 
                         <div class="wedding-column">
-                            <a href="#hindu">Hindu Wedding</a>
-                            <a href="#brahmin">Brahmin Wedding</a>
-                            <a href="#christian">Christian Wedding</a>
-                            <a href="#bride">Bride Portrait</a>
-                            <a href="#groom">Groom Portrait</a>
+                            <a href="hindumarriage.html">Hindu Wedding</a>
+                            <a href="brahminmarriage.html">Brahmin Wedding</a>
+                            <a href="christianmarriage.html">Christian Wedding</a>
+                            <a href="bridepotrait.html">Bride Portrait</a>
+                            <a href="groompotrait.html">Groom Portrait</a>
                         </div>
 
                         <div class="wedding-column">
-                            <a href="#baby-shower">Baby Shower</a>
-                            <a href="#beauty">Beauty Shoot</a>
-                            <a href="#couple">Couple Shoot</a>
-                            <a href="#birthday">Birthday Shoot</a>
+                            <a href="babyshower.html">Baby Shower</a>
+                            <a href="beautyshoot.html">Beauty Shoot</a>
+                            <a href="coupleshoot.html">Couple Shoot</a>
+                            <a href="birthdayshoot.html">Birthday Shoot</a>
                         </div>
                     </div>
                 </li>
 
                 <li class="nav-item"><a href="#about">About</a></li>
                 <li class="nav-item"><a href="#services">Services</a></li>
-                <li class="nav-item"><a href="#portfolio">Portfolio</a></li>
+                <li class="nav-item"><a href="#gallery-legacy">Portfolio</a></li>
                 <li class="nav-item"><a href="#packages">Packages</a></li>
+                <li class="nav-item"><a href="blog.html">Stories</a></li>
                 <li class="nav-item"><a href="#contact">Contact</a></li>
             </ul>
 
@@ -1442,22 +1431,23 @@
                 </button>
 
                 <div class="mobile-wedding-panel" id="mobileWeddingPanel">
-                    <a href="#hindu">Hindu Wedding</a>
-                    <a href="#brahmin">Brahmin Wedding</a>
-                    <a href="#christian">Christian Wedding</a>
-                    <a href="#bride">Bride Portrait</a>
-                    <a href="#groom">Groom Portrait</a>
-                    <a href="#baby-shower">Baby Shower</a>
-                    <a href="#beauty">Beauty Shoot</a>
-                    <a href="#couple">Couple Shoot</a>
-                    <a href="#birthday">Birthday Shoot</a>
+                    <a href="hindumarriage.html">Hindu Wedding</a>
+                    <a href="brahminmarriage.html">Brahmin Wedding</a>
+                    <a href="christianmarriage.html">Christian Wedding</a>
+                    <a href="bridepotrait.html">Bride Portrait</a>
+                    <a href="groompotrait.html">Groom Portrait</a>
+                    <a href="babyshower.html">Baby Shower</a>
+                    <a href="beautyshoot.html">Beauty Shoot</a>
+                    <a href="coupleshoot.html">Couple Shoot</a>
+                    <a href="birthdayshoot.html">Birthday Shoot</a>
                 </div>
             </li>
 
             <li><a href="#about">About</a></li>
             <li><a href="#services">Services</a></li>
-            <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="#gallery-legacy">Portfolio</a></li>
             <li><a href="#packages">Packages</a></li>
+            <li><a href="blog.html">Stories</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
 
@@ -1465,18 +1455,2634 @@
     </aside>
 
     <main>
-        <section class="hero-slider" id="home" aria-label="DLM featured photography">
+         <style>
+        /* =========================================================
+           CHRISTIAN WEDDING — OUR PROMISE EDITORIAL SECTION
+           (unchanged, included for completeness)
+        ========================================================= */
+
+        .cw-promise-section {
+            --cw-promise-pink: #ef2d83;
+            --cw-promise-pink-dark: #bd145f;
+            --cw-promise-pink-soft: #fff0f7;
+            --cw-promise-burgundy: #6a2438;
+            --cw-promise-navy: #182536;
+            --cw-promise-gold: #d2ac70;
+            --cw-promise-ivory: #fff9f5;
+            --cw-promise-white: #ffffff;
+            --cw-promise-ink: #2a1d25;
+            --cw-promise-muted: #78646e;
+            --cw-promise-border: rgba(42, 29, 37, 0.09);
+
+            position: relative;
+            width: 100%;
+            padding: 92px 24px 100px;
+            overflow: hidden;
+
+            color: var(--cw-promise-ink);
+
+            background:
+                radial-gradient(
+                    circle at 8% 15%,
+                    rgba(239, 45, 131, 0.08),
+                    transparent 29%
+                ),
+                radial-gradient(
+                    circle at 91% 85%,
+                    rgba(210, 172, 112, 0.12),
+                    transparent 30%
+                ),
+                linear-gradient(
+                    135deg,
+                    #fff8fc 0%,
+                    #ffffff 50%,
+                    #fff8f2 100%
+                );
+        }
+
+        .cw-promise-section *,
+        .cw-promise-section *::before,
+        .cw-promise-section *::after {
+            box-sizing: border-box;
+        }
+
+        .cw-promise-section::before {
+            content: "";
+            position: absolute;
+            top: -150px;
+            right: -130px;
+
+            width: 380px;
+            height: 380px;
+
+            border: 1px solid rgba(210, 172, 112, 0.14);
+            border-radius: 50%;
+
+            pointer-events: none;
+        }
+
+        .cw-promise-section::after {
+            content: "";
+            position: absolute;
+            left: -145px;
+            bottom: -185px;
+
+            width: 410px;
+            height: 410px;
+
+            border-radius: 50%;
+
+            background: rgba(239, 45, 131, 0.045);
+
+            pointer-events: none;
+        }
+
+        .cw-promise-container {
+            position: relative;
+            z-index: 2;
+
+            width: min(100%, 1160px);
+            margin: 0 auto;
+        }
+
+        .cw-promise-layout {
+            display: grid;
+            grid-template-columns:
+                minmax(420px, 0.92fr)
+                minmax(0, 1.08fr);
+
+            align-items: center;
+            gap: 72px;
+        }
+
+        /* =========================================================
+           ARCHED IMAGE
+        ========================================================= */
+
+        .cw-promise-visual {
+            position: relative;
+            min-height: 590px;
+        }
+
+        .cw-promise-arch-frame {
+            position: absolute;
+            inset: 0 58px 38px 0;
+
+            overflow: hidden;
+
+            border: 1px solid rgba(106, 36, 56, 0.11);
+            border-radius: 230px 230px 28px 28px;
+
+            background: #eee4e8;
+
+            box-shadow:
+                0 30px 75px rgba(69, 41, 53, 0.17),
+                0 10px 30px rgba(210, 172, 112, 0.08);
+
+            isolation: isolate;
+        }
+
+        .cw-promise-arch-frame::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+
+            background:
+                linear-gradient(
+                    to top,
+                    rgba(27, 31, 43, 0.78) 0%,
+                    rgba(30, 31, 41, 0.15) 46%,
+                    transparent 72%
+                );
+
+            pointer-events: none;
+        }
+
+        .cw-promise-arch-frame::after {
+            content: "";
+            position: absolute;
+            inset: 14px;
+            z-index: 3;
+
+            border: 1px solid rgba(255, 255, 255, 0.23);
+            border-radius: 215px 215px 20px 20px;
+
+            pointer-events: none;
+        }
+
+        .cw-promise-arch-frame img {
+            width: 100%;
+            height: 100%;
+            display: block;
+
+            object-fit: cover;
+            object-position: center 30%;
+
+            transition:
+                transform 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+                filter 0.45s ease;
+        }
+
+        .cw-promise-arch-frame:hover img {
+            transform: scale(1.045);
+            filter: saturate(1.04);
+        }
+
+        .cw-promise-image-caption {
+            position: absolute;
+            left: 27px;
+            right: 27px;
+            bottom: 27px;
+            z-index: 4;
+
+            color: #ffffff;
+        }
+
+        .cw-promise-image-caption span {
+            display: block;
+
+            color: rgba(255, 255, 255, 0.67);
+
+            font-size: 8px;
+            font-weight: 800;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+
+        .cw-promise-image-caption strong {
+            display: block;
+            max-width: 340px;
+            margin-top: 7px;
+
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(23px, 2.5vw, 34px);
+            font-weight: 500;
+            line-height: 1.15;
+        }
+
+        /* Floating image detail */
+
+        .cw-promise-detail-image {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            z-index: 5;
+
+            width: 185px;
+            height: 235px;
+
+            overflow: hidden;
+
+            border: 7px solid var(--cw-promise-ivory);
+            border-radius: 95px 95px 22px 22px;
+
+            background: #eadfe3;
+
+            box-shadow:
+                0 20px 48px rgba(69, 41, 53, 0.2);
+        }
+
+        .cw-promise-detail-image img {
+            width: 100%;
+            height: 100%;
+            display: block;
+
+            object-fit: cover;
+            object-position: center;
+
+            transition: transform 0.65s ease;
+        }
+
+        .cw-promise-detail-image:hover img {
+            transform: scale(1.07);
+        }
+
+        /* Decorative lines */
+
+        .cw-promise-gold-corner {
+            position: absolute;
+            top: 54px;
+            left: -17px;
+
+            width: 88px;
+            height: 88px;
+
+            border-top: 1px solid var(--cw-promise-gold);
+            border-left: 1px solid var(--cw-promise-gold);
+
+            pointer-events: none;
+        }
+
+        .cw-promise-photo-number {
+            position: absolute;
+            top: 27px;
+            right: 27px;
+            z-index: 5;
+
+            width: 72px;
+            height: 72px;
+
+            display: grid;
+            place-items: center;
+
+            border: 1px solid rgba(210, 172, 112, 0.28);
+            border-radius: 50%;
+
+            color: var(--cw-promise-burgundy);
+            background: rgba(255, 253, 251, 0.94);
+
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 20px;
+
+            box-shadow:
+                0 13px 32px rgba(69, 41, 53, 0.12);
+
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .cw-promise-photo-number::after {
+            content: "PROMISE";
+
+            position: absolute;
+            bottom: 9px;
+
+            color: var(--cw-promise-gold);
+
+            font-family: Arial, sans-serif;
+            font-size: 5px;
+            font-weight: 800;
+            letter-spacing: 0.11em;
+        }
+
+        /* =========================================================
+           EDITORIAL CONTENT
+        ========================================================= */
+
+        .cw-promise-content {
+            position: relative;
+            max-width: 540px;
+        }
+
+        .cw-promise-label {
+            width: fit-content;
+            margin: 0 0 15px;
+            padding: 7px 14px;
+
+            border: 1px solid rgba(239, 45, 131, 0.15);
+            border-radius: 999px;
+
+            color: var(--cw-promise-pink);
+            background: rgba(255, 255, 255, 0.88);
+
+            font-size: 9px;
+            font-weight: 800;
+            line-height: 1;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+
+            box-shadow:
+                0 9px 23px rgba(239, 45, 131, 0.07);
+        }
+
+        .cw-promise-content h2 {
+            max-width: 530px;
+            margin: 0;
+
+            color: var(--cw-promise-ink);
+
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(40px, 4.6vw, 60px);
+            font-weight: 500;
+            line-height: 1.05;
+            letter-spacing: -1.7px;
+        }
+
+        .cw-promise-content h2 span {
+            display: block;
+
+            color: var(--cw-promise-burgundy);
+            font-style: italic;
+        }
+
+        .cw-promise-description {
+            max-width: 500px;
+            margin: 19px 0 0;
+
+            color: var(--cw-promise-muted);
+
+            font-size: 13.5px;
+            line-height: 1.76;
+        }
+
+        .cw-promise-divider {
+            width: 82px;
+            height: 1px;
+            margin: 24px 0;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    var(--cw-promise-gold),
+                    transparent
+                );
+        }
+
+        /* Quote */
+
+        .cw-promise-quote {
+            position: relative;
+
+            margin: 0;
+            padding: 21px 22px 21px 56px;
+
+            border-left: 2px solid var(--cw-promise-pink);
+            border-radius: 0 18px 18px 0;
+
+            color: var(--cw-promise-burgundy);
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(255, 255, 255, 0.95),
+                    rgba(255, 240, 247, 0.9)
+                );
+
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 18px;
+            font-style: italic;
+            line-height: 1.55;
+
+            box-shadow:
+                0 14px 34px rgba(73, 43, 57, 0.07);
+        }
+
+        .cw-promise-quote::before {
+            content: "“";
+            position: absolute;
+            top: 7px;
+            left: 17px;
+
+            color: rgba(239, 45, 131, 0.28);
+
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 52px;
+            font-style: normal;
+            line-height: 1;
+        }
+
+        /* Inline qualities */
+
+        .cw-promise-qualities {
+            margin-top: 25px;
+
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .cw-promise-quality {
+            position: relative;
+            min-height: 98px;
+            padding: 14px 17px;
+
+            border-top: 1px solid rgba(210, 172, 112, 0.37);
+            border-bottom: 1px solid rgba(210, 172, 112, 0.23);
+
+            transition:
+                background 0.3s ease,
+                transform 0.3s ease;
+        }
+
+        .cw-promise-quality+.cw-promise-quality {
+            border-left: 1px solid rgba(210, 172, 112, 0.25);
+        }
+
+        .cw-promise-quality:hover {
+            background: rgba(255, 240, 247, 0.55);
+            transform: translateY(-4px);
+        }
+
+        .cw-promise-quality-number {
+            display: block;
+
+            color: rgba(106, 36, 56, 0.3);
+
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 22px;
+            line-height: 1;
+        }
+
+        .cw-promise-quality strong {
+            display: block;
+            margin-top: 8px;
+
+            color: var(--cw-promise-ink);
+
+            font-size: 11px;
+            line-height: 1.3;
+        }
+
+        .cw-promise-quality span {
+            display: block;
+            margin-top: 4px;
+
+            color: var(--cw-promise-muted);
+
+            font-size: 8.5px;
+            line-height: 1.45;
+        }
+
+        .cw-promise-signature {
+            margin-top: 22px;
+
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .cw-promise-signature::before {
+            content: "";
+
+            width: 45px;
+            height: 1px;
+            flex: 0 0 auto;
+
+            background: var(--cw-promise-gold);
+        }
+
+        .cw-promise-signature span {
+            color: var(--cw-promise-burgundy);
+
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 12px;
+            font-style: italic;
+            line-height: 1.5;
+        }
+
+        /* =========================================================
+           SCROLL REVEAL
+        ========================================================= */
+
+        .cw-promise-reveal {
+            opacity: 0;
+            transform: translateY(34px);
+
+            transition:
+                opacity 0.85s ease,
+                transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .cw-promise-reveal-left {
+            transform: translateX(-42px);
+        }
+
+        .cw-promise-reveal-right {
+            transform: translateX(42px);
+        }
+
+        .cw-promise-reveal.cw-visible {
+            opacity: 1;
+            transform: translate(0, 0);
+        }
+
+        .cw-promise-quality:nth-child(1) {
+            transition-delay: 0.08s;
+        }
+
+        .cw-promise-quality:nth-child(2) {
+            transition-delay: 0.16s;
+        }
+
+        .cw-promise-quality:nth-child(3) {
+            transition-delay: 0.24s;
+        }
+
+        /* =========================================================
+           TABLET
+        ========================================================= */
+
+        @media (max-width: 980px) {
+            .cw-promise-section {
+                padding: 78px 20px 86px;
+            }
+
+            .cw-promise-layout {
+                grid-template-columns:
+                    minmax(360px, 0.9fr)
+                    minmax(0, 1.1fr);
+
+                gap: 45px;
+            }
+
+            .cw-promise-visual {
+                min-height: 530px;
+            }
+
+            .cw-promise-detail-image {
+                width: 155px;
+                height: 205px;
+            }
+
+            .cw-promise-content h2 {
+                font-size: clamp(36px, 4.8vw, 51px);
+            }
+
+            .cw-promise-quality {
+                padding-left: 11px;
+                padding-right: 11px;
+            }
+        }
+
+        /* =========================================================
+           MOBILE
+        ========================================================= */
+
+        @media (max-width: 760px) {
+            .cw-promise-section {
+                padding: 65px 14px 72px;
+            }
+
+            .cw-promise-layout {
+                display: flex;
+                flex-direction: column;
+                gap: 36px;
+            }
+
+            .cw-promise-visual {
+                order: 1;
+
+                width: min(100%, 530px);
+                min-height: 500px;
+                margin: 0 auto;
+            }
+
+            .cw-promise-content {
+                order: 2;
+
+                width: min(100%, 520px);
+                max-width: none;
+                margin: 0 auto;
+
+                text-align: center;
+            }
+
+            .cw-promise-arch-frame {
+                inset: 0 37px 36px 0;
+
+                border-radius: 190px 190px 23px 23px;
+            }
+
+            .cw-promise-arch-frame::after {
+                border-radius: 178px 178px 16px 16px;
+            }
+
+            .cw-promise-arch-frame img {
+                object-position: center 28%;
+            }
+
+            .cw-promise-detail-image {
+                width: 155px;
+                height: 195px;
+
+                border-width: 6px;
+                border-radius: 78px 78px 18px 18px;
+            }
+
+            .cw-promise-photo-number {
+                top: 20px;
+                right: 14px;
+
+                width: 65px;
+                height: 65px;
+
+                font-size: 17px;
+            }
+
+            .cw-promise-gold-corner {
+                display: none;
+            }
+
+            .cw-promise-image-caption {
+                left: 20px;
+                right: 80px;
+                bottom: 20px;
+            }
+
+            .cw-promise-image-caption strong {
+                font-size: 23px;
+            }
+
+            .cw-promise-label {
+                margin-left: auto;
+                margin-right: auto;
+
+                font-size: 8px;
+            }
+
+            .cw-promise-content h2 {
+                max-width: 430px;
+                margin: 0 auto;
+
+                font-size: clamp(33px, 9vw, 44px);
+                line-height: 1.09;
+                letter-spacing: -0.9px;
+            }
+
+            .cw-promise-description {
+                max-width: 355px;
+                margin: 16px auto 0;
+
+                font-size: 13.5px;
+                line-height: 1.7;
+            }
+
+            .cw-promise-divider {
+                width: 70px;
+                margin: 20px auto;
+
+                background:
+                    linear-gradient(
+                        90deg,
+                        transparent,
+                        var(--cw-promise-gold),
+                        transparent
+                    );
+            }
+
+            .cw-promise-quote {
+                max-width: 420px;
+                margin: 0 auto;
+                padding: 19px 17px 19px 49px;
+
+                text-align: left;
+
+                font-size: 16px;
+                line-height: 1.5;
+            }
+
+            .cw-promise-quote::before {
+                left: 14px;
+                font-size: 45px;
+            }
+
+            .cw-promise-qualities {
+                max-width: 430px;
+                margin: 23px auto 0;
+
+                grid-template-columns: 1fr;
+
+                text-align: left;
+            }
+
+            .cw-promise-quality {
+                min-height: 75px;
+                padding: 13px 15px;
+
+                display: grid;
+                grid-template-columns: 35px minmax(0, 1fr);
+                grid-template-rows: auto auto;
+                align-items: center;
+                column-gap: 10px;
+
+                border-left: 0 !important;
+                border-bottom: 1px solid rgba(210, 172, 112, 0.23);
+            }
+
+            .cw-promise-quality-number {
+                grid-row: 1 / 3;
+
+                font-size: 20px;
+            }
+
+            .cw-promise-quality strong {
+                margin-top: 0;
+
+                font-size: 12px;
+            }
+
+            .cw-promise-quality span {
+                margin-top: 3px;
+
+                font-size: 10px;
+            }
+
+            .cw-promise-signature {
+                max-width: 350px;
+                margin: 21px auto 0;
+
+                justify-content: center;
+            }
+
+            .cw-promise-reveal-left,
+            .cw-promise-reveal-right {
+                transform: translateY(28px);
+            }
+        }
+
+        /* =========================================================
+           SMALL MOBILE
+        ========================================================= */
+
+        @media (max-width: 430px) {
+            .cw-promise-section {
+                padding-left: 11px;
+                padding-right: 11px;
+            }
+
+            .cw-promise-visual {
+                min-height: 420px;
+            }
+
+            .cw-promise-arch-frame {
+                inset: 0 28px 30px 0;
+
+                border-radius: 155px 155px 19px 19px;
+            }
+
+            .cw-promise-arch-frame::after {
+                inset: 10px;
+
+                border-radius: 147px 147px 13px 13px;
+            }
+
+            .cw-promise-detail-image {
+                width: 125px;
+                height: 160px;
+
+                border-width: 5px;
+                border-radius: 63px 63px 15px 15px;
+            }
+
+            .cw-promise-photo-number {
+                top: 14px;
+                right: 5px;
+
+                width: 58px;
+                height: 58px;
+
+                font-size: 15px;
+            }
+
+            .cw-promise-image-caption {
+                left: 16px;
+                right: 66px;
+                bottom: 16px;
+            }
+
+            .cw-promise-image-caption strong {
+                font-size: 20px;
+            }
+
+            .cw-promise-content h2 {
+                max-width: 355px;
+
+                font-size: 32px;
+            }
+
+            .cw-promise-description {
+                max-width: 330px;
+
+                font-size: 13px;
+            }
+
+            .cw-promise-quote {
+                max-width: 350px;
+
+                font-size: 15px;
+            }
+
+            .cw-promise-qualities {
+                max-width: 350px;
+            }
+
+            .cw-promise-signature span {
+                font-size: 11px;
+            }
+        }
+
+        @media (max-width: 370px) {
+            .cw-promise-visual {
+                min-height: 380px;
+            }
+
+            .cw-promise-detail-image {
+                width: 110px;
+                height: 140px;
+            }
+
+            .cw-promise-content h2 {
+                font-size: 29px;
+            }
+
+            .cw-promise-image-caption strong {
+                font-size: 18px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .cw-promise-reveal {
+                opacity: 1;
+                transform: none !important;
+                transition: none;
+            }
+
+            .cw-promise-arch-frame img,
+            .cw-promise-detail-image img,
+            .cw-promise-quality {
+                transition: none;
+            }
+        }
+
+        /* =========================================================
+           CHRISTIAN WEDDING — PREMIUM COMPACT HERO
+           (existing styles – unchanged)
+        ========================================================= */
+
+        .cw-hero-section {
+            --cw-pink: #ef2d83;
+            --cw-pink-dark: #bd145f;
+            --cw-pink-soft: #fff0f7;
+            --cw-burgundy: #6a2438;
+            --cw-navy: #182536;
+            --cw-gold: #d2ac70;
+            --cw-gold-soft: #f0dfc4;
+            --cw-pearl: #fffdfb;
+            --cw-ivory: #fff8f4;
+            --cw-white: #ffffff;
+            --cw-ink: #291b23;
+            --cw-muted: #76636d;
+            --cw-border: rgba(42, 29, 37, 0.09);
+
+            position: relative;
+            width: 100%;
+            min-height: 700px;
+            padding: 118px 24px 52px;
+            overflow: hidden;
+
+            display: flex;
+            align-items: center;
+
+            color: var(--cw-ink);
+
+            background:
+                radial-gradient(
+                    circle at 7% 12%,
+                    rgba(239, 45, 131, 0.1),
+                    transparent 27%
+                ),
+                radial-gradient(
+                    circle at 92% 86%,
+                    rgba(210, 172, 112, 0.14),
+                    transparent 28%
+                ),
+                linear-gradient(
+                    135deg,
+                    #fff8fc 0%,
+                    #ffffff 48%,
+                    #fff8f1 100%
+                );
+        }
+
+        .cw-hero-section *,
+        .cw-hero-section *::before,
+        .cw-hero-section *::after {
+            box-sizing: border-box;
+        }
+
+        .cw-hero-section::before {
+            content: "";
+            position: absolute;
+            top: -150px;
+            left: -140px;
+
+            width: 390px;
+            height: 390px;
+
+            border: 1px solid rgba(239, 45, 131, 0.1);
+            border-radius: 50%;
+
+            pointer-events: none;
+        }
+
+        .cw-hero-section::after {
+            content: "";
+            position: absolute;
+            right: -160px;
+            bottom: -190px;
+
+            width: 430px;
+            height: 430px;
+
+            border-radius: 50%;
+
+            background: rgba(210, 172, 112, 0.07);
+
+            pointer-events: none;
+        }
+
+        .cw-hero-container {
+            position: relative;
+            z-index: 2;
+
+            width: min(100%, 1240px);
+            margin: 0 auto;
+        }
+
+        .cw-hero-shell {
+            position: relative;
+
+            min-height: 560px;
+
+            display: grid;
+            grid-template-columns:
+                minmax(0, 0.84fr)
+                minmax(520px, 1.16fr);
+
+            overflow: hidden;
+
+            border: 1px solid rgba(42, 29, 37, 0.08);
+            border-radius: 34px;
+
+            background: rgba(255, 255, 255, 0.86);
+
+            box-shadow:
+                0 35px 90px rgba(73, 43, 57, 0.13),
+                inset 0 1px 0 rgba(255, 255, 255, 0.95);
+
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+        }
+
+        /* =========================================================
+           LEFT CONTENT
+        ========================================================= */
+
+        .cw-hero-content {
+            position: relative;
+            z-index: 4;
+
+            min-width: 0;
+            padding: 53px 46px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            background:
+                radial-gradient(
+                    circle at 7% 10%,
+                    rgba(239, 45, 131, 0.08),
+                    transparent 34%
+                ),
+                linear-gradient(
+                    145deg,
+                    rgba(255, 253, 251, 0.98),
+                    rgba(255, 247, 251, 0.96)
+                );
+        }
+
+        .cw-hero-label {
+            width: fit-content;
+            margin: 0 0 16px;
+            padding: 7px 14px;
+
+            border: 1px solid rgba(239, 45, 131, 0.16);
+            border-radius: 999px;
+
+            color: var(--cw-pink);
+            background: rgba(255, 255, 255, 0.9);
+
+            font-size: 9px;
+            font-weight: 800;
+            line-height: 1;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+
+            box-shadow:
+                0 9px 23px rgba(239, 45, 131, 0.07);
+        }
+
+        .cw-hero-content h1 {
+            max-width: 570px;
+            margin: 0;
+
+            color: var(--cw-ink);
+
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(50px, 5.4vw, 75px);
+            font-weight: 500;
+            line-height: 0.97;
+            letter-spacing: -2.3px;
+        }
+
+        .cw-hero-content h1 span {
+            display: block;
+            margin-top: 9px;
+
+            color: var(--cw-burgundy);
+
+            font-size: 0.51em;
+            font-style: italic;
+            line-height: 1.12;
+            letter-spacing: -0.6px;
+        }
+
+        .cw-hero-description {
+            max-width: 500px;
+            margin: 20px 0 0;
+
+            color: var(--cw-muted);
+
+            font-size: 13.5px;
+            line-height: 1.75;
+        }
+
+        .cw-hero-divider {
+            width: 80px;
+            height: 1px;
+            margin: 23px 0;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    var(--cw-gold),
+                    transparent
+                );
+        }
+
+        .cw-hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .cw-hero-primary,
+        .cw-hero-secondary {
+            min-height: 47px;
+            padding: 0 21px;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+
+            border-radius: 999px;
+
+            font-size: 11px;
+            font-weight: 800;
+            text-decoration: none;
+
+            transition:
+                transform 0.25s ease,
+                color 0.25s ease,
+                background 0.25s ease,
+                border-color 0.25s ease,
+                box-shadow 0.25s ease;
+        }
+
+        .cw-hero-primary {
+            color: var(--cw-white);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--cw-pink),
+                    var(--cw-pink-dark)
+                );
+
+            box-shadow:
+                0 14px 30px rgba(239, 45, 131, 0.25);
+        }
+
+        .cw-hero-primary::after {
+            content: "→";
+
+            font-size: 15px;
+
+            transition: transform 0.25s ease;
+        }
+
+        .cw-hero-primary:hover {
+            transform: translateY(-3px);
+
+            box-shadow:
+                0 19px 38px rgba(239, 45, 131, 0.34);
+        }
+
+        .cw-hero-primary:hover::after {
+            transform: translateX(4px);
+        }
+
+        .cw-hero-secondary {
+            border: 1px solid rgba(106, 36, 56, 0.17);
+
+            color: var(--cw-burgundy);
+            background: rgba(255, 255, 255, 0.84);
+        }
+
+        .cw-hero-secondary:hover {
+            border-color: var(--cw-pink);
+
+            color: var(--cw-white);
+            background: var(--cw-pink);
+
+            transform: translateY(-3px);
+
+            box-shadow:
+                0 15px 29px rgba(239, 45, 131, 0.2);
+        }
+
+        /* Small trust note */
+
+        .cw-hero-trust {
+            margin-top: 22px;
+
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .cw-hero-trust-avatars {
+            display: flex;
+            align-items: center;
+        }
+
+        .cw-hero-trust-dot {
+            width: 27px;
+            height: 27px;
+            margin-left: -6px;
+
+            display: grid;
+            place-items: center;
+
+            border: 2px solid var(--cw-white);
+            border-radius: 50%;
+
+            color: var(--cw-pink);
+            background: var(--cw-pink-soft);
+
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 9px;
+        }
+
+        .cw-hero-trust-dot:first-child {
+            margin-left: 0;
+        }
+
+        .cw-hero-trust p {
+            margin: 0;
+
+            color: var(--cw-muted);
+
+            font-size: 9.5px;
+            line-height: 1.45;
+        }
+
+        .cw-hero-trust strong {
+            color: var(--cw-burgundy);
+        }
+
+        /* =========================================================
+           PREMIUM CHURCH IMAGE – now replaced by carousel,
+           but we keep the container styles and overlays.
+        ========================================================= */
+
+        .cw-hero-media {
+            position: relative;
+            min-width: 0;
+            min-height: 560px;
+
+            overflow: hidden;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #e9dde4,
+                    #d8c8d1
+                );
+
+            isolation: isolate;
+        }
+
+        .cw-hero-media::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: 3;
+
+            background:
+                linear-gradient(
+                    to top,
+                    rgba(19, 27, 40, 0.79) 0%,
+                    rgba(26, 28, 40, 0.2) 46%,
+                    transparent 72%
+                );
+
+            pointer-events: none;
+        }
+
+        /* =========================================================
+           REMOVED CURVED / ARCHED STYLING FROM IMAGES
+           - The ::after pseudo-element with border-radius is removed.
+           - The .cw-hero-arch decorative element is hidden.
+        ========================================================= */
+        .cw-hero-media::after {
+            display: none !important;
+        }
+
+        .cw-hero-arch {
+            display: none !important;
+        }
+
+        /* The old image is removed; carousel sits in its place. */
+
+        /* Image caption */
+
+        .cw-hero-media-caption {
+            position: absolute;
+            left: 30px;
+            bottom: 116px;
+            z-index: 6;
+
+            max-width: 330px;
+
+            color: var(--cw-white);
+        }
+
+        .cw-hero-media-caption span {
+            display: block;
+
+            color: rgba(255, 255, 255, 0.67);
+
+            font-size: 8px;
+            font-weight: 800;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+
+        .cw-hero-media-caption strong {
+            display: block;
+            margin-top: 6px;
+
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(22px, 2.3vw, 31px);
+            font-weight: 500;
+            line-height: 1.14;
+        }
+
+        /* =========================================================
+           COVERAGE BAR
+        ========================================================= */
+
+        .cw-hero-coverage {
+            position: absolute;
+            left: 18px;
+            right: 18px;
+            bottom: 18px;
+            z-index: 7;
+
+            padding: 12px;
+
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 8px;
+
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 18px;
+
+            background: rgba(18, 27, 40, 0.63);
+
+            box-shadow:
+                0 15px 35px rgba(0, 0, 0, 0.2);
+
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+        }
+
+        .cw-hero-coverage-item {
+            min-width: 0;
+            padding: 8px 7px;
+
+            border-radius: 12px;
+
+            text-align: center;
+
+            transition:
+                transform 0.25s ease,
+                background 0.25s ease;
+        }
+
+        .cw-hero-coverage-item:hover {
+            background: rgba(255, 255, 255, 0.09);
+
+            transform: translateY(-2px);
+        }
+
+        .cw-hero-coverage-number {
+            display: block;
+
+            color: var(--cw-gold);
+
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 14px;
+        }
+
+        .cw-hero-coverage-item strong {
+            display: block;
+            margin-top: 4px;
+
+            color: var(--cw-white);
+
+            font-size: 9px;
+            font-weight: 800;
+            line-height: 1.2;
+        }
+
+        .cw-hero-coverage-item small {
+            display: block;
+            margin-top: 3px;
+
+            color: rgba(255, 255, 255, 0.57);
+
+            font-size: 6.5px;
+            line-height: 1.35;
+        }
+
+        /* Date badge */
+
+        .cw-hero-date-badge {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            z-index: 8;
+
+            min-width: 117px;
+            min-height: 57px;
+            padding: 9px 12px;
+
+            display: flex;
+            align-items: center;
+            gap: 9px;
+
+            border: 1px solid rgba(255, 255, 255, 0.23);
+            border-radius: 15px;
+
+            color: var(--cw-white);
+            background: rgba(24, 37, 54, 0.54);
+
+            box-shadow:
+                0 13px 30px rgba(0, 0, 0, 0.14);
+
+            backdrop-filter: blur(13px);
+            -webkit-backdrop-filter: blur(13px);
+        }
+
+        .cw-hero-date-icon {
+            width: 31px;
+            height: 31px;
+            flex: 0 0 auto;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 50%;
+
+            color: var(--cw-white);
+            background: var(--cw-pink);
+        }
+
+        .cw-hero-date-icon svg {
+            width: 14px;
+            height: 14px;
+
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 1.8;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .cw-hero-date-badge strong {
+            display: block;
+
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 13px;
+            font-weight: 500;
+            line-height: 1.1;
+        }
+
+        .cw-hero-date-badge span {
+            display: block;
+            margin-top: 3px;
+
+            color: rgba(255, 255, 255, 0.63);
+
+            font-size: 5.5px;
+            font-weight: 800;
+            letter-spacing: 0.09em;
+            text-transform: uppercase;
+        }
+
+        /* Vertical detail */
+
+        .cw-hero-vertical-note {
+            position: absolute;
+            top: 50%;
+            right: 7px;
+            z-index: 8;
+
+            color: rgba(255, 255, 255, 0.55);
+
+            font-size: 6px;
+            font-weight: 800;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            writing-mode: vertical-rl;
+
+            transform: translateY(-50%) rotate(180deg);
+        }
+
+        /* =========================================================
+           REVEAL ANIMATIONS (existing)
+        ========================================================= */
+
+        .cw-hero-reveal {
+            opacity: 0;
+            transform: translateY(28px);
+
+            transition:
+                opacity 0.8s ease,
+                transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .cw-hero-reveal.cw-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .cw-hero-media.cw-hero-reveal {
+            transform: translateX(35px) scale(0.985);
+        }
+
+        .cw-hero-media.cw-hero-reveal.cw-visible {
+            transform: translateX(0) scale(1);
+        }
+
+        /* =========================================================
+           TABLET (existing)
+        ========================================================= */
+
+        @media (max-width: 1050px) {
+            .cw-hero-section {
+                min-height: 650px;
+                padding: 105px 18px 44px;
+            }
+
+            .cw-hero-shell {
+                min-height: 530px;
+
+                grid-template-columns:
+                    minmax(0, 0.9fr)
+                    minmax(450px, 1.1fr);
+            }
+
+            .cw-hero-content {
+                padding: 40px 31px;
+            }
+
+            .cw-hero-content h1 {
+                font-size: clamp(45px, 5.3vw, 64px);
+            }
+
+            .cw-hero-media,
+            .cw-hero-main-image {
+                min-height: 530px;
+            }
+
+            .cw-hero-coverage {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .cw-hero-media-caption {
+                bottom: 160px;
+            }
+        }
+
+        /* =========================================================
+           MOBILE (existing)
+        ========================================================= */
+
+        @media (max-width: 780px) {
+            .cw-hero-section {
+                min-height: auto;
+                padding: 94px 13px 52px;
+            }
+
+            .cw-hero-shell {
+                min-height: 0;
+
+                display: flex;
+                flex-direction: column;
+
+                overflow: visible;
+
+                border-radius: 26px;
+            }
+
+            /* Image first on mobile */
+
+            .cw-hero-media {
+                order: 1;
+
+                width: 100%;
+                min-height: 0;
+                height: 440px;
+
+                overflow: hidden;
+
+                border-radius: 26px 26px 0 0;
+            }
+
+            .cw-hero-main-image {
+                width: 100%;
+                height: 100%;
+                min-height: 0;
+
+                object-fit: cover;
+                object-position: center 35%;
+            }
+
+            .cw-hero-media::after {
+                display: none !important;
+            }
+
+            .cw-hero-date-badge {
+                top: 13px;
+                right: 13px;
+
+                min-width: 93px;
+                min-height: 43px;
+                padding: 6px 8px;
+
+                gap: 6px;
+
+                border-radius: 11px;
+            }
+
+            .cw-hero-date-icon {
+                width: 24px;
+                height: 24px;
+            }
+
+            .cw-hero-date-icon svg {
+                width: 11px;
+                height: 11px;
+            }
+
+            .cw-hero-date-badge strong {
+                font-size: 10px;
+            }
+
+            .cw-hero-date-badge span {
+                font-size: 4.5px;
+            }
+
+            .cw-hero-media-caption {
+                left: 18px;
+                right: 18px;
+                bottom: 96px;
+
+                max-width: 270px;
+            }
+
+            .cw-hero-media-caption strong {
+                font-size: 22px;
+            }
+
+            .cw-hero-coverage {
+                left: 10px;
+                right: 10px;
+                bottom: 10px;
+
+                padding: 8px;
+
+                grid-template-columns: repeat(4, minmax(0, 1fr));
+                gap: 3px;
+
+                border-radius: 14px;
+            }
+
+            .cw-hero-coverage-item {
+                padding: 6px 2px;
+            }
+
+            .cw-hero-coverage-number {
+                font-size: 11px;
+            }
+
+            .cw-hero-coverage-item strong {
+                font-size: 7px;
+            }
+
+            .cw-hero-coverage-item small {
+                display: none;
+            }
+
+            .cw-hero-vertical-note {
+                display: none;
+            }
+
+            /* Content */
+
+            .cw-hero-content {
+                order: 2;
+
+                width: 100%;
+                padding: 30px 19px 27px;
+
+                text-align: center;
+
+                border-radius: 0 0 26px 26px;
+            }
+
+            .cw-hero-label {
+                margin: 0 auto 13px;
+
+                font-size: 8px;
+            }
+
+            .cw-hero-content h1 {
+                max-width: 420px;
+                margin: 0 auto;
+
+                font-size: clamp(43px, 12vw, 58px);
+                line-height: 1;
+                letter-spacing: -1.3px;
+            }
+
+            .cw-hero-content h1 span {
+                margin-top: 7px;
+
+                font-size: 0.5em;
+                line-height: 1.14;
+            }
+
+            .cw-hero-description {
+                max-width: 350px;
+                margin: 16px auto 0;
+
+                font-size: 13.5px;
+                line-height: 1.68;
+            }
+
+            .cw-hero-divider {
+                width: 67px;
+                margin: 19px auto;
+
+                background:
+                    linear-gradient(
+                        90deg,
+                        transparent,
+                        var(--cw-gold),
+                        transparent
+                    );
+            }
+
+            .cw-hero-actions {
+                width: 100%;
+                max-width: 355px;
+                margin: 0 auto;
+
+                flex-direction: column;
+                gap: 9px;
+            }
+
+            .cw-hero-primary,
+            .cw-hero-secondary {
+                width: 100%;
+                min-height: 48px;
+            }
+
+            .cw-hero-trust {
+                max-width: 330px;
+                margin: 19px auto 0;
+
+                justify-content: center;
+
+                text-align: left;
+            }
+
+            .cw-hero-media.cw-hero-reveal {
+                transform: translateY(25px);
+            }
+
+            .cw-hero-media.cw-hero-reveal.cw-visible {
+                transform: translateY(0);
+            }
+        }
+
+        /* =========================================================
+           SMALL MOBILE (existing)
+        ========================================================= */
+
+        @media (max-width: 480px) {
+            .cw-hero-section {
+                padding: 88px 10px 45px;
+            }
+
+            .cw-hero-shell {
+                border-radius: 22px;
+            }
+
+            .cw-hero-media {
+                height: 390px;
+
+                border-radius: 22px 22px 0 0;
+            }
+
+            .cw-hero-media::after {
+                display: none !important;
+            }
+
+            .cw-hero-media-caption {
+                bottom: 89px;
+            }
+
+            .cw-hero-media-caption strong {
+                font-size: 20px;
+            }
+
+            .cw-hero-content {
+                padding: 27px 15px 24px;
+
+                border-radius: 0 0 22px 22px;
+            }
+
+            .cw-hero-content h1 {
+                max-width: 350px;
+
+                font-size: 43px;
+            }
+
+            .cw-hero-description {
+                max-width: 325px;
+
+                font-size: 13px;
+            }
+
+            .cw-hero-coverage-item strong {
+                font-size: 6.5px;
+            }
+        }
+
+        @media (max-width: 370px) {
+            .cw-hero-media {
+                height: 350px;
+            }
+
+            .cw-hero-content h1 {
+                font-size: 39px;
+            }
+
+            .cw-hero-description {
+                font-size: 12.7px;
+            }
+
+            .cw-hero-trust {
+                display: none;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .cw-hero-reveal {
+                opacity: 1;
+                transform: none !important;
+                transition: none;
+            }
+
+            .cw-hero-main-image,
+            .cw-hero-primary,
+            .cw-hero-primary::after,
+            .cw-hero-secondary,
+            .cw-hero-coverage-item {
+                transition: none;
+            }
+        }
+
+        /* =========================================================
+           NEW CAROUSEL STYLES – added for slider enhancement
+        ========================================================= */
+
+        .cw-hero-carousel {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            overflow: hidden;
+            border-radius: inherit;
+        }
+
+        .cw-hero-slides {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            border-radius: inherit;
+        }
+
+        .cw-hero-slide {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transform: scale(1.02);
+            transition: opacity 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                transform 1.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            will-change: transform, opacity;
+            border-radius: inherit;
+            overflow: hidden;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+        }
+
+        .cw-hero-slide.cw-active {
+            opacity: 1;
+            transform: scale(1);
+            z-index: 2;
+        }
+
+        .cw-hero-slide-image {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            object-position: center 42%;
+            will-change: transform;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            transition: transform 8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transform-origin: center center;
+        }
+
+        /* ---- KEN BURNS – FASTER (5 seconds) ---- */
+        .cw-hero-slide-image.cw-ken-burns {
+            animation: cwKenBurns 5s ease-in-out infinite alternate;
+        }
+
+        .cw-hero-slide-image.cw-ken-burns-paused {
+            animation-play-state: paused;
+        }
+
+        @keyframes cwKenBurns {
+            0% {
+                transform: scale(1) translate(0, 0);
+            }
+            50% {
+                transform: scale(1.08) translate(-0.5%, -1%);
+            }
+            100% {
+                transform: scale(1.14) translate(0.5%, 1%);
+            }
+        }
+
+        /* ---- LEFT CONTENT ENTRANCE ANIMATIONS (replay each slide) ---- */
+
+        .cw-hero-content:not(.cw-visible) {
+            opacity: 0;
+            transform: translateY(28px);
+        }
+
+        .cw-hero-content.cw-visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        /* Animation classes triggered by JS */
+        .cw-hero-content.cw-anim-fade-up.cw-anim-play {
+            animation: cwFadeUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        @keyframes cwFadeUp {
+            0% {
+                opacity: 0;
+                transform: translateY(38px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .cw-hero-content.cw-anim-slide-left.cw-anim-play {
+            animation: cwSlideLeft 0.85s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        @keyframes cwSlideLeft {
+            0% {
+                opacity: 0;
+                transform: translateX(-48px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .cw-hero-content.cw-anim-slide-right.cw-anim-play {
+            animation: cwSlideRight 0.85s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        @keyframes cwSlideRight {
+            0% {
+                opacity: 0;
+                transform: translateX(48px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .cw-hero-content.cw-anim-zoom-reveal.cw-anim-play {
+            animation: cwZoomReveal 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        @keyframes cwZoomReveal {
+            0% {
+                opacity: 0;
+                transform: scale(0.92) translateY(12px);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .cw-hero-content.cw-anim-rotate-fade.cw-anim-play {
+            animation: cwRotateFade 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        @keyframes cwRotateFade {
+            0% {
+                opacity: 0;
+                transform: rotate(-3deg) scale(0.96);
+            }
+            100% {
+                opacity: 1;
+                transform: rotate(0) scale(1);
+            }
+        }
+
+        /* Override transitions during animation */
+        .cw-hero-content.cw-anim-play {
+            transition: none !important;
+        }
+
+        .cw-hero-content.cw-anim-play.cw-visible {
+            transition: none !important;
+        }
+
+        .cw-hero-content.cw-anim-fade-up.cw-visible,
+        .cw-hero-content.cw-anim-slide-left.cw-visible,
+        .cw-hero-content.cw-anim-slide-right.cw-visible,
+        .cw-hero-content.cw-anim-zoom-reveal.cw-visible,
+        .cw-hero-content.cw-anim-rotate-fade.cw-visible {
+            opacity: 1;
+            transform: translate(0, 0) scale(1) rotate(0);
+        }
+
+        /* Ensure overlays stay above carousel */
+        .cw-hero-date-badge {
+            z-index: 8;
+        }
+        .cw-hero-media-caption {
+            z-index: 6;
+        }
+        .cw-hero-coverage {
+            z-index: 7;
+        }
+        .cw-hero-vertical-note {
+            z-index: 8;
+        }
+        .cw-hero-media::before {
+            z-index: 3;
+        }
+
+        /* Responsive carousel adjustments (same as existing breakpoints) */
+        @media (max-width: 1050px) {
+            .cw-hero-slide-image {
+                object-position: center 40%;
+            }
+            @keyframes cwKenBurns {
+                0% {
+                    transform: scale(1) translate(0, 0);
+                }
+                50% {
+                    transform: scale(1.06) translate(-0.3%, -0.8%);
+                }
+                100% {
+                    transform: scale(1.12) translate(0.3%, 0.8%);
+                }
+            }
+        }
+
+        @media (max-width: 780px) {
+            .cw-hero-slide-image {
+                object-position: center 35%;
+            }
+            .cw-hero-carousel {
+                border-radius: 22px 22px 0 0;
+            }
+            .cw-hero-slide {
+                border-radius: 22px 22px 0 0;
+            }
+            .cw-hero-slides {
+                border-radius: 22px 22px 0 0;
+            }
+            @keyframes cwKenBurns {
+                0% {
+                    transform: scale(1) translate(0, 0);
+                }
+                50% {
+                    transform: scale(1.07) translate(-0.5%, -1%);
+                }
+                100% {
+                    transform: scale(1.13) translate(0.5%, 1%);
+                }
+            }
+            /* shorter mobile animations */
+            @keyframes cwFadeUp {
+                0% {
+                    opacity: 0;
+                    transform: translateY(28px);
+                }
+                100% {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            @keyframes cwSlideLeft {
+                0% {
+                    opacity: 0;
+                    transform: translateX(-32px);
+                }
+                100% {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+            }
+            @keyframes cwSlideRight {
+                0% {
+                    opacity: 0;
+                    transform: translateX(32px);
+                }
+                100% {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+            }
+            @keyframes cwZoomReveal {
+                0% {
+                    opacity: 0;
+                    transform: scale(0.94) translateY(8px);
+                }
+                100% {
+                    opacity: 1;
+                    transform: scale(1) translateY(0);
+                }
+            }
+            @keyframes cwRotateFade {
+                0% {
+                    opacity: 0;
+                    transform: rotate(-2deg) scale(0.97);
+                }
+                100% {
+                    opacity: 1;
+                    transform: rotate(0) scale(1);
+                }
+            }
+        }
+
+        @media (max-width: 480px) {
+            .cw-hero-carousel {
+                border-radius: 18px 18px 0 0;
+            }
+            .cw-hero-slide {
+                border-radius: 18px 18px 0 0;
+            }
+            .cw-hero-slides {
+                border-radius: 18px 18px 0 0;
+            }
+            .cw-hero-slide-image {
+                object-position: center 32%;
+            }
+            @keyframes cwKenBurns {
+                0% {
+                    transform: scale(1) translate(0, 0);
+                }
+                50% {
+                    transform: scale(1.08) translate(-0.5%, -1.2%);
+                }
+                100% {
+                    transform: scale(1.15) translate(0.5%, 1.2%);
+                }
+            }
+        }
+
+        @media (max-width: 370px) {
+            .cw-hero-slide-image {
+                object-position: center 30%;
+            }
+        }
+
+        /* Reduced motion overrides for carousel */
+        @media (prefers-reduced-motion: reduce) {
+            .cw-hero-slide {
+                transition: opacity 0.6s ease;
+                transform: none !important;
+            }
+            .cw-hero-slide-image.cw-ken-burns {
+                animation: none !important;
+                transform: none !important;
+            }
+            .cw-hero-slide-image.cw-ken-burns-paused {
+                animation: none !important;
+                transform: none !important;
+            }
+            .cw-hero-content.cw-anim-fade-up.cw-anim-play,
+            .cw-hero-content.cw-anim-slide-left.cw-anim-play,
+            .cw-hero-content.cw-anim-slide-right.cw-anim-play,
+            .cw-hero-content.cw-anim-zoom-reveal.cw-anim-play,
+            .cw-hero-content.cw-anim-rotate-fade.cw-anim-play {
+                animation: none !important;
+                opacity: 1 !important;
+                transform: none !important;
+            }
+            .cw-hero-content:not(.cw-visible) {
+                opacity: 1 !important;
+                transform: none !important;
+                transition: none !important;
+            }
+            .cw-hero-reveal {
+                opacity: 1 !important;
+                transform: none !important;
+                transition: none !important;
+            }
+            .cw-hero-media.cw-hero-reveal {
+                transform: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- =========================================================
+    HERO SECTION – with carousel integrated
+    ========================================================= -->
+    <section class="cw-hero-section" id="cw-home">
+        <div class="cw-hero-container">
+
+            <div class="cw-hero-shell">
+
+                <!-- LEFT CONTENT – dynamically updated -->
+                <div class="cw-hero-content cw-hero-reveal" id="cwHeroContent">
+
+                    <p class="cw-hero-label" id="cwHeroLabel">
+                        DLM Christian Wedding Stories
+                    </p>
+
+                    <h1 id="cwHeroHeading">
+                        From This Day Forward
+                        <span id="cwHeroSubheading">Faith. Love. Forever.</span>
+                    </h1>
+
+                    <p class="cw-hero-description" id="cwHeroDescription">
+                        From the walk down the aisle to the exchange of vows,
+                        we preserve every prayer, promise and joyful emotion
+                        with a refined cinematic style.
+                    </p>
+
+                    <div class="cw-hero-divider"></div>
+
+                    <div class="cw-hero-actions">
+                        <a class="cw-hero-primary" href="#cw-wedding-stories">
+                            Explore Wedding Stories
+                        </a>
+                        <a class="cw-hero-secondary"
+                        href="https://wa.me/919789029012?text=Hello%2C%20I%20would%20like%20to%20check%20availability%20for%20Christian%20wedding%20photography."
+                        target="_blank" rel="noopener noreferrer">
+                        Check Your Wedding Date
+                    </a>
+                </div>
+
+                <div class="cw-hero-trust">
+                    <div class="cw-hero-trust-avatars" aria-hidden="true">
+                        <span class="cw-hero-trust-dot">D</span>
+                        <span class="cw-hero-trust-dot">L</span>
+                        <span class="cw-hero-trust-dot">M</span>
+                    </div>
+                    <p>
+                        Thoughtfully documenting
+                        <strong>church weddings and receptions</strong>
+                        across Chennai.
+                    </p>
+                </div>
+
+            </div>
+
+            <!-- RIGHT MEDIA – CAROUSEL replaces the single image -->
+            <div class="cw-hero-media cw-hero-reveal" id="cwHeroMedia">
+
+                <!-- Carousel container -->
+                <div class="cw-hero-carousel" id="cwHeroCarousel">
+                    <div class="cw-hero-slides" id="cwHeroSlides">
+                        <!-- 5 slides injected by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Overlays (arch removed) -->
+                <span class="cw-hero-arch" aria-hidden="true"></span>
+
+                <div class="cw-hero-date-badge">
+                    <div class="cw-hero-date-icon">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <rect x="3" y="5" width="18" height="16" rx="2"></rect>
+                            <path d="M16 3v4"></path>
+                            <path d="M8 3v4"></path>
+                            <path d="M3 10h18"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <strong>2026 Dates</strong>
+                        <span>Now booking</span>
+                    </div>
+                </div>
+
+                <div class="cw-hero-media-caption">
+                    <span>Church Wedding Stories</span>
+                    <strong>Every promise becomes a timeless memory.</strong>
+                </div>
+
+                <div class="cw-hero-coverage" aria-label="Christian wedding photography coverage">
+                    <div class="cw-hero-coverage-item">
+                        <span class="cw-hero-coverage-number">01</span>
+                        <strong>Ceremony</strong>
+                        <small>Prayers and vows</small>
+                    </div>
+                    <div class="cw-hero-coverage-item">
+                        <span class="cw-hero-coverage-number">02</span>
+                        <strong>Portraits</strong>
+                        <small>Bride and couple</small>
+                    </div>
+                    <div class="cw-hero-coverage-item">
+                        <span class="cw-hero-coverage-number">03</span>
+                        <strong>Reception</strong>
+                        <small>Joyful celebrations</small>
+                    </div>
+                    <div class="cw-hero-coverage-item">
+                        <span class="cw-hero-coverage-number">04</span>
+                        <strong>Gallery</strong>
+                        <small>Private delivery</small>
+                    </div>
+                </div>
+
+                <span class="cw-hero-vertical-note" aria-hidden="true">
+                    Ceremony · Vows · Portraits · Celebration
+                </span>
+
+            </div>
+            <!-- /cw-hero-media -->
+
+        </div>
+        <!-- /cw-hero-shell -->
+
+    </div>
+    <!-- /cw-hero-container -->
+</section>
+<!-- /cw-hero-section -->
+
+
+<!-- =========================================================
+JAVASCRIPT – Carousel logic + content sync + reveal observer
+============================================================ -->
+<script>
+    (() => {
+        'use strict';
+
+        // ---- REDUCED MOTION ----
+        const prefersReducedMotion = window.matchMedia(
+            '(prefers-reduced-motion: reduce)'
+        ).matches;
+
+        // ---- SLIDE DATA (5 sets) ----
+        const slidesData = [
+         {
+            label: 'Sacred Union Photography',
+            heading: 'A Covenant of Love',
+            subheading: 'Blessed. Cherished. Eternal.',
+            description: 'Every church wedding tells a story of divine love. We capture the sacred moments, the tearful joys, and the promises that bind two souls together.',
+            image: 'assets/hindumarriageimages/image2.webp',
+            animation: 'slide-left'
+        }, {
+            label: 'Faith-Filled Celebrations',
+            heading: 'Until the End of Time',
+            subheading: 'Grace. Devotion. Unity.',
+            description: 'From the first prayer to the final blessing, we document your wedding day with artistry that honors your faith and celebrates your love story.',
+            image: 'assets/hindumarriageimages/image6.webp',
+            animation: 'slide-right'
+        }, {
+            label: 'Timeless Church Weddings',
+            heading: 'Where Forever Begins',
+            subheading: 'Holy. Sacred. Unforgettable.',
+            description: 'Your wedding day is a reflection of God\'s love. We preserve every heartfelt moment with elegance, reverence, and a cinematic eye for detail.',
+            image: 'assets/hindumarriageimages/image11.webp',
+            animation: 'zoom-reveal'
+        }, {
+            label: 'DLM Signature Stories',
+            heading: 'Written in the Heavens',
+            subheading: 'Divine. Eternal. Beautiful.',
+            description: 'A Christian wedding is more than an event — it\'s a sacred beginning. We tell your story through images that feel like poetry, light, and grace.',
+            image: 'assets/hindumarriageimages/image22.webp',
+            animation: 'rotate-fade'
+        }];
+
+        // ---- DOM REFS ----
+        const slidesContainer = document.getElementById('cwHeroSlides');
+        const contentEl = document.getElementById('cwHeroContent');
+        const labelEl = document.getElementById('cwHeroLabel');
+        const headingEl = document.getElementById('cwHeroHeading');
+        const subheadingEl = document.getElementById('cwHeroSubheading');
+        const descriptionEl = document.getElementById('cwHeroDescription');
+        const mediaEl = document.getElementById('cwHeroMedia');
+
+        let currentIndex = 0;
+        let slideInterval = null;
+        let isTransitioning = false;
+
+        // ---- BUILD SLIDES ----
+        function buildSlides() {
+            slidesContainer.innerHTML = '';
+            slidesData.forEach((data, index) => {
+                const slide = document.createElement('div');
+                slide.className = 'cw-hero-slide';
+                if (index === 0) slide.classList.add('cw-active');
+
+                const img = document.createElement('img');
+                img.className = 'cw-hero-slide-image';
+                img.src = data.image;
+                img.alt = data.label;
+                img.loading = 'lazy';
+
+                slide.appendChild(img);
+                slidesContainer.appendChild(slide);
+            });
+        }
+        buildSlides();
+
+        // ---- GET SLIDES ----
+        function getSlides() {
+            return slidesContainer.querySelectorAll('.cw-hero-slide');
+        }
+
+        // ---- UPDATE CONTENT with animation ----
+        function updateContent(index, animate = true) {
+            const data = slidesData[index];
+            if (!data) return;
+
+            labelEl.textContent = data.label;
+            // Preserve the <span> inside h1
+            const headingText = headingEl.childNodes[0];
+            if (headingText) headingText.textContent = data.heading;
+            subheadingEl.textContent = data.subheading;
+            descriptionEl.textContent = data.description;
+
+            // Remove all animation classes
+            contentEl.classList.remove(
+                'cw-anim-fade-up',
+                'cw-anim-slide-left',
+                'cw-anim-slide-right',
+                'cw-anim-zoom-reveal',
+                'cw-anim-rotate-fade',
+                'cw-anim-play'
+            );
+
+            if (prefersReducedMotion) {
+                contentEl.classList.add('cw-visible');
+                return;
+            }
+
+            if (!animate) {
+                contentEl.classList.add('cw-visible');
+                return;
+            }
+
+            // Force reflow for replay
+            void contentEl.offsetWidth;
+
+            const animMap = {
+                'fade-up': 'cw-anim-fade-up',
+                'slide-left': 'cw-anim-slide-left',
+                'slide-right': 'cw-anim-slide-right',
+                'zoom-reveal': 'cw-anim-zoom-reveal',
+                'rotate-fade': 'cw-anim-rotate-fade'
+            };
+
+            const animClass = animMap[data.animation] || 'cw-anim-fade-up';
+            contentEl.classList.add(animClass, 'cw-anim-play');
+            contentEl.classList.add('cw-visible');
+
+            // Cleanup after animation
+            const duration = 200;
+            setTimeout(() => {
+                contentEl.classList.remove(
+                    'cw-anim-fade-up',
+                    'cw-anim-slide-left',
+                    'cw-anim-slide-right',
+                    'cw-anim-zoom-reveal',
+                    'cw-anim-rotate-fade',
+                    'cw-anim-play'
+                );
+                contentEl.classList.add('cw-visible');
+            }, duration + 50);
+        }
+
+        // ---- UPDATE SLIDES (active state only - NO KEN BURNS) ----
+        function updateSlides(index) {
+            const slides = getSlides();
+            slides.forEach((slide, i) => {
+                const isActive = i === index;
+                slide.classList.toggle('cw-active', isActive);
+                // Removed Ken Burns classes
+            });
+        }
+
+        // ---- GO TO SLIDE ----
+        function goToSlide(index, animate = true) {
+            if (isTransitioning) return;
+            if (index === currentIndex && animate) return;
+
+            isTransitioning = true;
+            const total = slidesData.length;
+            let normalized = ((index % total) + total) % total;
+
+            updateSlides(normalized);
+            updateContent(normalized, animate);
+
+            // Update caption texts to match slide
+            const captionStrong = mediaEl.querySelector('.cw-hero-media-caption strong');
+            const captionSpan = mediaEl.querySelector('.cw-hero-media-caption span');
+            const captionMap = [
+                'Every promise becomes a timeless memory.',
+                'A sacred covenant of love and grace.',
+                'Faith, hope, and love — forever.',
+                'Where two become one in Christ.',
+                'A story written in the heavens.'
+            ];
+            const labelMap = [
+                'Church Wedding Stories',
+                'Sacred Union',
+                'Faith-Filled Celebrations',
+                'Timeless Church Weddings',
+                'DLM Signature Stories'
+            ];
+            if (captionStrong) captionStrong.textContent = captionMap[normalized] || captionMap[0];
+            if (captionSpan) captionSpan.textContent = labelMap[normalized] || labelMap[0];
+
+            currentIndex = normalized;
+
+            setTimeout(() => {
+                isTransitioning = false;
+            }, 950);
+        }
+
+        // ---- NEXT SLIDE ----
+        function nextSlide() {
+            if (isTransitioning) return;
+            goToSlide(currentIndex + 1, true);
+        }
+
+        // ---- AUTOPLAY ----
+        function startAutoplay() {
+            if (slideInterval) clearInterval(slideInterval);
+            if (prefersReducedMotion) return;
+            slideInterval = setInterval(nextSlide, 2000); // 2 seconds
+        }
+
+        function stopAutoplay() {
+            if (slideInterval) {
+                clearInterval(slideInterval);
+                slideInterval = null;
+            }
+        }
+
+        // ---- INIT ----
+        function init() {
+            // Initial state
+            updateSlides(0);
+            updateContent(0, false);
+            // Set initial caption
+            const captionStrong = mediaEl.querySelector('.cw-hero-media-caption strong');
+            const captionSpan = mediaEl.querySelector('.cw-hero-media-caption span');
+            if (captionStrong) captionStrong.textContent = 'Every promise becomes a timeless memory.';
+            if (captionSpan) captionSpan.textContent = 'Church Wedding Stories';
+
+            if (!prefersReducedMotion) {
+                startAutoplay();
+                // REMOVED: setupPauseOnHover() - No pause on hover
+            }
+
+            // ---- Intersection Observer for reveal (existing) ----
+            const heroSection = document.querySelector('.cw-hero-section');
+            if (heroSection) {
+                const revealElements = heroSection.querySelectorAll('.cw-hero-reveal');
+                const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+                if (!reduced && 'IntersectionObserver' in window) {
+                    const observer = new IntersectionObserver((entries) => {
+                        entries.forEach(entry => {
+                            if (!entry.isIntersecting) return;
+                            entry.target.classList.add('cw-visible');
+                            observer.unobserve(entry.target);
+                        });
+                    }, { threshold: 0.12 });
+                    revealElements.forEach(el => observer.observe(el));
+                } else {
+                    revealElements.forEach(el => el.classList.add('cw-visible'));
+                }
+            }
+
+            console.log('✨ Premium wedding carousel initialized (2s interval, no zoom, no pause).');
+        }
+
+        // ---- RUN ----
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
+
+        // ---- CLEANUP ----
+        window.addEventListener('beforeunload', () => {
+            stopAutoplay();
+        });
+
+    })();
+</script>
+
+</body> 
+        <!-- <section class="hero-slider" id="home" aria-label="DLM featured photography">
             <div class="slider-track" id="sliderTrack">
                 <article class="hero-slide is-active">
-                    <img src="assets/slide-1.svg" alt="Elegant wedding couple portrait" loading="eager" draggable="false">
+                    <img src="https://dlmphotography.in/wp-content/uploads/2022/04/2020-147-1.jpg" alt="Elegant wedding couple portrait" loading="eager" draggable="false">
                 </article>
 
                 <article class="hero-slide">
-                    <img src="assets/slide-2.svg" alt="Outdoor celebration photography" loading="lazy" draggable="false">
+                    <img src="https://dlmphotography.in/wp-content/uploads/2022/04/2020-9.jpg" alt="Outdoor celebration photography" loading="lazy" draggable="false">
                 </article>
 
                 <article class="hero-slide">
-                    <img src="assets/slide-3.svg" alt="Luxury event photography details" loading="lazy" draggable="false">
+                    <img src="https://dlmphotography.in/wp-content/uploads/2022/04/DLM-26.jpg" alt="Luxury event photography details" loading="lazy" draggable="false">
                 </article>
             </div>
 
@@ -1500,7 +4106,7 @@
             <div class="slider-progress" aria-hidden="true">
                 <div class="slider-progress-bar" id="sliderProgress"></div>
             </div>
-        </section>
+        </section> -->
 
         <section class="studio-about" id="about">
             <div class="studio-about-inner">
@@ -1508,16 +4114,16 @@
                     <div class="about-photo-frame" id="aboutCarousel">
                         <div class="about-carousel-track" id="aboutCarouselTrack">
                             <figure class="about-carousel-slide">
-                                <img src="assets/slide-1.svg" alt="DLM bridal portrait showcase">
+                                <img src="https://dlmphotography.in/wp-content/uploads/2022/04/31-1.jpg" alt="DLM bridal portrait showcase">
                             </figure>
                             <figure class="about-carousel-slide">
-                                <img src="assets/slide-2.svg" alt="DLM outdoor wedding showcase">
+                                <img src="https://dlmphotography.in/wp-content/uploads/2022/04/2020-62.jpg" alt="DLM outdoor wedding showcase">
                             </figure>
                             <figure class="about-carousel-slide">
-                                <img src="assets/slide-3.svg" alt="DLM event photography showcase">
+                                <img src="https://dlmphotography.in/wp-content/uploads/2022/04/DLM-29.jpg" alt="DLM event photography showcase">
                             </figure>
                             <figure class="about-carousel-slide" aria-hidden="true">
-                                <img src="assets/slide-1.svg" alt="">
+                                <img src="https://dlmphotography.in/wp-content/uploads/2022/04/31-1.jpg" alt="">
                             </figure>
                             <figure class="about-carousel-slide" aria-hidden="true">
                                 <img src="assets/slide-2.svg" alt="">
@@ -1567,6 +4173,940 @@
             </div>
         </section>
 
+<style>
+    /* ==========================================
+       PACKAGE EXPLANATION SECTION
+    ========================================== */
+
+    .package-section {
+        position: relative;
+        padding: 86px 0 92px;
+        overflow: hidden;
+        color: var(--ink);
+        background:
+            radial-gradient(circle at 14% 20%, rgba(239, 45, 131, 0.14), transparent 30%),
+            radial-gradient(circle at 88% 76%, rgba(255, 255, 255, 0.9), transparent 28%),
+            linear-gradient(180deg, #fff3f8 0%, #ffe4ef 100%);
+    }
+
+    .package-section::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background:
+            linear-gradient(90deg, rgba(255, 255, 255, 0.68), transparent 18%, transparent 82%, rgba(255, 255, 255, 0.58)),
+            radial-gradient(circle at 12% 84%, rgba(239, 45, 131, 0.1), transparent 28%);
+    }
+
+    .package-inner {
+        position: relative;
+        z-index: 1;
+        width: min(100%, 1220px);
+        margin: 0 auto;
+        padding: 0 28px;
+    }
+
+    .package-heading {
+        max-width: 720px;
+        margin: 0 auto 34px;
+        text-align: center;
+    }
+
+    .package-kicker {
+        margin: 0 0 10px;
+        color: var(--pink);
+        font-size: 12px;
+        font-weight: 850;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+    }
+
+    .package-heading h2 {
+        margin: 0;
+        font-size: clamp(34px, 4vw, 56px);
+        line-height: 1.04;
+        letter-spacing: 0;
+    }
+
+    .package-heading p {
+        max-width: 610px;
+        margin: 15px auto 0;
+        color: var(--muted);
+        font-size: 16px;
+        line-height: 1.7;
+    }
+
+    .package-filter {
+        margin: 0 auto 34px;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .package-filter-button {
+        min-height: 34px;
+        padding: 0 14px;
+        border: 1px solid rgba(239, 45, 131, 0.14);
+        border-radius: 999px;
+        color: #6a5361;
+        background: rgba(255, 255, 255, 0.82);
+        font: 800 12px "Inter", "Segoe UI", sans-serif;
+        cursor: pointer;
+        transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .package-filter-button:hover,
+    .package-filter-button.is-active {
+        color: #fff;
+        border-color: rgba(239, 45, 131, 0.48);
+        background: var(--pink);
+        box-shadow: 0 10px 20px rgba(239, 45, 131, 0.2);
+        transform: translateY(-1px);
+    }
+
+    .package-carousel-wrap {
+        position: relative;
+    }
+
+    .package-carousel-wrap::before,
+    .package-carousel-wrap::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 12px;
+        z-index: 2;
+        width: 76px;
+        pointer-events: none;
+    }
+
+    .package-carousel-wrap::before {
+        left: 0;
+        background: linear-gradient(90deg, #fff0f7, rgba(255, 240, 247, 0));
+    }
+
+    .package-carousel-wrap::after {
+        right: 0;
+        background: linear-gradient(270deg, #ffe5ef, rgba(255, 229, 239, 0));
+    }
+
+    .package-track {
+        display: grid;
+        grid-auto-flow: column;
+        grid-auto-columns: calc((100% - 72px) / 4);
+        gap: 18px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding: 0 2px 12px;
+        scroll-behavior: smooth;
+        scroll-snap-type: x mandatory;
+        scrollbar-width: none;
+    }
+
+    .package-track::-webkit-scrollbar {
+        display: none;
+    }
+
+    .package-card {
+        position: relative;
+        min-height: 296px;
+        padding: 16px;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        border: 1px solid rgba(239, 45, 131, 0.12);
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.9);
+        box-shadow:
+            0 16px 34px rgba(143, 28, 82, 0.12),
+            inset 0 1px 0 rgba(255, 255, 255, 0.9);
+        scroll-snap-align: start;
+        transform: translateY(0) scale(1);
+        transition:
+            transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+            border-color 0.3s ease,
+            background 0.3s ease,
+            box-shadow 0.3s ease;
+    }
+
+    .package-card::before {
+        content: "";
+        position: absolute;
+        inset: 1px;
+        z-index: 0;
+        border-radius: 15px;
+        opacity: 0;
+        pointer-events: none;
+        background:
+            linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0) 34%),
+            radial-gradient(circle at 18% 0%, rgba(239, 45, 131, 0.16), transparent 34%);
+        transition: opacity 0.3s ease;
+    }
+
+    .package-card::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        pointer-events: none;
+        background: linear-gradient(145deg, rgba(239, 45, 131, 0.13), transparent 48%);
+        transition: opacity 0.3s ease;
+    }
+
+    .package-card:hover {
+        transform: translateY(-8px) scale(1.01);
+        border-color: rgba(239, 45, 131, 0.46);
+        background: #ffffff;
+        box-shadow:
+            0 24px 50px rgba(143, 28, 82, 0.18),
+            inset 0 1px 0 rgba(255, 255, 255, 1);
+    }
+
+    .package-card:hover::before {
+        opacity: 1;
+    }
+
+    .package-card:hover::after {
+        opacity: 1;
+    }
+
+    .package-media {
+        aspect-ratio: 4 / 5;
+        min-height: 168px;
+        max-height: 220px;
+        margin-bottom: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        z-index: 1;
+    }
+
+    .package-media::before {
+        content: "";
+        position: absolute;
+        width: 110px;
+        height: 110px;
+        border-radius: 50%;
+        opacity: 0;
+        background: rgba(239, 45, 131, 0.12);
+        transform: scale(0.78);
+        transition: opacity 0.35s ease, transform 0.35s ease;
+    }
+
+    .package-media img {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        object-position: center center;
+        background: linear-gradient(135deg, #fff7fb, #f7ecf3);
+        filter: drop-shadow(0 18px 18px rgba(143, 28, 82, 0.18));
+        transform: translateY(0) scale(1);
+        transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), filter 0.35s ease;
+    }
+
+    .package-card:hover .package-media::before {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    .package-card:hover .package-media img {
+        transform: translateY(-6px) scale(1.08) rotate(-1deg);
+        filter: drop-shadow(0 24px 22px rgba(143, 28, 82, 0.25));
+    }
+
+    .package-card-top {
+        position: relative;
+        z-index: 1;
+        margin-bottom: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+    }
+
+    .package-tag,
+    .package-count {
+        min-height: 24px;
+        display: inline-flex;
+        align-items: center;
+        border-radius: 999px;
+        font-size: 11px;
+        font-weight: 850;
+        text-transform: uppercase;
+    }
+
+    .package-tag {
+        padding: 0 10px;
+        color: var(--pink-dark);
+        background: rgba(239, 45, 131, 0.12);
+        transition: color 0.25s ease, background 0.25s ease;
+    }
+
+    .package-count {
+        padding: 0 9px;
+        color: #fff;
+        background: var(--pink);
+        transition: transform 0.25s ease;
+    }
+
+    .package-card:hover .package-tag {
+        color: #fff;
+        background: var(--pink);
+    }
+
+    .package-card:hover .package-count {
+        transform: translateY(-1px);
+    }
+
+    .package-card h3 {
+        position: relative;
+        z-index: 1;
+        margin: 0;
+        color: #211821;
+        font-size: 18px;
+        line-height: 1.16;
+        letter-spacing: 0;
+    }
+
+    .package-price {
+        position: relative;
+        z-index: 1;
+        margin: 6px 0 0;
+        color: var(--pink-dark);
+        font-size: 13px;
+        font-weight: 850;
+    }
+
+    .package-offer-note {
+        position: relative;
+        z-index: 1;
+        margin: 6px 0 0;
+        width: fit-content;
+        padding: 6px 10px;
+        border-radius: 999px;
+        color: #7c4b61;
+        background: linear-gradient(90deg, rgba(239, 45, 131, 0.10), rgba(255, 255, 255, 0.95));
+        border: 1px solid rgba(239, 45, 131, 0.14);
+        font-size: 11px;
+        font-weight: 900;
+        box-shadow: 0 8px 16px rgba(239, 45, 131, 0.08);
+    }
+
+    .package-list {
+        position: relative;
+        z-index: 1;
+        margin: 14px 0 18px;
+        padding: 0;
+        display: grid;
+        gap: 7px;
+        list-style: none;
+        color: #6f5a67;
+        font-size: 12px;
+        line-height: 1.45;
+    }
+
+    .package-list li {
+        display: flex;
+        gap: 9px;
+        transform: translateX(0);
+        transition: color 0.25s ease, transform 0.25s ease;
+    }
+
+    .package-card:hover .package-list li {
+        color: #4d3945;
+        transform: translateX(3px);
+    }
+
+    .package-list li::before {
+        content: "";
+        width: 7px;
+        height: 11px;
+        flex: 0 0 auto;
+        margin-top: 3px;
+        border-right: 2px solid var(--pink);
+        border-bottom: 2px solid var(--pink);
+        transform: rotate(45deg);
+    }
+
+    .package-book {
+        position: relative;
+        z-index: 1;
+        width: fit-content;
+        min-height: 36px;
+        margin-top: auto;
+        padding: 0 14px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 999px;
+        color: #fff;
+        background: var(--pink);
+        font-size: 12px;
+        font-weight: 850;
+        text-decoration: none;
+        box-shadow: 0 10px 20px rgba(239, 45, 131, 0.2);
+        transition: background 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+    }
+
+    .package-book:hover {
+        background: var(--pink-dark);
+        box-shadow: 0 14px 28px rgba(201, 21, 103, 0.26);
+        transform: translateY(-2px);
+    }
+
+    .package-arrow {
+        position: absolute;
+        top: 50%;
+        z-index: 3;
+        width: 48px;
+        height: 48px;
+        display: grid;
+        place-items: center;
+        border: 1px solid rgba(239, 45, 131, 0.18);
+        border-radius: 50%;
+        color: var(--pink);
+        background: rgba(255, 255, 255, 0.86);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        cursor: pointer;
+        transform: translateY(-50%);
+        transition: background 0.25s ease, transform 0.25s ease;
+    }
+
+    .package-arrow:hover {
+        color: #fff;
+        background: var(--pink);
+        box-shadow: 0 16px 30px rgba(239, 45, 131, 0.24);
+        transform: translateY(-50%) scale(1.05);
+    }
+
+    .package-arrow.prev {
+        left: -24px;
+    }
+
+    .package-arrow.next {
+        right: -24px;
+    }
+
+    .package-arrow span {
+        width: 10px;
+        height: 10px;
+        display: block;
+        border-top: 2px solid currentColor;
+        border-right: 2px solid currentColor;
+    }
+
+    .package-arrow.prev span {
+        margin-left: 4px;
+        transform: rotate(-135deg);
+    }
+
+    .package-arrow.next span {
+        margin-right: 4px;
+        transform: rotate(45deg);
+    }
+
+    .package-card.is-hidden {
+        display: none;
+    }
+
+    @media (max-width: 1000px) {
+        .package-track {
+            grid-auto-columns: calc((100% - 24px) / 2);
+        }
+    }
+
+    @media (max-width: 620px) {
+        .package-section {
+            padding: 68px 0 76px;
+        }
+
+        .package-inner {
+            padding: 0 16px;
+        }
+
+        .package-heading {
+            margin-bottom: 26px;
+        }
+
+        .package-heading p {
+            font-size: 14.5px;
+        }
+
+        .package-filter {
+            justify-content: flex-start;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            padding-bottom: 4px;
+            scrollbar-width: none;
+        }
+
+        .package-filter::-webkit-scrollbar {
+            display: none;
+        }
+
+        .package-filter-button {
+            flex: 0 0 auto;
+        }
+
+        .package-track {
+            grid-auto-columns: 100%;
+            gap: 14px;
+        }
+
+        .package-card {
+            min-height: 280px;
+        }
+
+        .package-carousel-wrap::before,
+        .package-carousel-wrap::after {
+            width: 32px;
+        }
+
+        .package-arrow {
+            width: 42px;
+            height: 42px;
+        }
+
+        .package-arrow.prev {
+            left: -8px;
+        }
+
+        .package-arrow.next {
+            right: -8px;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .package-track {
+            scroll-behavior: auto;
+        }
+
+        .package-card,
+        .package-card::before,
+        .package-card::after,
+        .package-media::before,
+        .package-media img,
+        .package-list li,
+        .package-book,
+        .package-filter-button,
+        .package-arrow {
+            transition: none;
+        }
+    }
+</style>
+
+<section class="package-section" id="packages">
+    <div class="package-inner">
+        <div class="package-heading">
+            <p class="package-kicker">DLM Packages</p>
+            <h2>Choose The Right Plan For Your Celebration</h2>
+            <p>Browse package categories just like a premium gear carousel, then compare plans by coverage, deliverables, and event type.</p>
+        </div>
+
+        <div class="package-filter" id="packageFilter" aria-label="Package categories"></div>
+
+        <div class="package-carousel-wrap">
+            <button class="package-arrow prev" id="packagePrev" type="button" aria-label="Previous package">
+                <span></span>
+            </button>
+
+            <div class="package-track" id="packageTrack" aria-label="DLM package plans">
+                <article class="package-card" data-package-category="wedding">
+                    <div class="package-card-top">
+                        <span class="package-tag">Wedding</span>
+                        <span class="package-count">Popular</span>
+                    </div>
+                    <div class="package-media">
+                        <img src="assets/slide-1.svg" alt="Wedding package preview">
+                    </div>
+                    <h3>Wedding Classic</h3>
+                    <p class="package-price">From Rs. 45,000</p>
+                    <ul class="package-list">
+                        <li>1 day wedding coverage</li>
+                        <li>Candid and traditional photos</li>
+                        <li>Edited photos with online gallery</li>
+                    </ul>
+                    <a class="package-book" href="#contact">Check Availability</a>
+                </article>
+
+                <article class="package-card" data-package-category="wedding">
+                    <div class="package-card-top">
+                        <span class="package-tag">Wedding</span>
+                        <span class="package-count">Film</span>
+                    </div>
+                    <div class="package-media">
+                        <img src="assets/slide-2.svg" alt="Wedding film package preview">
+                    </div>
+                    <h3>Wedding Premium Film</h3>
+                    <p class="package-price">From Rs. 85,000</p>
+                    <ul class="package-list">
+                        <li>Photography and cinematic video</li>
+                        <li>Highlight film and full event video</li>
+                        <li>Premium album design included</li>
+                    </ul>
+                    <a class="package-book" href="#contact">Check Availability</a>
+                </article>
+
+                <article class="package-card" data-package-category="birthday">
+                    <div class="package-card-top">
+                        <span class="package-tag">Birthday</span>
+                        <span class="package-count">Kids</span>
+                    </div>
+                    <div class="package-media">
+                        <img src="assets/slide-3.svg" alt="Birthday package preview">
+                    </div>
+                    <h3>Birthday Moments</h3>
+                    <p class="package-price">From Rs. 12,000</p>
+                    <ul class="package-list">
+                        <li>3 hours event photography</li>
+                        <li>Cake, decor, family and candid shots</li>
+                        <li>Edited digital photos delivered online</li>
+                    </ul>
+                    <a class="package-book" href="#contact">Check Availability</a>
+                </article>
+
+                <article class="package-card" data-package-category="baby">
+                    <div class="package-card-top">
+                        <span class="package-tag">Baby Shower</span>
+                        <span class="package-count">Family</span>
+                    </div>
+                    <div class="package-media">
+                        <img src="assets/slide-1.svg" alt="Baby shower package preview">
+                    </div>
+                    <h3>Baby Shower Story</h3>
+                    <p class="package-price">From Rs. 18,000</p>
+                    <ul class="package-list">
+                        <li>Decor, rituals and guest coverage</li>
+                        <li>Family portraits with natural candids</li>
+                        <li>Short reel edit for social sharing</li>
+                    </ul>
+                    <a class="package-book" href="#contact">Check Availability</a>
+                </article>
+
+                <article class="package-card" data-package-category="couple">
+                    <div class="package-card-top">
+                        <span class="package-tag">Couple</span>
+                        <span class="package-count">Outdoor</span>
+                    </div>
+                    <div class="package-media">
+                        <img src="assets/slide-2.svg" alt="Couple shoot package preview">
+                    </div>
+                    <h3>Pre-Wedding Couple Shoot</h3>
+                    <p class="package-price">From Rs. 25,000</p>
+                    <ul class="package-list">
+                        <li>Outdoor or studio session</li>
+                        <li>Creative posing and location guidance</li>
+                        <li>Edited photos and short teaser video</li>
+                    </ul>
+                    <a class="package-book" href="#contact">Check Availability</a>
+                </article>
+
+                <article class="package-card" data-package-category="event">
+                    <div class="package-card-top">
+                        <span class="package-tag">Event</span>
+                        <span class="package-count">Pro</span>
+                    </div>
+                    <div class="package-media">
+                        <img src="assets/slide-3.svg" alt="Event package preview">
+                    </div>
+                    <h3>Corporate & Family Event</h3>
+                    <p class="package-price">From Rs. 20,000</p>
+                    <ul class="package-list">
+                        <li>Stage, guest and highlight coverage</li>
+                        <li>Professional edited photo selection</li>
+                        <li>Optional reels and video add-on</li>
+                    </ul>
+                    <a class="package-book" href="#contact">Check Availability</a>
+                </article>
+            </div>
+
+            <button class="package-arrow next" id="packageNext" type="button" aria-label="Next package">
+                <span></span>
+            </button>
+        </div>
+    </div>
+</section>
+
+<script>
+    (() => {
+        const packageTrack = document.getElementById("packageTrack");
+        const packageFilter = document.getElementById("packageFilter");
+        const previousButton = document.getElementById("packagePrev");
+        const nextButton = document.getElementById("packageNext");
+        const apiBase = localStorage.getItem("dlmApiBase") || "http://192.168.0.101:8080";
+        let publicPackages = [];
+        let activePackageFilter = "all";
+
+        if (!packageTrack || !previousButton || !nextButton || !packageFilter) {
+            return;
+        }
+
+        const escapeHtml = value => String(value || "")
+            .replaceAll("&", "&amp;")
+            .replaceAll("<", "&lt;")
+            .replaceAll(">", "&gt;")
+            .replaceAll('"', "&quot;")
+            .replaceAll("'", "&#039;");
+
+        const packageCards = () => Array.from(packageTrack.querySelectorAll("[data-package-category]"));
+
+        const normalizeFilterKey = value => String(value || "")
+            .trim()
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, "-")
+            .replace(/^-+|-+$/g, "") || "package";
+
+        const titleCase = value => String(value || "")
+            .trim()
+            .replace(/[-_]+/g, " ")
+            .replace(/\s+/g, " ")
+            .replace(/\b\w/g, char => char.toUpperCase());
+
+        const money = value => {
+            if (value === null || value === undefined || value === "") {
+                return "";
+            }
+            return `Rs. ${Number(value).toLocaleString("en-IN")}`;
+        };
+
+        const categoryFor = item => {
+            const source = `${item.serviceTitle || ""} ${item.title || ""}`.toLowerCase();
+            if (source.includes("birthday")) return "birthday";
+            if (source.includes("baby")) return "baby";
+            if (source.includes("couple") || source.includes("pre-wedding")) return "couple";
+            if (source.includes("event") || source.includes("corporate")) return "event";
+            return "wedding";
+        };
+
+        const splitLines = value => (value || "")
+            .split(/\r?\n|,/)
+            .map(item => item.trim())
+            .filter(Boolean);
+
+        const packageImage = item => {
+            const imageLocation = item.imageLocation || "assets/slide-1.svg";
+            return imageLocation.startsWith("/uploads/") ? `${apiBase}${imageLocation}` : imageLocation;
+        };
+        const packageOfferText = item => item.validUntil ? `Offer ends ${item.validUntil}` : "Offer available";
+        const packageTag = item => item.serviceTitle || item.title.split(" ")[0] || "Package";
+        const packageBadge = item => item.featured ? "Featured" : (item.bookingEnabled ? "Book Now" : "Preview");
+        const packageFilterKey = item => normalizeFilterKey(item.serviceTitle || item.title || item.category || "package");
+        const packageFilterLabel = item => {
+            const serviceTitle = String(item.serviceTitle || "").trim();
+            if (serviceTitle) {
+                return serviceTitle;
+            }
+            const title = String(item.title || "").trim();
+            if (title) {
+                return title.split(" ")[0];
+            }
+            return "Package";
+        };
+
+        const setActiveFilter = filter => {
+            activePackageFilter = filter;
+            Array.from(packageFilter.querySelectorAll("[data-package-filter]")).forEach(button => {
+                button.classList.toggle("is-active", button.dataset.packageFilter === filter);
+            });
+
+            packageCards().forEach(card => {
+                const shouldShow = filter === "all" || card.dataset.packageCategory === filter;
+                card.classList.toggle("is-hidden", !shouldShow);
+            });
+        };
+
+        const renderFilterButtons = packages => {
+            const items = Array.isArray(packages) ? packages : [];
+            const tabs = [{ key: "all", label: "All Packages" }];
+            const seen = new Set();
+
+            items.forEach(item => {
+                const key = packageFilterKey(item);
+                if (seen.has(key)) return;
+                seen.add(key);
+                tabs.push({
+                    key,
+                    label: packageFilterLabel(item)
+                });
+            });
+
+            packageFilter.innerHTML = tabs.map((tab, index) => `
+                <button
+                    class="package-filter-button${index === 0 ? " is-active" : ""}"
+                    type="button"
+                    data-package-filter="${escapeHtml(tab.key)}"
+                >${escapeHtml(tab.label)}</button>
+            `).join("");
+
+            Array.from(packageFilter.querySelectorAll("[data-package-filter]")).forEach(button => {
+                button.addEventListener("click", () => {
+                    setActiveFilter(button.dataset.packageFilter);
+                });
+            });
+
+            setActiveFilter(activePackageFilter);
+        };
+
+        const renderFallbackFilters = () => {
+            const tabs = [{ key: "all", label: "All Packages" }];
+            const seen = new Set();
+
+            packageCards().forEach(card => {
+                const key = card.dataset.packageCategory || "package";
+                if (seen.has(key)) return;
+                seen.add(key);
+                tabs.push({
+                    key,
+                    label: titleCase(key)
+                });
+            });
+
+            packageFilter.innerHTML = tabs.map((tab, index) => `
+                <button
+                    class="package-filter-button${index === 0 ? " is-active" : ""}"
+                    type="button"
+                    data-package-filter="${escapeHtml(tab.key)}"
+                >${escapeHtml(tab.label)}</button>
+            `).join("");
+
+            Array.from(packageFilter.querySelectorAll("[data-package-filter]")).forEach(button => {
+                button.addEventListener("click", () => {
+                    setActiveFilter(button.dataset.packageFilter);
+                });
+            });
+
+            setActiveFilter("all");
+        };
+
+        const packageDetailsHtml = item => {
+            const price = item.offerPrice || item.regularPrice;
+            const rows = [
+                ["Package", item.title],
+                ["Service", item.serviceTitle || "-"],
+                ["Regular Price", money(item.regularPrice)],
+                ["Offer Price", money(price)],
+                ["Offer Ends", item.validUntil || "No end date"],
+                ["Shoot Duration", item.shootDuration || "-"],
+                ["Photographers", item.photographersCount ? String(item.photographersCount) : "-"],
+                ["Booking Type", item.bookingType ? item.bookingType.replace("_", " ") : "-"],
+                ["Booking", item.bookingEnabled ? "Enabled" : "Disabled"],
+                ["Featured", item.featured ? "Yes" : "No"]
+            ];
+            return `
+                <div class="package-detail-grid">
+                    ${rows.map(([label, value]) => `
+                        <div class="package-detail-item">
+                            <span>${escapeHtml(label)}</span>
+                            <strong>${escapeHtml(value)}</strong>
+                        </div>
+                    `).join("")}
+                    <div class="package-detail-item package-detail-wide">
+                        <span>Description</span>
+                        <strong>${escapeHtml(item.description || "No description added.")}</strong>
+                    </div>
+                    <div class="package-detail-item package-detail-wide">
+                        <span>Inclusions</span>
+                        <strong>${escapeHtml(splitLines(item.inclusions).join(" • ") || "No inclusions added.")}</strong>
+                    </div>
+                    <div class="package-detail-item package-detail-wide">
+                        <span>Deliverables</span>
+                        <strong>${escapeHtml(item.deliverables || "No deliverables added.")}</strong>
+                    </div>
+                </div>
+            `;
+        };
+
+        const renderPackages = packages => {
+            publicPackages = packages || [];
+            if (!publicPackages.length) {
+                return;
+            }
+
+            packageTrack.innerHTML = publicPackages.map(item => {
+                const category = packageFilterKey(item);
+                const tag = packageTag(item);
+                const badge = packageBadge(item);
+                const inclusions = splitLines(item.inclusions).slice(0, 3);
+                const fallbackInclusions = [
+                    item.shootDuration,
+                    item.photographersCount ? `${item.photographersCount} photographer${item.photographersCount > 1 ? "s" : ""}` : "",
+                    item.deliverables
+                ].filter(Boolean).slice(0, 3);
+                const list = inclusions.length ? inclusions : fallbackInclusions;
+                const price = item.offerPrice || item.regularPrice;
+                const offerEnds = item.validUntil ? `Offer ends ${item.validUntil}` : "Offer available";
+
+                return `
+                    <article class="package-card" data-package-category="${escapeHtml(category)}">
+                        <div class="package-card-top">
+                            <span class="package-tag">${escapeHtml(tag)}</span>
+                            <span class="package-count">${escapeHtml(badge)}</span>
+                        </div>
+                        <div class="package-media">
+                            <img src="${escapeHtml(packageImage(item))}" alt="${escapeHtml(item.title)} preview">
+                        </div>
+                        <h3>${escapeHtml(item.title)}</h3>
+                        <p class="package-price">From ${escapeHtml(money(price))}</p>
+                        <div class="package-offer-note">${escapeHtml(offerEnds)}</div>
+                        <ul class="package-list">
+                            ${list.map(line => `<li>${escapeHtml(line)}</li>`).join("")}
+                        </ul>
+                        <button class="package-book" type="button" data-package-detail="${item.id}">View Details</button>
+                    </article>
+                `;
+            }).join("");
+
+            setActiveFilter(activePackageFilter);
+        };
+
+        const getPackageStep = () => {
+            const visibleCard = packageCards().find(card => !card.classList.contains("is-hidden"));
+
+            if (!visibleCard) {
+                return packageTrack.clientWidth;
+            }
+
+            const styles = window.getComputedStyle(packageTrack);
+            const gap = Number.parseFloat(styles.columnGap || styles.gap) || 0;
+            return visibleCard.getBoundingClientRect().width + gap;
+        };
+
+        const scrollPackages = direction => {
+            packageTrack.scrollBy({
+                left: getPackageStep() * direction,
+                behavior: "smooth"
+            });
+        };
+
+        previousButton.addEventListener("click", () => scrollPackages(-1));
+        nextButton.addEventListener("click", () => scrollPackages(1));
+
+        packageTrack.addEventListener("click", event => {
+            const button = event.target.closest("[data-package-detail]");
+            if (!button) return;
+            const item = publicPackages.find(entry => String(entry.id) === String(button.dataset.packageDetail));
+            if (item) {
+                window.location.href = `view-details.html?packageId=${encodeURIComponent(item.id)}`;
+            }
+        });
+
+        fetch(`${apiBase}/api/public/packages`)
+            .then(response => response.ok ? response.json() : [])
+            .then(packages => {
+                renderFilterButtons(packages);
+                renderPackages(packages);
+            })
+            .catch(() => {
+                renderFallbackFilters();
+            });
+    })();
+</script>
+
         <section class="services-section" id="services">
             <div class="services-inner">
                 <div class="services-intro">
@@ -1577,19 +5117,19 @@
 
                 <div class="services-grid">
                     <article class="service-card">
-                        <img class="service-image" src="assets/slide-1.svg" alt="Wedding photography service">
+                        <img class="service-image" src="https://dlmphotography.in/wp-content/uploads/2022/04/WEDDING-21.jpg" alt="Wedding photography service">
                         <h3>Wedding Photography</h3>
                         <a class="service-button" href="#contact">Explore more <span>&raquo;</span></a>
                     </article>
 
                     <article class="service-card">
-                        <img class="service-image" src="assets/slide-2.svg" alt="Cinematic wedding film service">
+                        <img class="service-image" src="https://dlmphotography.in/wp-content/uploads/2022/04/007.jpg" alt="Cinematic wedding film service">
                         <h3>Cinematic Wedding Films</h3>
                         <a class="service-button" href="#contact">Explore more <span>&raquo;</span></a>
                     </article>
 
                     <article class="service-card">
-                        <img class="service-image" src="assets/slide-3.svg" alt="Portrait and event shoot service">
+                        <img class="service-image" src="https://dlmphotography.in/wp-content/uploads/2022/04/DLM-71.jpg" alt="Portrait and event shoot service">
                         <h3>Portrait & Event Shoots</h3>
                         <a class="service-button" href="#contact">Explore more <span>&raquo;</span></a>
                     </article>
@@ -1893,7 +5433,7 @@
 
                     <div class="stories-track" id="storiesTrack" aria-label="Wedding video carousel">
                         <article class="story-card">
-                            <video controls preload="metadata" poster="assets/slide-1.svg">
+                            <video controls preload="metadata" poster="https://dlmphotography.in/wp-content/uploads/2022/04/5-2.jpg">
                                 <source src="assets/WhatsApp%20Video%202026-06-16%20at%2012.41.19%20PM.mp4" type="video/mp4">
                             </video>
                             <span class="story-play" aria-hidden="true"></span>
@@ -1904,7 +5444,7 @@
                         </article>
 
                         <article class="story-card">
-                            <video controls preload="metadata" poster="assets/slide-2.svg">
+                            <video controls preload="metadata" poster="https://dlmphotography.in/wp-content/uploads/2022/04/3-1.jpg">
                                 <source src="assets/WhatsApp%20Video%202026-06-16%20at%2012.41.19%20PM.mp4" type="video/mp4">
                             </video>
                             <span class="story-play" aria-hidden="true"></span>
@@ -1916,7 +5456,7 @@
                         
 
                         <article class="story-card">
-                            <video controls preload="metadata" poster="assets/slide-3.svg">
+                            <video controls preload="metadata" poster="https://dlmphotography.in/wp-content/uploads/2022/04/0-5.jpg">
                                 <source src="assets/WhatsApp%20Video%202026-06-16%20at%2012.41.19%20PM.mp4" type="video/mp4">
                             </video>
                             <span class="story-play" aria-hidden="true"></span>
@@ -1926,7 +5466,7 @@
                             </div>
                         </article>
                          <article class="story-card">
-                            <video controls preload="metadata" poster="assets/slide-3.svg">
+                            <video controls preload="metadata" poster="https://dlmphotography.in/wp-content/uploads/2022/04/MGP_9103-1.jpg">
                                 <source src="assets/WhatsApp%20Video%202026-06-16%20at%2012.41.19%20PM.mp4" type="video/mp4">
                             </video>
                             <span class="story-play" aria-hidden="true"></span>
@@ -1937,7 +5477,7 @@
                         </article>
 
                         <article class="story-card">
-                            <video controls preload="metadata" poster="assets/slide-1.svg">
+                            <video controls preload="metadata" poster="https://dlmphotography.in/wp-content/uploads/2022/04/3-1.jpg">
                                 <source src="assets/WhatsApp%20Video%202026-06-16%20at%2012.41.19%20PM.mp4" type="video/mp4">
                             </video>
                             <span class="story-play" aria-hidden="true"></span>
@@ -3049,7 +6589,7 @@ padding-left: 9px;
 
         <button class="photo-gallery-card photo-card-1" type="button">
             <img
-                src="https://picsum.photos/seed/gallery-one/400/500"
+                src="https://dlmphotography.in/wp-content/uploads/2022/04/2020-201.jpg"
                 alt="Wedding photography gallery image"
                 loading="lazy"
             >
@@ -3057,7 +6597,7 @@ padding-left: 9px;
 
         <button class="photo-gallery-card photo-card-2" type="button">
             <img
-                src="https://picsum.photos/seed/gallery-two/400/500"
+                src="https://dlmphotography.in/wp-content/uploads/2022/04/2020-282-1.jpg"
                 alt="Creative photography gallery image"
                 loading="lazy"
             >
@@ -3065,7 +6605,7 @@ padding-left: 9px;
 
         <button class="photo-gallery-card photo-card-3" type="button">
             <img
-                src="https://picsum.photos/seed/gallery-three/400/500"
+                src="https://dlmphotography.in/wp-content/uploads/2022/04/DLM-20-3.jpg"
                 alt="Outdoor photography gallery image"
                 loading="lazy"
             >
@@ -3073,7 +6613,7 @@ padding-left: 9px;
 
         <button class="photo-gallery-card photo-card-4" type="button">
             <img
-                src="https://picsum.photos/seed/gallery-four/400/500"
+                src="https://dlmphotography.in/wp-content/uploads/2022/04/DLM-22-1.jpg"
                 alt="Couple photography gallery image"
                 loading="lazy"
             >
@@ -3081,7 +6621,7 @@ padding-left: 9px;
 
         <button class="photo-gallery-card photo-card-5" type="button">
             <img
-                src="https://picsum.photos/seed/gallery-five/400/500"
+                src="https://dlmphotography.in/wp-content/uploads/2022/04/1J4A7196-copy.jpg"
                 alt="Celebration photography gallery image"
                 loading="lazy"
             >
@@ -3089,7 +6629,7 @@ padding-left: 9px;
 
         <button class="photo-gallery-card photo-card-6" type="button">
             <img
-                src="https://picsum.photos/seed/gallery-six/450/750"
+                src="https://dlmphotography.in/wp-content/uploads/2022/04/3.jpg"
                 alt="Portrait photography gallery image"
                 loading="lazy"
             >
@@ -3097,7 +6637,7 @@ padding-left: 9px;
 
         <button class="photo-gallery-card photo-card-7" type="button">
             <img
-                src="https://picsum.photos/seed/gallery-seven/450/850"
+                src="https://dlmphotography.in/wp-content/uploads/2022/04/0-3.jpg"
                 alt="Traditional photography gallery image"
                 loading="lazy"
             >
@@ -3105,7 +6645,7 @@ padding-left: 9px;
 
         <button class="photo-gallery-card photo-card-8" type="button">
             <img
-                src="https://picsum.photos/seed/gallery-eight/450/850"
+                src="https://dlmphotography.in/wp-content/uploads/2022/04/36.jpg"
                 alt="Studio photography gallery image"
                 loading="lazy"
             >
@@ -3113,7 +6653,7 @@ padding-left: 9px;
 
         <button class="photo-gallery-card photo-card-9" type="button">
             <img
-                src="https://picsum.photos/seed/gallery-nine/450/750"
+                src="https://dlmphotography.in/wp-content/uploads/2022/04/14-1.jpg"
                 alt="Cinematic photography gallery image"
                 loading="lazy"
             >
@@ -3121,7 +6661,7 @@ padding-left: 9px;
 
         <button class="photo-gallery-card photo-card-10" type="button">
             <img
-                src="https://picsum.photos/seed/gallery-ten/400/500"
+                src="https://dlmphotography.in/wp-content/uploads/2022/03/00.jpg"
                 alt="Event photography gallery image"
                 loading="lazy"
             >
@@ -3129,7 +6669,7 @@ padding-left: 9px;
 
         <button class="photo-gallery-card photo-card-11" type="button">
             <img
-                src="https://picsum.photos/seed/gallery-eleven/400/500"
+                src="https://dlmphotography.in/wp-content/uploads/2022/04/17-2.jpg"
                 alt="Reception photography gallery image"
                 loading="lazy"
             >
@@ -3137,7 +6677,7 @@ padding-left: 9px;
 
         <button class="photo-gallery-card photo-card-12" type="button">
             <img
-                src="https://picsum.photos/seed/gallery-twelve/400/500"
+                src="https://dlmphotography.in/wp-content/uploads/2022/04/25-1.jpg"
                 alt="Family photography gallery image"
                 loading="lazy"
             >
@@ -3145,7 +6685,7 @@ padding-left: 9px;
 
         <button class="photo-gallery-card photo-card-13" type="button">
             <img
-                src="https://picsum.photos/seed/gallery-thirteen/400/500"
+                src="https://dlmphotography.in/wp-content/uploads/2022/04/10-2.jpg"
                 alt="Premium photography gallery image"
                 loading="lazy"
             >
@@ -3153,7 +6693,7 @@ padding-left: 9px;
 
         <button class="photo-gallery-card photo-card-14" type="button">
             <img
-                src="https://picsum.photos/seed/gallery-fourteen/400/500"
+                src="https://dlmphotography.in/wp-content/uploads/2022/04/5-2.jpg"
                 alt="Wedding portrait gallery image"
                 loading="lazy"
             >
@@ -3417,783 +6957,157 @@ padding-left: 9px;
 </script>
 
 
+
+
+
 <style>
-    /* ==========================================
-       PACKAGE EXPLANATION SECTION
-    ========================================== */
-
-    .package-section {
-        position: relative;
-        padding: 86px 0 92px;
-        overflow: hidden;
-        color: var(--ink);
-        background:
-            radial-gradient(circle at 14% 20%, rgba(239, 45, 131, 0.14), transparent 30%),
-            radial-gradient(circle at 88% 76%, rgba(255, 255, 255, 0.9), transparent 28%),
-            linear-gradient(180deg, #fff3f8 0%, #ffe4ef 100%);
-    }
-
-    .package-section::before {
-        content: "";
-        position: absolute;
+    .package-modal-backdrop {
+        position: fixed;
         inset: 0;
-        pointer-events: none;
-        background:
-            linear-gradient(90deg, rgba(255, 255, 255, 0.68), transparent 18%, transparent 82%, rgba(255, 255, 255, 0.58)),
-            radial-gradient(circle at 12% 84%, rgba(239, 45, 131, 0.1), transparent 28%);
+        z-index: 2000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 18px;
+        background: rgba(36, 23, 35, 0.56);
     }
 
-    .package-inner {
+    .package-modal {
         position: relative;
-        z-index: 1;
-        width: min(100%, 1220px);
-        margin: 0 auto;
-        padding: 0 28px;
+        width: min(100%, 980px);
+        max-height: 90vh;
+        overflow: auto;
+        padding: 22px;
+        border: 1px solid rgba(36, 23, 35, 0.08);
+        border-radius: 24px;
+        background: linear-gradient(180deg, #ffffff, #fff7fb);
+        box-shadow: 0 30px 80px rgba(36, 23, 35, 0.26);
     }
 
-    .package-heading {
-        max-width: 720px;
-        margin: 0 auto 34px;
-        text-align: center;
-    }
-
-    .package-kicker {
-        margin: 0 0 10px;
+    .package-modal-close {
+        position: absolute;
+        top: 14px;
+        right: 14px;
+        width: 38px;
+        height: 38px;
+        border: 0;
+        border-radius: 50%;
         color: var(--pink);
-        font-size: 12px;
-        font-weight: 850;
-        letter-spacing: 0.16em;
+        background: #fff0f7;
+        font-size: 24px;
+        font-weight: 900;
+        cursor: pointer;
+    }
+
+    .package-modal-layout {
+        display: grid;
+        grid-template-columns: minmax(260px, 320px) 1fr;
+        gap: 20px;
+        align-items: start;
+    }
+
+    .package-modal-media {
+        position: sticky;
+        top: 0;
+        display: grid;
+        gap: 14px;
+    }
+
+    .package-modal-media img {
+        width: 100%;
+        height: auto;
+        max-height: 260px;
+        object-fit: contain;
+        border-radius: 18px;
+        padding: 4px;
+        background: linear-gradient(180deg, #fff7fb 0%, #fff 100%);
+        box-shadow: 0 18px 34px rgba(143, 28, 82, 0.12);
+    }
+
+    .package-modal-cta {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .package-modal-kicker {
+        width: fit-content;
+        margin-bottom: 8px;
+        padding: 7px 12px;
+        border-radius: 999px;
+        color: var(--pink-dark);
+        background: rgba(239, 45, 131, 0.12);
+        font-size: 11px;
+        font-weight: 900;
         text-transform: uppercase;
+        letter-spacing: 0.12em;
     }
 
-    .package-heading h2 {
+    .package-modal h3 {
         margin: 0;
-        font-size: clamp(34px, 4vw, 56px);
-        line-height: 1.04;
-        letter-spacing: 0;
+        font-size: clamp(28px, 3vw, 42px);
+        line-height: 1.08;
     }
 
-    .package-heading p {
-        max-width: 610px;
-        margin: 15px auto 0;
+    .package-modal p {
+        margin: 10px 0 18px;
         color: var(--muted);
-        font-size: 16px;
+        font-size: 15px;
         line-height: 1.7;
     }
 
-    .package-filter {
-        margin: 0 auto 34px;
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 10px;
-    }
-
-    .package-filter-button {
-        min-height: 38px;
-        padding: 0 18px;
-        border: 1px solid rgba(239, 45, 131, 0.12);
-        border-radius: 999px;
-        color: #604252;
-        background: rgba(255, 255, 255, 0.76);
-        font: 800 13px "Inter", "Segoe UI", sans-serif;
-        cursor: pointer;
-        transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
-    }
-
-    .package-filter-button:hover,
-    .package-filter-button.is-active {
-        color: #fff;
-        border-color: rgba(239, 45, 131, 0.48);
-        background: var(--pink);
-        transform: translateY(-1px);
-    }
-
-    .package-carousel-wrap {
-        position: relative;
-    }
-
-    .package-carousel-wrap::before,
-    .package-carousel-wrap::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        bottom: 12px;
-        z-index: 2;
-        width: 76px;
-        pointer-events: none;
-    }
-
-    .package-carousel-wrap::before {
-        left: 0;
-        background: linear-gradient(90deg, #fff0f7, rgba(255, 240, 247, 0));
-    }
-
-    .package-carousel-wrap::after {
-        right: 0;
-        background: linear-gradient(270deg, #ffe5ef, rgba(255, 229, 239, 0));
-    }
-
-    .package-track {
+    .package-detail-grid {
         display: grid;
-        grid-auto-flow: column;
-        grid-auto-columns: calc((100% - 72px) / 4);
-        gap: 24px;
-        overflow-x: auto;
-        overflow-y: hidden;
-        padding: 0 2px 12px;
-        scroll-behavior: smooth;
-        scroll-snap-type: x mandatory;
-        scrollbar-width: none;
-    }
-
-    .package-track::-webkit-scrollbar {
-        display: none;
-    }
-
-    .package-card {
-        position: relative;
-        min-height: 330px;
-        padding: 18px;
-        display: flex;
-        flex-direction: column;
-        overflow: hidden;
-        border: 1px solid rgba(239, 45, 131, 0.12);
-        border-radius: 12px;
-        background: rgba(255, 255, 255, 0.82);
-        box-shadow:
-            0 18px 42px rgba(143, 28, 82, 0.13),
-            inset 0 1px 0 rgba(255, 255, 255, 0.9);
-        scroll-snap-align: start;
-        transform: translateY(0) scale(1);
-        transition:
-            transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
-            border-color 0.3s ease,
-            background 0.3s ease,
-            box-shadow 0.3s ease;
-    }
-
-    .package-card::before {
-        content: "";
-        position: absolute;
-        inset: 1px;
-        z-index: 0;
-        border-radius: 11px;
-        opacity: 0;
-        pointer-events: none;
-        background:
-            linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0) 34%),
-            radial-gradient(circle at 18% 0%, rgba(239, 45, 131, 0.16), transparent 34%);
-        transition: opacity 0.3s ease;
-    }
-
-    .package-card::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        opacity: 0;
-        pointer-events: none;
-        background: linear-gradient(145deg, rgba(239, 45, 131, 0.13), transparent 48%);
-        transition: opacity 0.3s ease;
-    }
-
-    .package-card:hover {
-        transform: translateY(-10px) scale(1.015);
-        border-color: rgba(239, 45, 131, 0.46);
-        background: #ffffff;
-        box-shadow:
-            0 28px 58px rgba(143, 28, 82, 0.2),
-            inset 0 1px 0 rgba(255, 255, 255, 1);
-    }
-
-    .package-card:hover::before {
-        opacity: 1;
-    }
-
-    .package-card:hover::after {
-        opacity: 1;
-    }
-
-    .package-media {
-        height: 104px;
-        margin-bottom: 18px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-        z-index: 1;
-    }
-
-    .package-media::before {
-        content: "";
-        position: absolute;
-        width: 118px;
-        height: 118px;
-        border-radius: 50%;
-        opacity: 0;
-        background: rgba(239, 45, 131, 0.12);
-        transform: scale(0.78);
-        transition: opacity 0.35s ease, transform 0.35s ease;
-    }
-
-    .package-media img {
-        position: relative;
-        z-index: 1;
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-        filter: drop-shadow(0 18px 18px rgba(143, 28, 82, 0.18));
-        transform: translateY(0) scale(1);
-        transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), filter 0.35s ease;
-    }
-
-    .package-card:hover .package-media::before {
-        opacity: 1;
-        transform: scale(1);
-    }
-
-    .package-card:hover .package-media img {
-        transform: translateY(-6px) scale(1.08) rotate(-1deg);
-        filter: drop-shadow(0 24px 22px rgba(143, 28, 82, 0.25));
-    }
-
-    .package-card-top {
-        position: relative;
-        z-index: 1;
-        margin-bottom: 14px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 12px;
     }
 
-    .package-tag,
-    .package-count {
-        min-height: 24px;
-        display: inline-flex;
-        align-items: center;
-        border-radius: 999px;
-        font-size: 11px;
-        font-weight: 850;
-        text-transform: uppercase;
+    .package-detail-item {
+        padding: 14px;
+        border: 1px solid rgba(36, 23, 35, 0.08);
+        border-radius: 14px;
+        background: #fff;
     }
 
-    .package-tag {
-        padding: 0 10px;
-        color: var(--pink-dark);
-        background: rgba(239, 45, 131, 0.12);
-        transition: color 0.25s ease, background 0.25s ease;
-    }
-
-    .package-count {
-        padding: 0 9px;
-        color: #fff;
-        background: var(--pink);
-        transition: transform 0.25s ease;
-    }
-
-    .package-card:hover .package-tag {
-        color: #fff;
-        background: var(--pink);
-    }
-
-    .package-card:hover .package-count {
-        transform: translateY(-1px);
-    }
-
-    .package-card h3 {
-        position: relative;
-        z-index: 1;
-        margin: 0;
-        color: #211821;
-        font-size: 20px;
-        line-height: 1.18;
-        letter-spacing: 0;
-    }
-
-    .package-price {
-        position: relative;
-        z-index: 1;
-        margin: 8px 0 0;
-        color: var(--pink-dark);
-        font-size: 14px;
-        font-weight: 850;
-    }
-
-    .package-list {
-        position: relative;
-        z-index: 1;
-        margin: 18px 0 22px;
-        padding: 0;
-        display: grid;
-        gap: 9px;
-        list-style: none;
-        color: #6f5a67;
-        font-size: 13px;
-        line-height: 1.45;
-    }
-
-    .package-list li {
-        display: flex;
-        gap: 9px;
-        transform: translateX(0);
-        transition: color 0.25s ease, transform 0.25s ease;
-    }
-
-    .package-card:hover .package-list li {
-        color: #4d3945;
-        transform: translateX(3px);
-    }
-
-    .package-list li::before {
-        content: "";
-        width: 7px;
-        height: 11px;
-        flex: 0 0 auto;
-        margin-top: 3px;
-        border-right: 2px solid var(--pink);
-        border-bottom: 2px solid var(--pink);
-        transform: rotate(45deg);
-    }
-
-    .package-book {
-        position: relative;
-        z-index: 1;
-        width: fit-content;
-        min-height: 38px;
-        margin-top: auto;
-        padding: 0 16px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 999px;
-        color: #fff;
-        background: var(--pink);
-        font-size: 13px;
-        font-weight: 850;
-        text-decoration: none;
-        box-shadow: 0 10px 20px rgba(239, 45, 131, 0.2);
-        transition: background 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
-    }
-
-    .package-book:hover {
-        background: var(--pink-dark);
-        box-shadow: 0 14px 28px rgba(201, 21, 103, 0.26);
-        transform: translateY(-2px);
-    }
-
-    .package-arrow {
-        position: absolute;
-        top: 50%;
-        z-index: 3;
-        width: 48px;
-        height: 48px;
-        display: grid;
-        place-items: center;
-        border: 1px solid rgba(239, 45, 131, 0.18);
-        border-radius: 50%;
-        color: var(--pink);
-        background: rgba(255, 255, 255, 0.86);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        cursor: pointer;
-        transform: translateY(-50%);
-        transition: background 0.25s ease, transform 0.25s ease;
-    }
-
-    .package-arrow:hover {
-        color: #fff;
-        background: var(--pink);
-        box-shadow: 0 16px 30px rgba(239, 45, 131, 0.24);
-        transform: translateY(-50%) scale(1.05);
-    }
-
-    .package-arrow.prev {
-        left: -24px;
-    }
-
-    .package-arrow.next {
-        right: -24px;
-    }
-
-    .package-arrow span {
-        width: 10px;
-        height: 10px;
+    .package-detail-item span {
         display: block;
-        border-top: 2px solid currentColor;
-        border-right: 2px solid currentColor;
+        color: var(--muted);
+        font-size: 11px;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
     }
 
-    .package-arrow.prev span {
-        margin-left: 4px;
-        transform: rotate(-135deg);
+    .package-detail-item strong {
+        display: block;
+        margin-top: 6px;
+        color: var(--ink);
+        font-size: 14px;
+        line-height: 1.6;
+        font-weight: 800;
     }
 
-    .package-arrow.next span {
-        margin-right: 4px;
-        transform: rotate(45deg);
+    .package-detail-wide {
+        grid-column: 1 / -1;
     }
 
-    .package-card.is-hidden {
-        display: none;
-    }
+    @media (max-width: 760px) {
+        .package-modal-layout {
+            grid-template-columns: 1fr;
+        }
 
-    @media (max-width: 1000px) {
-        .package-track {
-            grid-auto-columns: calc((100% - 24px) / 2);
+        .package-modal-media {
+            position: static;
+        }
+
+        .package-detail-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .package-modal {
+            padding: 18px;
+            border-radius: 20px;
         }
     }
-
-    @media (max-width: 620px) {
-        .package-section {
-            padding: 68px 0 76px;
-        }
-
-        .package-inner {
-            padding: 0 16px;
-        }
-
-        .package-heading {
-            margin-bottom: 26px;
-        }
-
-        .package-heading p {
-            font-size: 14.5px;
-        }
-
-        .package-filter {
-            justify-content: flex-start;
-            flex-wrap: nowrap;
-            overflow-x: auto;
-            padding-bottom: 4px;
-            scrollbar-width: none;
-        }
-
-        .package-filter::-webkit-scrollbar {
-            display: none;
-        }
-
-        .package-filter-button {
-            flex: 0 0 auto;
-        }
-
-        .package-track {
-            grid-auto-columns: 100%;
-            gap: 16px;
-        }
-
-        .package-card {
-            min-height: 320px;
-        }
-
-        .package-carousel-wrap::before,
-        .package-carousel-wrap::after {
-            width: 32px;
-        }
-
-        .package-arrow {
-            width: 42px;
-            height: 42px;
-        }
-
-        .package-arrow.prev {
-            left: -8px;
-        }
-
-        .package-arrow.next {
-            right: -8px;
-        }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-        .package-track {
-            scroll-behavior: auto;
-        }
-
-        .package-card,
-        .package-card::before,
-        .package-card::after,
-        .package-media::before,
-        .package-media img,
-        .package-list li,
-        .package-book,
-        .package-filter-button,
-        .package-arrow {
-            transition: none;
-        }
-    }
-</style>
-
-<section class="package-section" id="packages">
-    <div class="package-inner">
-        <div class="package-heading">
-            <p class="package-kicker">DLM Packages</p>
-            <h2>Choose The Right Plan For Your Celebration</h2>
-            <p>Browse package categories just like a premium gear carousel, then compare plans by coverage, deliverables, and event type.</p>
-        </div>
-
-        <div class="package-filter" aria-label="Package categories">
-            <button class="package-filter-button is-active" type="button" data-package-filter="all">All Packages</button>
-            <button class="package-filter-button" type="button" data-package-filter="wedding">Wedding</button>
-            <button class="package-filter-button" type="button" data-package-filter="birthday">Birthday</button>
-            <button class="package-filter-button" type="button" data-package-filter="baby">Baby Shower</button>
-            <button class="package-filter-button" type="button" data-package-filter="couple">Couple Shoot</button>
-            <button class="package-filter-button" type="button" data-package-filter="event">Events</button>
-        </div>
-
-        <div class="package-carousel-wrap">
-            <button class="package-arrow prev" id="packagePrev" type="button" aria-label="Previous package">
-                <span></span>
-            </button>
-
-            <div class="package-track" id="packageTrack" aria-label="DLM package plans">
-                <article class="package-card" data-package-category="wedding">
-                    <div class="package-card-top">
-                        <span class="package-tag">Wedding</span>
-                        <span class="package-count">Popular</span>
-                    </div>
-                    <div class="package-media">
-                        <img src="assets/slide-1.svg" alt="Wedding package preview">
-                    </div>
-                    <h3>Wedding Classic</h3>
-                    <p class="package-price">From Rs. 45,000</p>
-                    <ul class="package-list">
-                        <li>1 day wedding coverage</li>
-                        <li>Candid and traditional photos</li>
-                        <li>Edited photos with online gallery</li>
-                    </ul>
-                    <a class="package-book" href="#contact">Check Availability</a>
-                </article>
-
-                <article class="package-card" data-package-category="wedding">
-                    <div class="package-card-top">
-                        <span class="package-tag">Wedding</span>
-                        <span class="package-count">Film</span>
-                    </div>
-                    <div class="package-media">
-                        <img src="assets/slide-2.svg" alt="Wedding film package preview">
-                    </div>
-                    <h3>Wedding Premium Film</h3>
-                    <p class="package-price">From Rs. 85,000</p>
-                    <ul class="package-list">
-                        <li>Photography and cinematic video</li>
-                        <li>Highlight film and full event video</li>
-                        <li>Premium album design included</li>
-                    </ul>
-                    <a class="package-book" href="#contact">Check Availability</a>
-                </article>
-
-                <article class="package-card" data-package-category="birthday">
-                    <div class="package-card-top">
-                        <span class="package-tag">Birthday</span>
-                        <span class="package-count">Kids</span>
-                    </div>
-                    <div class="package-media">
-                        <img src="assets/slide-3.svg" alt="Birthday package preview">
-                    </div>
-                    <h3>Birthday Moments</h3>
-                    <p class="package-price">From Rs. 12,000</p>
-                    <ul class="package-list">
-                        <li>3 hours event photography</li>
-                        <li>Cake, decor, family and candid shots</li>
-                        <li>Edited digital photos delivered online</li>
-                    </ul>
-                    <a class="package-book" href="#contact">Check Availability</a>
-                </article>
-
-                <article class="package-card" data-package-category="baby">
-                    <div class="package-card-top">
-                        <span class="package-tag">Baby Shower</span>
-                        <span class="package-count">Family</span>
-                    </div>
-                    <div class="package-media">
-                        <img src="assets/slide-1.svg" alt="Baby shower package preview">
-                    </div>
-                    <h3>Baby Shower Story</h3>
-                    <p class="package-price">From Rs. 18,000</p>
-                    <ul class="package-list">
-                        <li>Decor, rituals and guest coverage</li>
-                        <li>Family portraits with natural candids</li>
-                        <li>Short reel edit for social sharing</li>
-                    </ul>
-                    <a class="package-book" href="#contact">Check Availability</a>
-                </article>
-
-                <article class="package-card" data-package-category="couple">
-                    <div class="package-card-top">
-                        <span class="package-tag">Couple</span>
-                        <span class="package-count">Outdoor</span>
-                    </div>
-                    <div class="package-media">
-                        <img src="assets/slide-2.svg" alt="Couple shoot package preview">
-                    </div>
-                    <h3>Pre-Wedding Couple Shoot</h3>
-                    <p class="package-price">From Rs. 25,000</p>
-                    <ul class="package-list">
-                        <li>Outdoor or studio session</li>
-                        <li>Creative posing and location guidance</li>
-                        <li>Edited photos and short teaser video</li>
-                    </ul>
-                    <a class="package-book" href="#contact">Check Availability</a>
-                </article>
-
-                <article class="package-card" data-package-category="event">
-                    <div class="package-card-top">
-                        <span class="package-tag">Event</span>
-                        <span class="package-count">Pro</span>
-                    </div>
-                    <div class="package-media">
-                        <img src="assets/slide-3.svg" alt="Event package preview">
-                    </div>
-                    <h3>Corporate & Family Event</h3>
-                    <p class="package-price">From Rs. 20,000</p>
-                    <ul class="package-list">
-                        <li>Stage, guest and highlight coverage</li>
-                        <li>Professional edited photo selection</li>
-                        <li>Optional reels and video add-on</li>
-                    </ul>
-                    <a class="package-book" href="#contact">Check Availability</a>
-                </article>
-            </div>
-
-            <button class="package-arrow next" id="packageNext" type="button" aria-label="Next package">
-                <span></span>
-            </button>
-        </div>
-    </div>
-</section>
-
-<script>
-    (() => {
-        const packageTrack = document.getElementById("packageTrack");
-        const filterButtons = Array.from(document.querySelectorAll("[data-package-filter]"));
-        const previousButton = document.getElementById("packagePrev");
-        const nextButton = document.getElementById("packageNext");
-        const apiBase = localStorage.getItem("dlmApiBase") || "http://localhost:8080";
-
-        if (!packageTrack || !previousButton || !nextButton) {
-            return;
-        }
-
-        const escapeHtml = value => String(value || "")
-            .replaceAll("&", "&amp;")
-            .replaceAll("<", "&lt;")
-            .replaceAll(">", "&gt;")
-            .replaceAll('"', "&quot;")
-            .replaceAll("'", "&#039;");
-
-        const packageCards = () => Array.from(packageTrack.querySelectorAll("[data-package-category]"));
-
-        const money = value => {
-            if (value === null || value === undefined || value === "") {
-                return "";
-            }
-            return `Rs. ${Number(value).toLocaleString("en-IN")}`;
-        };
-
-        const categoryFor = item => {
-            const source = `${item.serviceTitle || ""} ${item.title || ""}`.toLowerCase();
-            if (source.includes("birthday")) return "birthday";
-            if (source.includes("baby")) return "baby";
-            if (source.includes("couple") || source.includes("pre-wedding")) return "couple";
-            if (source.includes("event") || source.includes("corporate")) return "event";
-            return "wedding";
-        };
-
-        const splitLines = value => (value || "")
-            .split(/\r?\n|,/)
-            .map(item => item.trim())
-            .filter(Boolean);
-
-        const packageImage = item => item.imageLocation || "assets/slide-1.svg";
-
-        const renderPackages = packages => {
-            if (!packages.length) {
-                return;
-            }
-
-            packageTrack.innerHTML = packages.map(item => {
-                const category = categoryFor(item);
-                const tag = item.serviceTitle || item.title.split(" ")[0] || "Package";
-                const badge = item.featured ? "Featured" : item.bookingEnabled ? "Booking" : "Preview";
-                const inclusions = splitLines(item.inclusions).slice(0, 3);
-                const fallbackInclusions = [
-                    item.shootDuration,
-                    item.photographersCount ? `${item.photographersCount} photographer${item.photographersCount > 1 ? "s" : ""}` : "",
-                    item.deliverables
-                ].filter(Boolean).slice(0, 3);
-                const list = inclusions.length ? inclusions : fallbackInclusions;
-                const price = item.offerPrice || item.regularPrice;
-
-                return `
-                    <article class="package-card" data-package-category="${escapeHtml(category)}">
-                        <div class="package-card-top">
-                            <span class="package-tag">${escapeHtml(tag)}</span>
-                            <span class="package-count">${escapeHtml(badge)}</span>
-                        </div>
-                        <div class="package-media">
-                            <img src="${escapeHtml(packageImage(item))}" alt="${escapeHtml(item.title)} preview">
-                        </div>
-                        <h3>${escapeHtml(item.title)}</h3>
-                        <p class="package-price">From ${escapeHtml(money(price))}</p>
-                        <ul class="package-list">
-                            ${list.map(line => `<li>${escapeHtml(line)}</li>`).join("")}
-                        </ul>
-                        <a class="package-book" href="#contact">${item.bookingEnabled ? "Check Availability" : "View Details"}</a>
-                    </article>
-                `;
-            }).join("");
-        };
-
-        const getPackageStep = () => {
-            const visibleCard = packageCards().find(card => !card.classList.contains("is-hidden"));
-
-            if (!visibleCard) {
-                return packageTrack.clientWidth;
-            }
-
-            const styles = window.getComputedStyle(packageTrack);
-            const gap = Number.parseFloat(styles.columnGap || styles.gap) || 0;
-            return visibleCard.getBoundingClientRect().width + gap;
-        };
-
-        const scrollPackages = direction => {
-            packageTrack.scrollBy({
-                left: getPackageStep() * direction,
-                behavior: "smooth"
-            });
-        };
-
-        filterButtons.forEach(button => {
-            button.addEventListener("click", () => {
-                const filter = button.dataset.packageFilter;
-
-                filterButtons.forEach(item => item.classList.remove("is-active"));
-                button.classList.add("is-active");
-
-                packageCards().forEach(card => {
-                    const shouldShow = filter === "all" || card.dataset.packageCategory === filter;
-                    card.classList.toggle("is-hidden", !shouldShow);
-                });
-
-                packageTrack.scrollTo({ left: 0, behavior: "smooth" });
-            });
-        });
-
-        previousButton.addEventListener("click", () => scrollPackages(-1));
-        nextButton.addEventListener("click", () => scrollPackages(1));
-
-        fetch(`${apiBase}/api/public/packages`)
-            .then(response => response.ok ? response.json() : [])
-            .then(renderPackages)
-            .catch(() => {
-                /* Keep the static package cards when the API is unavailable. */
-            });
-    })();
-</script>
-
-
-<style>
     /* ==========================================
        CANDID WEDDING VIDEOS SECTION
     ========================================== */
@@ -4507,19 +7421,19 @@ padding-left: 9px;
 
         <div class="candid-video-grid" aria-label="Candid wedding videos">
             <a class="candid-video-card" href="https://www.youtube.com/watch?v=VIDEO_ID_1" data-youtube-embed="https://www.youtube.com/embed/VIDEO_ID_1?autoplay=1&rel=0" aria-label="Play candid wedding video one">
-                <img src="assets/slide-1.svg" alt="Candid wedding ceremony video">
+                <img src="https://dlmphotography.in/wp-content/uploads/2022/04/WEDDING-18-1.jpg" alt="Candid wedding ceremony video">
                 <span class="candid-video-logo" aria-hidden="true"></span>
                 <span class="candid-play" aria-hidden="true"></span>
             </a>
 
             <a class="candid-video-card" href="https://www.youtube.com/watch?v=VIDEO_ID_2" data-youtube-embed="https://www.youtube.com/embed/VIDEO_ID_2?autoplay=1&rel=0" aria-label="Play candid wedding video two">
-                <img src="assets/slide-2.svg" alt="Candid couple wedding video">
+                <img src="https://dlmphotography.in/wp-content/uploads/2022/04/17.jpg" alt="Candid couple wedding video">
                 <span class="candid-video-logo" aria-hidden="true"></span>
                 <span class="candid-play" aria-hidden="true"></span>
             </a>
 
             <a class="candid-video-card" href="https://www.youtube.com/watch?v=VIDEO_ID_3" data-youtube-embed="https://www.youtube.com/embed/VIDEO_ID_3?autoplay=1&rel=0" aria-label="Play candid wedding video three">
-                <img src="assets/slide-3.svg" alt="Candid wedding ritual video">
+                <img src="https://dlmphotography.in/wp-content/uploads/2022/04/DLM-8.jpg" alt="Candid wedding ritual video">
                 <span class="candid-video-logo" aria-hidden="true"></span>
                 <span class="candid-play" aria-hidden="true"></span>
             </a>
@@ -5013,6 +7927,97 @@ div[class*="elfsight-app"] a[href*="elfsight.com"],
 </style>
 
 
+<style>
+    .dlm-latest-stories {
+        width: 100%;
+        padding: 72px 20px;
+        background: linear-gradient(180deg, #ffffff 0%, #fff7fb 100%);
+    }
+    .dlm-latest-stories[hidden] { display: none; }
+    .dlm-stories-inner { width: min(100%, 1180px); margin: 0 auto; }
+    .dlm-stories-head { display: flex; align-items: end; justify-content: space-between; gap: 20px; margin-bottom: 26px; }
+    .dlm-stories-kicker { margin: 0 0 8px; color: #ef2d83; font-size: 10px; font-weight: 900; text-transform: uppercase; }
+    .dlm-stories-head h2 { max-width: 620px; margin: 0; color: #2a1d25; font-family: Georgia, "Times New Roman", serif; font-size: clamp(30px, 4vw, 46px); font-weight: 500; line-height: 1.08; }
+    .dlm-stories-all { flex: 0 0 auto; padding: 11px 15px; border: 1px solid rgba(239,45,131,.18); border-radius: 8px; color: #bd145f; background: #fff0f7; font-size: 12px; font-weight: 900; text-decoration: none; }
+    .dlm-stories-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+    .dlm-story-card { min-width: 0; overflow: hidden; border: 1px solid rgba(42,29,37,.1); border-radius: 8px; color: inherit; background: #fff; box-shadow: 0 18px 42px rgba(83,41,62,.08); text-decoration: none; transition: transform .25s ease, box-shadow .25s ease; }
+    .dlm-story-card:hover { transform: translateY(-4px); box-shadow: 0 24px 54px rgba(83,41,62,.14); }
+    .dlm-story-cover { width: 100%; aspect-ratio: 16 / 10; display: block; object-fit: cover; background: linear-gradient(135deg, #fff0f7, #eee2e8); transition: transform .55s ease; }
+    .dlm-story-card:hover .dlm-story-cover { transform: scale(1.025); }
+    .dlm-story-body { padding: 17px; }
+    .dlm-story-meta { color: #ef2d83; font-size: 9px; font-weight: 900; text-transform: uppercase; }
+    .dlm-story-body h3 { margin: 9px 0 7px; color: #2a1d25; font-family: Georgia, "Times New Roman", serif; font-size: 22px; font-weight: 500; line-height: 1.18; }
+    .dlm-story-body p { margin: 0; color: #78646e; font-size: 12px; line-height: 1.6; }
+    .dlm-story-read { display: inline-block; margin-top: 13px; color: #bd145f; font-size: 11px; font-weight: 900; }
+    @media (max-width: 850px) { .dlm-stories-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 580px) {
+        .dlm-latest-stories { padding: 52px 12px; }
+        .dlm-stories-head { align-items: stretch; flex-direction: column; }
+        .dlm-stories-all { width: fit-content; }
+        .dlm-stories-grid { grid-template-columns: 1fr; }
+        .dlm-story-body h3 { font-size: 21px; }
+    }
+    @media (prefers-reduced-motion: reduce) { .dlm-story-card, .dlm-story-cover { transition: none; } }
+</style>
+
+<section class="dlm-latest-stories" id="latestStories" hidden>
+    <div class="dlm-stories-inner">
+        <div class="dlm-stories-head">
+            <div><p class="dlm-stories-kicker">DLM Studio Journal</p><h2>Latest Stories From Behind the Lens</h2></div>
+            <a class="dlm-stories-all" href="blog.html">View All Stories</a>
+        </div>
+        <div class="dlm-stories-grid" id="latestStoriesGrid"></div>
+    </div>
+</section>
+
+<script>
+(() => {
+    const apiBase = localStorage.getItem("dlmApiBase") || "http://192.168.0.101:8080";
+    const section = document.getElementById("latestStories");
+    const grid = document.getElementById("latestStoriesGrid");
+    if (!section || !grid) return;
+    fetch(`${apiBase}/api/public/blogs`)
+        .then(response => response.ok ? response.json() : Promise.reject())
+        .then(posts => {
+            const latest = Array.isArray(posts) ? posts.slice(0, 3) : [];
+            if (!latest.length) return;
+            latest.forEach(post => grid.appendChild(createStoryCard(post)));
+            section.hidden = false;
+        })
+        .catch(() => { section.hidden = true; });
+
+    function createStoryCard(post) {
+        const link = document.createElement("a");
+        link.className = "dlm-story-card";
+        link.href = `blog-detail.html?slug=${encodeURIComponent(post.slug)}`;
+        const cover = post.coverUrl ? document.createElement("img") : document.createElement("div");
+        cover.className = "dlm-story-cover";
+        if (post.coverUrl) { cover.src = `${apiBase}${post.coverUrl}`; cover.alt = post.title || "DLM story"; cover.loading = "lazy"; }
+        const body = document.createElement("div");
+        body.className = "dlm-story-body";
+        const meta = document.createElement("div");
+        meta.className = "dlm-story-meta";
+        meta.textContent = `${post.category || "Studio Story"} · ${formatDate(post.published_at)}`;
+        const title = document.createElement("h3");
+        title.textContent = post.title || "DLM Story";
+        const excerpt = document.createElement("p");
+        excerpt.textContent = post.excerpt || "Discover this story from DLM Photography.";
+        const read = document.createElement("span");
+        read.className = "dlm-story-read";
+        read.textContent = "Read Full Story →";
+        body.append(meta, title, excerpt, read);
+        link.append(cover, body);
+        return link;
+    }
+
+    function formatDate(value) {
+        const date = new Date(value);
+        return Number.isNaN(date.getTime()) ? "" : date.toLocaleDateString(undefined, { day: "numeric", month: "short", year: "numeric" });
+    }
+})();
+</script>
+
+
 
 <section
     class="studio-instagram-section"
@@ -5129,6 +8134,7 @@ div[class*="elfsight-app"] a[href*="elfsight.com"],
     }, 7000);
 })();
 </script>
+
 
 <style>
     /* =========================================
@@ -7239,7 +10245,7 @@ Please share the available package details and booking information.`;
 
             <div class="dlm-footer-photo">
                 <img
-                    src="https://picsum.photos/seed/dlm-footer-1/700/450"
+                    src="https://dlmphotography.in/wp-content/uploads/2022/04/DLM-31.jpg"
                     alt="Wedding photography"
                     loading="lazy"
                 >
@@ -7247,7 +10253,7 @@ Please share the available package details and booking information.`;
 
             <div class="dlm-footer-photo">
                 <img
-                    src="https://picsum.photos/seed/dlm-footer-2/500/450"
+                    src="https://dlmphotography.in/wp-content/uploads/2022/04/MGP_9138.jpg"
                     alt="Couple photography"
                     loading="lazy"
                 >
@@ -7255,7 +10261,7 @@ Please share the available package details and booking information.`;
 
             <div class="dlm-footer-photo">
                 <img
-                    src="https://picsum.photos/seed/dlm-footer-3/650/450"
+                    src="https://dlmphotography.in/wp-content/uploads/2022/04/DLM-36.jpg"
                     alt="Event photography"
                     loading="lazy"
                 >
@@ -7263,7 +10269,7 @@ Please share the available package details and booking information.`;
 
             <div class="dlm-footer-photo">
                 <img
-                    src="https://picsum.photos/seed/dlm-footer-4/500/450"
+                    src="https://dlmphotography.in/wp-content/uploads/2022/04/DLM-14.jpg"
                     alt="Portrait photography"
                     loading="lazy"
                 >
@@ -7371,6 +10377,7 @@ Please share the available package details and booking information.`;
                         <li><a href="#about">About Us</a></li>
                         <li><a href="#gallery">Gallery</a></li>
                         <li><a href="#packages">Packages</a></li>
+                        <li><a href="blog.html">Stories</a></li>
                         <li><a href="#instagram">Instagram</a></li>
                         <li><a href="#contact">Contact</a></li>
                     </ul>
@@ -7537,7 +10544,6 @@ Please share the available package details and booking information.`;
     })();
 </script>
        
-        
     </main>
 
     <script>
@@ -7604,6 +10610,7 @@ Please share the available package details and booking information.`;
             const originalSlides = Array.from(track.querySelectorAll(".hero-slide"));
             const slideDuration = 4000;
             const swipeThreshold = 45;
+            const trackTransition = "transform 0.85s cubic-bezier(0.22, 1, 0.36, 1)";
 
             if (originalSlides.length === 0) {
                 return;
@@ -7685,14 +10692,14 @@ Please share the available package details and booking information.`;
                     slideFallbackTimer = window.setTimeout(completeSlideTransition, 950);
                 }
 
-                track.style.transition = shouldAnimate ? "" : "none";
+                track.style.transition = shouldAnimate ? trackTransition : "none";
                 track.style.transform = `translateX(-${currentIndex * 100}%)`;
 
                 if (!shouldAnimate) {
                     isSliding = false;
-
+                    void track.offsetWidth;
                     requestAnimationFrame(() => {
-                        track.style.transition = "";
+                        track.style.transition = trackTransition;
                     });
                 }
             };
